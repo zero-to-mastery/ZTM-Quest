@@ -3,7 +3,7 @@ import { scaleFactor } from '../constants';
 import { getRandomCharacter } from '../utils/sprites';
 
 
-export function makeNpc(targetDestination, pos, startAnimation = 'idle-down') {
+export function makeNpc(targetDestination, pos, startAnimation = 'idle-down', additionalTag = 'npc') {
 
   const npcKey = `npc_${Math.random() * 1000}`;
   const randomCharacter = getRandomCharacter();
@@ -39,6 +39,7 @@ export function makeNpc(targetDestination, pos, startAnimation = 'idle-down') {
     k.anchor('center'),
     k.state("idle", ['idle', 'move', 'end']),
     `npc_${randomCharacter.name}`,
+    additionalTag,
     {
       targetDestination,
     }]);

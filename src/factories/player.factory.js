@@ -2,7 +2,7 @@ import { k } from '../kplayCtx';
 import { scaleFactor } from '../constants';
 
 
-export function makePlayer(playerProps = {}) {
+export function makePlayer(playerProps = {}, customScale = scaleFactor) {
 
   if (!k.getSprite('player')) {
     k.loadSprite('player', './characters.png', {
@@ -28,7 +28,7 @@ export function makePlayer(playerProps = {}) {
     k.body(),
     k.anchor('center'),
     k.pos(),
-    k.scale(scaleFactor),
+    k.scale(customScale),
     {
       speed: 250,
       direction: 'down',
