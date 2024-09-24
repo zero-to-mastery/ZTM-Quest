@@ -40,7 +40,7 @@ k.scene('start', async () => {
   const mapData = await (await fetch('./maps/map_start.json')).json();
   const { layers } = mapData;
 
-  const map = k.add([k.sprite('map'), k.pos(0), k.scale(scaleFactor)]);
+  const map = k.add([k.sprite('map'), k.pos(0), k.scale(scaleFactor), 'map_container']);
 
   const player = makePlayer({
     hasTalkedToBruno: false,
@@ -73,6 +73,7 @@ k.scene('start', async () => {
             (map.pos.y + chair.y + 12) * scaleFactor
           ),
           'idle-side',
+          'map_start'
         );
 
         k.add(npc);
@@ -102,7 +103,8 @@ k.scene('start', async () => {
           }),
           k.body({ isStatic: true }),
           k.pos(boundary.x, boundary.y),
-          boundary.name
+          boundary.name,
+          'map_start'
         ]);
 
         if (boundary.name === 'monitor_lobby') {
@@ -115,7 +117,8 @@ k.scene('start', async () => {
             k.pos(boundary.x + 2, boundary.y + 11),
             k.scale(0.8),
             k.body({ isStatic: true }),
-            boundary.name
+            boundary.name,
+            'map_start'
           ]);
           ztmTrailer.play('run');
         }
@@ -148,7 +151,8 @@ k.scene('start', async () => {
             k.anchor('center'),
             k.pos((map.pos.x + entity.x) * scaleFactor, (map.pos.y + entity.y) * scaleFactor),
             k.scale(scaleFactor + 1),
-            'bruno'
+            'bruno',
+            'map_start'
           ]);
         }
       }
@@ -156,7 +160,6 @@ k.scene('start', async () => {
   }
 
   initPlayerInteractions(player, k);
-
   /**
    * Setup/Registration of global events which will be triggered in current game/map context
    */
