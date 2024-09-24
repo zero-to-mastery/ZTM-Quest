@@ -13,7 +13,7 @@ Let's see how far we can get and where the game will lead into.
 There are some rules regarding contributions (especially during hacktoberfest)
 - No competition who resolves a issues first or who fixes a pull request first. Helping each other is good and important but creating pressure doesn't help
 - Fixing just one typo per pull request is not really considered adding a lot of value. Make sure you add real value by contributing to the game itself with logic, assets or screenplays
-- We know that everyone wants his/her pull request as fast merged as possible. Remember, this is a open source project and each person who works on it, does so in his/her freetime. Also the maintainers!
+- We know that everyone wants their pull request as fast merged as possible. Remember, this is a open source project and each person who works on it, does so in their freetime. Also the maintainers!
 - If a pull request got reviewed and problems were found, we will reject it first and request changes as long as the pull request is valid. No need to panic here. Just something which is common practice
 - If you add game assets or entire new maps to the game, make sure to keep track of any credits and shout outs which we have to make for third party resources. Altough they might be free to use, it is more than fair to give creative artists credit for their work. Even if it is a self-made asset, add yourself to the [asset_credits](./asset_credits.md) file
 
@@ -68,6 +68,11 @@ You can run the dev server with hot module reloading with
 ```bash
 npm run dev
 ```
+
+### Additional Information
+
+One of the tasks will be to add interactions in the ZTM Quest world. In order to help contributors identify objects in a map, screenshots were made from the [Tiled](https://www.mapeditor.org/) software with available objects with their corresponding names.
+If you want to develop interactions, make sure to check out the [additional-map-info readme](./additional-map-info/Readme.md)
 
 ## Recommendations
 
