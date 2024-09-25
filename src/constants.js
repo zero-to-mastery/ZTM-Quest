@@ -1,4 +1,5 @@
-export const scaleFactor = 4;
+export const scaleFactor = 2;
+export const speedByScaleFactor = 65 * scaleFactor;
 
 
 // ./characters.png sprites
