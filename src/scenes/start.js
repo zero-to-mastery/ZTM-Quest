@@ -1,11 +1,10 @@
 import { scaleFactor } from '../constants';
 import { makeNpc } from '../factories/npc.factory';
 import { makePlayer } from '../factories/player.factory';
-import { initPlayerInteractions } from '../interactions/map_start';
+import { initMap } from '../init/map.init';
 import { k, setGlobalEvents } from '../kplayCtx';
-import { setCamScale } from '../utils';
 import { stopCharacterAnims } from '../utils/animation';
-
+import { attachInteractions } from '../interactions/map_start';
 
 k.scene('start', async () => {
 
@@ -32,142 +31,70 @@ k.scene('start', async () => {
     }
   });
 
-  k.loadSprite('map', './exports/maps/map_start.png');
-  k.setBackground(k.Color.fromHex('#311047'));
-  setCamScale(k);
-
-
-  const mapData = await (await fetch('./maps/map_start.json')).json();
-  const { layers } = mapData;
-
-  const map = k.add([k.sprite('map'), k.pos(0), k.scale(scaleFactor), 'map_container']);
+  const objectConfig = {
+    static: ['map_boundaries', 'building_boundaries', 'chairs', 'enter_new_map_boundaries'],
+    spawnpoints: ['spawnpoints'],
+    interactionObjects: ['interaction_objects']
+  };
+  const [map, spawnpoint] = await initMap(k, objectConfig, './exports/maps/map_start.png', './maps/map_start.json');
 
   const player = makePlayer({
     hasTalkedToBruno: false,
     wasInRestroom: false,
     hasHandsWashed: false,
   });
+  player.pos = spawnpoint.player;
 
+  k.add(map);
   k.add(player);
 
-  stopCharacterAnims(player);
+  k.add([
+    k.sprite('bruno', { anim: 'idle-down' }),
+    k.area({
+      shape: new k.Rect(k.vec2(0), 16, 16)
+    }),
+    k.body({ isStatic: true }),
+    k.anchor('center'),
+    k.pos((map.pos.x + spawnpoint.bruno.x), (map.pos.y + spawnpoint.bruno.y)),
+    k.scale(scaleFactor + 1),
+    'bruno',
+    'map_start'
+  ]);
 
+  const npcStore = [];
+  const chairPattern = new RegExp(/chair_/g);
+  const chairs = map.get('*').filter(obj => obj.tags.filter(tag => new RegExp(chairPattern).test(tag)).length > 0);
 
-  // Loop over all layers to setup the map
-  for (const layer of layers) {
+  for (const chair of chairs) {
+    let direction = 'idle-side';
 
-    if (layer.name === 'chairs') {
-      for (const chair of layer.objects) {
-        let direction = 'idle-side';
+    direction = chair.tiledProps.direction;
 
-        if (chair.properties && chair.properties.length) {
-          const directionProp = chair.properties.find(prop => prop.name === 'direction');
-          direction = directionProp.value;
-        }
+    // createa npc for each chair
+    const npc = makeNpc(
+      chair.name,
+      k.vec2(
+        (map.pos.x + chair.pos.x + 6) * scaleFactor,
+        (map.pos.y + chair.pos.y + 12) * scaleFactor
+      ),
+      'idle-side',
+      'map_start'
+    );
 
-        // createa npc for each chair
-        const npc = makeNpc(
-          chair.name,
-          k.vec2(
-            (map.pos.x + chair.x + 6) * scaleFactor,
-            (map.pos.y + chair.y + 12) * scaleFactor
-          ),
-          'idle-side',
-          'map_start'
-        );
-
-        k.add(npc);
-
-        if (direction === 'left') {
-          npc.flipX = true;
-        }
-
-        k.wait(1, () => {
-          npc.enterState('idle');
-        })
-      }
+    if (direction === 'left') {
+      npc.flipX = true;
     }
-    if (layer.name === 'boundaries') {
-      for (const boundary of layer.objects) {
-        /**
-         * Setup start to create hidden boundaries for the player to collide with on the map
-         * The data gets loaded from map_start.json file which in fact got created by Tiled
-         */
-        map.add([
-          k.area({
-            /**
-             * The shape of the boundary which has the dimensions from Tiled map, pos x and y got figured out
-             * by try/fail method to match the boundaries on the map
-            */
-            shape: new k.Rect(k.vec2(1, 10), boundary.width, boundary.height)
-          }),
-          k.body({ isStatic: true }),
-          k.pos(boundary.x, boundary.y),
-          boundary.name,
-          'map_start'
-        ]);
-
-        if (boundary.name === 'monitor_lobby') {
-          const ztmTrailer = map.add([
-            k.sprite('ztmTrailer'),
-            k.area({
-              shape: new k.Rect(k.vec2(0, 0), boundary.width + 5, boundary.height)
-            }),
-            k.body(),
-            k.pos(boundary.x + 2, boundary.y + 11),
-            k.scale(0.8),
-            k.body({ isStatic: true }),
-            boundary.name,
-            'map_start'
-          ]);
-          ztmTrailer.play('run');
-        }
-      }
-      continue;
-    }
-
-    /**
-     * Spawnpoints are used to place entities in the map, in this case the main game character
-     * here we set the player position on start once the map object got parsed
-     */
-    if (layer.name === 'spawnpoints') {
-      for (const entity of layer.objects) {
-        if (entity.name === 'player') {
-          player.pos = k.vec2(
-            (map.pos.x + entity.x) * scaleFactor,
-            (map.pos.y + entity.y) * scaleFactor
-          );
-          continue;
-        }
-
-        if (entity.name === 'bruno') {
-
-          k.add([
-            k.sprite('bruno', { anim: 'idle-down' }),
-            k.area({
-              shape: new k.Rect(k.vec2(0), 16, 16)
-            }),
-            k.body({ isStatic: true }),
-            k.anchor('center'),
-            k.pos((map.pos.x + entity.x) * scaleFactor, (map.pos.y + entity.y) * scaleFactor),
-            k.scale(scaleFactor + 1),
-            'bruno',
-            'map_start'
-          ]);
-        }
-      }
-    }
+    npcStore.push(npc);
   }
 
-  initPlayerInteractions(player, k);
+  k.chooseMultiple(npcStore, npcStore.length / 3).forEach(npc => k.add(npc));
+
+
+  attachInteractions(player, k);
   /**
    * Setup/Registration of global events which will be triggered in current game/map context
    */
   setGlobalEvents(() => {
-    k.onResize(() => {
-      setCamScale(k);
-    });
-
     k.onUpdate(() => {
       k.camPos(player.pos.x, player.pos.y + 100);
 
