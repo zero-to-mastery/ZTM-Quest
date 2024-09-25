@@ -1,5 +1,5 @@
 import { k } from '../kplayCtx';
-import { scaleFactor } from '../constants';
+import { scaleFactor, speedByScaleFactor } from '../constants';
 
 
 export function makePlayer(playerProps = {}, customScale = scaleFactor) {
@@ -21,7 +21,7 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
 
 
   const player = k.make([
-    k.sprite('player', 'idle-down'),
+    k.sprite('player', { anim: 'idle-down' }),
     k.area({
       shape: new k.Rect(k.vec2(0), 16, 16)
     }),
@@ -30,7 +30,7 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
     k.pos(),
     k.scale(customScale),
     {
-      speed: 250,
+      speed: speedByScaleFactor,
       direction: 'down',
       isInDialog: false,
       collectedCoins: 0,
