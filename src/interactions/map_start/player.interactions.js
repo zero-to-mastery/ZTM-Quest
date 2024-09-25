@@ -1,8 +1,7 @@
-import { conversationBruno } from '../constants';
-import { displayDialogue } from '../utils';
+import { conversationBruno } from '../../constants';
+import { displayDialogue } from '../../utils';
 
-export const initPlayerInteractions = (player, k) => {
-
+export const initPlayerInteractions = (player, k, map) => {
   player.onCollide('bruno', () => {
     player.isInDialog = true;
     displayDialogue(conversationBruno, () => {
@@ -11,7 +10,7 @@ export const initPlayerInteractions = (player, k) => {
     });
   });
 
-  player.onCollide('enter_map_2', () => {
+  player.onCollide('enter_map_right', () => {
     if (player.hasTalkedToBruno && player.wasInRestroom && player.hasHandsWashed) {
       k.go('city');
     } else {
