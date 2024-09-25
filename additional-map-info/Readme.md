@@ -9,3 +9,9 @@ With each added map, you will also find object screenshots to identify objects w
 
 ![global map objects](./map_start/objects_map_start_1.png)
 ![chairs in map start](./map_start/objects_chairs_map_start.png)
+
+## City (map_city)
+![map setcion 1 objects](./map_city/objects_map_city_1.png)
+![map section 2 objects](./map_city/objects_map_city_2.png)
+![map section 3 objects](./map_city/objects_map_city_3.png)
+![map section 4 (enter new maps) objects](./map_city/objects_map_city_4.png)
