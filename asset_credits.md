@@ -20,3 +20,9 @@ https://opengameart.org/content/lpc-revised-the-office | By Eliza Wyatt. Element
  Uses the "16x16 RPG Tileset" by hilau at https://opengameart.org/content/16x16-rpg-tileset, which is based off of "16x16 Game Assets" by George Bailey at https://opengameart.org/content/16x16-game-assets. and "LPC Thatched-roof Cottage" by bluecarrot16 at https://opengameart.org/content/lpc-thatched-roof-cottage.
 
 https://the-pixel-nook.itch.io/rpg-building-pack
+
+https://marceles.itch.io/land-of-pixels-laboratory-tileset-pixel-art
+
+https://pipoya.itch.io/charamel | Create awesome Characters
+
+https://adriccustoms.itch.io/little-bits-office
