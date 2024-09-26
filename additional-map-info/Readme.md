@@ -11,7 +11,10 @@ With each added map, you will also find object screenshots to identify objects w
 ![chairs in map start](./map_start/objects_chairs_map_start.png)
 
 ## City (map_city)
-![map setcion 1 objects](./map_city/objects_map_city_1.png)
+![map section 1 objects](./map_city/objects_map_city_1.png)
 ![map section 2 objects](./map_city/objects_map_city_2.png)
 ![map section 3 objects](./map_city/objects_map_city_3.png)
 ![map section 4 (enter new maps) objects](./map_city/objects_map_city_4.png)
+
+## Arcade (map_arcade)
+![map section 1 objects](./map_arcade/objects_map_arcade_1.png)
