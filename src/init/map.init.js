@@ -3,13 +3,15 @@ import { setCamScale } from '../utils';
 
 
 
-export const initMap = async (k, objectConfig, pathToMapPng, pathToMapJson) => {
+export const initMap = async (k, objectConfig, pathToMapPng, pathToMapJson, shapeOffset = null) => {
   k.loadSprite('map', pathToMapPng);
   k.setBackground(k.Color.fromHex('#311047'));
   setCamScale(k);
 
   const mapData = await (await fetch(pathToMapJson)).json();
   const { layers } = mapData;
+
+  shapeOffset = shapeOffset || k.vec2(0, 0);
 
   const map = k.make([k.sprite('map'), k.pos(0), k.scale(scaleFactor), 'main_map']);
 
@@ -34,7 +36,7 @@ export const initMap = async (k, objectConfig, pathToMapPng, pathToMapJson) => {
              * The shape of the boundary which has the dimensions from Tiled map, pos x and y got figured out
              * by try/fail method to match the boundaries on the map
             */
-            shape: new k.Rect(k.vec2(0, 0), staticBodyObj.width, staticBodyObj.height),
+            shape: new k.Rect(shapeOffset, staticBodyObj.width, staticBodyObj.height),
           }),
           k.pos(staticBodyObj.x, staticBodyObj.y),
           staticBodyObj.name,
@@ -45,7 +47,7 @@ export const initMap = async (k, objectConfig, pathToMapPng, pathToMapJson) => {
                 return acc;
               }, {})
             }
-          }
+          },
         ];
 
         if (isStatic) {
