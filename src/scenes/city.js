@@ -7,7 +7,7 @@ import { attachInteractions } from '../interactions/map_city';
 
 k.scene('city', async () => {
   const objectConfig = {
-    static: ['map_boundaries', 'park_benches', 'building_boundaries', 'enter_map_boundaries'],
+    static: ['map_boundaries', 'park_benches', 'building_boundaries', 'enter_new_map_boundaries'],
     spawnpoints: ['spawnpoints'],
     interactionObjects: ['interaction_objects']
   };

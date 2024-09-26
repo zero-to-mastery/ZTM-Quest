@@ -2917,6 +2917,39 @@
                  "width":47,
                  "x":906.125,
                  "y":213.625
+                }, 
+                {
+                 "height":41.3333,
+                 "id":457,
+                 "name":"snack_bar_street",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":30.3333,
+                 "x":724.454545454545,
+                 "y":101.939227272727
+                }, 
+                {
+                 "height":10,
+                 "id":458,
+                 "name":"snack_bar_street",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":5,
+                 "x":719.454545454545,
+                 "y":104.606227272727
+                }, 
+                {
+                 "height":28.125,
+                 "id":459,
+                 "name":"snack_bar_street",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8.625,
+                 "x":754.829545454545,
+                 "y":116.481227272727
                 }],
          "opacity":1,
          "properties":[
@@ -3026,7 +3059,7 @@
                 {
                  "height":127.75,
                  "id":289,
-                 "name":"bounder_academy_right_tower",
+                 "name":"boundery_academy_right_tower",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -3037,7 +3070,7 @@
                 {
                  "height":8,
                  "id":290,
-                 "name":"bounder_academy_right_tower",
+                 "name":"boundery_academy_right_tower",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -3048,7 +3081,7 @@
                 {
                  "height":175.553063636364,
                  "id":291,
-                 "name":"bounder_academy_main_block_top",
+                 "name":"boundery_academy_main_block_top",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -3275,39 +3308,6 @@
                  "width":79.3333,
                  "x":127.651841666667,
                  "y":16.3637
-                }, 
-                {
-                 "height":41.3333,
-                 "id":314,
-                 "name":"boundary_snack_bar_street",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":30.3333,
-                 "x":724.318841666667,
-                 "y":101.6967
-                }, 
-                {
-                 "height":10,
-                 "id":315,
-                 "name":"boundary_snack_bar_street",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":5,
-                 "x":719.318841666667,
-                 "y":104.3637
-                }, 
-                {
-                 "height":28.125,
-                 "id":316,
-                 "name":"boundary_snack_bar_street",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":8.625,
-                 "x":754.693841666667,
-                 "y":116.2387
                 }, 
                 {
                  "height":73.5,
@@ -3537,7 +3537,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -3865,7 +3865,7 @@
                 {
                  "height":18.875,
                  "id":453,
-                 "name":"entry_map_arcade",
+                 "name":"enter_map_arcade",
                  "properties":[
                         {
                          "name":"goToDifferentMap",
@@ -3941,12 +3941,12 @@
                  "value":false
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],
  "nextlayerid":49,
- "nextobjectid":457,
+ "nextobjectid":460,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
