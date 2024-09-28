@@ -2,15 +2,14 @@ import { interactionWithBruno } from './bruno.interaction';
 import { enterMapCityInteraction } from './enterMapCity.interaction';
 import { restroomInteractions } from './restroom.interactions';
 
-
 const interactions = [
-  restroomInteractions,
-  interactionWithBruno,
-  enterMapCityInteraction,
+    restroomInteractions,
+    interactionWithBruno,
+    enterMapCityInteraction,
 ];
 
 export const attachInteractions = (gameObj, k) => {
-  const map = k.get('main_map')[0];
+    const map = k.get('main_map')[0];
 
-  interactions.forEach((cb) => cb(gameObj, k, map));
-}
+    interactions.forEach((cb) => cb(gameObj, k, map));
+};
