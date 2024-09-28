@@ -4,6 +4,7 @@ import { initMap } from '../init/map.init';
 import { k, setGlobalEvents } from '../kplayCtx';
 import { stopCharacterAnims } from '../utils/animation';
 import { attachInteractions } from '../interactions/map_arcade';
+import { addGameObjects } from '../gameObjects/map_arcade';
 
 k.scene('arcade', async () => {
   const objectConfig = {
@@ -26,6 +27,7 @@ k.scene('arcade', async () => {
   k.add(player);
 
   attachInteractions(player, k);
+  addGameObjects(k, map, spawnpoint).forEach(obj => k.add(obj));
 
   /**
    * Setup/Registration of global events which will be triggered in current game/map context
