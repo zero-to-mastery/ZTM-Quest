@@ -1,6 +1,8 @@
-import { initPlayerInteractions } from './player.interactions';
+import { enterMapArcadeInteraction } from './enterMapArcade.interactions';
 
-const interaction = [initPlayerInteractions];
+const interaction = [
+  enterMapArcadeInteraction,
+];
 
 export const attachInteractions = (gameObj, k) => {
   const map = k.get('main_map')[0];
