@@ -5,8 +5,8 @@ import { getRandomCharacter } from '../utils/sprites';
 
 export function makeNpc(targetDestination, pos, startAnimation = 'idle-down', additionalTag = 'npc') {
 
-  const npcKey = `npc_${Math.random() * 1000}`;
   const randomCharacter = getRandomCharacter();
+  const npcKey = `npc_${randomCharacter.name}`;
 
   const [idleDown, walkDown, idleSide, walkSide, idleUp, walkUp] = randomCharacter.frames;
 
@@ -27,22 +27,21 @@ export function makeNpc(targetDestination, pos, startAnimation = 'idle-down', ad
   }
 
 
-  const npc = k.make([
+  return k.make([
     k.sprite(npcKey, { anim: startAnimation }),
     k.area({
       shape: new k.Rect(k.vec2(0), 16, 16)
     }),
     k.body({ isStatic: true }),
-    k.anchor('center'),
     k.pos(pos.x, pos.y),
     k.scale(scaleFactor),
     k.anchor('center'),
     k.state("idle", ['idle', 'move', 'end']),
-    `npc_${randomCharacter.name}`,
+    npcKey,
     additionalTag,
     {
       targetDestination,
-    }]);
+    }
+  ]);
 
-  return npc;
 }
