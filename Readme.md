@@ -74,9 +74,16 @@ npm run dev
 One of the tasks will be to add interactions in the ZTM Quest world. In order to help contributors identify objects in a map, screenshots were made from the [Tiled](https://www.mapeditor.org/) software with available objects with their corresponding names.
 If you want to develop interactions, make sure to check out the [additional-map-info readme](./additional-map-info/Readme.md)
 
+### How-To Guides
+
+To make things easier (because it can be really confusing how to start contributing), we have added two HOW-TOs to help you out.
+
+[How-To add game objects](./HOWTO_Add-Game-Objects.md)
+[How-To add interactions](./HOWTO_Add-Interactions.md)
+
 ## Recommendations
 
 Here are some tools which I can recommend regarding game assets
 
 - For map creation: [Tiled](https://www.mapeditor.org/)
-- For music creation: [CakeWalk](https://www.bandlab.com/products/cakewalk) even a mobile app is avalable
+- For music creation: [CakeWalk](https://www.bandlab.com/products/cakewalk) even a mobile app is available
