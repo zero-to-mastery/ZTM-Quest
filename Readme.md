@@ -79,6 +79,7 @@ If you want to develop interactions, make sure to check out the [additional-map-
 To make things easier (because it can be really confusing how to start contributing), we have added two HOW-TOs to help you out.
 
 [How-To add game objects](./HOWTO_Add-Game-Objects.md)
+
 [How-To add interactions](./HOWTO_Add-Interactions.md)
 
 ## Recommendations
