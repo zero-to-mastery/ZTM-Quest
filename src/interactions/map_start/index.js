@@ -6,6 +6,7 @@ const interactions = [
     restroomInteractions,
     interactionWithBruno,
     enterMapCityInteraction,
+    // Add more interactions here
 ];
 
 export const attachInteractions = (gameObj, k) => {

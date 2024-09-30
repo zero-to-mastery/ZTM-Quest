@@ -1,4 +1,6 @@
-const gameObjects = [];
+const gameObjects = [
+    // Add more game objects here
+];
 
 export const addGameObjects = (k, map, spawnpoints) => {
     return gameObjects.reduce((gameObjAcc, cb) => {
