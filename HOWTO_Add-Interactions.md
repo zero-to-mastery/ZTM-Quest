@@ -23,9 +23,28 @@ In order to add new interactions to a map which you usually want to trigger from
       - `player` => the main character instance
       - `k` => kaplay context instance
       - `map` => map instance which contains all objects like boundaries
+
   - add your logic into the exported function
+```javascript
+// src/interactions/map_start/something.interaction.js
+export const interactionWithSomething = (player, k, map) => {
+  player.onCollide('somethingTag', () => {
+      // your logic here
+  });
+};
+```
   - import your function into the `index.js` file in `src/interactions/map_name/index.js` where `map_name` is the map where you want to add the interaction
   - add your function name to the `interactions` array in `index.js`
+```javascript
+// src/interactions/map_start/index.js
+import { interactionWithSomething } from './something.interactions';
+
+const interactions = [
+    // ... existing interactions
+    // Add more interactions here
+    interactionWithSomething,
+];
+```
 
 After finishing all steps, your interactions will get executed and attached to the map automatically.
 
