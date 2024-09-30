@@ -69,6 +69,21 @@ You can run the dev server with hot module reloading with
 npm run dev
 ```
 
+Run code style checks
+```bash
+npm run prettier
+```
+
+Run code style fix
+```bash
+npm run prettier:fix
+```
+
+Run linting
+```bash
+npm run lint
+```
+
 ### Additional Information
 
 One of the tasks will be to add interactions in the ZTM Quest world. In order to help contributors identify objects in a map, screenshots were made from the [Tiled](https://www.mapeditor.org/) software with available objects with their corresponding names.
