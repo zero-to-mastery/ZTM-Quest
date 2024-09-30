@@ -4,6 +4,7 @@ export const restroomInteractions = (player, k, map) => {
     player.onCollide('restroom_toilet', () => {
         player.wasInRestroom = true;
         player.isInDialog = true;
+        player.hasHandsWashed = false;
         const dialog = ['You feel refreshed now.', 'Ready for the ride.'];
 
         if (!player.hasTalkedToBruno) {
