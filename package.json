@@ -8,8 +8,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "prettier": "npx prettier src --check",
-    "prettier:fix": "npm run prettier -- --write",
+    "prettier": "npx prettier . --check --config ./.prettierrc.js",
+    "prettier:fix": "npm run prettier -- --write --config ./.prettierrc.js",
     "lint": "npx eslint"
   },
   "devDependencies": {

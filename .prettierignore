@@ -1,3 +1,7 @@
 .prettierrc
 .github/
 node_modules/
+public/
+*.md
+package*.json
+map_tiled_example.json
