@@ -1,4 +1,4 @@
-const processDialog = (text, resolve = null) => {
+const processDialog = (dialogue, text, resolve = null) => {
     let index = 0;
     let currentText = '';
     const intervalRef = setInterval(() => {
@@ -36,12 +36,12 @@ export async function displayDialogue(text, onDisplayEnd) {
                 nextBtn.addEventListener('click', () => {
                     res(intervalRef);
                 });
-                processDialog(t);
+                processDialog(dialogue, t);
             });
         }
         nextBtn.style.display = 'none';
     } else {
-        intervalRef = processDialog(text);
+        intervalRef = processDialog(dialogue, text);
     }
 
     closeBtn.style.display = 'block';

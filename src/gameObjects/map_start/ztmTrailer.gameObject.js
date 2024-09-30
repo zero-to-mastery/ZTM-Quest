@@ -1,6 +1,6 @@
 import { scaleFactor } from '../../constants';
 
-export const ztmTrailer = (k, map, spawnpioints) => {
+export const ztmTrailer = (k, map, spawnpoints) => {
     k.loadSprite('ztmTrailer', './ztm_trailer.png', {
         sliceX: 3,
         sliceY: 1,
