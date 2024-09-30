@@ -27,11 +27,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install dependencies
-        run: npm install -g prettier
+        run: npm install
       - name: Run Prettier
         id: prettier-run
         run: |
-          prettier --check . --ignore-unknown --write
+          npm run prettier
+          npm run prettier:fix
           echo "filecount=$(git status -s -uno | wc -L)" >> $GITHUB_OUTPUT
       - name: Commit changes
         if: ${{ steps.prettier-run.outputs.filecount > 0 }}
