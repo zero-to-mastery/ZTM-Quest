@@ -28,4 +28,4 @@ jobs:
       - name: Check with prettier
         id: prettier-run
         run: |
-          npx prettier --check .
+          npm run prettier
