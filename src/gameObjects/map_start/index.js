@@ -9,7 +9,7 @@ const gameObjects = [
     npcsOnChairs,
     ztmTrailer,
     computer,
-    cake
+    cake,
     // Add more game objects here
 ];
 

@@ -9,7 +9,7 @@ const interactions = [
     interactionWithBruno,
     enterMapCityInteraction,
     interactionWithMainboxMainArea,
-    interactionWithComputer
+    interactionWithComputer,
     // Add more interactions here
 ];
 
