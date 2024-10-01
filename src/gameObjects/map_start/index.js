@@ -1,11 +1,13 @@
 import { bruno } from './bruno.gameObject';
 import { npcsOnChairs } from './npcsOnChairs.gameObject';
 import { ztmTrailer } from './ztmTrailer.gameObject';
+import { computer } from './computer.gameObject';
 
 const gameObjects = [
     bruno,
     npcsOnChairs,
     ztmTrailer,
+    computer
     // Add more game objects here
 ];
 
