@@ -6,6 +6,7 @@ export const computer = (k, map, spawnpoints) => {
         sliceY: 4,
         anims: {
             on: { from: 2, to: 3, loop: false },
+            off: { from: 3, to: 2, loop: false }
         }
     });
 
