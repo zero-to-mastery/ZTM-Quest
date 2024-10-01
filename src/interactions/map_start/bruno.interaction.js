@@ -1,10 +1,10 @@
-import { displayDialogue } from '../../utils';
-import { conversationBruno } from '../../constants';
+import { displayDialogueWithCharacter, displayDialogueWithoutCharacter } from '../../utils';
+import { conversationBruno, bruno } from '../../constants'; 
 
 export const interactionWithBruno = (player, k, map) => {
     player.onCollide('bruno', () => {
         player.isInDialog = true;
-        displayDialogue(conversationBruno, () => {
+        displayDialogueWithCharacter(bruno.name, conversationBruno, () => { 
             player.isInDialog = false;
             player.hasTalkedToBruno = true;
         });
