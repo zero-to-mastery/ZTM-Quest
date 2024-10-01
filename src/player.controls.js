@@ -15,7 +15,6 @@ export const addPlayerControls = (k, player) => {
     );
 
     k.onButtonPress(['up', 'down'], (dir) => {
-        console.log({ player });
         if (player.isInDialog) return;
         player.direction = dir;
         player.play(animations[dir]);
