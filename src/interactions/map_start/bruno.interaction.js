@@ -1,4 +1,4 @@
-import { displayDialogueWithCharacter } from '../../utils';
+import { displayDialogueWithCharacter} from '../../utils';
 import { conversationBruno, bruno } from '../../constants'; 
 
 export const interactionWithBruno = (player, k, map) => {

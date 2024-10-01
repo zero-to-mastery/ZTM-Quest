@@ -1,4 +1,4 @@
-import { displayDialogueWithCharacter, displayDialogueWithoutCharacter } from '../../utils';
+import { displayDialogueWithoutCharacter } from '../../utils';
 
 export const getDummyText = () => {
    
