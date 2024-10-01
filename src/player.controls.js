@@ -1,12 +1,66 @@
 import { stopCharacterAnims } from './utils/animation';
+const animations = {
+    up: 'walk-up',
+    down: 'walk-down',
+    left: 'walk-side',
+    right: 'walk-side',
+};
 
 export const addPlayerControls = (k, player) => {
+    // Manage multiple pressed buttons
+    const pressed = new Set();
+    k.onButtonPress(['up', 'down', 'left', 'right'], (dir) => pressed.add(dir));
+    k.onButtonRelease(['up', 'down', 'left', 'right'], (dir) =>
+        pressed.delete(dir)
+    );
+
+    k.onButtonPress(['up', 'down'], (dir) => {
+        if (player.isInDialog) return;
+        player.direction = dir;
+        player.play(animations[dir]);
+    });
+    k.onButtonPress(['left', 'right'], (dir) => {
+        if (player.isInDialog) return;
+        player.direction = dir;
+        player.play(animations[dir]);
+        if (dir === 'left' && !player.flipX) player.flipX = true;
+        if (dir === 'right' && player.flipX) player.flipX = false;
+    });
+
+    // When a button is released, check if there are other buttons pressed
+    k.onButtonRelease(['up', 'down', 'left', 'right'], (dir) => {
+        stopCharacterAnims(player);
+        pressed.delete(dir);
+        if (!pressed.size) return;
+
+        const nextDir = [...pressed].at(-1);
+        player.direction = nextDir;
+        const a = animations[nextDir];
+        if (player.curAnim() !== a) player.play(a);
+    });
+
+    k.onButtonDown(['up', 'down', 'left', 'right'], (dir) => {
+        // if three buttons are pressed, the player should not move
+        if (pressed.size > 2) return;
+        const dirX = pressed.has('left') ? -1 : pressed.has('right') ? 1 : 0;
+        const dirY = pressed.has('up') ? -1 : pressed.has('down') ? 1 : 0;
+
+        const moveDir = k.vec2(dirX, dirY);
+        const speed =
+            pressed.size === 1
+                ? player.speed
+                : // Dot product for diagonal movement 45%
+                  player.speed * 0.707106781188095; // 1 / sqrt(2)
+
+        player.move(moveDir.unit().scale(speed));
+    });
+
     k.onUpdate(() => {
         k.camPos(player.pos.x, player.pos.y + 100);
     });
 
     k.onMouseDown((mouseBtn) => {
-        if (mouseBtn !== 'left' || player.isInDialog) return;
+        if (mouseBtn !== 'left' || player.isInDialog || pressed.size) return;
 
         const worldMousePos = k.toWorld(k.mousePos());
         player.moveTo(worldMousePos, player.speed);
@@ -19,9 +73,9 @@ export const addPlayerControls = (k, player) => {
         if (
             mouseAngle > lowerBound &&
             mouseAngle < upperBound &&
-            player.curAnim() !== 'walk-up'
+            player.curAnim() !== animations.up
         ) {
-            player.play('walk-up');
+            player.play(animations.up);
             player.direction = 'up';
             return;
         }
@@ -29,26 +83,29 @@ export const addPlayerControls = (k, player) => {
         if (
             mouseAngle < -lowerBound &&
             mouseAngle > -upperBound &&
-            player.curAnim() !== 'walk-down'
+            player.curAnim() !== animations.down
         ) {
-            player.play('walk-down');
+            player.play(animations.down);
             player.direction = 'down';
             return;
         }
 
         if (Math.abs(mouseAngle) > upperBound) {
             player.flipX = false;
-            if (player.curAnim() !== 'walk-side') player.play('walk-side');
+            if (player.curAnim() !== animations.right)
+                player.play(animations.right);
             player.direction = 'right';
             return;
         }
 
         if (Math.abs(mouseAngle) < lowerBound) {
             player.flipX = true;
-            if (player.curAnim() !== 'walk-side') player.play('walk-side');
+            if (player.curAnim() !== animations.left)
+                player.play(animations.left);
             player.direction = 'left';
             return;
         }
     });
-    k.onMouseRelease(() => stopCharacterAnims(player));
+    // Only stop animations if no buttons are pressed
+    k.onMouseRelease(() => pressed.size || stopCharacterAnims(player));
 };
