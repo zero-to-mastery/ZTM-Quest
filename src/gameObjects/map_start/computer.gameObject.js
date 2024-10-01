@@ -16,7 +16,7 @@ export const computer = (k, map, spawnpoints) => {
         k.sprite('computer', { frame: 2 }),
         k.area(),
         k.pos(
-            (tableRoom1.pos.x + 10) * scaleFactor,
+            (tableRoom1.pos.x + 3) * scaleFactor,
             (tableRoom1.pos.y + 30) * scaleFactor
         ),
         k.body({ isStatic: true }),

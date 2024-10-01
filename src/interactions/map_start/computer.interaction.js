@@ -1,10 +1,10 @@
 export const interactionWithComputer = (player, k, map) => {
+    const [computer] = k.query({ include: 'computer' });
+
     player.onCollide('computer', () => {
-        const [computer] = k.query({ include: 'computer' });
         computer.play('on');
     });
     player.onCollideEnd('computer', () => {
-        const [computer] = k.query({ include: 'computer' });
         computer.play('off');
     });
 };
