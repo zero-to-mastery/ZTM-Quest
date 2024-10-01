@@ -1,7 +1,6 @@
 import { displayDialogueWithoutCharacter } from '../../utils';
 
 export const getDummyText = () => {
-   
     const num = Math.floor(Math.random() * 11);
     if (num > 1) {
         return `You have ${num} messages in your mailbox`;

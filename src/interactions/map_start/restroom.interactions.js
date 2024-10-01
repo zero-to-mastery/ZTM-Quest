@@ -17,9 +17,12 @@ export const restroomInteractions = (player, k, map) => {
 
     player.onCollide('restroom_sink', () => {
         player.isInDialog = true;
-        displayDialogueWithoutCharacter(['You washed your hands. Good job!'], () => {
-            player.hasHandsWashed = true;
-            player.isInDialog = false;
-        });
+        displayDialogueWithoutCharacter(
+            ['You washed your hands. Good job!'],
+            () => {
+                player.hasHandsWashed = true;
+                player.isInDialog = false;
+            }
+        );
     });
 };

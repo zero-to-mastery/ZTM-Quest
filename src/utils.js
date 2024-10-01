@@ -21,7 +21,7 @@ const processDialogWithCharacterName = (dialogue, characterName, text) => {
     const intervalRef = setInterval(() => {
         if (index < text.length) {
             currentText += text[index];
-            dialogue.innerHTML = `<strong>${characterName}:</strong><br>${currentText}`; 
+            dialogue.innerHTML = `<strong>${characterName}:</strong><br>${currentText}`;
             index++;
             return;
         }
@@ -32,7 +32,11 @@ const processDialogWithCharacterName = (dialogue, characterName, text) => {
     return intervalRef;
 };
 
-export async function displayDialogueWithCharacter(characterName, text, onDisplayEnd = () => {}) {
+export async function displayDialogueWithCharacter(
+    characterName,
+    text,
+    onDisplayEnd = () => {}
+) {
     const dialogueUI = document.getElementById('textbox-container');
     const dialogue = document.getElementById('dialogue');
     const closeBtn = document.getElementById('close');
@@ -53,12 +57,20 @@ export async function displayDialogueWithCharacter(characterName, text, onDispla
                 nextBtn.addEventListener('click', () => {
                     res(intervalRef);
                 });
-                intervalRef = processDialogWithCharacterName(dialogue, characterName, t); // Call function with character name
+                intervalRef = processDialogWithCharacterName(
+                    dialogue,
+                    characterName,
+                    t
+                ); // Call function with character name
             });
         }
         nextBtn.style.display = 'none';
     } else {
-        intervalRef = processDialogWithCharacterName(dialogue, characterName, text); // Call function with character name
+        intervalRef = processDialogWithCharacterName(
+            dialogue,
+            characterName,
+            text
+        ); // Call function with character name
     }
 
     closeBtn.style.display = 'block';
@@ -80,7 +92,10 @@ export async function displayDialogueWithCharacter(characterName, text, onDispla
     });
 }
 
-export async function displayDialogueWithoutCharacter(text, onDisplayEnd = () => {}) {
+export async function displayDialogueWithoutCharacter(
+    text,
+    onDisplayEnd = () => {}
+) {
     const dialogueUI = document.getElementById('textbox-container');
     const dialogue = document.getElementById('dialogue');
     const closeBtn = document.getElementById('close');

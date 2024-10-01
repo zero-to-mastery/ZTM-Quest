@@ -1,188 +1,206 @@
 <!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="./favicon-32x32.png?v=d0a70af7f35f5943c7e28883adbbb7fd" type="image/png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ZTM-Quest</title>
-    <style>
-        @font-face {
-            font-family: pixelifysans;
-            src: url(PixelifySans-VariableFont_wght.ttf);
-        }
-
-        body {
-            font-family: pixelifysans, monospace;
-            font-size: 2rem;
-            overflow: hidden;
-            margin: 0;
-            padding: 0;
-        }
-
-        #app {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-
-        #textbox {
-            position: absolute;
-            left: 15%;
-            right: 15%;
-            bottom: 2vh;
-            min-height: 8vh;
-            background: #fff;
-            border-radius: 10px;
-            border: 2px solid #007BFF;
-            outline: none;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            word-spacing: 0.2rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s ease, transform 0.3s ease, opacity 0.5s ease;
-            opacity: 0;
-            animation: fadeIn 0.8s forwards;
-            font-size: 1.2rem;
-        }
-
-        #textbox:hover {
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .ui-text {
-            margin: 0;
-            font-family: pixelifysans, sans-serif;
-            font-size: 1.5rem;
-            color: #333;
-            user-select: none;
-            opacity: 0;
-            animation: slideIn 1s forwards 0.3s;
-        }
-
-        .ui-close-btn,
-        .ui-next-btn {
-            font-family: 'Courier New', monospace;
-            border: 2px solid #007BFF;
-            border-radius: 6px;
-            padding: 0.6rem 1.5rem;
-            background-color: #007BFF;
-            color: white;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
-            opacity: 0;
-            animation: fadeIn 1s forwards 0.5s;
-        }
-
-        .ui-close-btn:hover,
-        .ui-next-btn:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-            transform: translateY(-2px);
-        }
-
-        .btn-container {
-            align-self: flex-end;
-            margin-top: 1rem;
-            display: flex;
-            gap: 0.6rem;
-            opacity: 0;
-            animation: fadeIn 1s forwards 0.6s;
-        }
-
-        .note {
-            position: absolute;
-            left: 5%;
-            top: 2vh;
-            display: flex;
-            flex-direction: column;
-            color: #aaa;
-            font-size: 1rem;
-            line-height: 1.6;
-            opacity: 0;
-            animation: fadeIn 1s forwards 0.7s;
-        }
-
-        .note span {
-            margin-bottom: 0.6rem;
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
+    <head>
+        <meta charset="UTF-8" />
+        <link
+            rel="icon"
+            href="./favicon-32x32.png?v=d0a70af7f35f5943c7e28883adbbb7fd"
+            type="image/png"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ZTM-Quest</title>
+        <style>
+            @font-face {
+                font-family: pixelifysans;
+                src: url(PixelifySans-VariableFont_wght.ttf);
             }
 
-            100% {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideIn {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
+            body {
+                font-family: pixelifysans, monospace;
+                font-size: 2rem;
+                overflow: hidden;
+                margin: 0;
+                padding: 0;
             }
 
-            100% {
-                opacity: 1;
-                transform: translateY(0);
+            #app {
+                width: 100%;
+                height: 100%;
+                position: relative;
             }
-        }
 
-        @media (max-width: 768px) {
             #textbox {
-                left: 8%;
-                right: 8%;
+                position: absolute;
+                left: 15%;
+                right: 15%;
+                bottom: 2vh;
+                min-height: 8vh;
+                background: #fff;
+                border-radius: 10px;
+                border: 2px solid #007bff;
+                outline: none;
+                padding: 1.5rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                word-spacing: 0.2rem;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                transition:
+                    box-shadow 0.3s ease,
+                    transform 0.3s ease,
+                    opacity 0.5s ease;
+                opacity: 0;
+                animation: fadeIn 0.8s forwards;
+                font-size: 1.2rem;
+            }
+
+            #textbox:hover {
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+                transform: translateY(-2px);
+            }
+
+            .ui-text {
+                margin: 0;
+                font-family: pixelifysans, sans-serif;
+                font-size: 1.5rem;
+                color: #333;
+                user-select: none;
+                opacity: 0;
+                animation: slideIn 1s forwards 0.3s;
             }
 
             .ui-close-btn,
             .ui-next-btn {
-                padding: 0.5rem 1rem;
-                font-size: 1rem;
+                font-family: 'Courier New', monospace;
+                border: 2px solid #007bff;
+                border-radius: 6px;
+                padding: 0.6rem 1.5rem;
+                background-color: #007bff;
+                color: white;
+                cursor: pointer;
+                font-size: 1.1rem;
+                transition:
+                    background-color 0.3s ease,
+                    transform 0.2s ease,
+                    border-color 0.3s ease;
+                opacity: 0;
+                animation: fadeIn 1s forwards 0.5s;
+            }
+
+            .ui-close-btn:hover,
+            .ui-next-btn:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+                transform: translateY(-2px);
+            }
+
+            .btn-container {
+                align-self: flex-end;
+                margin-top: 1rem;
+                display: flex;
+                gap: 0.6rem;
+                opacity: 0;
+                animation: fadeIn 1s forwards 0.6s;
             }
 
             .note {
-                font-size: 0.9rem;
+                position: absolute;
+                left: 5%;
+                top: 2vh;
+                display: flex;
+                flex-direction: column;
+                color: #aaa;
+                font-size: 1rem;
+                line-height: 1.6;
+                opacity: 0;
+                animation: fadeIn 1s forwards 0.7s;
             }
 
-            .ui-name {
-                font-family: pixelifysans, sans-serif;
-                font-size: 1.5rem;
-                color: #333;
-                margin-bottom: 0.5rem;
-                font-weight: bold;
+            .note span {
+                margin-bottom: 0.6rem;
             }
-        }
-    </style>
-</head>
 
-<body>
-    <div id="app">
-        <div>
-            <p class="note">
-                Tap/Click/&uarr;&darr;&larr;&rarr; around to move
-            </p>
+            @keyframes fadeIn {
+                0% {
+                    opacity: 0;
+                }
 
-            <div id="textbox-container" style="display: none">
-                <div id="textbox">
-                    <p id="dialogue" class="ui-text"></p>
-                    <div class="btn-container">
-                        <button id="close" class="ui-close-btn" aria-label="Close dialog">
-                            Close
-                        </button>
-                        <button id="next" class="ui-next-btn" aria-label="Next dialog">Next</button>
+                100% {
+                    opacity: 1;
+                }
+            }
+
+            @keyframes slideIn {
+                0% {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @media (max-width: 768px) {
+                #textbox {
+                    left: 8%;
+                    right: 8%;
+                }
+
+                .ui-close-btn,
+                .ui-next-btn {
+                    padding: 0.5rem 1rem;
+                    font-size: 1rem;
+                }
+
+                .note {
+                    font-size: 0.9rem;
+                }
+
+                .ui-name {
+                    font-family: pixelifysans, sans-serif;
+                    font-size: 1.5rem;
+                    color: #333;
+                    margin-bottom: 0.5rem;
+                    font-weight: bold;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="app">
+            <div>
+                <p class="note">
+                    Tap/Click/&uarr;&darr;&larr;&rarr; around to move
+                </p>
+
+                <div id="textbox-container" style="display: none">
+                    <div id="textbox">
+                        <p id="dialogue" class="ui-text"></p>
+                        <div class="btn-container">
+                            <button
+                                id="close"
+                                class="ui-close-btn"
+                                aria-label="Close dialog"
+                            >
+                                Close
+                            </button>
+                            <button
+                                id="next"
+                                class="ui-next-btn"
+                                aria-label="Next dialog"
+                            >
+                                Next
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
+            <canvas id="game"></canvas>
         </div>
-        <canvas id="game"></canvas>
-    </div>
-    <script type="module" src="src/main.js"></script>
-</body>
-
+        <script type="module" src="src/main.js"></script>
+    </body>
 </html>
