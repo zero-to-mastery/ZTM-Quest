@@ -32,3 +32,12 @@ export const conversationBruno = [
     "Otherwise if you can't wait to explore the outside world, just go through the door.",
     'But, make sure you visit the restroom before you go. It will be a long journey.',
 ];
+
+export const firstConversationArcade = [
+    "Hey there! Looking for play some games?",
+    "Did you know the game machine to your left is undefeated?",
+    "I hear someone beat game machine near machine crawl today!",
+    "If you're up for a challenge, try game machine crawl!",
+    "Make sure to wash and sanitize your hand before playing.",
+    "Thank you my friend go and enjoy."
+];

@@ -1,7 +1,9 @@
+import { firstInteractionWithArcadeEmployee } from './arcade_employee.interaction';
 import { enterMapCityInteraction } from './enterMapCity.interactions';
 
 const interactions = [
     enterMapCityInteraction,
+    firstInteractionWithArcadeEmployee
     // Add more interactions here
 ];
 
