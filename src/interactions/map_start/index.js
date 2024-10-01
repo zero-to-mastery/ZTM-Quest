@@ -2,13 +2,13 @@ import { interactionWithBruno } from './bruno.interaction';
 import { enterMapCityInteraction } from './enterMapCity.interaction';
 import { interactionWithMainboxMainArea } from './mailboxMainArea.interaction';
 import { restroomInteractions } from './restroom.interactions';
-import { } from '../map_city/enterStoreMainArea.interaction';
 
 const interactions = [
     restroomInteractions,
     interactionWithBruno,
     enterMapCityInteraction,
     interactionWithMainboxMainArea,
+    interactionWithComputer,
     // Add more interactions here
 ];
 
