@@ -9,6 +9,7 @@ const interactions = [
     enterMapCityInteraction,
     interactionWithMainboxMainArea,
     // Add more interactions here
+    interactionWithStoreMainArea,
 ];
 
 export const attachInteractions = (gameObj, k) => {
