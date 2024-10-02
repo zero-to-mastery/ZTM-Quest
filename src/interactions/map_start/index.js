@@ -11,7 +11,7 @@ const interactions = [
     enterMapCityInteraction,
     interactionWithMainboxMainArea,
     interactionWithComputer,
-    interactionWithJokeTeller
+    interactionWithJokeTeller,
     // Add more interactions here
 ];
 
