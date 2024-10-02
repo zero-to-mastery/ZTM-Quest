@@ -4,6 +4,8 @@ import { npcsOnChairs } from './npcsOnChairs.gameObject';
 import { ztmTrailer } from './ztmTrailer.gameObject';
 import { computer } from './computer.gameObject';
 
+import { misterFu } from './misterFu.gameObject';
+
 const gameObjects = [
     bruno,
     npcsOnChairs,
@@ -11,6 +13,7 @@ const gameObjects = [
     computer,
     cake,
     // Add more game objects here
+    misterFu,
 ];
 
 export const addGameObjects = (k, map, spawnpoints) => {
