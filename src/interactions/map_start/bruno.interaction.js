@@ -1,14 +1,18 @@
 import { displayDialogueWithCharacter } from '../../utils';
 import { conversationBruno, bruno } from '../../constants';
-import { stopCharacterAnims } from '../../utils/animation';
 
 export const interactionWithBruno = (player, k, map) => {
     player.onCollide('bruno', () => {
         player.isInDialog = true;
-        stopCharacterAnims(player);
-        displayDialogueWithCharacter(bruno.name, conversationBruno, () => {
-            player.isInDialog = false;
-            player.state.hasTalkedToBruno = true;
+        displayDialogueWithCharacter({
+            k,
+            player,
+            characterName: bruno.name,
+            test: conversationBruno,
+            onDisplayEnd: () => {
+                player.isInDialog = false;
+                player.state.hasTalkedToBruno = true;
+            },
         });
     });
 };

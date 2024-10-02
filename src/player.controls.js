@@ -1,8 +1,9 @@
 import { animations, stopCharacterAnims } from './utils/animation';
 
+// Manage multiple pressed buttons
+const pressed = new Set();
+
 export const addPlayerControls = (k, player) => {
-    // Manage multiple pressed buttons
-    const pressed = new Set();
     k.onButtonPress(
         ['up', 'down', 'left', 'right'],
         (dir) => player.isInDialog || pressed.add(dir)
@@ -11,6 +12,12 @@ export const addPlayerControls = (k, player) => {
         ['up', 'down', 'left', 'right'],
         (dir) => player.isInDialog || pressed.delete(dir)
     );
+    // Control what happens when a dialog starts
+    k.canvas.addEventListener('dialogueDisplayed', () => {
+        pressed.clear();
+        // TODO: should it look at the character?
+        stopCharacterAnims(player);
+    });
 
     k.onButtonPress(['up', 'down'], (dir) => {
         if (player.isInDialog) return;
@@ -40,11 +47,15 @@ export const addPlayerControls = (k, player) => {
 
     k.onButtonDown(['up', 'down', 'left', 'right'], (dir) => {
         if (player.isInDialog) return;
-        // if three buttons are pressed, the player should not move
+        // If three buttons are pressed, the player should not move
         if (pressed.size > 2) return;
+        // Also, if opposite buttons are pressed, the player should not move
+        if (pressed.has('left') && pressed.has('right')) return;
+        if (pressed.has('up') && pressed.has('down')) return;
+
+        // Move the player
         const dirX = pressed.has('left') ? -1 : pressed.has('right') ? 1 : 0;
         const dirY = pressed.has('up') ? -1 : pressed.has('down') ? 1 : 0;
-
         const moveDir = k.vec2(dirX, dirY);
         const speed =
             pressed.size === 1
