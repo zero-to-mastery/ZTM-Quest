@@ -1,8 +1,9 @@
 import { displayDialogue } from '../../utils';
 import { conversationBruno } from '../../constants';
+import { interactionHandler } from '../handler.interactions';
 
 export const interactionWithBruno = (player, k, map) => {
-    player.onCollide('bruno', () => {
+    interactionHandler(player, 'bruno', k, () => {
         player.isInDialog = true;
         displayDialogue(conversationBruno, () => {
             player.isInDialog = false;
