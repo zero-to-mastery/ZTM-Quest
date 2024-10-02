@@ -71,3 +71,25 @@ export function setCamScale(k) {
         k.camScale(k.vec2(1.5));
     }
 }
+
+export function buildActionModal(sprite, k) {
+    const spritePos = sprite.pos;
+
+    const actionModal = k.add([
+        k.rect(20, 20),
+        k.color(255, 255, 255),
+        k.outline(2, k.Color.BLACK),
+        k.pos(spritePos.x - 10, spritePos.y - sprite.height - 30),
+        k.layer('ui'),
+        'action-modal',
+    ]);
+
+    const actionLabel = k.add([
+        k.text('t', { size: 16, align: 'center' }),
+        k.color(0, 0, 0),
+        k.pos(actionModal.pos.x + 5, actionModal.pos.y + 4),
+        'action-label',
+    ]);
+
+    return { actionModal, actionLabel };
+}
