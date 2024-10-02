@@ -5,7 +5,7 @@ export const enterMapArcadeInteraction = (player, k) => {
         });
     });
 
-    player.onCollide('enter_map_start_right', () => {
+    player.onCollide('enter_map_start', () => {
         import('../../scenes/start').then((_) => {
             k.go('start');
         });
