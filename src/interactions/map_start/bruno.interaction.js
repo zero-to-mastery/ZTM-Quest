@@ -1,13 +1,13 @@
-import { displayDialogue } from '../../utils';
-import { conversationBruno } from '../../constants';
 import { interactionHandler } from '../handler.interactions';
+import { displayDialogueWithCharacter } from '../../utils';
+import { conversationBruno, bruno } from '../../constants';
 
 export const interactionWithBruno = (player, k, map) => {
     interactionHandler(player, 'bruno', k, () => {
         player.isInDialog = true;
-        displayDialogue(conversationBruno, () => {
+        displayDialogueWithCharacter(bruno.name, conversationBruno, () => {
             player.isInDialog = false;
-            player.hasTalkedToBruno = true;
+            player.state.hasTalkedToBruno = true;
         });
     });
 };

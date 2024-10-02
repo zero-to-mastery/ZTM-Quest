@@ -3,6 +3,7 @@ import { enterMapCityInteraction } from './enterMapCity.interaction';
 import { interactionWithMainboxMainArea } from './mailboxMainArea.interaction';
 import { restroomInteractions } from './restroom.interactions';
 import { interactionWithComputer } from './computer.interaction';
+import { interactionWithJokeTeller } from './jokeTeller.interaction';
 
 const interactions = [
     restroomInteractions,
@@ -10,6 +11,7 @@ const interactions = [
     enterMapCityInteraction,
     interactionWithMainboxMainArea,
     interactionWithComputer,
+    interactionWithJokeTeller,
     // Add more interactions here
 ];
 

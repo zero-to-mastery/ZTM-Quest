@@ -1,19 +1,19 @@
-import { displayDialogue } from '../../utils';
+import { displayDialogueWithoutCharacter } from '../../utils';
 
 export const enterMapCityInteraction = (player, k, map) => {
     player.onCollide('enter_map_right', () => {
         if (
-            player.hasTalkedToBruno &&
-            player.wasInRestroom &&
-            player.hasHandsWashed
+            player.state.hasTalkedToBruno &&
+            player.state.wasInRestroom &&
+            player.state.hasHandsWashed
         ) {
             import('../../scenes/city').then((_) => {
                 k.go('city');
             });
         } else {
-            if (!player.hasTalkedToBruno) {
+            if (!player.state.hasTalkedToBruno) {
                 player.isInDialog = true;
-                displayDialogue(
+                displayDialogueWithoutCharacter(
                     [
                         'You should talk to Bruno first.',
                         'He is the guy with the beautiful suite to your left side.',
@@ -25,9 +25,9 @@ export const enterMapCityInteraction = (player, k, map) => {
 
                 return;
             } else {
-                if (!player.wasInRestroom) {
+                if (!player.state.wasInRestroom) {
                     player.isInDialog = true;
-                    displayDialogue(
+                    displayDialogueWithoutCharacter(
                         [
                             'You should visit the restroom first.',
                             'Remember what bruno said? It will be a long journey.',
@@ -40,9 +40,9 @@ export const enterMapCityInteraction = (player, k, map) => {
                     return;
                 }
 
-                if (!player.hasHandsWashed) {
+                if (!player.state.hasHandsWashed) {
                     player.isInDialog = true;
-                    displayDialogue(
+                    displayDialogueWithoutCharacter(
                         ['You should wash your hands first.'],
                         () => {
                             player.isInDialog = false;
