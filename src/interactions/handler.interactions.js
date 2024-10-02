@@ -1,6 +1,6 @@
 import { buildActionModal } from '../utils';
 
-export const interactionHandler = (
+export const npcInteractionHandler = (
     player,
     target,
     k,
@@ -8,10 +8,10 @@ export const interactionHandler = (
     onCollideEnd
 ) => {
     let keyHandler;
-    player.onCollide(target, () => {
+    player.onCollide(target, (sprite) => {
         // Display the modal prompting the user to press 't'
-        const { actionModal, actionLabel } = buildActionModal(player, k);
-        console.log(actionModal);
+        const { actionModal, actionLabel } = buildActionModal(sprite, k);
+
         keyHandler = k.onKeyPress('t', () => {
             k.destroy(actionModal);
             k.destroy(actionLabel);

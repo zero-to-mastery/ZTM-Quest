@@ -1,8 +1,7 @@
 import { displayDialogueWithoutCharacter } from '../../utils';
-import { interactionHandler } from '../handler.interactions';
 
 export const restroomInteractions = (player, k, map) => {
-    interactionHandler(player, 'restroom_toilet', k, () => {
+    player.onCollide('restroom_toilet', () => {
         player.state.wasInRestroom = true;
         player.isInDialog = true;
         player.state.hasHandsWashed = false;
@@ -16,7 +15,7 @@ export const restroomInteractions = (player, k, map) => {
         });
     });
 
-    interactionHandler(player, 'restroom_sink', k, () => {
+    player.onCollide('restroom_sink', () => {
         player.isInDialog = true;
         displayDialogueWithoutCharacter(
             ['You washed your hands. Good job!'],
