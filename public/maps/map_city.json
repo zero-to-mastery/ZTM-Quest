@@ -3887,7 +3887,7 @@
                 {
                  "height":16.3863636363636,
                  "id":455,
-                 "name":"enter_map_start",
+                 "name":"enter_map_start_left",
                  "properties":[
                         {
                          "name":"goToDifferentMap",
@@ -3909,7 +3909,7 @@
                 {
                  "height":15.6590909090909,
                  "id":456,
-                 "name":"enter_map_start",
+                 "name":"enter_map_start_right",
                  "properties":[
                         {
                          "name":"goToDifferentMap",
