@@ -32,10 +32,10 @@ export const jokeTellerNPC = (k, map, spawnpoints) => {
         },
     });
 
-    const spawnPoint = spawnpoints.jokeTeller || { x: 90, y: 250 };
+    const spawnPoint = spawnpoints.jokeTeller || { x: 180, y: 467 };
 
     return k.make([
-        k.sprite('jokeTeller', { anim: 'idle-down' }),
+        k.sprite('jokeTeller', { anim: 'idle-side' }),
         k.area({
             shape: new k.Rect(k.vec2(0), 16, 16),
         }),
