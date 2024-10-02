@@ -4,17 +4,18 @@ export const interactionHandler = (
     player,
     target,
     k,
-    displayDialogueFunction
+    onCollide,
+    onCollideEnd
 ) => {
     let keyHandler;
-    player.onCollide(target, (sprite) => {
+    player.onCollide(target, () => {
         // Display the modal prompting the user to press 't'
-        const { actionModal, actionLabel } = buildActionModal(sprite, k);
+        const { actionModal, actionLabel } = buildActionModal(player, k);
+        console.log(actionModal);
         keyHandler = k.onKeyPress('t', () => {
-            player.isInDialog = true;
             k.destroy(actionModal);
             k.destroy(actionLabel);
-            displayDialogueFunction();
+            onCollide();
             keyHandler.cancel();
         });
     });
@@ -28,6 +29,11 @@ export const interactionHandler = (
         if (actionLabel) {
             actionLabel.destroy();
         }
+
         keyHandler.cancel();
+
+        if (onCollideEnd) {
+            onCollideEnd();
+        }
     });
 };

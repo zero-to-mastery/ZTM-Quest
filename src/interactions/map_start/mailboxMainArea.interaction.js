@@ -1,4 +1,5 @@
 import { displayDialogueWithoutCharacter } from '../../utils';
+import { interactionHandler } from '../handler.interactions';
 
 export const getDummyText = () => {
     const num = Math.floor(Math.random() * 11);
@@ -14,7 +15,7 @@ export const getDummyText = () => {
 };
 
 export const interactionWithMainboxMainArea = (player, k, map) => {
-    player.onCollide('mailbox_mainArea', () => {
+    interactionHandler(player, 'mailbox_mainArea', k, () => {
         player.isInDialog = true;
         displayDialogueWithoutCharacter(getDummyText(), () => {
             player.isInDialog = false;
