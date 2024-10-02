@@ -9,7 +9,7 @@ export const interactionWithJokeTeller = (player, k, map) => {
 
 const fetchJoke = async (player, k) => {
     try {
-        const response = await fetch('https://v2.jokeapi.dev/joke/Any');
+        const response = await fetch('https://v2.jokeapi.dev/joke/Any?safe-mode');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
