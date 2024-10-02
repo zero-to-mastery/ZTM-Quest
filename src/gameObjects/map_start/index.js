@@ -3,13 +3,14 @@ import { cake } from './cake.gameObject';
 import { npcsOnChairs } from './npcsOnChairs.gameObject';
 import { ztmTrailer } from './ztmTrailer.gameObject';
 import { computer } from './computer.gameObject';
-
+import { jokeTellerNPC } from './jokeTellerNPC.gameObject';
 const gameObjects = [
     bruno,
     npcsOnChairs,
     ztmTrailer,
     computer,
     cake,
+    jokeTellerNPC,
     // Add more game objects here
 ];
 
