@@ -3,15 +3,15 @@ import { displayDialogueWithoutCharacter } from '../../utils';
 export const enterMapCityInteraction = (player, k, map) => {
     player.onCollide('enter_map_right', () => {
         if (
-            player.hasTalkedToBruno &&
-            player.wasInRestroom &&
-            player.hasHandsWashed
+            player.state.hasTalkedToBruno &&
+            player.state.wasInRestroom &&
+            player.state.hasHandsWashed
         ) {
             import('../../scenes/city').then((_) => {
                 k.go('city');
             });
         } else {
-            if (!player.hasTalkedToBruno) {
+            if (!player.state.hasTalkedToBruno) {
                 player.isInDialog = true;
                 displayDialogueWithoutCharacter(
                     [
@@ -25,7 +25,7 @@ export const enterMapCityInteraction = (player, k, map) => {
 
                 return;
             } else {
-                if (!player.wasInRestroom) {
+                if (!player.state.wasInRestroom) {
                     player.isInDialog = true;
                     displayDialogueWithoutCharacter(
                         [
@@ -40,7 +40,7 @@ export const enterMapCityInteraction = (player, k, map) => {
                     return;
                 }
 
-                if (!player.hasHandsWashed) {
+                if (!player.state.hasHandsWashed) {
                     player.isInDialog = true;
                     displayDialogueWithoutCharacter(
                         ['You should wash your hands first.'],
