@@ -19,16 +19,19 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
     }
 
     const playerState = {
-        set: function(target, key, value) {
+        set: function (target, key, value) {
             const gameState = getGameState();
             gameState.player[key] = value;
             setGameState(gameState);
             return true;
-        }
-    }
-    const state = new Proxy({
-        ...playerProps
-    }, playerState);
+        },
+    };
+    const state = new Proxy(
+        {
+            ...playerProps,
+        },
+        playerState
+    );
 
     const player = k.make([
         k.sprite('player', { anim: 'idle-down' }),
