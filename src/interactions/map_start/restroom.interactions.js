@@ -2,12 +2,12 @@ import { displayDialogueWithoutCharacter } from '../../utils';
 
 export const restroomInteractions = (player, k, map) => {
     player.onCollide('restroom_toilet', () => {
-        player.wasInRestroom = true;
+        player.state.wasInRestroom = true;
         player.isInDialog = true;
-        player.hasHandsWashed = false;
+        player.state.hasHandsWashed = false;
         const dialog = ['You feel refreshed now.', 'Ready for the ride.'];
 
-        if (!player.hasTalkedToBruno) {
+        if (!player.state.hasTalkedToBruno) {
             dialog.push('You should talk to Bruno first.');
         }
         displayDialogueWithoutCharacter(dialog, () => {
@@ -20,7 +20,7 @@ export const restroomInteractions = (player, k, map) => {
         displayDialogueWithoutCharacter(
             ['You washed your hands. Good job!'],
             () => {
-                player.hasHandsWashed = true;
+                player.state.hasHandsWashed = true;
                 player.isInDialog = false;
             }
         );
