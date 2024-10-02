@@ -1,4 +1,5 @@
 import { displayDialogueWithoutCharacter } from '../../utils';
+import { stopCharacterAnims } from '../../utils/animation';
 
 export const enterMapCityInteraction = (player, k, map) => {
     player.onCollide('enter_map_right', () => {
@@ -13,6 +14,7 @@ export const enterMapCityInteraction = (player, k, map) => {
         } else {
             if (!player.state.hasTalkedToBruno) {
                 player.isInDialog = true;
+                stopCharacterAnims(player);
                 displayDialogueWithoutCharacter(
                     [
                         'You should talk to Bruno first.',
@@ -27,6 +29,7 @@ export const enterMapCityInteraction = (player, k, map) => {
             } else {
                 if (!player.state.wasInRestroom) {
                     player.isInDialog = true;
+                    stopCharacterAnims(player);
                     displayDialogueWithoutCharacter(
                         [
                             'You should visit the restroom first.',
@@ -42,6 +45,7 @@ export const enterMapCityInteraction = (player, k, map) => {
 
                 if (!player.state.hasHandsWashed) {
                     player.isInDialog = true;
+                    stopCharacterAnims(player);
                     displayDialogueWithoutCharacter(
                         ['You should wash your hands first.'],
                         () => {

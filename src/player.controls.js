@@ -1,17 +1,15 @@
-import { stopCharacterAnims } from './utils/animation';
-const animations = {
-    up: 'walk-up',
-    down: 'walk-down',
-    left: 'walk-side',
-    right: 'walk-side',
-};
+import { animations, stopCharacterAnims } from './utils/animation';
 
 export const addPlayerControls = (k, player) => {
     // Manage multiple pressed buttons
     const pressed = new Set();
-    k.onButtonPress(['up', 'down', 'left', 'right'], (dir) => pressed.add(dir));
-    k.onButtonRelease(['up', 'down', 'left', 'right'], (dir) =>
-        pressed.delete(dir)
+    k.onButtonPress(
+        ['up', 'down', 'left', 'right'],
+        (dir) => player.isInDialog || pressed.add(dir)
+    );
+    k.onButtonRelease(
+        ['up', 'down', 'left', 'right'],
+        (dir) => player.isInDialog || pressed.delete(dir)
     );
 
     k.onButtonPress(['up', 'down'], (dir) => {
@@ -32,6 +30,7 @@ export const addPlayerControls = (k, player) => {
         stopCharacterAnims(player);
         pressed.delete(dir);
         if (!pressed.size) return;
+        if (player.isInDialog) return;
 
         const nextDir = [...pressed].at(-1);
         player.direction = nextDir;
@@ -40,6 +39,7 @@ export const addPlayerControls = (k, player) => {
     });
 
     k.onButtonDown(['up', 'down', 'left', 'right'], (dir) => {
+        if (player.isInDialog) return;
         // if three buttons are pressed, the player should not move
         if (pressed.size > 2) return;
         const dirX = pressed.has('left') ? -1 : pressed.has('right') ? 1 : 0;
