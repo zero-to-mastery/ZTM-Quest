@@ -1,5 +1,6 @@
 import { k } from '../kplayCtx';
 import { scaleFactor, speedByScaleFactor } from '../constants';
+import { getGameState, setGameState } from '../utils/gameState';
 
 export function makePlayer(playerProps = {}, customScale = scaleFactor) {
     if (!k.getSprite('player')) {
@@ -17,6 +18,18 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
         });
     }
 
+    const playerState = {
+        set: function(target, key, value) {
+            const gameState = getGameState();
+            gameState.player[key] = value;
+            setGameState(gameState);
+            return true;
+        }
+    }
+    const state = new Proxy({
+        ...playerProps
+    }, playerState);
+
     const player = k.make([
         k.sprite('player', { anim: 'idle-down' }),
         k.area({
@@ -32,7 +45,7 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
             isInDialog: false,
             collectedCoins: 0,
             score: 0,
-            ...playerProps,
+            state: state,
         },
     ]);
 

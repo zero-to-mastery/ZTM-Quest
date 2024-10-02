@@ -6,7 +6,7 @@ export const interactionWithBruno = (player, k, map) => {
         player.isInDialog = true;
         displayDialogue(conversationBruno, () => {
             player.isInDialog = false;
-            player.hasTalkedToBruno = true;
+            player.state.hasTalkedToBruno = true;
         });
     });
 };
