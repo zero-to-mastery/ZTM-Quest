@@ -4,6 +4,7 @@ import { k } from '../kplayCtx';
 import { attachInteractions } from '../interactions/map_start';
 import { addGameObjects } from '../gameObjects/map_start';
 import { addPlayerControls } from '../player.controls';
+import { getGameState } from '../utils/gameState';
 
 k.scene('start', async () => {
     const objectConfig = {
@@ -24,11 +25,8 @@ k.scene('start', async () => {
         k.vec2(0, 11)
     );
 
-    const player = makePlayer({
-        hasTalkedToBruno: false,
-        wasInRestroom: false,
-        hasHandsWashed: false,
-    });
+    const gameState = getGameState();
+    const player = makePlayer(gameState.player);
 
     player.pos = spawnpoint.player;
 
