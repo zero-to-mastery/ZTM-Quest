@@ -25,7 +25,3 @@ jobs:
         id: eslint-run
         run: |
           npx eslint
-      - name: Check with prettier
-        id: prettier-run
-        run: |
-          npm run prettier

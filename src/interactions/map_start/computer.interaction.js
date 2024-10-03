@@ -22,7 +22,11 @@ export const interactionWithComputer = (player, k, map) => {
 
     player.onCollide('computer', () => {
         computer.play('on');
-        displayDialogueWithoutCharacter(careerPathDialogue);
+        displayDialogueWithoutCharacter({
+            k: k,
+            player: player,
+            text: careerPathDialogue,
+        });
     });
 
     player.onCollideEnd('computer', () => {
