@@ -21,10 +21,12 @@ const fetchJoke = async (player, k) => {
         handleJokeResponse(jokeData, player, k);
     } catch (error) {
         console.error('Failed to fetch joke:', error);
-        displayDialogueWithCharacter(
-            'Joke Teller',
-            'I am having trouble finding a joke right now.'
-        );
+        displayDialogueWithCharacter({
+            k,
+            player,
+            characterName: 'Joke Teller',
+            text: 'I am having trouble finding a joke right now',
+        });
     }
 };
 
