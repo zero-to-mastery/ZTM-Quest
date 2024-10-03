@@ -1,16 +1,18 @@
 const processDialog = (dialogue, text) => {
     let index = 0;
     let currentText = '';
+    let fullText = Array.isArray(text) ? text.join(' ') : text;
     const intervalRef = setInterval(() => {
-        if (index < text.length) {
-            currentText += text[index];
+        if (index < fullText.length) {
+            currentText += fullText[index];
+            console.log(currentText);
             dialogue.innerHTML = currentText; // Display the current tex
             index++;
             return;
         }
 
         clearInterval(intervalRef);
-    }, 1);
+    }, 20);
 
     return intervalRef;
 };
@@ -39,10 +41,11 @@ export async function displayDialogueWithCharacter({
     text,
     onDisplayEnd = () => {},
 }) {
+    await new Promise((r) => requestAnimationFrame(r));
     const dialogueUI = document.getElementById('textbox-container');
     const dialogue = document.getElementById('dialogue');
-    const closeBtn = document.getElementById('close');
-    const nextBtn = document.getElementById('next');
+    const closeBtn = document.getElementById('dialog-close-btn');
+    const nextBtn = document.getElementById('dialog-next-btn');
 
     let intervalRef = null;
 
@@ -51,14 +54,10 @@ export async function displayDialogueWithCharacter({
     if (text instanceof Array) {
         closeBtn.style.display = 'none';
         nextBtn.style.display = 'block';
+        nextBtn.focus();
         for await (const t of text) {
             intervalRef = await new Promise((res) => {
-                nextBtn.removeEventListener('click', () => {
-                    res(intervalRef);
-                });
-                nextBtn.addEventListener('click', () => {
-                    res(intervalRef);
-                });
+                nextBtn.addEventListener('click', () => res(intervalRef));
                 intervalRef = processDialogWithCharacterName(
                     dialogue,
                     characterName,
@@ -83,12 +82,7 @@ export async function displayDialogueWithCharacter({
         dialogue.innerHTML = '';
         clearInterval(intervalRef);
         closeBtn.removeEventListener('click', onCloseBtnClick);
-        k.canvas.focus();
-        k.canvas.dispatchEvent(
-            new CustomEvent('dialogueClosed', {
-                detail: { k, player, characterName, text },
-            })
-        );
+        k.triggerEvent('dialog-closed', { player, characterName, text });
         k.canvas.focus();
     }
 
@@ -99,12 +93,7 @@ export async function displayDialogueWithCharacter({
             closeBtn.click();
         }
     });
-
-    k.canvas.dispatchEvent(
-        new CustomEvent('dialogueDisplayed', {
-            detail: { k, player, characterName, text },
-        })
-    );
+    k.triggerEvent('dialog-displayed', { player, characterName, text });
 }
 
 export async function displayDialogueWithoutCharacter({
@@ -113,17 +102,20 @@ export async function displayDialogueWithoutCharacter({
     text,
     onDisplayEnd = () => {},
 }) {
+    // Seems to be a bug where when the canvas loses focus,
+    // the keypress event listener is not triggered
+    // await new Promise((r) => setTimeout(r, 300));
     const dialogueUI = document.getElementById('textbox-container');
     const dialogue = document.getElementById('dialogue');
-    const closeBtn = document.getElementById('close');
+    const closeBtn = document.getElementById('dialog-close-btn');
+    const nextBtn = document.getElementById('dialog-next-btn');
 
-    let intervalRef = null;
-
+    let intervalRef = 0;
     dialogueUI.style.display = 'block';
+    nextBtn.style.display = 'none';
+    closeBtn.style.display = 'block';
 
     intervalRef = processDialog(dialogue, text); // Call function without character name
-
-    closeBtn.style.display = 'block';
 
     function onCloseBtnClick() {
         onDisplayEnd();
@@ -131,31 +123,23 @@ export async function displayDialogueWithoutCharacter({
         dialogue.innerHTML = '';
         clearInterval(intervalRef);
         closeBtn.removeEventListener('click', onCloseBtnClick);
-        k.canvas.focus();
-        k.canvas.dispatchEvent(
-            new CustomEvent('dialogueClosed', { detail: { k, player, text } })
-        );
+        k.triggerEvent('dialog-closed', { player, text });
         k.canvas.focus();
     }
-
     closeBtn.addEventListener('click', onCloseBtnClick);
 
-    addEventListener('keypress', (key) => {
-        if (key.code === 'Enter') {
-            closeBtn.click();
-        }
+    addEventListener('keydown', (key) => {
+        if (['Enter', 'Escape'].includes(key.code)) closeBtn.click();
     });
-
-    k.canvas.dispatchEvent(
-        new CustomEvent('dialogueDisplayed', { detail: { k, player, text } })
-    );
+    closeBtn.focus();
+    k.triggerEvent('dialog-displayed', { player, text });
 }
 
 export async function displayPermissionBox(text, onDisplayEnd = () => {}) {
     const dialogueUI = document.getElementById('textbox-container');
     const dialogue = document.getElementById('dialogue');
-    const closeBtn = document.getElementById('close');
-    const nextBtn = document.getElementById('next');
+    const closeBtn = document.getElementById('dialog-close-btn');
+    const nextBtn = document.getElementById('dialog-next-btn');
     closeBtn.innerHTML = 'No';
     nextBtn.innerHTML = 'Yes';
 
