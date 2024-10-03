@@ -1,14 +1,18 @@
 import { displayDialogueWithCharacter } from '../../utils';
+import { npcInteractionHandler } from '../handler.interactions';
 
 export const interactionWithJokeTeller = (player, k, map) => {
-    player.onCollide('jokeTellerNpc', () => {
+    npcInteractionHandler(player, 'jokeTellerNpc', k, () => {
         fetchJoke(player, k);
     });
 };
 
 const fetchJoke = async (player, k) => {
     try {
-        const response = await fetch('https://v2.jokeapi.dev/joke/Programming');
+
+            const response = await fetch(
+            'https://v2.jokeapi.dev/joke/Any?safe-mode'
+        );
 
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -34,5 +38,13 @@ const handleJokeResponse = (jokeData, player, k) => {
         jokeText = `${jokeData.setup}\n${jokeData.delivery}`;
     }
 
-    displayDialogueWithCharacter('Joke Teller', jokeText);
+    displayDialogueWithCharacter({
+        k,
+        player,
+        characterName: 'Joke Teller',
+        text: jokeText,
+        onDisplayEnd: () => {
+            player.isInDialogue = false;
+        },
+    });
 };

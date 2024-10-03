@@ -1,18 +1,23 @@
-import { stopCharacterAnims } from './utils/animation';
-const animations = {
-    up: 'walk-up',
-    down: 'walk-down',
-    left: 'walk-side',
-    right: 'walk-side',
-};
+import { animations, stopCharacterAnims } from './utils/animation';
+
+// Manage multiple pressed buttons
+const pressed = new Set();
 
 export const addPlayerControls = (k, player) => {
-    // Manage multiple pressed buttons
-    const pressed = new Set();
-    k.onButtonPress(['up', 'down', 'left', 'right'], (dir) => pressed.add(dir));
-    k.onButtonRelease(['up', 'down', 'left', 'right'], (dir) =>
-        pressed.delete(dir)
+    k.onButtonPress(
+        ['up', 'down', 'left', 'right'],
+        (dir) => player.isInDialog || pressed.add(dir)
     );
+    k.onButtonRelease(
+        ['up', 'down', 'left', 'right'],
+        (dir) => player.isInDialog || pressed.delete(dir)
+    );
+    // Control what happens when a dialog starts
+    k.canvas.addEventListener('dialogueDisplayed', () => {
+        pressed.clear();
+        // TODO: should it look at the character?
+        stopCharacterAnims(player);
+    });
 
     k.onButtonPress(['up', 'down'], (dir) => {
         if (player.isInDialog) return;
@@ -32,6 +37,7 @@ export const addPlayerControls = (k, player) => {
         stopCharacterAnims(player);
         pressed.delete(dir);
         if (!pressed.size) return;
+        if (player.isInDialog) return;
 
         const nextDir = [...pressed].at(-1);
         player.direction = nextDir;
@@ -40,11 +46,16 @@ export const addPlayerControls = (k, player) => {
     });
 
     k.onButtonDown(['up', 'down', 'left', 'right'], (dir) => {
-        // if three buttons are pressed, the player should not move
+        if (player.isInDialog) return;
+        // If three buttons are pressed, the player should not move
         if (pressed.size > 2) return;
+        // Also, if opposite buttons are pressed, the player should not move
+        if (pressed.has('left') && pressed.has('right')) return;
+        if (pressed.has('up') && pressed.has('down')) return;
+
+        // Move the player
         const dirX = pressed.has('left') ? -1 : pressed.has('right') ? 1 : 0;
         const dirY = pressed.has('up') ? -1 : pressed.has('down') ? 1 : 0;
-
         const moveDir = k.vec2(dirX, dirY);
         const speed =
             pressed.size === 1
