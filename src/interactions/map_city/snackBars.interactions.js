@@ -2,7 +2,10 @@ import { displayPermissionBox } from '../../utils';
 
 export const snackBarGreenInteraction = (player, k) => {
     player.onCollide('snack_bar_green', async () => {
+        player.isInDialog = true;
         let ztmSnackDecision = await displayPermissionBox({
+            k,
+            player,
             text: [
                 'Welcome to Snack Bar Green! Ready to go from zero to snack mastery?',
             ],
@@ -17,6 +20,8 @@ export const snackBarGreenInteraction = (player, k) => {
             );
         } else {
             let secondSnackChance = await displayPermissionBox({
+                k,
+                player,
                 text: [
                     'Are you sure? The path to snack mastery is only one bite away...',
                 ],
@@ -40,7 +45,10 @@ export const snackBarGreenInteraction = (player, k) => {
 
 export const snackBarRedInteraction = (player, k) => {
     player.onCollide('snack_bar_red', async () => {
+        player.isInDialog = true;
         let snackOffer = await displayPermissionBox({
+            k,
+            player,
             text: [
                 'Welcome to Snack Bar Red! The *real* masters of snacking... Unlike *ahem* some green wannabes across the street. Ready for the best snack experience?',
             ],
@@ -55,6 +63,8 @@ export const snackBarRedInteraction = (player, k) => {
             );
         } else {
             let changeMind = await displayPermissionBox({
+                k,
+                player,
                 text: [
                     'Are you sure? Don’t tell me you’re thinking of going to *that* green place... Their snacks are... well, let’s just say "unimpressive."',
                 ],
@@ -78,6 +88,7 @@ export const snackBarRedInteraction = (player, k) => {
 
 export const snackBarStreetInteraction = (player, k) => {
     player.onCollide('snack_bar_street', async () => {
+        player.isInDialog = true;
         let snackDecision = await displayPermissionBox({
             text: [
                 'Psst! You look hungry! How about a snack? It’s a secret recipe!',

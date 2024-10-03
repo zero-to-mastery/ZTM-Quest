@@ -58,7 +58,12 @@ export async function displayDialogue({
     k.triggerEvent('dialog-displayed', { player, characterName, text });
 }
 
-export async function displayPermissionBox({ text, onDisplayEnd = () => {} }) {
+export async function displayPermissionBox({
+    k,
+    player,
+    text,
+    onDisplayEnd = () => {},
+}) {
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
     const closeBtn = document.getElementById('dialog-close-btn');
@@ -97,12 +102,7 @@ export async function displayPermissionBox({ text, onDisplayEnd = () => {} }) {
 
         nextBtn.addEventListener('click', onNextBtnClick);
         closeBtn.addEventListener('click', onCloseBtnClick);
-
-        addEventListener('keypress', (key) => {
-            if (key.code === 'Enter') {
-                nextBtn.click(); // Trigger "Yes" when Enter is pressed
-            }
-        });
+        k.triggerEvent('dialog-displayed', { player, text });
     });
 }
 

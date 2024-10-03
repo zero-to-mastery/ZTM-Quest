@@ -2,7 +2,10 @@ import { displayPermissionBox } from '../../utils';
 
 export const stall1Interaction = (player, k) => {
     player.onCollide('stall_1', async () => {
+        player.isInDialog = true;
         let stall1Offer = await displayPermissionBox({
+            k,
+            player,
             text: [
                 '🎉 Welcome to Stall 1! Our secret ingredient is... a sprinkle of **joy**! Ready to snack like a champ?',
             ],
@@ -17,6 +20,8 @@ export const stall1Interaction = (player, k) => {
             );
         } else {
             let secondChance = await displayPermissionBox({
+                k,
+                player,
                 text: [
                     '🤔 Are you absolutely sure? Our snacks are scientifically proven to elevate your happiness levels! Or do you prefer sadness-flavored snacks?',
                 ],
@@ -40,7 +45,10 @@ export const stall1Interaction = (player, k) => {
 
 export const stall2Interaction = (player, k) => {
     player.onCollide('stall_2', async () => {
+        player.isInDialog = true;
         let stall2Offer = await displayPermissionBox({
+            k,
+            player,
             text: [
                 '🎊 Ahoy! Welcome to Stall 2! We don’t just sell snacks; we sell **memories**! Care to join the flavor revolution?',
             ],
@@ -55,6 +63,8 @@ export const stall2Interaction = (player, k) => {
             );
         } else {
             let secondThoughts = await displayPermissionBox({
+                k,
+                player,
                 text: [
                     '🚫 Wait a minute! Are you really about to miss the chance to munch on greatness? Don’t you want to be a snack legend?',
                 ],
