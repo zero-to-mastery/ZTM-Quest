@@ -29,6 +29,7 @@ k.scene('arcade', async () => {
     player.pos = spawnpoint.player;
     k.add(map);
     k.add(player);
+    k.canvas.focus();
 
     attachInteractions(player, k);
     addGameObjects(k, map, spawnpoint).forEach((obj) => k.add(obj));
