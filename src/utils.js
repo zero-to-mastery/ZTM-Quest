@@ -83,6 +83,7 @@ export async function displayDialogueWithCharacter({
         dialogue.innerHTML = '';
         clearInterval(intervalRef);
         closeBtn.removeEventListener('click', onCloseBtnClick);
+        k.canvas.focus();
         k.canvas.dispatchEvent(
             new CustomEvent('dialogueClosed', {
                 detail: { k, player, characterName, text },
@@ -130,6 +131,7 @@ export async function displayDialogueWithoutCharacter({
         dialogue.innerHTML = '';
         clearInterval(intervalRef);
         closeBtn.removeEventListener('click', onCloseBtnClick);
+        k.canvas.focus();
         k.canvas.dispatchEvent(
             new CustomEvent('dialogueClosed', { detail: { k, player, text } })
         );
@@ -147,6 +149,58 @@ export async function displayDialogueWithoutCharacter({
     k.canvas.dispatchEvent(
         new CustomEvent('dialogueDisplayed', { detail: { k, player, text } })
     );
+}
+
+export async function displayPermissionBox(text, onDisplayEnd = () => {}) {
+    const dialogueUI = document.getElementById('textbox-container');
+    const dialogue = document.getElementById('dialogue');
+    const closeBtn = document.getElementById('close');
+    const nextBtn = document.getElementById('next');
+    closeBtn.innerHTML = 'No';
+    nextBtn.innerHTML = 'Yes';
+
+    let intervalRef = null;
+
+    dialogueUI.style.display = 'block';
+
+    intervalRef = processDialog(dialogue, text); // Call function without character name
+
+    closeBtn.style.display = 'block';
+
+    return new Promise((resolve) => {
+        function onCloseBtnClick() {
+            onDisplayEnd();
+            dialogueUI.style.display = 'none';
+            dialogue.innerHTML = '';
+            clearInterval(intervalRef);
+            closeBtn.removeEventListener('click', onCloseBtnClick);
+            nextBtn.removeEventListener('click', onNextBtnClick);
+            closeBtn.innerHTML = 'Close';
+            nextBtn.innerHTML = 'Next';
+            resolve(false); // Resolve with false when "No" is clicked
+        }
+
+        function onNextBtnClick() {
+            onDisplayEnd();
+            dialogueUI.style.display = 'none';
+            dialogue.innerHTML = '';
+            clearInterval(intervalRef);
+            nextBtn.removeEventListener('click', onNextBtnClick);
+            closeBtn.removeEventListener('click', onCloseBtnClick);
+            closeBtn.innerHTML = 'Close';
+            nextBtn.innerHTML = 'Next';
+            resolve(true); // Resolve with true when "Yes" is clicked
+        }
+
+        nextBtn.addEventListener('click', onNextBtnClick);
+        closeBtn.addEventListener('click', onCloseBtnClick);
+
+        addEventListener('keypress', (key) => {
+            if (key.code === 'Enter') {
+                nextBtn.click(); // Trigger "Yes" when Enter is pressed
+            }
+        });
+    });
 }
 
 export function setCamScale(k) {

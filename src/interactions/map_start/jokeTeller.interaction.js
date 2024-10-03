@@ -16,7 +16,7 @@ const fetchJoke = async (player, k) => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        
+
         const jokeData = await response.json();
         handleJokeResponse(jokeData, player, k);
     } catch (error) {
@@ -30,14 +30,12 @@ const fetchJoke = async (player, k) => {
 
 const handleJokeResponse = (jokeData, player, k) => {
     let jokeText = '';
-    
-  
+
     if (jokeData.type === 'single') {
         jokeText = jokeData.joke;
     } else if (jokeData.type === 'twopart') {
         jokeText = `${jokeData.setup}\n${jokeData.delivery}`;
     }
-
 
     displayDialogueWithCharacter({
         k,
@@ -48,5 +46,4 @@ const handleJokeResponse = (jokeData, player, k) => {
             player.isInDialogue = false;
         },
     });
-
 };
