@@ -1,7 +1,8 @@
 import { displayDialogueWithCharacter } from '../../utils';
+import { npcInteractionHandler } from '../handler.interactions';
 
 export const interactionWithJokeTeller = (player, k, map) => {
-    player.onCollide('jokeTellerNpc', () => {
+    npcInteractionHandler(player, 'jokeTellerNpc', k, () => {
         fetchJoke(player, k);
     });
 };
@@ -33,5 +34,13 @@ const handleJokeResponse = (jokeData, player, k) => {
         jokeText = `${jokeData.setup}\n${jokeData.delivery}`;
     }
 
-    displayDialogueWithCharacter('Joke Teller', jokeText);
+    displayDialogueWithCharacter({
+        k,
+        player,
+        characterName: 'Joke Teller',
+        text: jokeText,
+        onDisplayEnd: () => {
+            player.isInDialogue = false;
+        },
+    });
 };
