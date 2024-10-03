@@ -5,7 +5,9 @@ import { restroomInteractions } from './restroom.interactions';
 import { interactionWithComputer } from './computer.interaction';
 import { interactionWithJokeTeller } from './jokeTeller.interaction';
 import { interactionWithDrinksMachine } from './drink_machine.interaction';
+
 import { interactionWithMisterFu } from './misterFu.interaction';
+
 
 const interactions = [
     restroomInteractions,
