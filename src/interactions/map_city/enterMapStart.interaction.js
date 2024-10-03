@@ -1,6 +1,6 @@
 import { displayPermissionBox } from '../../utils';
-export const enterMapStartInteraction =  (player, k) => {
-    player.onCollide('enter_map_start',async () => {
+export const enterMapStartInteraction = (player, k) => {
+    player.onCollide('enter_map_start', async () => {
         let granted = await displayPermissionBox(
             'You are about to go back to the start. Are you sure you want to proceed?'
         );
@@ -10,6 +10,5 @@ export const enterMapStartInteraction =  (player, k) => {
                 k.go('start');
             });
         }
-        
     });
 };
