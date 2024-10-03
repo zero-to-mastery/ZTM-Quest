@@ -1,7 +1,8 @@
 import { displayDialogueWithCharacter } from '../../utils';
+import { npcInteractionHandler } from '../handler.interactions';
 
 export const interactionWithJokeTeller = (player, k, map) => {
-    player.onCollide('jokeTellerNpc', () => {
+    npcInteractionHandler(player, 'jokeTellerNpc', k, () => {
         fetchJoke(player, k);
     });
 };

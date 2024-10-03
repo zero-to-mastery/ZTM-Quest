@@ -1,12 +1,19 @@
+import { npcInteractionHandler } from '../handler.interactions';
 import { displayDialogueWithCharacter } from '../../utils';
 import { conversationBruno, bruno } from '../../constants';
 
 export const interactionWithBruno = (player, k, map) => {
-    player.onCollide('bruno', () => {
+    npcInteractionHandler(player, bruno.name, k, () => {
         player.isInDialog = true;
-        displayDialogueWithCharacter(bruno.name, conversationBruno, () => {
-            player.isInDialog = false;
-            player.state.hasTalkedToBruno = true;
+        displayDialogueWithCharacter({
+            k,
+            player,
+            characterName: bruno.name,
+            test: conversationBruno,
+            onDisplayEnd: () => {
+                player.isInDialog = false;
+                player.state.hasTalkedToBruno = true;
+            },
         });
     });
 };
