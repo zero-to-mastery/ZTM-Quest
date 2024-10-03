@@ -6,7 +6,6 @@ import { computer } from './computer.gameObject';
 
 import { misterFu } from './misterFu.gameObject';
 
-
 import { jokeTellerNPC } from './jokeTellerNPC.gameObject';
 
 const gameObjects = [
