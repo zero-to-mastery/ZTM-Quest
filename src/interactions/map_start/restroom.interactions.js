@@ -5,15 +5,15 @@ export const restroomInteractions = (player, k, map) => {
         player.state.wasInRestroom = true;
         player.isInDialog = true;
         player.state.hasHandsWashed = false;
-        const dialog = ['You feel refreshed now.', 'Ready for the ride.'];
+        const dialogue = ['You feel refreshed now.', 'Ready for the ride.'];
 
         if (!player.state.hasTalkedToBruno) {
-            dialog.push('You should talk to Bruno first.');
+            dialogue.push('You should talk to Bruno first.');
         }
         displayDialogue({
             k,
             player,
-            text: [dialog.join(' ')],
+            text: [dialogue.join(' ')],
             onDisplayEnd: () => {
                 player.isInDialog = false;
             },

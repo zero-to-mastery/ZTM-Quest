@@ -1,4 +1,4 @@
-const processDialog = async ({ dialog, text, characterName }) => {
+const processDialogue = async ({ dialog, text, characterName }) => {
     let currentText = '';
     for (const t of text) {
         currentText += t;
@@ -35,7 +35,7 @@ export async function displayDialogue({
         await new Promise((res) => {
             nextBtn.addEventListener('click', () => res());
             if (t === text[text.length - 1]) res(); // resolve on last text
-            processDialog({ dialog, text: t, characterName });
+            processDialogue({ dialog, text: t, characterName });
         });
     }
     nextBtn.style.display = 'none';
@@ -69,7 +69,7 @@ export async function displayPermissionBox(text, onDisplayEnd = () => {}) {
     closeBtn.style.display = 'block';
     nextBtn.focus();
 
-    processDialog({ dialog, text: text.join(' ') });
+    processDialogue({ dialog, text: text.join(' ') });
 
     return new Promise((resolve) => {
         function onCloseBtnClick() {
