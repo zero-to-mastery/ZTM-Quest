@@ -1,7 +1,9 @@
 import { enterMapArcadeInteraction } from './enterMapArcade.interactions';
+import { enterMapStartInteraction } from './enterMapStart.interaction';
 
 const interactions = [
     enterMapArcadeInteraction,
+    enterMapStartInteraction,
     // Add more interactions here
 ];
 
