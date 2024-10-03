@@ -32,11 +32,13 @@ const processDialogWithCharacterName = (dialogue, characterName, text) => {
     return intervalRef;
 };
 
-export async function displayDialogueWithCharacter(
+export async function displayDialogueWithCharacter({
+    k,
+    player,
     characterName,
     text,
-    onDisplayEnd = () => {}
-) {
+    onDisplayEnd = () => {},
+}) {
     const dialogueUI = document.getElementById('textbox-container');
     const dialogue = document.getElementById('dialogue');
     const closeBtn = document.getElementById('close');
@@ -81,6 +83,11 @@ export async function displayDialogueWithCharacter(
         dialogue.innerHTML = '';
         clearInterval(intervalRef);
         closeBtn.removeEventListener('click', onCloseBtnClick);
+        k.canvas.dispatchEvent(
+            new CustomEvent('dialogueClosed', {
+                detail: { k, player, characterName, text },
+            })
+        );
     }
 
     closeBtn.addEventListener('click', onCloseBtnClick);
@@ -90,12 +97,20 @@ export async function displayDialogueWithCharacter(
             closeBtn.click();
         }
     });
+
+    k.canvas.dispatchEvent(
+        new CustomEvent('dialogueDisplayed', {
+            detail: { k, player, characterName, text },
+        })
+    );
 }
 
-export async function displayDialogueWithoutCharacter(
+export async function displayDialogueWithoutCharacter({
+    k,
+    player,
     text,
-    onDisplayEnd = () => {}
-) {
+    onDisplayEnd = () => {},
+}) {
     const dialogueUI = document.getElementById('textbox-container');
     const dialogue = document.getElementById('dialogue');
     const closeBtn = document.getElementById('close');
@@ -114,6 +129,9 @@ export async function displayDialogueWithoutCharacter(
         dialogue.innerHTML = '';
         clearInterval(intervalRef);
         closeBtn.removeEventListener('click', onCloseBtnClick);
+        k.canvas.dispatchEvent(
+            new CustomEvent('dialogueClosed', { detail: { k, player, text } })
+        );
     }
 
     closeBtn.addEventListener('click', onCloseBtnClick);
@@ -123,6 +141,10 @@ export async function displayDialogueWithoutCharacter(
             closeBtn.click();
         }
     });
+
+    k.canvas.dispatchEvent(
+        new CustomEvent('dialogueDisplayed', { detail: { k, player, text } })
+    );
 }
 
 export function setCamScale(k) {
