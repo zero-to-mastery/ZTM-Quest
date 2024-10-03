@@ -18,7 +18,7 @@ const processDialog = (dialogue, text) => {
 
 // Seems to be a bug where when the canvas loses focus,
 // the keypress event listener is not triggered
-const slightPause = () => new Promise((res) => setTimeout(res, 300));
+const slightPause = () => new Promise((res) => setTimeout(res, 500));
 
 const processDialogWithCharacterName = (dialogue, characterName, text) => {
     let index = 0;
