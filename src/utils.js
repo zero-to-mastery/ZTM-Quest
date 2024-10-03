@@ -83,7 +83,7 @@ export async function displayDialogueWithCharacter({
         dialogue.innerHTML = '';
         clearInterval(intervalRef);
         closeBtn.removeEventListener('click', onCloseBtnClick);
-        focusGameCanvas();
+        k.canvas.focus();
         k.canvas.dispatchEvent(
             new CustomEvent('dialogueClosed', {
                 detail: { k, player, characterName, text },
@@ -130,7 +130,7 @@ export async function displayDialogueWithoutCharacter({
         dialogue.innerHTML = '';
         clearInterval(intervalRef);
         closeBtn.removeEventListener('click', onCloseBtnClick);
-        focusGameCanvas();
+        k.canvas.focus();
         k.canvas.dispatchEvent(
             new CustomEvent('dialogueClosed', { detail: { k, player, text } })
         );
@@ -156,11 +156,6 @@ export function setCamScale(k) {
     } else {
         k.camScale(k.vec2(1.5));
     }
-}
-
-export function focusGameCanvas() {
-    const gameCanvas = document.getElementById('game');
-    gameCanvas.focus();
 }
 
 export function buildActionModal(sprite, k) {
