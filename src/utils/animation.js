@@ -1,3 +1,10 @@
+export const animations = {
+    up: 'walk-up',
+    down: 'walk-down',
+    left: 'walk-side',
+    right: 'walk-side',
+};
+
 export const stopCharacterAnims = (objectInstance) => {
     switch (objectInstance.direction) {
         case 'up':

@@ -10,19 +10,26 @@ export const restroomInteractions = (player, k, map) => {
         if (!player.state.hasTalkedToBruno) {
             dialog.push('You should talk to Bruno first.');
         }
-        displayDialogueWithoutCharacter(dialog, () => {
-            player.isInDialog = false;
+        displayDialogueWithoutCharacter({
+            k,
+            player,
+            dialog,
+            onDisplayEnd: () => {
+                player.isInDialog = false;
+            },
         });
     });
 
     player.onCollide('restroom_sink', () => {
         player.isInDialog = true;
-        displayDialogueWithoutCharacter(
-            ['You washed your hands. Good job!'],
-            () => {
+        displayDialogueWithoutCharacter({
+            k,
+            player,
+            text: ['You washed your hands. Good job!'],
+            onDisplayEnd: () => {
                 player.state.hasHandsWashed = true;
                 player.isInDialog = false;
-            }
-        );
+            },
+        });
     });
 };
