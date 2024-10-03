@@ -41,6 +41,6 @@ const handleJokeResponse = (jokeData, player, k) => {
         text: jokeText,
         onDisplayEnd: () => {
             player.isInDialogue = false;
-        }
+        },
     });
 };
