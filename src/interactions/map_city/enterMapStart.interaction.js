@@ -7,7 +7,7 @@ export const enterMapStartInteraction = (player, k) => {
         // console.log(granted);
         if (granted) {
             import('../../scenes/start').then((_) => {
-                k.go('start');
+                k.go('start', 'enter_city');
             });
         }
     });
