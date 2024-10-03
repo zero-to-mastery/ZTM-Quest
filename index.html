@@ -28,6 +28,53 @@
                 height: 100%;
                 position: relative;
             }
+            #custom-prompt {
+                display: none;
+                position: absolute;
+                left: 15%;
+                right: 15%;
+                bottom: 2vh;
+                background: #fff;
+                border-radius: 10px;
+                border: 2px solid #007bff;
+                padding: 1rem;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                flex-direction: column;
+                align-items: flex-start;
+                word-spacing: 0.2rem;
+                z-index: 10; /* Ensure it's above other UI elements */
+            }
+
+            .prompt-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .options-container {
+                display: flex;
+                justify-content: center;
+                gap: 1rem; /* Adds space between buttons */
+                margin-top: 1rem;
+            }
+
+            .option-btn {
+                padding: 0.8rem 1.5rem;
+                background-color: #007bff;
+                border: none;
+                border-radius: 8px;
+                color: white;
+                font-size: 1rem;
+                cursor: pointer;
+                transition:
+                    background-color 0.3s ease,
+                    transform 0.2s ease;
+            }
+
+            .option-btn:hover {
+                background-color: #0056b3;
+                transform: translateY(-2px);
+            }
 
             #textbox {
                 position: absolute;
@@ -69,7 +116,11 @@
                 opacity: 0;
                 animation: slideIn 1s forwards 0.3s;
             }
-
+            .ui-text {
+                transition:
+                    transform 0.5s ease,
+                    opacity 0.5s ease;
+            }
             .ui-close-btn,
             .ui-next-btn {
                 font-family: 'Courier New', monospace;
@@ -177,6 +228,16 @@
                     Tap/Click/&uarr;&darr;&larr;&rarr; around to move
                 </p>
 
+                <p id="dialogue-text"></p>
+                <div id="custom-prompt" class="custom-prompt">
+                    <div class="prompt-content">
+                        <p id="prompt-message"></p>
+                        <div
+                            id="options-container"
+                            class="options-container"
+                        ></div>
+                    </div>
+                </div>
                 <div id="textbox-container" style="display: none">
                     <div id="textbox">
                         <p id="dialogue" class="ui-text"></p>
