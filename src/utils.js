@@ -67,6 +67,7 @@ export async function displayPermissionBox(text, onDisplayEnd = () => {}) {
     nextBtn.innerHTML = 'Yes';
     dialogUI.style.display = 'block';
     closeBtn.style.display = 'block';
+    nextBtn.style.display = 'block';
     nextBtn.focus();
 
     processDialogue({ dialog, text: text.join(' ') });
