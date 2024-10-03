@@ -4,6 +4,7 @@ import { interactionWithMainboxMainArea } from './mailboxMainArea.interaction';
 import { restroomInteractions } from './restroom.interactions';
 import { interactionWithComputer } from './computer.interaction';
 import { interactionWithJokeTeller } from './jokeTeller.interaction';
+import { interactionWithMisterFu } from './misterFu.interaction';
 
 const interactions = [
     restroomInteractions,
@@ -13,6 +14,7 @@ const interactions = [
     interactionWithComputer,
     interactionWithJokeTeller,
     // Add more interactions here
+    interactionWithMisterFu, 
 ];
 
 export const attachInteractions = (gameObj, k) => {
