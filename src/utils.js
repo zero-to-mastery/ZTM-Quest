@@ -88,6 +88,7 @@ export async function displayDialogueWithCharacter({
                 detail: { k, player, characterName, text },
             })
         );
+        k.canvas.focus();
     }
 
     closeBtn.addEventListener('click', onCloseBtnClick);
@@ -132,6 +133,7 @@ export async function displayDialogueWithoutCharacter({
         k.canvas.dispatchEvent(
             new CustomEvent('dialogueClosed', { detail: { k, player, text } })
         );
+        k.canvas.focus();
     }
 
     closeBtn.addEventListener('click', onCloseBtnClick);
