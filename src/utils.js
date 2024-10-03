@@ -32,11 +32,13 @@ const processDialogWithCharacterName = (dialogue, characterName, text) => {
     return intervalRef;
 };
 
-export async function displayDialogueWithCharacter(
+export async function displayDialogueWithCharacter({
+    k,
+    player,
     characterName,
     text,
-    onDisplayEnd = () => {}
-) {
+    onDisplayEnd = () => {},
+}) {
     const dialogueUI = document.getElementById('textbox-container');
     const dialogue = document.getElementById('dialogue');
     const closeBtn = document.getElementById('close');
@@ -81,6 +83,11 @@ export async function displayDialogueWithCharacter(
         dialogue.innerHTML = '';
         clearInterval(intervalRef);
         closeBtn.removeEventListener('click', onCloseBtnClick);
+        k.canvas.dispatchEvent(
+            new CustomEvent('dialogueClosed', {
+                detail: { k, player, characterName, text },
+            })
+        );
     }
 
     closeBtn.addEventListener('click', onCloseBtnClick);
@@ -90,12 +97,20 @@ export async function displayDialogueWithCharacter(
             closeBtn.click();
         }
     });
+
+    k.canvas.dispatchEvent(
+        new CustomEvent('dialogueDisplayed', {
+            detail: { k, player, characterName, text },
+        })
+    );
 }
 
-export async function displayDialogueWithoutCharacter(
+export async function displayDialogueWithoutCharacter({
+    k,
+    player,
     text,
-    onDisplayEnd = () => {}
-) {
+    onDisplayEnd = () => {},
+}) {
     const dialogueUI = document.getElementById('textbox-container');
     const dialogue = document.getElementById('dialogue');
     const closeBtn = document.getElementById('close');
@@ -114,6 +129,9 @@ export async function displayDialogueWithoutCharacter(
         dialogue.innerHTML = '';
         clearInterval(intervalRef);
         closeBtn.removeEventListener('click', onCloseBtnClick);
+        k.canvas.dispatchEvent(
+            new CustomEvent('dialogueClosed', { detail: { k, player, text } })
+        );
     }
 
     closeBtn.addEventListener('click', onCloseBtnClick);
@@ -123,6 +141,10 @@ export async function displayDialogueWithoutCharacter(
             closeBtn.click();
         }
     });
+
+    k.canvas.dispatchEvent(
+        new CustomEvent('dialogueDisplayed', { detail: { k, player, text } })
+    );
 }
 
 export async function displayPermissionBox(text, onDisplayEnd = () => {}) {
@@ -184,4 +206,26 @@ export function setCamScale(k) {
     } else {
         k.camScale(k.vec2(1.5));
     }
+}
+
+export function buildActionModal(sprite, k) {
+    const spritePos = sprite.pos;
+
+    const actionModal = k.add([
+        k.rect(20, 20),
+        k.color(255, 255, 255),
+        k.outline(2, k.Color.BLACK),
+        k.pos(spritePos.x - 10, spritePos.y - sprite.height - 30),
+        k.layer('ui'),
+        'action-modal',
+    ]);
+
+    const actionLabel = k.add([
+        k.text('t', { size: 16, align: 'center' }),
+        k.color(0, 0, 0),
+        k.pos(actionModal.pos.x + 5, actionModal.pos.y + 4),
+        'action-label',
+    ]);
+
+    return { actionModal, actionLabel };
 }
