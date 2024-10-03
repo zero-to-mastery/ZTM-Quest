@@ -5,7 +5,6 @@ const processDialog = (dialogue, text) => {
     const intervalRef = setInterval(() => {
         if (index < fullText.length) {
             currentText += fullText[index];
-            console.log(currentText);
             dialogue.innerHTML = currentText; // Display the current tex
             index++;
             return;
