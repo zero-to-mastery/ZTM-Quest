@@ -35,7 +35,6 @@ export const conversationBruno = [
 
 
 export const misterFu = {name: 'misterFu', frames: [60, 64, 62, 68, 61, 66]}
-
 export const conversationMisterFu = [
     "Greetings, traveler! I'm MisterFu.",
     "I bet you've heard tales about my adventures.",
