@@ -2,8 +2,8 @@ import { scaleFactor } from '../../constants';
 
 export const misterFu = (k, map, spawnpoints) => {
     k.loadSprite('misterFu', './characters.png', {
-        sliceX: 9,
-        sliceY: 1,
+        sliceX: 10,
+        sliceY: 20,
         anims: {
             'idle-down': 60,
             'walk-down': { from: 64, to: 65, loop: true, speed: 4 },
