@@ -8,16 +8,22 @@ export const npcInteractionHandler = (
     onCollideEnd
 ) => {
     let keyHandler;
+    let clickHandler;
+
     player.onCollide(target, (sprite) => {
         // Display the modal prompting the user to press 't'
         const { actionModal, actionLabel } = buildActionModal(sprite, k);
 
-        keyHandler = k.onKeyPress('t', () => {
+        function handleOnCollide() {
             k.destroy(actionModal);
             k.destroy(actionLabel);
             onCollide();
+            clickHandler.cancel();
             keyHandler.cancel();
-        });
+        }
+
+        clickHandler = k.onClick('action-modal', () => handleOnCollide());
+        keyHandler = k.onKeyPress('t', () => handleOnCollide());
     });
 
     player.onCollideEnd(target, () => {
@@ -30,6 +36,7 @@ export const npcInteractionHandler = (
             actionLabel.destroy();
         }
 
+        clickHandler.cancel();
         keyHandler.cancel();
 
         if (onCollideEnd) {
