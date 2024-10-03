@@ -34,5 +34,13 @@ const handleJokeResponse = (jokeData, player, k) => {
         jokeText = `${jokeData.setup}\n${jokeData.delivery}`;
     }
 
-    displayDialogueWithCharacter('Joke Teller', jokeText);
+    displayDialogueWithCharacter({
+        k,
+        player,
+        characterName: 'Joke Teller',
+        text: jokeText,
+        onDisplayEnd: () => {
+            player.isInDialogue = false;
+        },
+    });
 };

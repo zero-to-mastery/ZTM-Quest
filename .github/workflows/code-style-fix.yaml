@@ -31,7 +31,6 @@ jobs:
       - name: Run Prettier
         id: prettier-run
         run: |
-          npm run prettier
           npm run prettier:fix
           echo "filecount=$(git status -s -uno | wc -L)" >> $GITHUB_OUTPUT
       - name: Commit changes
