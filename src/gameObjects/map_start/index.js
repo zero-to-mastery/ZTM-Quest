@@ -3,7 +3,12 @@ import { cake } from './cake.gameObject';
 import { npcsOnChairs } from './npcsOnChairs.gameObject';
 import { ztmTrailer } from './ztmTrailer.gameObject';
 import { computer } from './computer.gameObject';
+
+import { misterFu } from './misterFu.gameObject';
+
+
 import { jokeTellerNPC } from './jokeTellerNPC.gameObject';
+
 const gameObjects = [
     bruno,
     npcsOnChairs,
@@ -12,6 +17,7 @@ const gameObjects = [
     cake,
     jokeTellerNPC,
     // Add more game objects here
+    misterFu,
 ];
 
 export const addGameObjects = (k, map, spawnpoints) => {
