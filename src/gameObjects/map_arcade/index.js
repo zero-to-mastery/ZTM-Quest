@@ -1,5 +1,9 @@
+import { storeMainAreaInteraction } from '../map_city/enterStoreMainArea.interaction';
+import { enterMapCityInteraction } from './enterMapCity.interactions';
 const gameObjects = [
     // Add more game objects here
+    storeMainAreaInteraction,
+    interactionWithArcadeArea
 ];
 
 export const addGameObjects = (k, map, spawnpoints) => {

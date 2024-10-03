@@ -10,6 +10,15 @@ function sampleArcadeInteraction() {
 
 };
 
+//player interaction logic with store
+export const sampleStoreInteraction = () => {
+    // sample of coins balance
+    var coinBal = 1000;
+
+    return 'You have ${coinBal} coins to spend'; 
+
+};
+
 //shows what happens when player is in arcade
 export const storeMainAreaInteraction = (player, k, map) => {
     //if user runs into the arcade, show them the balance
@@ -18,14 +27,15 @@ export const storeMainAreaInteraction = (player, k, map) => {
         displayDialogue(sampleStoreInteraction(), () => {
             player.isInDialog = false;
         });
-    //if user runs into the house, show them the house
-    player.onCollide('tiny_house_top_left_door', () => {
-        player.isInDialog = true;
-        /*displayDialogue(sampleTinyHouseInteraction(), () => { //sampleTinyHouseInteraction needs building
-            player.isInDialog = false;
-        });*/
-    });
 
 
     });
 };
+
+player.onCollide('tiny_house_top_left_door', () => {
+    player.isInDialog = true;
+    displayDialogue(sampleTinyHouseInteraction(), () => { //sampleTinyHouseInteraction needs building
+        player.isInDialog = false;
+    });
+
+});
