@@ -1,128 +1,53 @@
-const processDialog = (dialogue, text) => {
-    let index = 0;
+const processDialog = async ({ dialog, text, characterName }) => {
     let currentText = '';
-    let fullText = Array.isArray(text) ? text.join(' ') : text;
-    const intervalRef = setInterval(() => {
-        if (index < fullText.length) {
-            currentText += fullText[index];
-            dialogue.innerHTML = currentText; // Display the current tex
-            index++;
-            return;
-        }
-
-        clearInterval(intervalRef);
-    }, 20);
-
-    return intervalRef;
+    for (const t of text) {
+        currentText += t;
+        dialog.innerHTML = characterName
+            ? `<strong>${characterName}:</strong><br>${currentText}`
+            : currentText;
+        await new Promise((res) => setTimeout(res, 20));
+    }
 };
 
 // Seems to be a bug where when the canvas loses focus,
 // the keypress event listener is not triggered
 const slightPause = () => new Promise((res) => setTimeout(res, 500));
 
-const processDialogWithCharacterName = (dialogue, characterName, text) => {
-    let index = 0;
-    let currentText = '';
-    const intervalRef = setInterval(() => {
-        if (index < text.length) {
-            currentText += text[index];
-            dialogue.innerHTML = `<strong>${characterName}:</strong><br>${currentText}`;
-            index++;
-            return;
-        }
-
-        clearInterval(intervalRef);
-    }, 1);
-
-    return intervalRef;
-};
-
-export async function displayDialogueWithCharacter({
+export async function displayDialogue({
     k,
     player,
     characterName,
-    text,
+    text = [],
     onDisplayEnd = () => {},
 }) {
-    const dialogueUI = document.getElementById('textbox-container');
-    const dialogue = document.getElementById('dialogue');
+    const dialogUI = document.getElementById('textbox-container');
+    const dialog = document.getElementById('dialog');
     const closeBtn = document.getElementById('dialog-close-btn');
     const nextBtn = document.getElementById('dialog-next-btn');
+    dialogUI.style.display = 'block';
 
-    let intervalRef = null;
-
-    dialogueUI.style.display = 'block';
-
-    if (text instanceof Array) {
-        closeBtn.style.display = 'none';
+    if (text.length > 1) {
         nextBtn.style.display = 'block';
         await slightPause().then(() => nextBtn.focus());
-        for await (const t of text) {
-            intervalRef = await new Promise((res) => {
-                nextBtn.addEventListener('click', () => res(intervalRef));
-                intervalRef = processDialogWithCharacterName(
-                    dialogue,
-                    characterName,
-                    t
-                ); // Call function with character name
-            });
-        }
-        nextBtn.style.display = 'none';
-    } else {
-        intervalRef = processDialogWithCharacterName(
-            dialogue,
-            characterName,
-            text
-        ); // Call function with character name
     }
-
-    closeBtn.style.display = 'block';
-
-    function onCloseBtnClick() {
-        onDisplayEnd();
-        dialogueUI.style.display = 'none';
-        dialogue.innerHTML = '';
-        clearInterval(intervalRef);
-        closeBtn.removeEventListener('click', onCloseBtnClick);
-        k.triggerEvent('dialog-closed', { player, characterName, text });
-        k.canvas.focus();
+    closeBtn.style.display = 'none';
+    for await (const t of text) {
+        await new Promise((res) => {
+            nextBtn.addEventListener('click', () => res());
+            if (t === text[text.length - 1]) res(); // resolve on last text
+            processDialog({ dialog, text: t, characterName });
+        });
     }
-
-    closeBtn.addEventListener('click', onCloseBtnClick);
-
-    addEventListener('keypress', (key) => {
-        if (key.code === 'Enter') {
-            closeBtn.click();
-        }
-    });
-    k.triggerEvent('dialog-displayed', { player, characterName, text });
-}
-
-export async function displayDialogueWithoutCharacter({
-    k,
-    player,
-    text,
-    onDisplayEnd = () => {},
-}) {
-    const dialogueUI = document.getElementById('textbox-container');
-    const dialogue = document.getElementById('dialogue');
-    const closeBtn = document.getElementById('dialog-close-btn');
-    const nextBtn = document.getElementById('dialog-next-btn');
-
-    let intervalRef = 0;
-    dialogueUI.style.display = 'block';
     nextBtn.style.display = 'none';
     closeBtn.style.display = 'block';
-
-    intervalRef = processDialog(dialogue, text); // Call function without character name
+    closeBtn.focus();
 
     function onCloseBtnClick() {
         onDisplayEnd();
-        dialogueUI.style.display = 'none';
-        dialogue.innerHTML = '';
-        clearInterval(intervalRef);
+        dialogUI.style.display = 'none';
+        dialog.innerHTML = '';
         closeBtn.removeEventListener('click', onCloseBtnClick);
-        k.triggerEvent('dialog-closed', { player, text });
+        k.triggerEvent('dialog-closed', { player, characterName, text });
         k.canvas.focus();
     }
     closeBtn.addEventListener('click', onCloseBtnClick);
@@ -130,32 +55,27 @@ export async function displayDialogueWithoutCharacter({
     addEventListener('keydown', (key) => {
         if (['Enter', 'Escape'].includes(key.code)) closeBtn.click();
     });
-    await slightPause().then(() => closeBtn.focus());
-    k.triggerEvent('dialog-displayed', { player, text });
+    k.triggerEvent('dialog-displayed', { player, characterName, text });
 }
 
-export async function displayPermissionBox(text, onDisplayEnd = () => {}) {
-    const dialogueUI = document.getElementById('textbox-container');
-    const dialogue = document.getElementById('dialogue');
+export async function displayPermissionBox(text = '', onDisplayEnd = () => {}) {
+    const dialogUI = document.getElementById('textbox-container');
+    const dialog = document.getElementById('dialog');
     const closeBtn = document.getElementById('dialog-close-btn');
     const nextBtn = document.getElementById('dialog-next-btn');
     closeBtn.innerHTML = 'No';
     nextBtn.innerHTML = 'Yes';
-
-    let intervalRef = null;
-
-    dialogueUI.style.display = 'block';
-
-    intervalRef = processDialog(dialogue, text); // Call function without character name
-
+    dialogUI.style.display = 'block';
     closeBtn.style.display = 'block';
+    nextBtn.focus();
+
+    processDialog({ dialog, text });
 
     return new Promise((resolve) => {
         function onCloseBtnClick() {
             onDisplayEnd();
-            dialogueUI.style.display = 'none';
-            dialogue.innerHTML = '';
-            clearInterval(intervalRef);
+            dialogUI.style.display = 'none';
+            dialog.innerHTML = '';
             closeBtn.removeEventListener('click', onCloseBtnClick);
             nextBtn.removeEventListener('click', onNextBtnClick);
             closeBtn.innerHTML = 'Close';
@@ -165,9 +85,8 @@ export async function displayPermissionBox(text, onDisplayEnd = () => {}) {
 
         function onNextBtnClick() {
             onDisplayEnd();
-            dialogueUI.style.display = 'none';
-            dialogue.innerHTML = '';
-            clearInterval(intervalRef);
+            dialogUI.style.display = 'none';
+            dialog.innerHTML = '';
             nextBtn.removeEventListener('click', onNextBtnClick);
             closeBtn.removeEventListener('click', onCloseBtnClick);
             closeBtn.innerHTML = 'Close';

@@ -1,4 +1,4 @@
-import { displayDialogueWithoutCharacter } from '../../utils';
+import { displayDialogue } from '../../utils';
 
 // List of drinks and possible fun surprises
 
@@ -13,12 +13,20 @@ export const interactionWithDrinksMachine = (player, k, map) => {
                 // Callback when an option is selected
                 // Logic based on the selected option
                 const texts = {
-                    Coke: 'Coke - "Taste the Feeling!" A cold refreshment is coming your way!',
-                    Soda: 'Soda - "Fizz up your life!" Time for some sparkling fun!',
-                    Water: 'Water - "Pure as the mountain stream." Stay hydrated and fresh!',
-                    Sprite: 'Sprite - "Obey Your Thirst!" Crisp and refreshing as ever!',
+                    Coke: [
+                        'Coke - "Taste the Feeling!" A cold refreshment is coming your way!',
+                    ],
+                    Soda: [
+                        'Soda - "Fizz up your life!" Time for some sparkling fun!',
+                    ],
+                    Water: [
+                        'Water - "Pure as the mountain stream." Stay hydrated and fresh!',
+                    ],
+                    Sprite: [
+                        'Sprite - "Obey Your Thirst!" Crisp and refreshing as ever!',
+                    ],
                 };
-                displayDialogueWithoutCharacter({
+                displayDialogue({
                     k,
                     player,
                     text: texts[selectedOption],

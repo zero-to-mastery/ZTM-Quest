@@ -1,4 +1,4 @@
-import { displayDialogueWithoutCharacter } from '../../utils';
+import { displayDialogue } from '../../utils';
 
 export const restroomInteractions = (player, k, map) => {
     player.onCollide('restroom_toilet', () => {
@@ -10,10 +10,10 @@ export const restroomInteractions = (player, k, map) => {
         if (!player.state.hasTalkedToBruno) {
             dialog.push('You should talk to Bruno first.');
         }
-        displayDialogueWithoutCharacter({
+        displayDialogue({
             k,
             player,
-            text: dialog,
+            text: [dialog.join(' ')],
             onDisplayEnd: () => {
                 player.isInDialog = false;
             },
@@ -22,10 +22,10 @@ export const restroomInteractions = (player, k, map) => {
 
     player.onCollide('restroom_sink', () => {
         player.isInDialog = true;
-        displayDialogueWithoutCharacter({
+        displayDialogue({
             k,
             player,
-            text: 'You washed your hands. Good job!',
+            text: ['You washed your hands. Good job!'],
             onDisplayEnd: () => {
                 player.state.hasHandsWashed = true;
                 player.isInDialog = false;
