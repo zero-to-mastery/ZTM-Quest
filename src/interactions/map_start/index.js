@@ -2,6 +2,9 @@ import { interactionWithBruno } from './bruno.interaction';
 import { enterMapCityInteraction } from './enterMapCity.interaction';
 import { interactionWithMainboxMainArea } from './mailboxMainArea.interaction';
 import { restroomInteractions } from './restroom.interactions';
+import { interactionWithComputer } from './computer.interaction';
+import { interactionWithJokeTeller } from './jokeTeller.interaction';
+import { interactionWithDrinksMachine } from './drink_machine.interaction';
 
 const interactions = [
     restroomInteractions,
@@ -9,6 +12,8 @@ const interactions = [
     enterMapCityInteraction,
     interactionWithMainboxMainArea,
     interactionWithComputer,
+    interactionWithJokeTeller,
+    interactionWithDrinksMachine,
     // Add more interactions here
 ];
 
