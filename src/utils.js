@@ -58,7 +58,7 @@ export async function displayDialogue({
     k.triggerEvent('dialog-displayed', { player, characterName, text });
 }
 
-export async function displayPermissionBox(text, onDisplayEnd = () => {}) {
+export async function displayPermissionBox({ text, onDisplayEnd = () => {} }) {
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
     const closeBtn = document.getElementById('dialog-close-btn');
