@@ -17,6 +17,10 @@ const processDialog = (dialogue, text) => {
     return intervalRef;
 };
 
+// Seems to be a bug where when the canvas loses focus,
+// the keypress event listener is not triggered
+const slightPause = () => new Promise((res) => setTimeout(res, 300));
+
 const processDialogWithCharacterName = (dialogue, characterName, text) => {
     let index = 0;
     let currentText = '';
@@ -41,7 +45,6 @@ export async function displayDialogueWithCharacter({
     text,
     onDisplayEnd = () => {},
 }) {
-    await new Promise((r) => requestAnimationFrame(r));
     const dialogueUI = document.getElementById('textbox-container');
     const dialogue = document.getElementById('dialogue');
     const closeBtn = document.getElementById('dialog-close-btn');
@@ -54,7 +57,7 @@ export async function displayDialogueWithCharacter({
     if (text instanceof Array) {
         closeBtn.style.display = 'none';
         nextBtn.style.display = 'block';
-        nextBtn.focus();
+        await slightPause().then(() => nextBtn.focus());
         for await (const t of text) {
             intervalRef = await new Promise((res) => {
                 nextBtn.addEventListener('click', () => res(intervalRef));
@@ -102,9 +105,6 @@ export async function displayDialogueWithoutCharacter({
     text,
     onDisplayEnd = () => {},
 }) {
-    // Seems to be a bug where when the canvas loses focus,
-    // the keypress event listener is not triggered
-    // await new Promise((r) => setTimeout(r, 300));
     const dialogueUI = document.getElementById('textbox-container');
     const dialogue = document.getElementById('dialogue');
     const closeBtn = document.getElementById('dialog-close-btn');
@@ -131,7 +131,7 @@ export async function displayDialogueWithoutCharacter({
     addEventListener('keydown', (key) => {
         if (['Enter', 'Escape'].includes(key.code)) closeBtn.click();
     });
-    closeBtn.focus();
+    await slightPause().then(() => closeBtn.focus());
     k.triggerEvent('dialog-displayed', { player, text });
 }
 
