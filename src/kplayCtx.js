@@ -12,7 +12,9 @@ export const k = kaplay({
         right: { keyboard: ['d', 'right'], gamepad: 'east' },
     },
 });
-
-export const setGlobalEvents = (cb = () => {}) => {
-    cb();
+k.onCustomEvent = (eventName, cb) => {
+    k.canvas.addEventListener(eventName, cb.bind(k));
+};
+k.triggerEvent = (eventName, detail) => {
+    k.canvas.dispatchEvent(new CustomEvent(eventName, { detail }));
 };

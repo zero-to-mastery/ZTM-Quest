@@ -13,7 +13,7 @@ export const addPlayerControls = (k, player) => {
         (dir) => player.isInDialog || pressed.delete(dir)
     );
     // Control what happens when a dialog starts
-    k.canvas.addEventListener('dialogueDisplayed', () => {
+    k.onCustomEvent('dialog-displayed', () => {
         pressed.clear();
         // TODO: should it look at the character?
         stopCharacterAnims(player);
@@ -49,6 +49,7 @@ export const addPlayerControls = (k, player) => {
         if (player.isInDialog) return;
         // If three buttons are pressed, the player should not move
         if (pressed.size > 2) return;
+        if (pressed.size === 0) return;
         // Also, if opposite buttons are pressed, the player should not move
         if (pressed.has('left') && pressed.has('right')) return;
         if (pressed.has('up') && pressed.has('down')) return;
