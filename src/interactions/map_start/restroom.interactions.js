@@ -13,7 +13,7 @@ export const restroomInteractions = (player, k, map) => {
         displayDialogueWithoutCharacter({
             k,
             player,
-            dialog,
+            text: dialog,
             onDisplayEnd: () => {
                 player.isInDialog = false;
             },
@@ -25,7 +25,7 @@ export const restroomInteractions = (player, k, map) => {
         displayDialogueWithoutCharacter({
             k,
             player,
-            text: ['You washed your hands. Good job!'],
+            text: 'You washed your hands. Good job!',
             onDisplayEnd: () => {
                 player.state.hasHandsWashed = true;
                 player.isInDialog = false;

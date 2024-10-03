@@ -9,7 +9,7 @@ export const interactionWithBruno = (player, k, map) => {
             k,
             player,
             characterName: bruno.name,
-            test: conversationBruno,
+            text: conversationBruno,
             onDisplayEnd: () => {
                 player.isInDialog = false;
                 player.state.hasTalkedToBruno = true;
