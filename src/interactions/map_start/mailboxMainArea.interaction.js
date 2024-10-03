@@ -16,8 +16,13 @@ export const getDummyText = () => {
 export const interactionWithMainboxMainArea = (player, k, map) => {
     player.onCollide('mailbox_mainArea', () => {
         player.isInDialog = true;
-        displayDialogueWithoutCharacter(getDummyText(), () => {
-            player.isInDialog = false;
+        displayDialogueWithoutCharacter({
+            k,
+            player,
+            text: getDummyText(),
+            onDisplayEnd: () => {
+                player.isInDialog = false;
+            },
         });
     });
 };

@@ -1,16 +1,16 @@
 import { scaleFactor } from '../../constants';
 
 export const misterFu = (k, map, spawnpoints) => {
-    k.loadSprite('misterFu', './misterFu.png', {
+    k.loadSprite('misterFu', './characters.png', {
         sliceX: 9,
         sliceY: 1,
         anims: {
-            'idle-down': 0,
-            'walk-down': { from: 3, to: 4, loop: true, speed: 4 },
-            'idle-side': 2,
-            'walk-side': { from: 7, to: 8, loop: true, speed: 4 },
-            'idle-up': 1,
-            'walk-up': { from: 5, to: 26, loop: true, speed: 4 },
+            'idle-down': 60,
+            'walk-down': { from: 64, to: 65, loop: true, speed: 4 },
+            'idle-side': 62,
+            'walk-side': { from: 68, to: 69, loop: true, speed: 4 },
+            'idle-up': 61,
+            'walk-up': { from: 66, to: 76, loop: true, speed: 4 },
         },
     });
 
@@ -22,8 +22,8 @@ export const misterFu = (k, map, spawnpoints) => {
         k.body({ isStatic: true }),
         k.anchor('center'),
         k.pos(
-            map.pos.x + spawnpoints.misterFu.x,
-            map.pos.y + spawnpoints.misterFu.y
+            map.pos.x + spawnpoints.player.pos,
+            map.pos.y + spawnpoints.player.pos
         ),
         k.scale(scaleFactor + 0.5),
         'misterFu',
