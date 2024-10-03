@@ -212,11 +212,13 @@ export function setCamScale(k) {
     }
 }
 
+// NOTE: sprite must be an npc not an object like mailbox
 export function buildActionModal(sprite, k) {
     const spritePos = sprite.pos;
 
     const actionModal = k.add([
         k.rect(20, 20),
+        k.area(),
         k.color(255, 255, 255),
         k.outline(2, k.Color.BLACK),
         k.pos(spritePos.x - 10, spritePos.y - sprite.height - 30),
