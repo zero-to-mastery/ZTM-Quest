@@ -1,9 +1,9 @@
-import { firstInteractionWithArcadeEmployee } from './arcade_employee.interaction';
+import { firstInteractionWithUncleBob } from './uncleBob.interaction';
 import { enterMapCityInteraction } from './enterMapCity.interactions';
 
 const interactions = [
     enterMapCityInteraction,
-    firstInteractionWithArcadeEmployee
+    firstInteractionWithUncleBob,
     // Add more interactions here
 ];
 

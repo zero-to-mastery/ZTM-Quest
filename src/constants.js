@@ -34,10 +34,10 @@ export const conversationBruno = [
 ];
 
 export const firstConversationArcade = [
-    "Hey there! Looking for play some games?",
-    "Did you know the game machine to your left is undefeated?",
-    "I hear someone beat game machine near machine crawl today!",
+    'Hey there! Looking for play some games?',
+    'Did you know the game machine to your left is undefeated?',
+    'I hear someone beat game machine near machine crawl today!',
     "If you're up for a challenge, try game machine crawl!",
-    "Make sure to wash and sanitize your hand before playing.",
-    "Thank you my friend go and enjoy."
+    'Make sure to wash and sanitize your hand before playing.',
+    'Thank you my friend go and enjoy.',
 ];
