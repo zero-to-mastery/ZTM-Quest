@@ -206,14 +206,14 @@ export function buildActionModal(sprite, k) {
         k.outline(2, k.Color.BLACK),
         k.pos(spritePos.x - 10, spritePos.y - sprite.height - 30),
         k.layer('ui'),
-        'action-modal',
+        `action-modal-${sprite.tags[0]}`,
     ]);
 
     const actionLabel = k.add([
         k.text('t', { size: 16, align: 'center' }),
         k.color(0, 0, 0),
         k.pos(actionModal.pos.x + 5, actionModal.pos.y + 4),
-        'action-label',
+        `action-label-${sprite.tags[0]}`,
     ]);
 
     return { actionModal, actionLabel };
