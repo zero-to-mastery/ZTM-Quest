@@ -22,13 +22,15 @@ export const npcInteractionHandler = (
             keyHandler.cancel();
         }
 
-        clickHandler = k.onClick('action-modal', () => handleOnCollide());
+        clickHandler = k.onClick(`action-modal-${sprite.tags[0]}`, () =>
+            handleOnCollide()
+        );
         keyHandler = k.onKeyPress('t', () => handleOnCollide());
     });
 
-    player.onCollideEnd(target, () => {
-        const [actionModal] = k.get('action-modal');
-        const [actionLabel] = k.get('action-label');
+    player.onCollideEnd(target, (sprite) => {
+        const [actionModal] = k.get(`action-modal-${sprite.tags[0]}`);
+        const [actionLabel] = k.get(`action-label-${sprite.tags[0]}`);
         if (actionModal) {
             actionModal.destroy();
         }
