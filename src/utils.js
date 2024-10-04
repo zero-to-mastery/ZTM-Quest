@@ -83,6 +83,7 @@ export async function displayDialogueWithCharacter({
         dialogue.innerHTML = '';
         clearInterval(intervalRef);
         closeBtn.removeEventListener('click', onCloseBtnClick);
+        k.canvas.focus();
         k.canvas.dispatchEvent(
             new CustomEvent('dialogueClosed', {
                 detail: { k, player, characterName, text },
@@ -129,6 +130,7 @@ export async function displayDialogueWithoutCharacter({
         dialogue.innerHTML = '';
         clearInterval(intervalRef);
         closeBtn.removeEventListener('click', onCloseBtnClick);
+        k.canvas.focus();
         k.canvas.dispatchEvent(
             new CustomEvent('dialogueClosed', { detail: { k, player, text } })
         );
