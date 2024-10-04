@@ -14,7 +14,6 @@ export default [
         files: ['src/**/*.js'],
         ignores: ['.github/*', 'node_modules/*', 'public/*', 'dist/*'],
         rules: {
-            'no-console': 'off',
             'no-unused-vars': [
                 'error',
                 {
