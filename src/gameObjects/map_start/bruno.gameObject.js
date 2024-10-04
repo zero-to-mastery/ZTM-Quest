@@ -23,6 +23,7 @@ export const bruno = (k, map, spawnpoints) => {
         k.anchor('center'),
         k.pos(map.pos.x + spawnpoints.bruno.x, map.pos.y + spawnpoints.bruno.y),
         k.scale(scaleFactor + 0.5),
+        k.offscreen({ hide: true, distance: 10 }),
         'bruno',
     ]);
 

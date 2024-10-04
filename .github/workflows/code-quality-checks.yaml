@@ -5,8 +5,6 @@ on:
     types:
       - opened
       - synchronize
-  # Allows you to run this workflow manually from the Actions tab on GitHub.
-  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -24,4 +22,6 @@ jobs:
       - name: Check with eslint
         id: eslint-run
         run: |
-          npx eslint
+          npm run lint
+      - name: Build with Vite
+        run: npm run build

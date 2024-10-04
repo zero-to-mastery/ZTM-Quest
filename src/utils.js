@@ -1,11 +1,26 @@
-const processDialogue = async ({ dialog, text, characterName }) => {
+const processDialogue = async ({ dialog, text, characterName, abort = null }) => {
     let currentText = '';
+    const timeoutIds = [];
+
+    if (abort) {
+        abort.signal.addEventListener('abort', () => {
+            currentText = text;
+            dialog.innerHTML = characterName
+                ? `<strong>${characterName}:</strong><br>${currentText}`
+                : currentText;
+
+            timeoutIds.forEach((id) => clearTimeout(id));
+        });
+    }
+
     for (const t of text) {
         currentText += t;
         dialog.innerHTML = characterName
             ? `<strong>${characterName}:</strong><br>${currentText}`
             : currentText;
-        await new Promise((res) => setTimeout(res, 20));
+        await new Promise((res) => {
+            timeoutIds.push(setTimeout(res, 20));
+        });
     }
 };
 
@@ -18,12 +33,14 @@ export async function displayDialogue({
     player,
     characterName,
     text,
-    onDisplayEnd = () => {},
+    onDisplayEnd = () => { },
 }) {
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
     const closeBtn = document.getElementById('dialog-close-btn');
     const nextBtn = document.getElementById('dialog-next-btn');
+    let abort = new AbortController();
+
     dialogUI.style.display = 'block';
 
     if (text.length > 1) {
@@ -31,19 +48,27 @@ export async function displayDialogue({
         await slightPause().then(() => nextBtn.focus());
     }
     closeBtn.style.display = 'none';
+
     for await (const t of text) {
+        abort = new AbortController();
         await new Promise((res) => {
-            nextBtn.addEventListener('click', () => res());
             if (t === text[text.length - 1]) res(); // resolve on last text
-            processDialogue({ dialog, text: t, characterName });
+            processDialogue({ dialog, text: t, characterName, abort });
+
+            nextBtn.addEventListener('click', () => {
+                abort.abort();
+                res()
+            });
         });
     }
+
     nextBtn.style.display = 'none';
     closeBtn.style.display = 'block';
     closeBtn.focus();
 
     function onCloseBtnClick() {
         onDisplayEnd();
+        abort.abort();
         dialogUI.style.display = 'none';
         dialog.innerHTML = '';
         closeBtn.removeEventListener('click', onCloseBtnClick);
@@ -62,7 +87,7 @@ export async function displayPermissionBox({
     k,
     player,
     text,
-    onDisplayEnd = () => {},
+    onDisplayEnd = () => { },
 }) {
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
@@ -127,6 +152,7 @@ export function buildActionModal(sprite, k) {
         k.pos(spritePos.x - 10, spritePos.y - sprite.height - 30),
         k.layer('ui'),
         `action-modal-${sprite.tags[0]}`,
+        // k.offscreen({ hide: true, pause: true })
     ]);
 
     const actionLabel = k.add([
@@ -134,6 +160,7 @@ export function buildActionModal(sprite, k) {
         k.color(0, 0, 0),
         k.pos(actionModal.pos.x + 5, actionModal.pos.y + 4),
         `action-label-${sprite.tags[0]}`,
+        //k.offscreen({ hide: true, pause: true })
     ]);
 
     return { actionModal, actionLabel };

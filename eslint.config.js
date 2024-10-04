@@ -1,13 +1,19 @@
 import globals from 'globals';
 import pluginJs from '@eslint/js';
+import importPlugin from 'eslint-plugin-import';
 
 export default [
+    pluginJs.configs.recommended,
+    importPlugin.flatConfigs.recommended,
     {
-        languageOptions: { globals: globals.browser },
+        languageOptions: {
+            globals: globals.browser,
+            ecmaVersion: 2021,
+            sourceType: 'module',
+        },
         files: ['src/**/*.js'],
         ignores: ['.github/*', 'node_modules/*', 'public/*', 'dist/*'],
         rules: {
-            'no-console': 'off',
             'no-unused-vars': [
                 'error',
                 {
@@ -32,7 +38,13 @@ export default [
             'no-unsafe-call': 'off',
             'no-unsafe-argument': 'off',
             'no-unsafe-regular-expressions': 'off',
+            'import/no-unresolved': 'error',
+            'import/namespace': 'off',
+            'import/no-named-as-default': 'off',
+            'import/no-named-as-default-member': 'off',
+            'import/default': 'off',
+            'no-console': 'warn',
         },
     },
-    pluginJs.configs.recommended,
+
 ];
