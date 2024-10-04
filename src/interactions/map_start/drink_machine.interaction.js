@@ -44,15 +44,34 @@ function showCustomPrompt(message, options, callback) {
         const button = document.createElement('button');
         button.textContent = option;
         button.classList.add('option-btn');
+        button.setAttribute('tabindex', '0'); // Make the button focusable
+
+        // Add click event for mouse interactions
         button.onclick = function () {
             callback(option);
             closeCustomPrompt();
         };
+
+        // Add keyboard event listener for accessibility
+        button.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                // Enter or Space key
+                e.preventDefault(); // Prevent the default behavior (e.g., form submission)
+                callback(option);
+                closeCustomPrompt();
+            }
+        });
+
         optionsContainer.appendChild(button);
     });
 
     // Display the custom prompt
     document.getElementById('custom-prompt').style.display = 'flex';
+
+    // Set focus on the first button
+    if (optionsContainer.children.length > 0) {
+        optionsContainer.children[0].focus();
+    }
 }
 
 // Function to close the custom prompt
