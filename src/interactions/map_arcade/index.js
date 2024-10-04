@@ -1,7 +1,9 @@
+import { firstInteractionWithUncleBob } from './uncleBob.interaction';
 import { enterMapCityInteraction } from './enterMapCity.interactions';
 
 const interactions = [
     enterMapCityInteraction,
+    firstInteractionWithUncleBob,
     // Add more interactions here
 ];
 
