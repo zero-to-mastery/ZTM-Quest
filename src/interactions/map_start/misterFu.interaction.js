@@ -5,7 +5,6 @@ import { conversationMisterFu, misterFu } from '../../constants';
 
 export const interactionWithMisterFu = (player, k, map) => {
     player.onCollide('misterFu', () => {
-
         npcInteractionHandler(player, misterFu.name, k, () => {
             player.isInDialog = true;
             displayDialogue({
