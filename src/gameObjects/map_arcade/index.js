@@ -1,5 +1,8 @@
+import { jessie } from "./jessie.gameObject";
+
 const gameObjects = [
     // Add more game objects here
+    jessie,
 ];
 
 export const addGameObjects = (k, map, spawnpoints) => {

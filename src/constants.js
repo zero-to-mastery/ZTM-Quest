@@ -45,3 +45,15 @@ export const conversationMisterFu = [
     "If you're itching to start your journey, the path lies through that gate.",
     "But don't forget to stock up on supplies before you go. It's a long road ahead."
 ]
+
+export const jessie = {name: "jessie", frames: [180, 184, 182, 188, 181, 186]}
+export const conversationJessie = [
+    "Hey there! I'm Jessie, nice to meet you.",
+    "I've heard whispers of your arrival. Exciting times ahead!",
+    "No quests from me today, but who knows what tomorrow brings? wink",
+    "Welcome to the bustling world of ZTM and Kaplay!",
+    "Look around, many adventurers are here, each with their own tale.",
+    "Feel free to chat with others; they might have some interesting stories.",
+    "Ready to embark on your journey? The gate is just over there.",
+    "Make sure you're well-prepared before heading out. It's a vast world out there."
+]
