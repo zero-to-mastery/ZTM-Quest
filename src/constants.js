@@ -32,3 +32,16 @@ export const conversationBruno = [
     "Otherwise if you can't wait to explore the outside world, just go through the door.",
     'But, make sure you visit the restroom before you go. It will be a long journey.',
 ];
+
+
+export const misterFu = {name: 'misterFu', frames: [60, 64, 62, 68, 61, 66]}
+export const conversationMisterFu = [
+    "Greetings, traveler! I'm MisterFu.",
+    "I bet you've heard tales about my adventures.",
+    "Today, I won't send you on a quest. Not just yet, anyway wink.", 
+    "You're about to dive into the world of ZTM and Kaplay!",
+    "As you can see, many adventurers are already here, eager to explore.",
+    "Some might even share their stories with you.",
+    "If you're itching to start your journey, the path lies through that gate.",
+    "But don't forget to stock up on supplies before you go. It's a long road ahead."
+]
