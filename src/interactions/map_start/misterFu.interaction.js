@@ -1,4 +1,4 @@
-import { displayDialogueWithCharacter } from '../../utils';
+import { displayDialogue } from '../../utils';
 import { npcInteractionHandler } from '../handler.interactions';
 
 import { conversationMisterFu, misterFu } from '../../constants';
@@ -8,7 +8,6 @@ export const interactionWithMisterFu = (player, k, map) => {
         player.isInDialog = true;
         
         npcInteractionHandler(player, misterFu.name, k, () => {
-
             displayDialogueWithCharacter({
                 k,
                 player,

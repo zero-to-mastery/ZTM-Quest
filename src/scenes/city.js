@@ -6,7 +6,7 @@ import { attachInteractions } from '../interactions/map_city';
 import { addGameObjects } from '../gameObjects/map_city';
 import { addPlayerControls } from '../player.controls';
 
-k.scene('city', async () => {
+k.scene('city', async (enter_tag) => {
     const objectConfig = {
         static: [
             'map_boundaries',
@@ -25,9 +25,10 @@ k.scene('city', async () => {
     );
     const player = makePlayer({}, scaleFactor);
 
-    player.pos = spawnpoint.player;
+    player.pos = (enter_tag && spawnpoint[enter_tag]) || spawnpoint.player;
     k.add(map);
     k.add(player);
+    k.canvas.focus();
 
     attachInteractions(player, k);
     addGameObjects(k, map, spawnpoint).forEach((obj) => k.add(obj));

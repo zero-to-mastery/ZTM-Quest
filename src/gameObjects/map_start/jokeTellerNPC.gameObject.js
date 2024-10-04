@@ -43,6 +43,7 @@ export const jokeTellerNPC = (k, map, spawnpoints) => {
         k.pos(spawnPoint.x, spawnPoint.y),
         k.scale(scaleFactor),
         k.anchor('center'),
+        k.offscreen({ hide: true, distance: 10 }),
         'jokeTellerNpc',
     ]);
 };
