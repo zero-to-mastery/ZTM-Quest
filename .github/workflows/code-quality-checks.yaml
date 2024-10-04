@@ -22,6 +22,6 @@ jobs:
       - name: Check with eslint
         id: eslint-run
         run: |
-          npx eslint
+          npm run lint
       - name: Build with Vite
         run: npm run build
