@@ -4,6 +4,7 @@ import { displayDialogueWithoutCharacter } from '../../utils';
 
 export const interactionWithDrinksMachine = (player, k, map) => {
     player.onCollide('drinks_machine', () => {
+        player.isInDialog = true;
         // Trigger the custom prompt when the player collides with the drinks machine
         showCustomPrompt(
             'What would you like to drink?', // Prompt message
@@ -11,27 +12,20 @@ export const interactionWithDrinksMachine = (player, k, map) => {
             (selectedOption) => {
                 // Callback when an option is selected
                 // Logic based on the selected option
-                if (selectedOption === 'Coke') {
-                    displayDialogueWithoutCharacter(
-                        'Coke - "Taste the Feeling!" A cold refreshment is coming your way!',
-                        () => {}
-                    );
-                } else if (selectedOption === 'Soda') {
-                    displayDialogueWithoutCharacter(
-                        'Soda - "Fizz up your life!" Time for some sparkling fun!',
-                        () => {}
-                    );
-                } else if (selectedOption === 'Water') {
-                    displayDialogueWithoutCharacter(
-                        'Water - "Pure as the mountain stream." Stay hydrated and fresh!',
-                        () => {}
-                    );
-                } else if (selectedOption === 'Sprite') {
-                    displayDialogueWithoutCharacter(
-                        'Sprite - "Obey Your Thirst!" Crisp and refreshing as ever!',
-                        () => {}
-                    );
-                }
+                const texts = {
+                    Coke: 'Coke - "Taste the Feeling!" A cold refreshment is coming your way!',
+                    Soda: 'Soda - "Fizz up your life!" Time for some sparkling fun!',
+                    Water: 'Water - "Pure as the mountain stream." Stay hydrated and fresh!',
+                    Sprite: 'Sprite - "Obey Your Thirst!" Crisp and refreshing as ever!',
+                };
+                displayDialogueWithoutCharacter({
+                    k,
+                    player,
+                    text: texts[selectedOption],
+                    onDisplayEnd: () => {
+                        player.isInDialog = false;
+                    },
+                });
             }
         );
     });
