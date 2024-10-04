@@ -7,6 +7,7 @@ import { computer } from './computer.gameObject';
 import { misterFu } from './misterFu.gameObject';
 
 import { jokeTellerNPC } from './jokeTellerNPC.gameObject';
+import { tvVideo } from './tv_main_room_video.gameObject';
 
 const gameObjects = [
     bruno,
@@ -17,6 +18,7 @@ const gameObjects = [
     jokeTellerNPC,
     // Add more game objects here
     misterFu,
+    tvVideo,
 ];
 
 export const addGameObjects = (k, map, spawnpoints) => {
