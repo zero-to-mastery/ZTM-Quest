@@ -24,7 +24,7 @@ export const interactionWithJokeTeller = (player, k, map) => {
                 },
             });
         } catch (error) {
-            console.error('Failed to fetch joke:', error);
+            k.debug.error('Failed to fetch joke:', error);
             displayDialogue({
                 k,
                 player,
