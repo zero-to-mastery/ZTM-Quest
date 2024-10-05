@@ -1,5 +1,3 @@
-import { displayDialogueWithoutCharacter } from '../../utils';
-
 export const enterMapForestInteraction = (player, k, map) => {
     player.onCollide('enter_map_top', () => {
         import('../../scenes/forest').then((_) => {
