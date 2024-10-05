@@ -14,10 +14,6 @@ jobs:
   codeQuality:
     name: Eslint
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,15 +25,3 @@ jobs:
           npm run lint
       - name: Build with Vite
         run: npm run build
-      - name: Add Hacktberfest labels
-        uses: actions/github-script@v4
-        if: ${{ steps.eslint-run.outcome == 'success' }}
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.issues.addLabels({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ['hacktoberfest-accepted']
-            })
