@@ -33,27 +33,29 @@ export const conversationBruno = [
     'But, make sure you visit the restroom before you go. It will be a long journey.',
 ];
 
-
-export const misterFu = {name: 'misterFu', frames: [60, 64, 62, 68, 61, 66]}
+export const misterFu = { name: 'misterFu', frames: [60, 64, 62, 68, 61, 66] };
 export const conversationMisterFu = [
     "Greetings, traveler! I'm MisterFu.",
     "I bet you've heard tales about my adventures.",
-    "Today, I won't send you on a quest. Not just yet, anyway wink.", 
+    "Today, I won't send you on a quest. Not just yet, anyway wink.",
     "You're about to dive into the world of ZTM and Kaplay!",
-    "As you can see, many adventurers are already here, eager to explore.",
-    "Some might even share their stories with you.",
+    'As you can see, many adventurers are already here, eager to explore.',
+    'Some might even share their stories with you.',
     "If you're itching to start your journey, the path lies through that gate.",
-    "But don't forget to stock up on supplies before you go. It's a long road ahead."
-]
+    "But don't forget to stock up on supplies before you go. It's a long road ahead.",
+];
 
-export const jessie = {name: "jessie", frames: [180, 184, 182, 188, 181, 186]}
+export const jessie = {
+    name: 'jessie',
+    frames: [180, 184, 182, 188, 181, 186],
+};
 export const conversationJessie = [
-    "Hey there! I'm Jessie, nice to meet you.",
-    "I've heard whispers of your arrival. Exciting times ahead!",
-    "No quests from me today, but who knows what tomorrow brings? wink",
-    "Welcome to the bustling world of ZTM and Kaplay!",
-    "Look around, many adventurers are here, each with their own tale.",
-    "Feel free to chat with others; they might have some interesting stories.",
-    "Ready to embark on your journey? The gate is just over there.",
-    "Make sure you're well-prepared before heading out. It's a vast world out there."
-]
+    'Hey there! Welcome to the arcade! Ready to have some fun?',
+    "Hi! I'm Jessie. Need any tips on the best games here?",
+    "Hello! Have you tried the new racing game? It's awesome!",
+    "Welcome! I'm Jessie. Let's see if you can beat my high score!",
+    'Hey! Looking for a challenge? I can show you the toughest games.',
+    "Hi there! Don't forget to check out the prize counter after playing!",
+    "Hello! Need any help finding a game? I'm your go-to guide!",
+    "Hey! Ready to play? I've got some great game recommendations for you.",
+];
