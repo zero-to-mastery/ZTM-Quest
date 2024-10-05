@@ -13,7 +13,6 @@ export const interactionWithLocker = (player, k, map) => {
         );
         // Trigger the custom prompt when the player collides with the drinks machine
         showCustomPrompt(
-            player,
             'What character would you like to play?', // Prompt message
             characterOptions, // Dynamic options based on characters
             (selectedOption) => {
@@ -50,6 +49,7 @@ async function showCustomPrompt(message, options, callback) {
 
     // Create buttons for each option
     options.forEach(async (option) => {
+        await slightPause();
         const button = document.createElement('button');
         button.textContent = option;
         button.classList.add('option-btn');
@@ -60,7 +60,7 @@ async function showCustomPrompt(message, options, callback) {
             callback(option);
             closeCustomPrompt();
         };
-        await slightPause();
+
         // Add keyboard event listener for accessibility
         button.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
