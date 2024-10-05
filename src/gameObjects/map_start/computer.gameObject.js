@@ -20,6 +20,7 @@ export const computer = (k, map, spawnpoints) => {
             (tableRoom1.pos.y + 30) * scaleFactor
         ),
         k.body({ isStatic: true }),
+        k.offscreen({ hide: true, distance: 10 }),
         'computer',
     ]);
 };

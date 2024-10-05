@@ -25,6 +25,10 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
             setGameState(gameState);
             return true;
         },
+        get: function (target, key) {
+            const gameState = getGameState();
+            return gameState.player[key];
+        },
     };
     const state = new Proxy(
         {
