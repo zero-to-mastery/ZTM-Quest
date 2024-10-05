@@ -1,5 +1,3 @@
-
-
 const interactions = [
     // Add more interactions here
 ];

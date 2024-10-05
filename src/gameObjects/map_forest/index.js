@@ -1,8 +1,6 @@
 import { butterfly } from "./butterfly.gameObject";
 
-const gameObjects = [
-    butterfly
-];
+const gameObjects = [butterfly];
 
 export const addGameObjects = (k, map, spawnpoints) => {
     return gameObjects.reduce((gameObjAcc, cb) => {
