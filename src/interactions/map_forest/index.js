@@ -1,5 +1,7 @@
+import { enterMapCityInteraction } from "./enterMapCity.interactions";
+
 const interactions = [
-    // Add more interactions here
+    enterMapCityInteraction
 ];
 
 export const attachInteractions = (gameObj, k) => {
