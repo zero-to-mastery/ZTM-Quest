@@ -1,15 +1,19 @@
 import { characters } from '../../constants';
 import { displayDialogue } from '../../utils';
 
+const slightPause = () => new Promise((res) => setTimeout(res, 500));
+
 export const interactionWithLocker = (player, k, map) => {
     player.onCollide('cabin_edge_room_1', () => {
         player.isInDialog = true;
+
         const characterOptions = characters.map(
             (character) =>
                 character.name.charAt(0).toUpperCase() + character.name.slice(1)
         );
         // Trigger the custom prompt when the player collides with the drinks machine
         showCustomPrompt(
+            player,
             'What character would you like to play?', // Prompt message
             characterOptions, // Dynamic options based on characters
             (selectedOption) => {
@@ -19,23 +23,24 @@ export const interactionWithLocker = (player, k, map) => {
                         character.name.toLowerCase() ===
                         selectedOption.toLowerCase()
                 );
-                const displayText = `You've chosen to play ${selectedCharacter.name}`
-                displayDialogue({
-                    k,
-                    player,
-                    text: [displayText],
-                    onDisplayEnd: () => {
-                        player.isInDialog = false;
-                    },
-                });
-
+                // const displayText = `You've chosen to play ${selectedCharacter.name}`
+                // displayDialogue({
+                //     k,
+                //     player,
+                //     text: [displayText],
+                //     onDisplayEnd: () => {
+                //         player.isInDialog = false;
+                //     },
+                // });
                 player.changePlayer(selectedCharacter.name);
+                player.isInDialog = false;
+                k.canvas.focus();
             }
         );
     });
 };
 
-function showCustomPrompt(message, options, callback) {
+async function showCustomPrompt(player, message, options, callback) {
     // Set the prompt message
     document.getElementById('prompt-message').textContent = message;
 
@@ -44,7 +49,7 @@ function showCustomPrompt(message, options, callback) {
     optionsContainer.innerHTML = '';
 
     // Create buttons for each option
-    options.forEach((option) => {
+    options.forEach(async (option) => {
         const button = document.createElement('button');
         button.textContent = option;
         button.classList.add('option-btn');
@@ -55,7 +60,7 @@ function showCustomPrompt(message, options, callback) {
             callback(option);
             closeCustomPrompt();
         };
-
+        await slightPause();
         // Add keyboard event listener for accessibility
         button.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
@@ -65,7 +70,6 @@ function showCustomPrompt(message, options, callback) {
                 closeCustomPrompt();
             }
         });
-
         optionsContainer.appendChild(button);
     });
 
