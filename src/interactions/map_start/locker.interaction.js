@@ -40,7 +40,7 @@ export const interactionWithLocker = (player, k, map) => {
     });
 };
 
-async function showCustomPrompt(player, message, options, callback) {
+async function showCustomPrompt(message, options, callback) {
     // Set the prompt message
     document.getElementById('prompt-message').textContent = message;
 
