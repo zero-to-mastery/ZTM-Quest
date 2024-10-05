@@ -1,5 +1,5 @@
 import { k } from '../kplayCtx';
-import { scaleFactor, speedByScaleFactor } from '../constants';
+import { characters, scaleFactor, speedByScaleFactor } from '../constants';
 import { getGameState, setGameState } from '../utils/gameState';
 import { getRandomCharacter } from '../utils/sprites';
 
@@ -19,10 +19,12 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
         });
     }
 
-    const changePlayer = (startAnimation = 'idle-down') => {
-        const randomCharacter = getRandomCharacter();
+    const changePlayer = (name, startAnimation = 'idle-down') => {
+        const chosenCharacter = characters.find(
+            (character) => character.name === name
+        );
         const [idleDown, walkDown, idleSide, walkSide, idleUp, walkUp] =
-            randomCharacter.frames;
+            chosenCharacter.frames;
 
         k.loadSprite('player', './characters.png', {
             sliceX: 10,
