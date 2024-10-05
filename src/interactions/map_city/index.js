@@ -1,6 +1,7 @@
 import { boundaryArcadeInteraction } from './boundaryArcade.interaction';
 import { boundaryBurgerBarInteraction } from './boundaryBurgerBar.interaction';
 import { enterMapArcadeInteraction } from './enterMapArcade.interactions';
+import { enterMapForestInteraction } from './enterMapForest.interactions';
 import { enterMapStartInteraction } from './enterMapStart.interaction';
 import {
     snackBarRedInteraction,
@@ -12,6 +13,7 @@ import { stall1Interaction, stall2Interaction } from './stalls.interaction';
 const interactions = [
     enterMapArcadeInteraction,
     enterMapStartInteraction,
+    enterMapForestInteraction,
     boundaryBurgerBarInteraction,
     boundaryArcadeInteraction,
     snackBarRedInteraction,
