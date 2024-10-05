@@ -47,36 +47,88 @@ async function showCustomPrompt(message, options, callback) {
     const optionsContainer = document.getElementById('options-container');
     optionsContainer.innerHTML = '';
 
-    // Create buttons for each option
-    options.forEach(async (option) => {
+    const itemsPerPage = 5; // Number of options per page
+    let currentPage = 1;
+    const totalPages = Math.ceil(options.length / itemsPerPage);
+
+    async function renderOptions() {
         await slightPause();
-        const button = document.createElement('button');
-        button.textContent = option;
-        button.classList.add('option-btn');
-        button.setAttribute('tabindex', '0'); // Make the button focusable
+        // Calculate the start and end indices for the current page
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const currentOptions = options.slice(start, end);
 
-        // Add click event for mouse interactions
-        button.onclick = function () {
-            callback(option);
-            closeCustomPrompt();
-        };
+        // Clear existing options
+        optionsContainer.innerHTML = '';
 
-        // Add keyboard event listener for accessibility
-        button.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                // Enter or Space key
-                e.preventDefault(); // Prevent the default behavior (e.g., form submission)
+        // Create buttons for each option
+        currentOptions.forEach((option) => {
+            const button = document.createElement('button');
+            button.textContent = option;
+            button.classList.add('option-btn');
+            button.setAttribute('tabindex', '0'); // Make the button focusable
+
+            // Add click event for mouse interactions
+            button.onclick = function () {
                 callback(option);
                 closeCustomPrompt();
-            }
+            };
+
+            // Add keyboard event listener for accessibility
+            button.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    // Enter or Space key
+                    e.preventDefault(); // Prevent the default behavior (e.g., form submission)
+                    callback(option);
+                    closeCustomPrompt();
+                }
+            });
+
+            optionsContainer.appendChild(button);
         });
-        optionsContainer.appendChild(button);
-    });
+    }
+
+    async function renderPagination() {
+        await slightPause();
+        // Create Previous button
+        const prevButton = document.createElement('button');
+        prevButton.classList.add('option-btn');
+        prevButton.textContent = 'Previous';
+        prevButton.disabled = currentPage === 1;
+        prevButton.onclick = () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderOptions();
+                renderPagination();
+            }
+        };
+
+        // Create Next button
+        const nextButton = document.createElement('button');
+        nextButton.classList.add('option-btn');
+        nextButton.textContent = 'Next';
+        nextButton.disabled = currentPage === totalPages;
+        nextButton.onclick = () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderOptions();
+                renderPagination();
+            }
+        };
+        prevButton.style.width = '45%';
+        nextButton.style.width = '45%';
+        optionsContainer.appendChild(prevButton);
+        optionsContainer.appendChild(nextButton);
+    }
 
     // Display the custom prompt
     document.getElementById('custom-prompt').style.display = 'flex';
     optionsContainer.style.display = 'flex';
     optionsContainer.style.flexWrap = 'wrap';
+
+    // Initial render of options and pagination
+    renderOptions();
+    renderPagination();
 
     // Set focus on the first button
     if (optionsContainer.children.length > 0) {
