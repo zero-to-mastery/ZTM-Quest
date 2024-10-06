@@ -1,4 +1,4 @@
-import { butterfly } from "./butterfly.gameObject";
+import { butterfly } from './butterfly.gameObject';
 
 const gameObjects = [butterfly];
 

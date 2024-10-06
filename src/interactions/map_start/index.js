@@ -1,5 +1,6 @@
 import { interactionWithBruno } from './bruno.interaction';
-import { enterMapCityInteraction } from './enterMapCity.interaction';
+import { enterMapCityLeftInteraction } from './enterMapCityLeft.interaction';
+import { enterMapCityRightInteraction } from './enterMapCityRight.interactions';
 import { interactionWithMainboxMainArea } from './mailboxMainArea.interaction';
 import { restroomInteractions } from './restroom.interactions';
 import { interactionWithComputer } from './computer.interaction';
@@ -14,7 +15,8 @@ import { interactionWithLocker} from './locker.interaction';
 const interactions = [
     restroomInteractions,
     interactionWithBruno,
-    enterMapCityInteraction,
+    enterMapCityLeftInteraction,
+    enterMapCityRightInteraction,
     interactionWithMainboxMainArea,
     interactionWithComputer,
     interactionWithJokeTeller,

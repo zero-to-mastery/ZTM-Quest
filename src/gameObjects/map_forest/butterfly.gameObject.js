@@ -13,7 +13,7 @@ export const butterfly = (k, map, spawnpoints) => {
     return k.make([
         k.sprite('butterfly', { anim: 'idle-side' }),
         k.area({
-            shape: new k.Rect(k.vec2(0), 16,16),
+            shape: new k.Rect(k.vec2(0), 16, 16),
         }),
         k.body({ isStatic: true }),
         k.anchor('center'),
