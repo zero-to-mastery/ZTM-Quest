@@ -3,7 +3,7 @@ import { npcsInCityMap } from './npcsOnmap_city';
 const gameObjects = [
     npcsInCityMap,
     // Add more game objects here
-    campusHouse1OpenDoor
+    campusHouse1OpenDoor,
 ];
 
 export const addGameObjects = (k, map, spawnpoints) => {

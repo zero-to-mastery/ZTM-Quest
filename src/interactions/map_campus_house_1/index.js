@@ -1,4 +1,4 @@
-import { enterMapCityInteraction } from "./enterMapCity.interactions";
+import { enterMapCityInteraction } from './enterMapCity.interactions';
 
 const interactions = [
     // Add more interactions here
