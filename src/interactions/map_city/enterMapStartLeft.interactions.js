@@ -1,6 +1,6 @@
 import { displayPermissionBox } from '../../utils';
-export const enterMapStartInteraction = (player, k) => {
-    player.onCollide('enter_map_start', async () => {
+export const enterMapStartLeftInteraction = (player, k) => {
+    player.onCollide('enter_map_start_left', async () => {
         player.isInDialog = true;
         let granted = await displayPermissionBox({
             k,
@@ -12,10 +12,9 @@ export const enterMapStartInteraction = (player, k) => {
                 player.isInDialog = false;
             },
         });
-        // console.log(granted);
         if (granted) {
             import('../../scenes/start').then((_) => {
-                k.go('start', 'enter_city');
+                k.go('start', 'spawn_left');
             });
         }
     });
