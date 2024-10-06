@@ -10,7 +10,7 @@ import { interactionWithDrinksMachine } from './drink_machine.interaction';
 import { interactionWithMisterFu } from './misterFu.interaction';
 import { interactionWithTV } from './tv_main_room.interaction';
 import { interactionWithCake } from './cake.interaction';
-import { interactionWithLocker} from './locker.interaction';
+import { interactionWithLocker } from './locker.interaction';
 
 const interactions = [
     restroomInteractions,
@@ -25,7 +25,7 @@ const interactions = [
     interactionWithMisterFu,
     interactionWithTV,
     interactionWithCake,
-    interactionWithLocker
+    interactionWithLocker,
 ];
 
 export const attachInteractions = (gameObj, k) => {
