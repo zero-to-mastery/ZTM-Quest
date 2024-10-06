@@ -31,7 +31,7 @@ k.scene('campus_house_1', async (enter_tag) => {
     k.add(player);
     k.canvas.focus();
 
-    addGameObjects(k, map, spawnpoint).forEach((obj) => k.add(obj));
     attachInteractions(player, k);
+    addGameObjects(k, map, spawnpoint).forEach((obj) => k.add(obj));
     addPlayerControls(k, player);
 });
