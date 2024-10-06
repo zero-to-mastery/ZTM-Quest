@@ -1,7 +1,6 @@
 import { k } from '../kplayCtx';
 import { characters, scaleFactor, speedByScaleFactor } from '../constants';
 import { getGameState, setGameState } from '../utils/gameState';
-import { getRandomCharacter } from '../utils/sprites';
 
 export function makePlayer(playerProps = {}, customScale = scaleFactor) {
     if (!k.getSprite('player')) {

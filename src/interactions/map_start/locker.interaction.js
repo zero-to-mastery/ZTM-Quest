@@ -1,5 +1,4 @@
 import { characters } from '../../constants';
-import { displayDialogue } from '../../utils';
 
 const slightPause = () => new Promise((res) => setTimeout(res, 500));
 
@@ -22,15 +21,6 @@ export const interactionWithLocker = (player, k, map) => {
                         character.name.toLowerCase() ===
                         selectedOption.toLowerCase()
                 );
-                // const displayText = `You've chosen to play ${selectedCharacter.name}`
-                // displayDialogue({
-                //     k,
-                //     player,
-                //     text: [displayText],
-                //     onDisplayEnd: () => {
-                //         player.isInDialog = false;
-                //     },
-                // });
                 player.changePlayer(selectedCharacter.name);
                 player.isInDialog = false;
                 k.canvas.focus();
