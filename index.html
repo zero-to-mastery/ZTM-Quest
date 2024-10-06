@@ -97,10 +97,30 @@
                 flex-direction: column;
                 color: #fff;
                 text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
-                font-size: 1rem;
+                font-size: 1.25rem;
                 line-height: 1.6;
                 opacity: 0;
                 animation: fadeIn 1s forwards 0.7s;
+            }
+
+            #interaction-note {
+                position: absolute;
+                right: 5%;
+                top: 2vh;
+                display: flex;
+                text-align: center;
+                align-items: center;
+                gap: 1rem;
+                color: #fff;
+                text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+                font-size: 1.25rem;
+                line-height: 1.6;
+                opacity: 0;
+                animation: fadeIn 0.5s forwards;
+            }
+
+            #interaction-note img {
+                display: inline;
             }
 
             .note span {
@@ -136,6 +156,9 @@
             <div>
                 <p class="note">
                     Tap/Click/&uarr;&darr;&larr;&rarr; around to move
+                </p>
+                <p id="interaction-note" style="display:none;">
+                    T - Interact with NPC/Object
                 </p>
 
                 <p id="dialog-text"></p>
