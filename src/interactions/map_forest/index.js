@@ -1,5 +1,7 @@
+import { enterMapForestJunctionInteraction } from "./enterMapForestJunction.interactions";
+
 const interactions = [
-    // Add more interactions here
+    enterMapForestJunctionInteraction
 ];
 
 export const attachInteractions = (gameObj, k) => {
