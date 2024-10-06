@@ -26,7 +26,7 @@ k.scene('city', async (enter_tag) => {
     const player = makePlayer({}, scaleFactor);
 
     player.pos = (enter_tag && spawnpoint[enter_tag]) || spawnpoint.player;
-    
+
     k.add(map);
     k.add(player);
     k.canvas.focus();

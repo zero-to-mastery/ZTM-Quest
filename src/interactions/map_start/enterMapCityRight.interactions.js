@@ -1,7 +1,8 @@
 import { displayDialogue } from '../../utils';
 
 export const enterMapCityRightInteraction = (player, k, map) => {
-    player.onCollide('enter_map_right', () => { // Collision point (Enter map boundary) //! NOT THE SPAWNPOINT
+    player.onCollide('enter_map_right', () => {
+        // Collision point (Enter map boundary) //! NOT THE SPAWNPOINT
         if (
             player.state.hasTalkedToBruno &&
             player.state.wasInRestroom &&

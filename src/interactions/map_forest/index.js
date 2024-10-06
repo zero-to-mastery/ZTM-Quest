@@ -1,8 +1,6 @@
-import { enterMapForestJunctionInteraction } from "./enterMapForestJunction.interactions";
+import { enterMapForestJunctionInteraction } from './enterMapForestJunction.interactions';
 
-const interactions = [
-    enterMapForestJunctionInteraction
-];
+const interactions = [enterMapForestJunctionInteraction];
 
 export const attachInteractions = (gameObj, k) => {
     const map = k.get('main_map')[0];

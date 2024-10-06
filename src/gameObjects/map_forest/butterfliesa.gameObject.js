@@ -8,8 +8,9 @@ export const butterfliesa = (k, map, spawnpoints) => {
         .get('*')
         .filter(
             (obj) =>
-                obj.tags.filter((tag) => new RegExp(butterfliesPattern).test(tag))
-                    .length > 0
+                obj.tags.filter((tag) =>
+                    new RegExp(butterfliesPattern).test(tag)
+                ).length > 0
         );
 
     for (const butterfly of butterflies) {

@@ -4,7 +4,8 @@ import { k } from '../kplayCtx';
 import { attachInteractions } from '../interactions/map_forest_junction';
 import { addGameObjects } from '../gameObjects/map_forest_junction';
 import { addPlayerControls } from '../player.controls';
-import { getGameState } from '../utils/gameState';``
+import { getGameState } from '../utils/gameState';
+``;
 
 k.scene('forest_junction', async (enter_tag) => {
     const objectConfig = {
