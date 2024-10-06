@@ -1,5 +1,6 @@
 import { boundaryArcadeInteraction } from './boundaryArcade.interaction';
 import { boundaryBurgerBarInteraction } from './boundaryBurgerBar.interaction';
+import { enterMapApartmentInteraction } from './enterMapApartment.interaction';
 import { enterMapArcadeInteraction } from './enterMapArcade.interactions';
 import { enterMapForestInteraction } from './enterMapForest.interactions';
 import { enterMapStartInteraction } from './enterMapStart.interaction';
@@ -22,6 +23,7 @@ const interactions = [
     stall1Interaction,
     stall2Interaction,
     // Add more interactions here
+    enterMapApartmentInteraction
 ];
 
 export const attachInteractions = (gameObj, k) => {
