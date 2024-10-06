@@ -2,7 +2,7 @@ import { scaleFactor } from '../../constants';
 import { displayDialogue } from '../../utils';
 
 export const interactionWithGameMachine6 = (player, k, map) => {
-    player.onCollide('game_machine_2', () => {
+    player.onCollide('game_machine_6', () => {
         player.isInDialog = true;
         // Trigger the custom prompt when the player collides with the game machine
         showCustomPrompt(
@@ -91,7 +91,7 @@ function startChromeDinoGame(k) {
     const FLOOR_HEIGHT = 48;
     const JUMP_FORCE = 800;
     const SPEED = 480;
-    const GRAVITY = 1600
+    const GRAVITY = 1600;
 
     // Set up the game scene
     k.scene('dinoGame', () => {
@@ -185,12 +185,16 @@ function startChromeDinoGame(k) {
         ]);
 
         // go back to game with space is pressed
-        k.onKeyPress('space', () => import('../../scenes/arcade').then((_) => {
-            k.go('arcade');
-        }));
-        k.onClick(() => import('../../scenes/arcade').then((_) => {
-            k.go('arcade');
-        }));
+        k.onKeyPress('space', () =>
+            import('../../scenes/arcade').then((_) => {
+                k.go('arcade');
+            })
+        );
+        k.onClick(() =>
+            import('../../scenes/arcade').then((_) => {
+                k.go('arcade');
+            })
+        );
         k.setGravity(0);
     });
 
