@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"map_city.json"
+        }
+    },
  "height":40,
  "infinite":false,
  "layers":[
@@ -184,7 +192,7 @@
          "name":"street_global",
          "opacity":1,
          "type":"group",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -1903,7 +1911,7 @@
                 {
                  "height":0,
                  "id":461,
-                 "name":"spawn_map_forest_top",
+                 "name":"spawn_top",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -1915,7 +1923,7 @@
                 {
                  "height":0,
                  "id":462,
-                 "name":"spawn_map_right",
+                 "name":"spawn_right",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -1927,7 +1935,7 @@
                 {
                  "height":0,
                  "id":463,
-                 "name":"spawn_map_left",
+                 "name":"spawn_left",
                  "point":true,
                  "rotation":0,
                  "type":"",
