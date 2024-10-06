@@ -97,9 +97,10 @@ To make things easier (because it can be really confusing how to start contribut
 
 [How-To add interactions](./HOWTO_Add-Interactions.md)
 
-## Recommendations
+## Recommendations for creating new assets (not mandatory to contribute)
 
-Here are some tools which I can recommend regarding game assets
+Here are some tools which I can recommend regarding game asset creation from scratch
 
 - For map creation: [Tiled](https://www.mapeditor.org/)
 - For music creation: [CakeWalk](https://www.bandlab.com/products/cakewalk) even a mobile app is available
+- For art creation: [Gimp](https://www.gimp.org/) 
