@@ -1,5 +1,5 @@
 import { k } from '../kplayCtx';
-import { scaleFactor, speedByScaleFactor } from '../constants';
+import { characters, scaleFactor, speedByScaleFactor } from '../constants';
 import { getGameState, setGameState } from '../utils/gameState';
 
 export function makePlayer(playerProps = {}, customScale = scaleFactor) {
@@ -17,6 +17,44 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
             },
         });
     }
+
+    const changePlayer = (name, startAnimation = 'idle-down') => {
+        const chosenCharacter = characters.find(
+            (character) => character.name === name
+        );
+        const [idleDown, walkDown, idleSide, walkSide, idleUp, walkUp] =
+            chosenCharacter.frames;
+
+        k.loadSprite('player', './characters.png', {
+            sliceX: 10,
+            sliceY: 20,
+            anims: {
+                'idle-down': idleDown,
+                'walk-down': {
+                    from: walkDown,
+                    to: walkDown + 1,
+                    loop: true,
+                    speed: 6,
+                },
+                'idle-side': idleSide,
+                'walk-side': {
+                    from: walkSide,
+                    to: walkSide + 1,
+                    loop: true,
+                    speed: 6,
+                },
+                'idle-up': idleUp,
+                'walk-up': {
+                    from: walkUp,
+                    to: walkUp + 1,
+                    loop: true,
+                    speed: 6,
+                },
+            },
+        });
+        // Update the player's sprite to use the new character
+        player.use(k.sprite('player', { anim: startAnimation }));
+    };
 
     const playerState = {
         set: function (target, key, value) {
@@ -53,6 +91,7 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
             collectedCoins: 0,
             score: 0,
             state: state,
+            changePlayer,
         },
     ]);
 
