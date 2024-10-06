@@ -148,35 +148,53 @@ export function setCamScale(k) {
 // NOTE: sprite must be an npc not an object like mailbox
 // export function buildActionModal(sprite, k) {
 //     document.getElementById("interaction-note").style.display = "flex";
-    // const spritePos = sprite.pos;
+// const spritePos = sprite.pos;
 
-    // const actionModal = k.add([
-    //     k.rect(20, 20),
-    //     k.area(),
-    //     k.color(255, 255, 255),
-    //     k.outline(2, k.Color.BLACK),
-    //     k.pos(spritePos.x - 10, spritePos.y - sprite.height - 30),
-    //     k.layer('ui'),
-    //     `action-modal-${sprite.tags[0]}`,
-    //     // k.offscreen({ hide: true, pause: true })
-    // ]);
+// const actionModal = k.add([
+//     k.rect(20, 20),
+//     k.area(),
+//     k.color(255, 255, 255),
+//     k.outline(2, k.Color.BLACK),
+//     k.pos(spritePos.x - 10, spritePos.y - sprite.height - 30),
+//     k.layer('ui'),
+//     `action-modal-${sprite.tags[0]}`,
+//     // k.offscreen({ hide: true, pause: true })
+// ]);
 
-    // const actionLabel = k.add([
-    //     k.text('T', { size: 16, align: 'center' }),
-    //     k.color(0, 0, 0),
-    //     k.pos(actionModal.pos.x + 5, actionModal.pos.y + 4),
-    //     `action-label-${sprite.tags[0]}`,
-    //     //k.offscreen({ hide: true, pause: true })
-    // ]);
+// const actionLabel = k.add([
+//     k.text('T', { size: 16, align: 'center' }),
+//     k.color(0, 0, 0),
+//     k.pos(actionModal.pos.x + 5, actionModal.pos.y + 4),
+//     `action-label-${sprite.tags[0]}`,
+//     //k.offscreen({ hide: true, pause: true })
+// ]);
 
-    // return { actionModal, actionLabel };
+// return { actionModal, actionLabel };
 // }
 
-export const buildInteractionPrompt = () => {
-    document.getElementById("interaction-note").style.display = 'flex';
-}
+export const buildInteractionPrompt = (k) => {
+    k.isTouchscreen()
+        ? (document.getElementById('interaction-note-mobile').style.display =
+              'flex')
+        : (document.getElementById('interaction-note').style.display = 'flex');
+};
 
-export const tearDownInteractionPrompt = () => {
-    document.getElementById("interaction-note").style.display = 'none';
+export const tearDownInteractionPrompt = (k) => {
+    k.isTouchscreen()
+        ? (document.getElementById('interaction-note-mobile').style.display =
+              'none')
+        : (document.getElementById('interaction-note').style.display = 'none');
+};
 
-}
+export const initializeMovementPrompt = (k) => {
+    if (k.isTouchscreen()) {
+        document.getElementById('note-mobile').style.display = 'flex';
+        document.getElementById('note').style.display = 'none';
+        document.getElementById('interaction-note').style.display = 'none';
+    } else {
+        document.getElementById('note').style.display = 'flex';
+        document.getElementById('note-mobile').style.display = 'none';
+        document.getElementById('interaction-note-mobile').style.display =
+            'none';
+    }
+};

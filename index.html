@@ -89,7 +89,7 @@
                 animation: fadeIn 1s forwards 0.6s;
             }
 
-            .note {
+            #note, #note-mobile {
                 position: absolute;
                 left: 5%;
                 top: 2vh;
@@ -97,13 +97,21 @@
                 flex-direction: column;
                 color: #fff;
                 text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
-                font-size: 1.25rem;
+                font-size: 1rem;
                 line-height: 1.6;
                 opacity: 0;
                 animation: fadeIn 1s forwards 0.7s;
             }
 
-            #interaction-note {
+            #note-mobile {
+                top: auto;
+                bottom: 2vh;
+                background-color: rgba(0, 0, 0, 0.25);
+                padding: 0.25rem 0.5rem;
+                border-radius: 15px;
+            }
+
+            #interaction-note, #interaction-note-mobile {
                 position: absolute;
                 right: 5%;
                 top: 2vh;
@@ -113,18 +121,18 @@
                 gap: 1rem;
                 color: #fff;
                 text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
-                font-size: 1.25rem;
+                font-size: 1rem;
                 line-height: 1.6;
                 opacity: 0;
                 animation: fadeIn 0.5s forwards;
             }
 
-            #interaction-note img {
-                display: inline;
-            }
-
-            .note span {
-                margin-bottom: 0.6rem;
+            #interaction-note-mobile {
+                bottom: 2vh;
+                top:auto;
+                background-color: rgba(0, 0, 0, 0.25);
+                padding: 0.25rem 0.5rem;
+                border-radius: 15px;
             }
 
             @keyframes fadeIn {
@@ -154,11 +162,17 @@
     <body>
         <div id="app">
             <div>
-                <p class="note">
+                <p id="note" style="display: none;">
                     Tap/Click/&uarr;&darr;&larr;&rarr; around to move
                 </p>
                 <p id="interaction-note" style="display:none;">
                     T - Interact with NPC/Object
+                </p>
+                <p id="note-mobile" style="display: none;">
+                    Tap to move around
+                </p>
+                <p id="interaction-note-mobile" style="display:none;">
+                    Tap to Interact
                 </p>
 
                 <p id="dialog-text"></p>
