@@ -1,8 +1,6 @@
-import { npcsInCityMap } from './npcsOnmap_city';
-const gameObjects = [
-    npcsInCityMap,
-    // Add more game objects here
-];
+import { butterfly } from './butterfly.gameObject';
+
+const gameObjects = [butterfly];
 
 export const addGameObjects = (k, map, spawnpoints) => {
     return gameObjects.reduce((gameObjAcc, cb) => {

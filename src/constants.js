@@ -45,6 +45,7 @@ export const conversationMisterFu = [
     "But don't forget to stock up on supplies before you go. It's a long road ahead.",
 ];
 
+
 export const jessie = {
     name: 'jessie',
     frames: [180, 184, 182, 188, 181, 186],
@@ -59,3 +60,4 @@ export const conversationJessie = [
     "Hello! Need any help finding a game? I'm your go-to guide!",
     "Hey! Ready to play? I've got some great game recommendations for you.",
 ];
+

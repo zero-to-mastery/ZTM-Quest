@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"map_start.json"
+        }
+    },
  "height":20,
  "infinite":false,
  "layers":[
@@ -28,7 +36,7 @@
          "name":"ground",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":30,
          "x":0,
          "y":0
@@ -59,7 +67,7 @@
          "name":"aboveGround",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":30,
          "x":0,
          "y":0
@@ -90,7 +98,7 @@
          "name":"walls",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":30,
          "x":0,
          "y":0
@@ -121,7 +129,7 @@
          "name":"mainArea",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":30,
          "x":0,
          "y":0
@@ -152,7 +160,7 @@
          "name":"chairs_room_1",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":30,
          "x":0,
          "y":0
@@ -183,7 +191,7 @@
          "name":"furniture_room_1",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":30,
          "x":0,
          "y":0
@@ -216,7 +224,7 @@
          "offsety":-0.666666666666671,
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":30,
          "x":0,
          "y":0
@@ -249,7 +257,7 @@
          "offsety":10,
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":30,
          "x":0,
          "y":0
@@ -282,7 +290,7 @@
          "offsety":-6,
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":30,
          "x":0,
          "y":0
@@ -486,7 +494,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -843,7 +851,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -875,7 +883,7 @@
          "offsety":-9.75,
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":30,
          "x":0,
          "y":0
@@ -906,7 +914,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -915,18 +923,6 @@
          "id":15,
          "name":"spawnpoints",
          "objects":[
-                {
-                 "height":0,
-                 "id":57,
-                 "name":"player",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":11.3333333333333,
-                 "y":182.666666666667
-                }, 
                 {
                  "height":0,
                  "id":111,
@@ -954,7 +950,7 @@
                 {
                  "height":0,
                  "id":192,
-                 "name":"enter_city",
+                 "name":"spawn_right",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -962,6 +958,30 @@
                  "width":0,
                  "x":455.833333333333,
                  "y":267.166666666667
+                }, 
+                {
+                 "height":0,
+                 "id":195,
+                 "name":"player",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":16,
+                 "y":192
+                }, 
+                {
+                 "height":0,
+                 "id":197,
+                 "name":"spawn_left",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":32,
+                 "y":208
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1103,7 +1123,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -1670,7 +1690,7 @@
          "y":0
         }],
  "nextlayerid":27,
- "nextobjectid":193,
+ "nextobjectid":198,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
