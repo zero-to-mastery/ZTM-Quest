@@ -15,8 +15,6 @@ export const initMap = async (
     const mapData = await (await fetch(pathToMapJson)).json();
     const { layers } = mapData;
 
-    shapeOffset = shapeOffset || k.vec2(0, 0);
-
     const map = k.make([
         k.sprite('map'),
         k.pos(0),
@@ -26,77 +24,45 @@ export const initMap = async (
 
     const spawnpointsCharacters = {};
 
-    for (const layer of layers) {
-        const isStaticObject = objectConfig.static.includes(layer.name);
-        const isInteractionObject = objectConfig.interactionObjects.includes(
-            layer.name
-        );
+    layers.forEach(layer => {
+        const { name, objects, properties } = layer;
+        const isStaticObject = objectConfig.static.includes(name);
+        const isInteractionObject = objectConfig.interactionObjects.includes(name);
 
         if (isStaticObject || isInteractionObject) {
-            const isStaticProp = layer?.properties?.filter(
-                (prop) => prop.name === 'isStatic'
-            );
-            const isStatic =
-                isStaticProp.length > 0 ? isStaticProp[0].value : true;
+            const isStatic = properties?.some(prop => prop.name === 'isStatic' && prop.value) ?? true;
 
-            for (const staticBodyObj of layer.objects) {
-                /**
-                 * Setup hidden boundaries for the player to collide with on the map
-                 * The data gets loaded from mapData which in fact got created by Tiled
-                 */
+            objects.forEach(staticBodyObj => {
                 const components = [
                     k.area({
-                        /**
-                         * The shape of the boundary which has the dimensions from Tiled map, pos x and y got figured out
-                         * by try/fail method to match the boundaries on the map
-                         */
-                        shape: new k.Rect(
-                            shapeOffset,
-                            staticBodyObj.width,
-                            staticBodyObj.height
-                        ),
+                        shape: new k.Rect(shapeOffset, staticBodyObj.width, staticBodyObj.height),
                     }),
                     k.pos(staticBodyObj.x, staticBodyObj.y),
                     staticBodyObj.name,
                     {
-                        tiledProps: {
-                            ...staticBodyObj?.properties?.reduce(
-                                (acc, prop) => {
-                                    acc[prop.name] = prop.value;
-                                    return acc;
-                                },
-                                {}
-                            ),
-                        },
+                        tiledProps: properties?.reduce((acc, prop) => {
+                            acc[prop.name] = prop.value;
+                            return acc;
+                        }, {}),
                     },
                 ];
 
-                if (isStatic) {
-                    components.push(k.body({ isStatic: true }));
-                }
-
-                if (isInteractionObject) {
-                    components.push('interaction_object');
-                }
+                if (isStatic) components.push(k.body({ isStatic: true }));
+                if (isInteractionObject) components.push('interaction_object');
 
                 map.add(components);
-            }
-            continue;
+            });
         }
 
-        /**
-         * Spawnpoints are used to place entities in the map, in this case the main game character
-         * here we set the player position on start once the map object got parsed
-         */
-        if (objectConfig.spawnpoints.includes(layer.name)) {
-            for (const entity of layer.objects) {
+        if (objectConfig.spawnpoints.includes(name)) {
+            objects.forEach(entity => {
                 spawnpointsCharacters[entity.name] = k.vec2(
                     (map.pos.x + entity.x) * scaleFactor,
                     (map.pos.y + entity.y) * scaleFactor
                 );
-            }
+            });
         }
-    }
+    });
 
     return [map, spawnpointsCharacters];
 };
