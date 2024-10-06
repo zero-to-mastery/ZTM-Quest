@@ -9,7 +9,7 @@ const interactions = [
     enterMapCityInteraction,
     // Add more interactions here
 
-    interactionWithJessie
+    interactionWithJessie,
 
 
     // new interaction
