@@ -1,9 +1,9 @@
-import { displayDialogue } from '../../utils';
+
 import { npcInteractionHandler } from '../handler.interactions';
 
 import { conversationJessie, jessie } from '../../constants';
 
-export const interactionWithMisterFu = (player, k, map) => {
+export const interactionWithJessie = (player, k, map) => {
     player.onCollide('jessie', () => {
         player.isInDialog = true;
         
