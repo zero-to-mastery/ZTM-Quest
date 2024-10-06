@@ -3,62 +3,59 @@ import { displayDialogue } from '../../utils';
 export const interactionWithGameMachine2 = (player, k, map) => {
     player.onCollide('game_machine_2', () => {
         player.isInDialog = true;
-        // Trigger the custom prompt when the player collides with the game machine
         showCustomPrompt(
-            'Do you want to play the Chrome Dino Game?', // Updated Prompt message
-            ['Yes', 'No'], // Options for the game prompt
-            (selectedOption) => {
-                // Logic based on the selected option
-                if (selectedOption === 'Yes') {
-                    displayDialogue({
-                        k,
-                        player,
-                        text: ['Starting the Chrome Dino Game... Good luck!'],
-                        onDisplayEnd: () => {
-                            player.isInDialog = false;
-                            startChromeDinoGame(k); // Pass k to the game start function
-                        },
-                    });
-                } else {
-                    displayDialogue({
-                        k,
-                        player,
-                        text: ['Maybe next time!'],
-                        onDisplayEnd: () => {
-                            player.isInDialog = false;
-                        },
-                    });
-                }
-            }
+            'Do you want to play the Chrome Dino Game?',
+            ['Yes', 'No'],
+            (selectedOption) => handlePromptSelection(selectedOption, player, k)
         );
     });
 };
 
-function showCustomPrompt(message, options, callback) {
-    // Set the prompt message
-    document.getElementById('prompt-message').textContent = message;
+const handlePromptSelection = (selectedOption, player, k) => {
+    if (selectedOption === 'Yes') {
+        displayDialogue({
+            k,
+            player,
+            text: ['Starting the Chrome Dino Game... Good luck!'],
+            onDisplayEnd: () => {
+                player.isInDialog = false;
+                startChromeDinoGame(k);
+            },
+        });
+    } else {
+        displayDialogue({
+            k,
+            player,
+            text: ['Maybe next time!'],
+            onDisplayEnd: () => {
+                player.isInDialog = false;
+            },
+        });
+    }
+};
 
-    // Clear any existing options in the container
+const showCustomPrompt = (message, options, callback) => {
+    const promptMessage = document.getElementById('prompt-message');
     const optionsContainer = document.getElementById('options-container');
+    const customPrompt = document.getElementById('custom-prompt');
+
+    promptMessage.textContent = message;
     optionsContainer.innerHTML = '';
 
-    // Create buttons for each option
     options.forEach((option) => {
         const button = document.createElement('button');
         button.textContent = option;
         button.classList.add('option-btn');
-        button.setAttribute('tabindex', '0'); // Make the button focusable
+        button.setAttribute('tabindex', '0');
 
-        // Add click event for mouse interactions
-        button.onclick = function () {
+        button.onclick = () => {
             callback(option);
             closeCustomPrompt();
         };
 
-        // Add keyboard event listener for accessibility
-        button.addEventListener('keydown', function (e) {
+        button.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault(); // Prevent the default behavior
+                e.preventDefault();
                 callback(option);
                 closeCustomPrompt();
             }
@@ -67,23 +64,17 @@ function showCustomPrompt(message, options, callback) {
         optionsContainer.appendChild(button);
     });
 
-    // Display the custom prompt
-    document.getElementById('custom-prompt').style.display = 'flex';
-
-    // Set focus on the first button
+    customPrompt.style.display = 'flex';
     if (optionsContainer.children.length > 0) {
         optionsContainer.children[0].focus();
     }
-}
+};
 
-// Function to close the custom prompt
-function closeCustomPrompt() {
-    // Hide the custom prompt
+const closeCustomPrompt = () => {
     document.getElementById('custom-prompt').style.display = 'none';
-}
+};
 
-// Function to start the Chrome Dino Game
-function startChromeDinoGame(k) {
+const startChromeDinoGame = (k) => {
     k.debug.log('Chrome Dino Game started!');
-    // Here you can implement the logic to actually start the game
-}
+    // Implement the logic to actually start the game
+};
