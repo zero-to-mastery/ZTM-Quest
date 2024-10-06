@@ -16,7 +16,7 @@ export const interactionWithGameMachine2 = (player, k, map) => {
                         text: ['Starting the Chrome Dino Game... Good luck!'],
                         onDisplayEnd: () => {
                             player.isInDialog = false;
-                            startChromeDinoGame(); // Trigger the game start
+                            startChromeDinoGame(k); // Pass k to the game start function
                         },
                     });
                 } else {
@@ -82,8 +82,8 @@ function closeCustomPrompt() {
     document.getElementById('custom-prompt').style.display = 'none';
 }
 
-// Placeholder function for starting the Chrome Dino Game
-function startChromeDinoGame() {
-    console.log('Chrome Dino Game started!');
+// Function to start the Chrome Dino Game
+function startChromeDinoGame(k) {
+    k.debug.log('Chrome Dino Game started!');
     // Here you can implement the logic to actually start the game
 }
