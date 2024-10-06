@@ -1,12 +1,12 @@
 import { makePlayer } from '../factories/player.factory';
 import { initMap } from '../init/map.init';
 import { k } from '../kplayCtx';
-import { attachInteractions } from '../interactions/map_apartment';
-import { addGameObjects } from '../gameObjects/map_apartment';
+import { attachInteractions } from '../interactions/map_campus_house_1';
+import { addGameObjects } from '../gameObjects/map_campus_house_1';
 import { addPlayerControls } from '../player.controls';
 import { scaleFactor } from '../constants';
 
-k.scene('apartment', async (enter_tag) => {
+k.scene('campus_house_1', async (enter_tag) => {
     const objectConfig = {
         static: [
             'map_boundaries',
@@ -19,8 +19,8 @@ k.scene('apartment', async (enter_tag) => {
     const [map, spawnpoint] = await initMap(
         k,
         objectConfig,
-        './exports/maps/map_apartment.png',
-        './maps/map_apartment.json'
+        './exports/maps/map_campus_house_1.png',
+        './maps/map_campus_house_1.json'
     );
 
     const player = makePlayer({}, scaleFactor);
