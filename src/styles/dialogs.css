@@ -153,6 +153,11 @@
     font-size: 1.2rem;
 }
 
+#textbox:hover {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
 #textbox #dialog {
     overflow-y: auto;
     width: 100%;

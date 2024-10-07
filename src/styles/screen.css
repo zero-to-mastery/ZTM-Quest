@@ -51,6 +51,52 @@
     right: 0;
 }
 
+#note,
+#note-mobile {
+    flex-direction: column;
+    color: #fff;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+    font-size: 1.25rem;
+    line-height: 1.6;
+    background-color: black;
+    border-radius: 15px;
+    padding: 0.5rem 1rem;
+    opacity: 0;
+    animation: fadeIn 1s forwards 0.7s;
+}
+
+#note-mobile {
+    top: auto;
+    bottom: 2vh;
+    font-size: 1rem;
+}
+
+#interaction-note,
+#interaction-note-mobile {
+    position: absolute;
+    right: 5%;
+    top: 2vh;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    gap: 1rem;
+    color: #fff;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+    font-size: 1.25rem;
+    line-height: 1.6;
+    background-color: black;
+    border-radius: 15px;
+    padding: 0.5rem 1rem;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+#interaction-note-mobile {
+    bottom: 2vh;
+    top: auto;
+    font-size: 1rem;
+}
+
 .note {
     flex-direction: column;
     color: #fff;
@@ -59,7 +105,7 @@
     line-height: 1.6;
     opacity: 0;
     animation: fadeIn 1s forwards 0.7s;
-    padding: 25px;
+    padding: 15px;
 }
 
 .control-text-container {
@@ -76,6 +122,7 @@
     height: 120px;
     transform: rotate(10deg);
     margin: 20px 10px;
+    flex-shrink: 0;
 }
 
 .control-btn {
@@ -148,8 +195,14 @@
         padding: 5px;
     }
 
+    .footer-head-info {
+        display: flex;
+    }
+
     .control-text-container {
-        padding: 20px;
+        margin-top: 0;
+        color: white;
+        padding: 15px;
     }
 
     .control-btns {
@@ -170,5 +223,9 @@
 
     .dialogs-wrapper {
         height: calc(100% - 100px);
+    }
+
+    .note {
+        padding: 10px;
     }
 }

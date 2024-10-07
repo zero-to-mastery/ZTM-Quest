@@ -12,9 +12,8 @@
         <style>
             @font-face {
                 font-family: pixelifysans;
-                src: url(PixelifySans-VariableFont_wght.ttf);
+                src: url(./assets/fonts/PixelifySans-VariableFont_wght.ttf);
             }
-
             html,
             body {
                 overflow: hidden;
@@ -39,6 +38,15 @@
 
             .d-mobile-hide {
                 display: none;
+            }
+
+            .btn-container {
+                align-self: flex-end;
+                margin-top: 1rem;
+                display: flex;
+                gap: 0.6rem;
+                opacity: 0;
+                animation: fadeIn 1s forwards 0.6s;
             }
 
             @keyframes fadeIn {
@@ -80,12 +88,16 @@
             </div>
             <div id="right-panel" class="right"></div>
             <div id="footer" class="bottom">
-                <div class="control-btns d-desktop-hide">
-                    <div class="control-btn y">Y</div>
-                    <div class="control-btn z">Z</div>
-                    <div class="control-btn a">A</div>
-                    <div class="control-btn b">B</div>
+                <div class="footer-head-info">
+                    <div class="control-btns d-desktop-hide">
+                        <div class="control-btn y">Y</div>
+                        <div class="control-btn z">Z</div>
+                        <div class="control-btn a">A</div>
+                        <div class="control-btn b">B</div>
+                    </div>
+                    <div id="text-info"></div>
                 </div>
+
                 <div class="dialogs-wrapper">
                     <p id="dialog-text"></p>
                     <div id="custom-prompt" class="custom-prompt">

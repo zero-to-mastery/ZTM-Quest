@@ -1,6 +1,6 @@
 import { scaleFactor } from '../constants';
-import { setCamScale } from '../utils';
 let uiLoaded = false;
+import { setCamScale } from '../utils';
 
 export const initMap = async (
     k,
@@ -30,15 +30,23 @@ export const initMap = async (
             const app = document.getElementById('app');
             app.classList.add('loaded');
             const controlText = `
-                    <p id="controlNote" class="note">
+                    <p id="controlNote" class="d-mobile-hide note">
                         Tap/Click/&uarr;&darr;&larr;&rarr; around to move
-                    </p>`;
+                    </p>
+                    <p class="d-mobile-hide note">
+                        T - Interact with NPC/Object
+                    </p>
+                    <p class="d-desktop-hide">Tap to move around</p>
+                    <p class="d-desktop-hide">
+                        Tap to Interact
+                    </p>
+                    `;
             const div = document.createElement('div');
             div.classList.add('control-text-container');
             div.innerHTML = controlText;
             const matchesMobile = matchMedia('(max-width: 768px)');
             if (matchesMobile.matches) {
-                const footer = document.getElementById('footer');
+                const footer = document.getElementById('text-info');
                 footer.appendChild(div);
             } else {
                 const leftPanel = document.getElementById('left-panel');
