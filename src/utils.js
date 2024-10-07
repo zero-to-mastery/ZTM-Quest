@@ -136,13 +136,18 @@ export async function displayPermissionBox({
     });
 }
 
-export function setCamScale(k) {
+export function getCamScale(k) {
     const resizeFactor = k.width() / k.height();
     if (resizeFactor < 1) {
-        k.camScale(k.vec2(1));
+        return 1;
     } else {
-        k.camScale(k.vec2(1.5));
+        return 1.5;
     }
+}
+
+export function setCamScale(k) {
+    const scale = getCamScale(k);
+    k.camScale(k.vec2(scale));
 }
 
 // NOTE: sprite must be an npc not an object like mailbox

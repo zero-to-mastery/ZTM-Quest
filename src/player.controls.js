@@ -1,4 +1,6 @@
+import { scaleFactor } from './constants';
 import { animations, stopCharacterAnims } from './utils/animation';
+import { getCamScale } from './utils';
 
 // Manage multiple pressed buttons
 const pressed = new Set();
@@ -67,8 +69,49 @@ export const addPlayerControls = (k, player) => {
         player.move(moveDir.unit().scale(speed));
     });
 
+    const [map] = k.get('main_map');
+
+    k.onLoad(() => {
+        setInitCameraPosition();
+    });
+
+    function getBoundaries() {
+        return {
+            left: 0,
+            right: map.width * scaleFactor,
+            top: 0,
+            bottom: map.height * scaleFactor,
+        };
+    }
+
+    function updatePos({ k, x, y }) {
+        const camScale = getCamScale(k);
+        const boundaries = getBoundaries(k);
+        const halfHeightScreen = k.height() / 2 / camScale;
+        const halfWidthScreen = k.width() / 2 / camScale;
+        if (y + halfHeightScreen > boundaries.bottom) {
+            y = boundaries.bottom - halfHeightScreen;
+        } else if (y - halfHeightScreen < boundaries.top) {
+            y = boundaries.top + halfHeightScreen;
+        }
+
+        if (x + halfWidthScreen > boundaries.right) {
+            x = boundaries.right - halfWidthScreen;
+        } else if (x - halfWidthScreen < boundaries.left) {
+            x = boundaries.left + halfWidthScreen;
+        }
+
+        return [x, y];
+    }
+
+    function setInitCameraPosition() {
+        const updPos = updatePos({ k, ...player.pos });
+        k.camPos(...updPos);
+    }
+
     k.onUpdate(() => {
-        k.camPos(player.pos.x, player.pos.y + 100);
+        const updPos = updatePos({ k, ...player.pos });
+        k.camPos(...updPos);
     });
 
     k.onMouseDown((mouseBtn) => {
