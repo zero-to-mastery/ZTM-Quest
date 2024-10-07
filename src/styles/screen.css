@@ -10,34 +10,64 @@
 .left,
 .right {
     position: absolute;
-    background-color: rgba(0, 255, 255, 0.374);
+    background-color: #311047;
 }
 
 .top {
     top: 0;
     width: 100%;
+    height: 60px;
+    padding: 10px;
 }
 
 .bottom {
     bottom: 0;
     width: 100%;
+    height: 300px;
+
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.left,
+.right {
+    top: 60px;
+    bottom: 300px;
+    padding: 30px;
 }
 
 .left {
     width: 10%;
-    top: 0;
-    bottom: 0;
     left: 0;
 }
 
 .right {
     right: 0;
     width: 10%;
-    top: 0;
-    bottom: 0;
 }
 
-.top,
-.bottom {
-    height: 20%;
+.note {
+    flex-direction: column;
+    color: #fff;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+    font-size: 1rem;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeIn 1s forwards 0.7s;
+}
+
+.note span {
+    margin-bottom: 0.6rem;
+}
+
+@media (max-width: 768px) {
+    .left,
+    .right,
+    .bottom {
+        padding: 5px;
+    }
+
+    .control-text-container {
+        padding: 20px;
+    }
 }

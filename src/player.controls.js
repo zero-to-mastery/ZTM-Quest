@@ -70,27 +70,37 @@ export const addPlayerControls = (k, player) => {
     });
 
     const [map] = k.get('main_map');
+    const camScale = getCamScale(k);
 
-    k.onLoad(() => {
-        setInitCameraPosition();
-    });
+    const leftPanel = document.getElementById('left-panel');
+    const rightPanel = document.getElementById('right-panel');
+    const header = document.getElementById('header');
+    const footer = document.getElementById('footer');
+
+    const leftBounds = leftPanel.getBoundingClientRect();
+    const rightBounds = rightPanel.getBoundingClientRect();
+    const headerBounds = header.getBoundingClientRect();
+    const footerBounds = footer.getBoundingClientRect();
 
     function getBoundaries() {
         return {
-            left: 0,
-            right: map.width * scaleFactor,
-            top: 0,
-            bottom: map.height * scaleFactor,
+            left: -leftBounds.width / camScale,
+            right: map.width * scaleFactor + rightBounds.width / camScale,
+            top: -headerBounds.height / camScale,
+            bottom: map.height * scaleFactor + footerBounds.height / camScale,
         };
     }
 
     function updatePos({ k, x, y }) {
-        const camScale = getCamScale(k);
         const boundaries = getBoundaries(k);
         const halfHeightScreen = k.height() / 2 / camScale;
         const halfWidthScreen = k.width() / 2 / camScale;
         if (k.width() / camScale > boundaries.right) {
-            x = boundaries.right / 2;
+            const diff =
+                k.width() / camScale -
+                boundaries.right -
+                Math.abs(boundaries.left);
+            x = boundaries.left + halfWidthScreen - diff / 2;
         } else {
             if (x + halfWidthScreen > boundaries.right) {
                 x = boundaries.right - halfWidthScreen;
@@ -99,7 +109,11 @@ export const addPlayerControls = (k, player) => {
             }
         }
         if (k.height() / camScale > boundaries.bottom) {
-            y = boundaries.bottom / 2;
+            const diff =
+                k.height() / camScale -
+                boundaries.bottom -
+                Math.abs(boundaries.top);
+            y = boundaries.bottom - halfHeightScreen - diff / 2;
         } else {
             if (y + halfHeightScreen > boundaries.bottom) {
                 y = boundaries.bottom - halfHeightScreen;
@@ -109,11 +123,6 @@ export const addPlayerControls = (k, player) => {
         }
 
         return [x, y];
-    }
-
-    function setInitCameraPosition() {
-        const updPos = updatePos({ k, ...player.pos });
-        k.camPos(...updPos);
     }
 
     k.onUpdate(() => {

@@ -24,6 +24,7 @@ const processDialogue = async ({
             ? `<strong>${characterName}:</strong><br>${currentText}`
             : currentText;
         await new Promise((res) => {
+            dialog.scrollTop = dialog.scrollHeight;
             timeoutIds.push(setTimeout(res, 20));
         });
     }
@@ -58,6 +59,7 @@ export async function displayDialogue({
         abort = new AbortController();
         await new Promise((res) => {
             if (t === text[text.length - 1]) res(); // resolve on last text
+
             processDialogue({ dialog, text: t, characterName, abort });
 
             nextBtn.addEventListener('click', () => {
@@ -105,28 +107,33 @@ export async function displayPermissionBox({
     nextBtn.style.display = 'block';
     nextBtn.focus();
 
-    processDialogue({ dialog, text: text.join(' ') });
+    const abort = new AbortController();
+    processDialogue({ dialog, text: text.join(' '), abort });
 
     return new Promise((resolve) => {
         function onCloseBtnClick() {
             onDisplayEnd();
+            abort.abort();
             dialogUI.style.display = 'none';
             dialog.innerHTML = '';
             closeBtn.removeEventListener('click', onCloseBtnClick);
             nextBtn.removeEventListener('click', onNextBtnClick);
             closeBtn.innerHTML = 'Close';
             nextBtn.innerHTML = 'Next';
+            k.canvas.focus();
             resolve(false); // Resolve with false when "No" is clicked
         }
 
         function onNextBtnClick() {
             onDisplayEnd();
+            abort.abort();
             dialogUI.style.display = 'none';
             dialog.innerHTML = '';
             nextBtn.removeEventListener('click', onNextBtnClick);
             closeBtn.removeEventListener('click', onCloseBtnClick);
             closeBtn.innerHTML = 'Close';
             nextBtn.innerHTML = 'Next';
+            k.canvas.focus();
             resolve(true); // Resolve with true when "Yes" is clicked
         }
 

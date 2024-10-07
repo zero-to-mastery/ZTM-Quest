@@ -32,53 +32,6 @@
                 height: 100%;
                 position: relative;
             }
-            #custom-prompt {
-                display: none;
-                position: absolute;
-                left: 15%;
-                right: 15%;
-                bottom: 2vh;
-                background: #fff;
-                border-radius: 10px;
-                border: 2px solid #007bff;
-                padding: 1rem;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-                flex-direction: column;
-                align-items: flex-start;
-                word-spacing: 0.2rem;
-                z-index: 10; /* Ensure it's above other UI elements */
-            }
-
-            #textbox {
-                position: absolute;
-                left: 15%;
-                right: 15%;
-                bottom: 2vh;
-                min-height: 8vh;
-                background: #fff;
-                border-radius: 10px;
-                border: 2px solid #007bff;
-                outline: none;
-                padding: 1.5rem;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-                word-spacing: 0.2rem;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-                transition:
-                    box-shadow 0.3s ease,
-                    transform 0.3s ease,
-                    opacity 0.5s ease;
-                opacity: 0;
-                animation: fadeIn 0.8s forwards;
-                font-size: 1.2rem;
-            }
-
-            #textbox:hover {
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-                transform: translateY(-2px);
-            }
 
             .btn-container {
                 align-self: flex-end;
@@ -87,24 +40,6 @@
                 gap: 0.6rem;
                 opacity: 0;
                 animation: fadeIn 1s forwards 0.6s;
-            }
-
-            .note {
-                position: absolute;
-                left: 5%;
-                top: 2vh;
-                display: flex;
-                flex-direction: column;
-                color: #fff;
-                text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
-                font-size: 1rem;
-                line-height: 1.6;
-                opacity: 0;
-                animation: fadeIn 1s forwards 0.7s;
-            }
-
-            .note span {
-                margin-bottom: 0.6rem;
             }
 
             @keyframes fadeIn {
@@ -133,11 +68,12 @@
 
     <body>
         <div id="app">
-            <div>
-                <p class="note">
-                    Tap/Click/&uarr;&darr;&larr;&rarr; around to move
-                </p>
+            <canvas id="game"></canvas>
 
+            <div id="header" class="top"></div>
+            <div id="left-panel" class="left"></div>
+            <div id="right-panel" class="right"></div>
+            <div id="footer" class="bottom">
                 <p id="dialog-text"></p>
                 <div id="custom-prompt" class="custom-prompt">
                     <div class="prompt-content">
@@ -170,13 +106,6 @@
                     </div>
                 </div>
             </div>
-
-            <canvas id="game"></canvas>
-
-            <div class="top"></div>
-            <div class="left"></div>
-            <div class="right"></div>
-            <div class="bottom"></div>
         </div>
         <script type="module" src="src/main.js"></script>
     </body>

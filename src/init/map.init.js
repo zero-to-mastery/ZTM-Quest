@@ -1,5 +1,6 @@
 import { scaleFactor } from '../constants';
 import { setCamScale } from '../utils';
+let uiLoaded = false;
 
 export const initMap = async (
     k,
@@ -23,6 +24,27 @@ export const initMap = async (
         k.scale(scaleFactor),
         'main_map',
     ]);
+
+    k.onLoad(() => {
+        if (!uiLoaded) {
+            const controlText = `
+                    <p id="controlNote" class="note">
+                        Tap/Click/&uarr;&darr;&larr;&rarr; around to move
+                    </p>`;
+            const div = document.createElement('div');
+            div.classList.add('control-text-container');
+            div.innerHTML = controlText;
+            const matchesMobile = matchMedia('(max-width: 768px)');
+            if (matchesMobile.matches) {
+                const footer = document.getElementById('footer');
+                footer.appendChild(div);
+            } else {
+                const leftPanel = document.getElementById('left-panel');
+                leftPanel.appendChild(div);
+            }
+            uiLoaded = true;
+        }
+    });
 
     const spawnpointsCharacters = {};
 
