@@ -15,7 +15,7 @@ export function makeNpc(
         randomCharacter.frames;
 
     if (!k.getSprite(npcKey)) {
-        k.loadSprite(npcKey, './characters.png', {
+        k.loadSprite(npcKey, './assets/sprites/characters.png', {
             sliceX: 10,
             sliceY: 20,
             anims: {

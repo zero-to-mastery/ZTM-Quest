@@ -154,7 +154,7 @@ export const buildInteractionPrompt = (sprite, k) => {
     }
     const spritePos = sprite.pos;
 
-    k.loadSprite('question-bubble', './question-bubble.png', {
+    k.loadSprite('question-bubble', './assets/sprites/question-bubble.png', {
         sliceX: 8,
         sliceY: 1,
         anims: {
@@ -184,7 +184,10 @@ export const tearDownInteractionPrompt = (k) => {
     } else {
         document.getElementById('interaction-note').style.display = 'none';
     }
-    k.destroy(k.get('question-bubble')[0]);
+    
+    if(k.get('question-bubble')[0]) {
+        k.destroy(k.get('question-bubble')[0]);
+    }
 };
 
 export const initializeMovementPrompt = (k) => {

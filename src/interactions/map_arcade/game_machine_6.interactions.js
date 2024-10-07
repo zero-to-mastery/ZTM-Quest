@@ -99,7 +99,7 @@ function startChromeDinoGame(k) {
         k.setGravity(GRAVITY);
 
         //load a sprite name dino with run animation
-        k.loadSprite('dino', 'public/doux.png', {
+        k.loadSprite('dino', './assets/sprites/doux.png', {
             sliceX: 24,
             sliceY: 1,
             anims: {

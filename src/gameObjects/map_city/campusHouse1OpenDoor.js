@@ -1,7 +1,7 @@
 import { scaleFactor } from '../../constants';
 
 export const campusHouse1OpenDoor = (k, map, spawnpoints) => {
-    k.loadSprite('campusHouse1OpenDoor', './campus_house_door_1.png');
+    k.loadSprite('campusHouse1OpenDoor', './assets/sprites/campus_house_door_1.png');
 
     const [campusHouseDoor1] = map.query({ include: 'campus_house_door_1' });
 
