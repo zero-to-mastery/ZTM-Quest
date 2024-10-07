@@ -91,7 +91,6 @@ function startChromeDinoGame(k) {
     const JUMP_FORCE = 800;
     const SPEED = 480;
     const GRAVITY = 1600;
-    let trees = []; // Store references to trees
     let score = 0;
     // Set up the game scene
     k.scene('dinoGame', () => {
@@ -109,7 +108,7 @@ function startChromeDinoGame(k) {
         //add the dino to screen
         const dino = k.add([
             k.sprite('dino', { anim: 'run' }),
-            k.pos(10, k.height() - 300),
+            k.pos(40, k.height() - 350),
             k.area(),
             k.body(),
             k.scale(1),
@@ -117,6 +116,13 @@ function startChromeDinoGame(k) {
 
         //pressing the spacebar lets the dino jump
         k.onKeyPress('space', () => {
+            if (dino.isGrounded()) {
+                dino.jump(JUMP_FORCE);
+            }
+        });
+
+        //click screening will let dino jump
+        k.onClick(() => {
             if (dino.isGrounded()) {
                 dino.jump(JUMP_FORCE);
             }
@@ -132,10 +138,10 @@ function startChromeDinoGame(k) {
 
         //add platform
         const floor = k.add([
-            k.rect(k.width(), FLOOR_HEIGHT),
+            k.rect(k.width() + 100, FLOOR_HEIGHT),
             k.area(),
             k.outline(4),
-            k.pos(0, k.height() - 250),
+            k.pos(0, k.height() - 200),
             k.anchor('botleft'),
             k.body({ isStatic: true }),
             k.color(127, 200, 255),
@@ -147,23 +153,24 @@ function startChromeDinoGame(k) {
             const scaleFactor = k.width() / k.height();
             const width = k.width() / k.height() < 1 ? 0.5 : 1;
             const height = k.width() / k.height() < 1 ? 0.5 : 1;
-            const tree = k.add([
-                k.rect(48 * width, k.rand(48, 72) * height),
-                k.area(),
-                k.outline(4),
-                k.pos(k.width() - 10, k.height() - 300),
-                k.anchor('botleft'),
-                k.body(),
-                k.color(255, 180, 255),
-                k.move(k.LEFT, SPEED * scaleFactor + score / 10),
-                k.offscreen({ destroy: true }),
-                'tree',
-            ]);
-            trees.push(tree);
+
             k.wait(k.rand(1.5, 3), () => {
+                k.add([
+                    k.rect(48 * width, k.rand(48, 72) * height),
+                    k.area(),
+                    k.outline(4),
+                    k.pos(k.width(), k.height() - 300),
+                    k.anchor('botleft'),
+                    k.body(),
+                    k.color(255, 180, 255),
+                    k.move(k.LEFT, SPEED * scaleFactor + score / 10),
+                    k.offscreen({ destroy: true }),
+                    'tree',
+                ]);
                 spawnTree();
             });
         }
+
         spawnTree();
 
         //on hit show an animation and change scenes
