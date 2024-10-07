@@ -1,5 +1,4 @@
-import { scaleFactor } from '../../constants';
-import { displayDialogue } from '../../utils';
+import { displayDialogue, setCamScale } from '../../utils';
 
 export const interactionWithGameMachine6 = (player, k, map) => {
     player.onCollide('game_machine_6', () => {
@@ -92,12 +91,12 @@ function startChromeDinoGame(k) {
     const JUMP_FORCE = 800;
     const SPEED = 480;
     const GRAVITY = 1600;
-
+    let trees = []; // Store references to trees
+    let score = 0;
     // Set up the game scene
     k.scene('dinoGame', () => {
         //gravity for dino
         k.setGravity(GRAVITY);
-
         //load a sprite name dino with run animation
         k.loadSprite('dino', './assets/sprites/doux.png', {
             sliceX: 24,
@@ -110,10 +109,10 @@ function startChromeDinoGame(k) {
         //add the dino to screen
         const dino = k.add([
             k.sprite('dino', { anim: 'run' }),
-            k.pos(80, 200),
+            k.pos(10, k.height() - 300),
             k.area(),
             k.body(),
-            k.scale(scaleFactor),
+            k.scale(1),
         ]);
 
         //pressing the spacebar lets the dino jump
@@ -124,33 +123,39 @@ function startChromeDinoGame(k) {
         });
 
         //add platform
-        k.add([
+        const floor = k.add([
             k.rect(k.width(), FLOOR_HEIGHT),
+            k.area(),
+            k.outline(4),
             k.pos(0, k.height() - 250),
             k.anchor('botleft'),
-            k.outline(4),
-            k.area(),
             k.body({ isStatic: true }),
             k.color(127, 200, 255),
+            'floor',
         ]);
 
         //spawn trees with different heights at different intervals
         function spawnTree() {
-            k.add([
-                k.rect(48, k.rand(48, 72)),
+            const scaleFactor = k.width() / k.height();
+            const width = k.width() / k.height() < 1 ? 0.5 : 1;
+            const height = k.width() / k.height() < 1 ? 0.5 : 1;
+            const tree = k.add([
+                k.rect(48 * width, k.rand(48 * height, 72 * height)),
                 k.area(),
                 k.outline(4),
-                k.pos(k.width() - 10, k.height() - 500),
+                k.pos(k.width() - 10, k.height() - 300),
                 k.anchor('botleft'),
                 k.body(),
                 k.color(255, 180, 255),
-                k.move(k.LEFT, SPEED),
+                k.move(k.LEFT, SPEED * scaleFactor + score / 10),
+                k.offscreen({ destroy: true }),
                 'tree',
             ]);
-
+            trees.push(tree);
             k.wait(k.rand(1.5, 3), () => {
                 spawnTree();
             });
+            console.log(SPEED * scaleFactor + score / 10);
         }
         spawnTree();
 
@@ -162,12 +167,22 @@ function startChromeDinoGame(k) {
         });
 
         // keep track of score
-        let score = 0;
+
         const scoreLabel = k.add([k.text(score), k.pos(68, 100)]);
         // increment score every frame
         k.onUpdate(() => {
             score++;
             scoreLabel.text = score;
+        });
+        // Handle screen resize
+        k.onResize(() => {
+            const scaleFactor = k.width() / k.height();
+            if (scaleFactor < 1) {
+                dino.scaleTo(1);
+            } else {
+                dino.scaleTo(scaleFactor);
+            }
+            floor.width = k.width();
         });
     });
 
