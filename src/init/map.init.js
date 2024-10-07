@@ -33,12 +33,9 @@ export const initMap = async (
                     <p id="controlNote" class="d-mobile-hide note">
                         Tap/Click/&uarr;&darr;&larr;&rarr; around to move
                     </p>
-                    <p class="d-mobile-hide note">
-                        T - Interact with NPC/Object
-                    </p>
-                    <p class="d-desktop-hide">Tap to move around</p>
-                    <p class="d-desktop-hide">
-                        Tap to Interact
+                    <p class="d-desktop-hide note">Tap to move around</p>
+                    <p id="interaction-info" class='note' style='display: none'>
+                        ${k.isTouchscreen() ? 'Tap to Interact' : 'T - Interact with NPC/Object'}
                     </p>
                     `;
             const div = document.createElement('div');
