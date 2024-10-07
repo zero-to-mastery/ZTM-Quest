@@ -29,19 +29,20 @@ export const initMap = async (
         if (!uiLoaded) {
             const app = document.getElementById('app');
             app.classList.add('loaded');
+            const matchesMobile = matchMedia('(max-width: 768px)');
             const controlText = `
                     <p id="controlNote" class="d-mobile-hide note">
                         Tap/Click/&uarr;&darr;&larr;&rarr; around to move
                     </p>
                     <p class="d-desktop-hide note">Tap to move around</p>
                     <p id="interaction-info" class='note' style='display: none'>
-                        ${k.isTouchscreen() ? 'Tap to Interact' : 'T - Interact with NPC/Object'}
+                        ${matchesMobile.matches ? 'Tap to Interact' : 'T - Interact with NPC/Object'}
                     </p>
                     `;
             const div = document.createElement('div');
             div.classList.add('control-text-container');
             div.innerHTML = controlText;
-            const matchesMobile = matchMedia('(max-width: 768px)');
+
             if (matchesMobile.matches) {
                 const footer = document.getElementById('text-info');
                 footer.appendChild(div);
