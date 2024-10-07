@@ -29,8 +29,6 @@ const processDialogue = async ({
     }
 };
 
-// Seems to be a bug where when the canvas loses focus,
-// the keypress event listener is not triggered
 const slightPause = () => new Promise((res) => setTimeout(res, 500));
 
 export async function displayDialogue({
@@ -116,6 +114,7 @@ export async function displayPermissionBox({
             nextBtn.removeEventListener('click', onNextBtnClick);
             closeBtn.innerHTML = 'Close';
             nextBtn.innerHTML = 'Next';
+            k.canvas.focus();
             resolve(false); // Resolve with false when "No" is clicked
         }
 
@@ -127,6 +126,7 @@ export async function displayPermissionBox({
             closeBtn.removeEventListener('click', onCloseBtnClick);
             closeBtn.innerHTML = 'Close';
             nextBtn.innerHTML = 'Next';
+            k.canvas.focus();
             resolve(true); // Resolve with true when "Yes" is clicked
         }
 
