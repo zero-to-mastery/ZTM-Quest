@@ -1,14 +1,8 @@
 import { enterMapCityInteraction } from './enterMapCity.interactions';
-import { interactionWithGameMachine2 } from './game_machine_2.interactions';
-import { interactionWithGameMachine6 } from './game_machine_6.interactions';
 
 const interactions = [
-    enterMapCityInteraction,
     // Add more interactions here
-
-    // new interaction
-    interactionWithGameMachine2,
-    interactionWithGameMachine6,
+    enterMapCityInteraction,
 ];
 
 export const attachInteractions = (gameObj, k) => {

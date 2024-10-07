@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"map_city.json"
+        }
+    },
  "height":40,
  "infinite":false,
  "layers":[
@@ -508,7 +516,7 @@
          "name":"parking_lots",
          "opacity":1,
          "type":"group",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -927,7 +935,7 @@
                         }],
                  "opacity":1,
                  "type":"objectgroup",
-                 "visible":true,
+                 "visible":false,
                  "x":0,
                  "y":0
                 }, 
@@ -1196,7 +1204,7 @@
                         }],
                  "opacity":1,
                  "type":"objectgroup",
-                 "visible":true,
+                 "visible":false,
                  "x":0,
                  "y":0
                 }, 
@@ -1226,14 +1234,14 @@
                         }],
                  "opacity":1,
                  "type":"objectgroup",
-                 "visible":true,
+                 "visible":false,
                  "x":0,
                  "y":0
                 }],
          "name":"buildings",
          "opacity":1,
          "type":"group",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -1867,7 +1875,7 @@
          "name":"ztm_building",
          "opacity":1,
          "type":"group",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -1879,7 +1887,7 @@
                 {
                  "height":0,
                  "id":97,
-                 "name":"player",
+                 "name":"spawn_office_left",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -1891,14 +1899,62 @@
                 {
                  "height":0,
                  "id":460,
-                 "name":"enter_arcade",
+                 "name":"spawn_arcade",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":644.454545454545,
-                 "y":91.3636363636363
+                 "y":107
+                }, 
+                {
+                 "height":0,
+                 "id":461,
+                 "name":"spawn_top",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":560,
+                 "y":48
+                }, 
+                {
+                 "height":0,
+                 "id":462,
+                 "name":"spawn_right",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":932,
+                 "y":128
+                }, 
+                {
+                 "height":0,
+                 "id":463,
+                 "name":"spawn_left",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":32,
+                 "y":128
+                }, 
+                {
+                 "height":0,
+                 "id":464,
+                 "name":"spawn_office_right",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":576,
+                 "y":432
                 }],
          "opacity":1,
          "properties":[
@@ -3899,7 +3955,7 @@
                 {
                  "height":16.3863636363636,
                  "id":455,
-                 "name":"enter_map_start",
+                 "name":"enter_map_start_left",
                  "properties":[
                         {
                          "name":"goToDifferentMap",
@@ -3921,7 +3977,7 @@
                 {
                  "height":15.6590909090909,
                  "id":456,
-                 "name":"enter_map_start",
+                 "name":"enter_map_start_right",
                  "properties":[
                         {
                          "name":"goToDifferentMap",
@@ -3958,7 +4014,7 @@
          "y":0
         }],
  "nextlayerid":49,
- "nextobjectid":461,
+ "nextobjectid":465,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
