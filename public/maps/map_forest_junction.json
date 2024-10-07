@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"map_forest_junction.json"
+        }
+    },
  "height":20,
  "infinite":false,
  "layers":[
@@ -177,7 +185,7 @@
                  "visible":true,
                  "width":16,
                  "x":104,
-                 "y":104
+                 "y":102
                 }, 
                 {
                  "height":100,
@@ -220,7 +228,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -315,13 +323,13 @@
                 {
                  "height":8,
                  "id":142,
-                 "name":"interactive_tree",
+                 "name":"tree",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":108,
-                 "y":108
+                 "y":100
                 }, 
                 {
                  "height":4,
