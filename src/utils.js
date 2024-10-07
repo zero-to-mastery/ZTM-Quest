@@ -166,12 +166,6 @@ export function setCamScale(k) {
 
 // NOTE: sprite must be an npc not an object like mailbox
 export const buildInteractionPrompt = (sprite, k) => {
-    if (k.isTouchscreen()) {
-        document.getElementById('interaction-note-mobile').style.display =
-            'flex';
-    } else {
-        document.getElementById('interaction-note').style.display = 'flex';
-    }
     const spritePos = sprite.pos;
 
     k.loadSprite('question-bubble', './assets/sprites/question-bubble.png', {
