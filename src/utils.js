@@ -192,13 +192,6 @@ export const buildInteractionPrompt = (sprite, k) => {
 };
 
 export const tearDownInteractionPrompt = (k) => {
-    if (k.isTouchscreen()) {
-        document.getElementById('interaction-note-mobile').style.display =
-            'none';
-    } else {
-        document.getElementById('interaction-note').style.display = 'none';
-    }
-
     if (k.get('question-bubble')[0]) {
         k.destroy(k.get('question-bubble')[0]);
     }
