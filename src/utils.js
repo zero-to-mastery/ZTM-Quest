@@ -184,8 +184,8 @@ export const tearDownInteractionPrompt = (k) => {
     } else {
         document.getElementById('interaction-note').style.display = 'none';
     }
-    
-    if(k.get('question-bubble')[0]) {
+
+    if (k.get('question-bubble')[0]) {
         k.destroy(k.get('question-bubble')[0]);
     }
 };
