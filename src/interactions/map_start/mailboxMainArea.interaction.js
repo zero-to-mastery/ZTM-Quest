@@ -1,7 +1,6 @@
-import { displayDialogue } from '../../utils';
+import { displayDialogueWithoutCharacter } from '../../utils';
 
 export const getDummyText = () => {
-    // 0 to 10 (inclusive)
     const num = Math.floor(Math.random() * 11);
     if (num > 1) {
         return `You have ${num} messages in your mailbox`;
@@ -17,8 +16,13 @@ export const getDummyText = () => {
 export const interactionWithMainboxMainArea = (player, k, map) => {
     player.onCollide('mailbox_mainArea', () => {
         player.isInDialog = true;
-        displayDialogue(getDummyText(), () => {
-            player.isInDialog = false;
+        displayDialogueWithoutCharacter({
+            k,
+            player,
+            text: getDummyText(),
+            onDisplayEnd: () => {
+                player.isInDialog = false;
+            },
         });
     });
 };

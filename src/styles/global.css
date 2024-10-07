@@ -1,0 +1,6 @@
+@import url(./dialogs.css);
+
+button:focus {
+    box-shadow: 2px 3px 5px #8383af;
+    outline: 2px solid blue;
+}

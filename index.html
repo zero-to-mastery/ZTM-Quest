@@ -9,19 +9,21 @@
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>ZTM-Quest</title>
-    </head>
-
-    <body>
         <style>
             @font-face {
                 font-family: pixelifysans;
                 src: url(PixelifySans-VariableFont_wght.ttf);
             }
 
+            html, body {
+                overflow: hidden;
+                margin: 0;
+                padding: 0;
+            }
+
             body {
                 font-family: pixelifysans, monospace;
                 font-size: 2rem;
-                overflow: hidden;
             }
 
             #app {
@@ -29,69 +31,139 @@
                 height: 100%;
                 position: relative;
             }
+            #custom-prompt {
+                display: none;
+                position: absolute;
+                left: 15%;
+                right: 15%;
+                bottom: 2vh;
+                background: #fff;
+                border-radius: 10px;
+                border: 2px solid #007bff;
+                padding: 1rem;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                flex-direction: column;
+                align-items: flex-start;
+                word-spacing: 0.2rem;
+                z-index: 10; /* Ensure it's above other UI elements */
+            }
 
             #textbox {
                 position: absolute;
-                left: 10%;
-                right: 10%;
+                left: 15%;
+                right: 15%;
                 bottom: 2vh;
-                min-height: 10vh;
-                background: white;
-                border-radius: 3px;
-                outline-style: solid;
-                padding: 1rem;
+                min-height: 8vh;
+                background: #fff;
+                border-radius: 10px;
+                border: 2px solid #007bff;
+                outline: none;
+                padding: 1.5rem;
                 display: flex;
                 flex-direction: column;
-                flex-wrap: wrap;
                 justify-content: flex-start;
                 align-items: flex-start;
                 word-spacing: 0.2rem;
-                filter: drop-shadow(0 0 0.75rem rgb(112, 112, 112));
-                /* overflow: auto; */
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                transition:
+                    box-shadow 0.3s ease,
+                    transform 0.3s ease,
+                    opacity 0.5s ease;
+                opacity: 0;
+                animation: fadeIn 0.8s forwards;
+                font-size: 1.2rem;
             }
 
-            .ui-text {
-                margin: 0;
-                user-select: none;
+            #textbox:hover {
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+                transform: translateY(-2px);
             }
-
-            .ui-close-btn,
-            .ui-next-btn {
-                font-family: pixelifysans, monospace;
-                border-style: none;
-                border-radius: 3px;
-                padding: 1rem;
-                font-size: inherit;
-            }
-
+            
             .btn-container {
                 align-self: flex-end;
                 margin-top: 1rem;
+                display: flex;
+                gap: 0.6rem;
+                opacity: 0;
+                animation: fadeIn 1s forwards 0.6s;
             }
 
             .note {
                 position: absolute;
                 left: 5%;
-                top: 1vh;
+                top: 2vh;
                 display: flex;
                 flex-direction: column;
-                color: rgb(238, 238, 238);
+                color: #aaa;
+                font-size: 1rem;
+                line-height: 1.6;
+                opacity: 0;
+                animation: fadeIn 1s forwards 0.7s;
+            }
+
+            .note span {
+                margin-bottom: 0.6rem;
+            }
+
+            @keyframes fadeIn {
+                0% {
+                    opacity: 0;
+                }
+
+                100% {
+                    opacity: 1;
+                }
+            }
+
+            @keyframes slideIn {
+                0% {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
             }
         </style>
+    </head>
+
+    <body>
         <div id="app">
             <div>
                 <p class="note">
                     Tap/Click/&uarr;&darr;&larr;&rarr; around to move
                 </p>
 
+                <p id="dialogue-text"></p>
+                <div id="custom-prompt" class="custom-prompt">
+                    <div class="prompt-content">
+                        <p id="prompt-message"></p>
+                        <div
+                            id="options-container"
+                            class="options-container"
+                        ></div>
+                    </div>
+                </div>
                 <div id="textbox-container" style="display: none">
                     <div id="textbox">
                         <p id="dialogue" class="ui-text"></p>
                         <div class="btn-container">
-                            <button id="close" class="ui-close-btn">
+                            <button
+                                id="close"
+                                class="ui-close-btn"
+                                aria-label="Close dialog"
+                            >
                                 Close
                             </button>
-                            <button id="next" class="ui-next-btn">Next</button>
+                            <button
+                                id="next"
+                                class="ui-next-btn"
+                                aria-label="Next dialog"
+                            >
+                                Next
+                            </button>
                         </div>
                     </div>
                 </div>
