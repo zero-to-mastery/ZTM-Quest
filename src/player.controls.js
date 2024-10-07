@@ -89,16 +89,23 @@ export const addPlayerControls = (k, player) => {
         const boundaries = getBoundaries(k);
         const halfHeightScreen = k.height() / 2 / camScale;
         const halfWidthScreen = k.width() / 2 / camScale;
-        if (y + halfHeightScreen > boundaries.bottom) {
-            y = boundaries.bottom - halfHeightScreen;
-        } else if (y - halfHeightScreen < boundaries.top) {
-            y = boundaries.top + halfHeightScreen;
+        if (k.width() / camScale > boundaries.right) {
+            x = boundaries.right / 2;
+        } else {
+            if (x + halfWidthScreen > boundaries.right) {
+                x = boundaries.right - halfWidthScreen;
+            } else if (x - halfWidthScreen < boundaries.left) {
+                x = boundaries.left + halfWidthScreen;
+            }
         }
-
-        if (x + halfWidthScreen > boundaries.right) {
-            x = boundaries.right - halfWidthScreen;
-        } else if (x - halfWidthScreen < boundaries.left) {
-            x = boundaries.left + halfWidthScreen;
+        if (k.height() / camScale > boundaries.bottom) {
+            y = boundaries.bottom / 2;
+        } else {
+            if (y + halfHeightScreen > boundaries.bottom) {
+                y = boundaries.bottom - halfHeightScreen;
+            } else if (y - halfHeightScreen < boundaries.top) {
+                y = boundaries.top + halfHeightScreen;
+            }
         }
 
         return [x, y];
