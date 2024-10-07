@@ -158,7 +158,7 @@ export const buildInteractionPrompt = (sprite, k) => {
         sliceX: 8,
         sliceY: 1,
         anims: {
-            'float': {
+            float: {
                 from: 0,
                 to: 7,
             },

@@ -22,9 +22,7 @@ export const interactionHandler = (
             keyHandler.cancel();
         }
         console.log(sprite);
-        clickHandler = k.onClick(`${sprite.tags[0]}`, () =>
-            handleOnCollide()
-        );
+        clickHandler = k.onClick(`${sprite.tags[0]}`, () => handleOnCollide());
         keyHandler = k.onKeyPress('t', () => handleOnCollide());
     });
 
