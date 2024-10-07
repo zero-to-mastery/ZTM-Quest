@@ -17,3 +17,24 @@ p {
 h2 {
     margin: 0.5rem 0;
 }
+
+.loaded .d-mobile-hide {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+    .loaded .d-mobile-hide {
+        display: none;
+    }
+
+    .loaded .d-desktop-hide {
+        display: block;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+}

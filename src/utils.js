@@ -85,7 +85,10 @@ export async function displayDialogue({
     closeBtn.addEventListener('click', onCloseBtnClick);
 
     addEventListener('keydown', (key) => {
-        if (['Enter', 'Escape'].includes(key.code)) closeBtn.click();
+        if (key.code === 'Enter') {
+            document.activeElement.click();
+        }
+        if (key.code === 'Escape') closeBtn.click();
     });
     k.triggerEvent('dialog-displayed', { player, characterName, text });
 }
@@ -139,6 +142,12 @@ export async function displayPermissionBox({
 
         nextBtn.addEventListener('click', onNextBtnClick);
         closeBtn.addEventListener('click', onCloseBtnClick);
+        addEventListener('keydown', (key) => {
+            if (key.code === 'Enter') {
+                document.activeElement.click();
+            }
+            if (key.code === 'Escape') closeBtn.click();
+        });
         k.triggerEvent('dialog-displayed', { player, text });
     });
 }

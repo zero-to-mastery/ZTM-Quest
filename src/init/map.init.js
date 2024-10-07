@@ -27,6 +27,8 @@ export const initMap = async (
 
     k.onLoad(() => {
         if (!uiLoaded) {
+            const app = document.getElementById('app');
+            app.classList.add('loaded');
             const controlText = `
                     <p id="controlNote" class="note">
                         Tap/Click/&uarr;&darr;&larr;&rarr; around to move

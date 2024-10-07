@@ -93,13 +93,14 @@ export const addPlayerControls = (k, player) => {
 
     function updatePos({ k, x, y }) {
         const boundaries = getBoundaries(k);
+
         const halfHeightScreen = k.height() / 2 / camScale;
         const halfWidthScreen = k.width() / 2 / camScale;
-        if (k.width() / camScale > boundaries.right) {
-            const diff =
-                k.width() / camScale -
-                boundaries.right -
-                Math.abs(boundaries.left);
+        const mapW = boundaries.right + Math.abs(boundaries.left);
+        const mapH = boundaries.bottom + Math.abs(boundaries.top);
+
+        if (k.width() / camScale > mapW) {
+            const diff = k.width() / camScale - mapW;
             x = boundaries.left + halfWidthScreen - diff / 2;
         } else {
             if (x + halfWidthScreen > boundaries.right) {
@@ -108,17 +109,26 @@ export const addPlayerControls = (k, player) => {
                 x = boundaries.left + halfWidthScreen;
             }
         }
-        if (k.height() / camScale > boundaries.bottom) {
-            const diff =
-                k.height() / camScale -
-                boundaries.bottom -
-                Math.abs(boundaries.top);
+
+        if (k.height() / camScale > mapH) {
+            const diff = k.height() / camScale - mapH;
             y = boundaries.bottom - halfHeightScreen - diff / 2;
         } else {
-            if (y + halfHeightScreen > boundaries.bottom) {
+            const hViewPort =
+                (k.height() - footerBounds.height - headerBounds.height) /
+                camScale;
+
+            const dy =
+                halfHeightScreen -
+                (k.height() - footerBounds.height) / camScale +
+                hViewPort / 2;
+
+            if (y + halfHeightScreen + dy > boundaries.bottom) {
                 y = boundaries.bottom - halfHeightScreen;
-            } else if (y - halfHeightScreen < boundaries.top) {
+            } else if (y - halfHeightScreen + dy < boundaries.top) {
                 y = boundaries.top + halfHeightScreen;
+            } else {
+                y += dy;
             }
         }
 
