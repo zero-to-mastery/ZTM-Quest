@@ -2,16 +2,16 @@ import { displayDialogue } from '../../utils';
 import { interactionHandler } from '../handler.interactions';
 
 const treeDialogue = [
-    "You see a mix of vibrant colors—daisies, tulips, and a few flowers you can't quite recognize. A small bee buzzes lazily between the blooms.\nThere's something almost magical about the way these flowers grow…",
+    "The tree's bark is rough to the touch, grooves etched deep into its surface. You notice some carvings—initials of people who must have visited here long ago."
 ];
 
-export const interactionWithFlowers = (player, k, map) => {
-    interactionHandler(player, 'flowers', k, () => {
+export const interactionWithTree = (player, k, map) => {
+    interactionHandler(player, 'tree', k, () => {
         player.isInDialog = true;
         displayDialogue({
             k,
             player,
-            characterName: 'flowers',
+            characterName: 'tree',
             text: treeDialogue,
             onDisplayEnd: () => {
                 player.isInDialog = false;
