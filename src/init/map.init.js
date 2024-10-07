@@ -1,5 +1,5 @@
 import { scaleFactor } from '../constants';
-import { setCamScale } from '../utils';
+import { initializeMovementPrompt, setCamScale } from '../utils';
 
 export const initMap = async (
     k,
@@ -11,19 +11,19 @@ export const initMap = async (
     k.loadSprite('map', pathToMapPng);
     k.setBackground(k.Color.fromHex('#311047'));
     setCamScale(k);
-
+    
     const mapData = await (await fetch(pathToMapJson)).json();
     const { layers } = mapData;
-
+    
     shapeOffset = shapeOffset || k.vec2(0, 0);
-
+    
     const map = k.make([
         k.sprite('map'),
         k.pos(0),
         k.scale(scaleFactor),
         'main_map',
     ]);
-
+    
     const spawnpointsCharacters = {};
 
     for (const layer of layers) {
@@ -98,5 +98,6 @@ export const initMap = async (
         }
     }
 
+    initializeMovementPrompt(k);
     return [map, spawnpointsCharacters];
 };

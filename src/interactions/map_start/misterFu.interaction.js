@@ -1,11 +1,10 @@
 import { displayDialogue } from '../../utils';
-import { npcInteractionHandler } from '../handler.interactions';
+import { interactionHandler } from '../handler.interactions';
 
 import { conversationMisterFu, misterFu } from '../../constants';
 
 export const interactionWithMisterFu = (player, k, map) => {
-    player.onCollide('misterFu', () => {
-        npcInteractionHandler(player, misterFu.name, k, () => {
+        interactionHandler(player, misterFu.name, k, () => {
             player.isInDialog = true;
             displayDialogue({
                 k,
@@ -18,5 +17,4 @@ export const interactionWithMisterFu = (player, k, map) => {
                 },
             });
         });
-    });
 };

@@ -1,8 +1,8 @@
 import { displayDialogue } from '../../utils';
-import { npcInteractionHandler } from '../handler.interactions';
+import { interactionHandler } from '../handler.interactions';
 
 export const interactionWithJokeTeller = (player, k, map) => {
-    npcInteractionHandler(player, 'jokeTellerNpc', k, async () => {
+    interactionHandler(player, 'jokeTellerNpc', k, async () => {
         player.isInDialogue = true;
         try {
             const response = await fetch(
