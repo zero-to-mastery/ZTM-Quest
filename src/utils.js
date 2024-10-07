@@ -1,4 +1,9 @@
-const processDialogue = async ({ dialog, text, characterName, abort = null }) => {
+const processDialogue = async ({
+    dialog,
+    text,
+    characterName,
+    abort = null,
+}) => {
     let currentText = '';
     const timeoutIds = [];
 
@@ -33,7 +38,7 @@ export async function displayDialogue({
     player,
     characterName,
     text,
-    onDisplayEnd = () => { },
+    onDisplayEnd = () => {},
 }) {
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
@@ -57,7 +62,7 @@ export async function displayDialogue({
 
             nextBtn.addEventListener('click', () => {
                 abort.abort();
-                res()
+                res();
             });
         });
     }
@@ -87,7 +92,7 @@ export async function displayPermissionBox({
     k,
     player,
     text,
-    onDisplayEnd = () => { },
+    onDisplayEnd = () => {},
 }) {
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
