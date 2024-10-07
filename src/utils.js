@@ -151,7 +151,7 @@ export function setCamScale(k) {
 // const spritePos = sprite.pos;
 
 // const actionModal = k.add([
-//     k.rect(20, 20),
+//     k.sprite('action-modal'),
 //     k.area(),
 //     k.color(255, 255, 255),
 //     k.outline(2, k.Color.BLACK),
@@ -172,18 +172,46 @@ export function setCamScale(k) {
 // return { actionModal, actionLabel };
 // }
 
-export const buildInteractionPrompt = (k) => {
-    k.isTouchscreen()
-        ? (document.getElementById('interaction-note-mobile').style.display =
-              'flex')
-        : (document.getElementById('interaction-note').style.display = 'flex');
+export const buildInteractionPrompt = (sprite, k) => {
+    if (k.isTouchscreen()) {
+        document.getElementById('interaction-note-mobile').style.display =
+            'flex';
+    } else {
+        document.getElementById('interaction-note').style.display = 'flex';
+    }
+    const spritePos = sprite.pos;
+
+    k.loadSprite('question-bubble', './question-bubble.png', {
+        sliceX: 8,
+        sliceY: 1,
+        anims: {
+            'float': {
+                from: 0,
+                to: 7,
+            },
+        },
+    });
+
+    k.add([
+        k.sprite('question-bubble', { anim: 'float' }),
+        k.animate([0, 1, 2, 3, 4, 5, 6, 7]),
+        k.area(),
+        k.color(255, 255, 255),
+        k.outline(2, k.Color.BLACK),
+        k.pos(spritePos.x + 5, spritePos.y - sprite.height - 20),
+        k.layer('ui'),
+        `question-bubble`,
+    ]);
 };
 
 export const tearDownInteractionPrompt = (k) => {
-    k.isTouchscreen()
-        ? (document.getElementById('interaction-note-mobile').style.display =
-              'none')
-        : (document.getElementById('interaction-note').style.display = 'none');
+    if (k.isTouchscreen()) {
+        document.getElementById('interaction-note-mobile').style.display =
+            'none';
+    } else {
+        document.getElementById('interaction-note').style.display = 'none';
+    }
+    k.destroy(k.get('question-bubble')[0]);
 };
 
 export const initializeMovementPrompt = (k) => {

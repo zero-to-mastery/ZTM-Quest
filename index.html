@@ -32,6 +32,7 @@
                 height: 100%;
                 position: relative;
             }
+            
             #custom-prompt {
                 display: none;
                 position: absolute;
@@ -93,12 +94,15 @@
                 position: absolute;
                 left: 5%;
                 top: 2vh;
-                display: flex;
+                /* display: flex; */
                 flex-direction: column;
                 color: #fff;
                 text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
-                font-size: 1rem;
+                font-size: 1.25rem;
                 line-height: 1.6;
+                background-color: black;
+                border-radius: 15px;
+                padding: 0.5rem 1rem;
                 opacity: 0;
                 animation: fadeIn 1s forwards 0.7s;
             }
@@ -106,9 +110,7 @@
             #note-mobile {
                 top: auto;
                 bottom: 2vh;
-                background-color: rgba(0, 0, 0, 0.25);
-                padding: 0.25rem 0.5rem;
-                border-radius: 15px;
+                font-size: 1rem;
             }
 
             #interaction-note, #interaction-note-mobile {
@@ -121,8 +123,11 @@
                 gap: 1rem;
                 color: #fff;
                 text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
-                font-size: 1rem;
+                font-size: 1.25rem;
                 line-height: 1.6;
+                background-color: black;
+                border-radius: 15px;
+                padding: 0.5rem 1rem;
                 opacity: 0;
                 animation: fadeIn 0.5s forwards;
             }
@@ -130,9 +135,8 @@
             #interaction-note-mobile {
                 bottom: 2vh;
                 top:auto;
-                background-color: rgba(0, 0, 0, 0.25);
-                padding: 0.25rem 0.5rem;
-                border-radius: 15px;
+                font-size: 1rem;
+
             }
 
             @keyframes fadeIn {

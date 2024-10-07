@@ -12,7 +12,7 @@ export const interactionHandler = (
 
     player.onCollide(target, (sprite) => {
         // Builds Interaction prompt in right hand of screen
-        buildInteractionPrompt(k);
+        buildInteractionPrompt(sprite, k);
 
         function handleOnCollide() {
             // Tears down interaction prompt in right hand of screen
