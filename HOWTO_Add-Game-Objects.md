@@ -29,7 +29,7 @@ In order to add new game objects to a map, you have to follow the following file
 import { scaleFactor } from '../../constants';
 
 export const something = (k, map, spawnpoints) => {
-  k.loadSprite('something', './something.png', {
+  k.loadSprite('something', './assets/sprites/something.png', {
         sliceX: 9,
         sliceY: 1,
         anims: {

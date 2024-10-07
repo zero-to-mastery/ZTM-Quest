@@ -1,6 +1,6 @@
-import { buildActionModal } from '../utils';
+import { buildInteractionPrompt, tearDownInteractionPrompt } from '../utils';
 
-export const npcInteractionHandler = (
+export const interactionHandler = (
     player,
     target,
     k,
@@ -8,28 +8,28 @@ export const npcInteractionHandler = (
     onCollideEnd
 ) => {
     let keyHandler;
-    player.onCollide(target, (sprite) => {
-        // Display the modal prompting the user to press 't'
-        const { actionModal, actionLabel } = buildActionModal(sprite, k);
+    let clickHandler;
 
-        keyHandler = k.onKeyPress('t', () => {
-            k.destroy(actionModal);
-            k.destroy(actionLabel);
+    player.onCollide(target, (sprite) => {
+        // Builds Interaction prompt in right hand of screen
+        buildInteractionPrompt(sprite, k);
+
+        function handleOnCollide() {
+            // Tears down interaction prompt in right hand of screen
+            tearDownInteractionPrompt(k);
             onCollide();
+            clickHandler.cancel();
             keyHandler.cancel();
-        });
+        }
+        console.log(sprite);
+        clickHandler = k.onClick(`${sprite.tags[0]}`, () => handleOnCollide());
+        keyHandler = k.onKeyPress('t', () => handleOnCollide());
     });
 
-    player.onCollideEnd(target, () => {
-        const [actionModal] = k.get('action-modal');
-        const [actionLabel] = k.get('action-label');
-        if (actionModal) {
-            actionModal.destroy();
-        }
-        if (actionLabel) {
-            actionLabel.destroy();
-        }
+    player.onCollideEnd(target, (sprite) => {
+        tearDownInteractionPrompt(k);
 
+        clickHandler.cancel();
         keyHandler.cancel();
 
         if (onCollideEnd) {

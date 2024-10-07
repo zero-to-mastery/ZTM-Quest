@@ -7,6 +7,8 @@ import { computer } from './computer.gameObject';
 import { misterFu } from './misterFu.gameObject';
 
 import { jokeTellerNPC } from './jokeTellerNPC.gameObject';
+import { tvVideo } from './tv_main_room_video.gameObject';
+import { randNpcsOnRestroomSinkCounch } from './randNpcsOnRestroomSinkCounch.gameObject';
 
 const gameObjects = [
     bruno,
@@ -16,7 +18,9 @@ const gameObjects = [
     cake,
     jokeTellerNPC,
     // Add more game objects here
+    randNpcsOnRestroomSinkCounch,
     misterFu,
+    tvVideo,
 ];
 
 export const addGameObjects = (k, map, spawnpoints) => {

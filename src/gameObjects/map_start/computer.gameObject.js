@@ -1,7 +1,7 @@
 import { scaleFactor } from '../../constants';
 
 export const computer = (k, map, spawnpoints) => {
-    k.loadSprite('computer', './laptop.png', {
+    k.loadSprite('computer', './assets/sprites/laptop.png', {
         sliceX: 4,
         sliceY: 4,
         anims: {
@@ -20,6 +20,7 @@ export const computer = (k, map, spawnpoints) => {
             (tableRoom1.pos.y + 30) * scaleFactor
         ),
         k.body({ isStatic: true }),
+        k.offscreen({ hide: true, distance: 10 }),
         'computer',
     ]);
 };

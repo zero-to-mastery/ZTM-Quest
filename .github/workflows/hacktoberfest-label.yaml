@@ -1,0 +1,33 @@
+name: Hacktoberfest Label
+
+on:
+  pull_request_target:
+    types:
+      - opened
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  addLabel:
+    name: Hacktoberfest Label
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if it's October
+        id: check_month
+        run: |
+          month=$(date -d "${{ github.event.pull_request.created_at }}" +%m)
+          echo "isoctober=$( [ "$month" -eq 10 ] && echo true || echo false )" >> $GITHUB_OUTPUT
+      - name: Add Hacktberfest labels
+        uses: actions/github-script@v7
+        if: steps.check_month.outputs.isoctober == 'true'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['hacktoberfest-accepted']
+            })
