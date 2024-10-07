@@ -21,7 +21,6 @@ k.scene('forest', async (enter_tag) => {
         objectConfig,
         './exports/maps/map_forest.png',
         './maps/map_forest.json',
-        k.vec2(0, 11)
     );
 
     const gameState = getGameState();
