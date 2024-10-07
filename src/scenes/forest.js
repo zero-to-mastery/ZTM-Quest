@@ -20,7 +20,7 @@ k.scene('forest', async (enter_tag) => {
         k,
         objectConfig,
         './exports/maps/map_forest.png',
-        './maps/map_forest.json',
+        './maps/map_forest.json'
     );
 
     const gameState = getGameState();

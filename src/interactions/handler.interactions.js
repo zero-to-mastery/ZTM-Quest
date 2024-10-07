@@ -9,7 +9,7 @@ export const interactionHandler = (
 ) => {
     let keyHandler;
     let clickHandler;
-    
+
     player.onCollide(target, (sprite) => {
         // Builds Interaction prompt in right hand of screen
         buildInteractionPrompt(sprite, k);
