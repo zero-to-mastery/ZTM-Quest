@@ -1,5 +1,5 @@
 import { scaleFactor } from '../constants';
-import { setCamScale } from '../utils';
+import { initializeMovementPrompt, setCamScale } from '../utils';
 
 export const initMap = async (
     k,
@@ -98,5 +98,6 @@ export const initMap = async (
         }
     }
 
+    initializeMovementPrompt(k);
     return [map, spawnpointsCharacters];
 };

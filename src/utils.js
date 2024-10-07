@@ -145,28 +145,60 @@ export function setCamScale(k) {
     }
 }
 
-// NOTE: sprite must be an npc not an object like mailbox
-export function buildActionModal(sprite, k) {
+export const buildInteractionPrompt = (sprite, k) => {
+    if (k.isTouchscreen()) {
+        document.getElementById('interaction-note-mobile').style.display =
+            'flex';
+    } else {
+        document.getElementById('interaction-note').style.display = 'flex';
+    }
     const spritePos = sprite.pos;
 
-    const actionModal = k.add([
-        k.rect(20, 20),
+    k.loadSprite('question-bubble', './assets/sprites/question-bubble.png', {
+        sliceX: 8,
+        sliceY: 1,
+        anims: {
+            float: {
+                from: 0,
+                to: 7,
+            },
+        },
+    });
+
+    k.add([
+        k.sprite('question-bubble', { anim: 'float' }),
+        k.animate([0, 1, 2, 3, 4, 5, 6, 7]),
         k.area(),
         k.color(255, 255, 255),
         k.outline(2, k.Color.BLACK),
-        k.pos(spritePos.x - 10, spritePos.y - sprite.height - 30),
+        k.pos(spritePos.x + 5, spritePos.y - sprite.height - 20),
         k.layer('ui'),
-        `action-modal-${sprite.tags[0]}`,
-        // k.offscreen({ hide: true, pause: true })
+        `question-bubble`,
     ]);
+};
 
-    const actionLabel = k.add([
-        k.text('t', { size: 16, align: 'center' }),
-        k.color(0, 0, 0),
-        k.pos(actionModal.pos.x + 5, actionModal.pos.y + 4),
-        `action-label-${sprite.tags[0]}`,
-        //k.offscreen({ hide: true, pause: true })
-    ]);
+export const tearDownInteractionPrompt = (k) => {
+    if (k.isTouchscreen()) {
+        document.getElementById('interaction-note-mobile').style.display =
+            'none';
+    } else {
+        document.getElementById('interaction-note').style.display = 'none';
+    }
 
-    return { actionModal, actionLabel };
-}
+    if (k.get('question-bubble')[0]) {
+        k.destroy(k.get('question-bubble')[0]);
+    }
+};
+
+export const initializeMovementPrompt = (k) => {
+    if (k.isTouchscreen()) {
+        document.getElementById('note-mobile').style.display = 'flex';
+        document.getElementById('note').style.display = 'none';
+        document.getElementById('interaction-note').style.display = 'none';
+    } else {
+        document.getElementById('note').style.display = 'flex';
+        document.getElementById('note-mobile').style.display = 'none';
+        document.getElementById('interaction-note-mobile').style.display =
+            'none';
+    }
+};
