@@ -29,3 +29,5 @@ https://adriccustoms.itch.io/little-bits-office
 
 https://opengameart.org/content/lpc-forest-tiles 
 By users Sharm, Hyptosis, Johann C, Beast, William. Thompsonj, & Reemax | Assets made by Lanea Zimmerman, Tuomo Untinen, Manuel Riecke
+
+https://arks.itch.io/dino-characters @ScissorMarks
