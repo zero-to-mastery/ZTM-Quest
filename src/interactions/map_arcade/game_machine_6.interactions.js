@@ -1,4 +1,4 @@
-import { displayDialogue, setCamScale } from '../../utils';
+import { displayDialogue } from '../../utils';
 
 export const interactionWithGameMachine6 = (player, k, map) => {
     player.onCollide('game_machine_6', () => {
@@ -122,6 +122,14 @@ function startChromeDinoGame(k) {
             }
         });
 
+        //pressing the esc lets player leave game
+        k.onKeyPress('escape', () =>
+            import('../../scenes/arcade').then((_) => {
+                k.setGravity(0);
+                k.go('arcade');
+            })
+        );
+
         //add platform
         const floor = k.add([
             k.rect(k.width(), FLOOR_HEIGHT),
@@ -140,7 +148,7 @@ function startChromeDinoGame(k) {
             const width = k.width() / k.height() < 1 ? 0.5 : 1;
             const height = k.width() / k.height() < 1 ? 0.5 : 1;
             const tree = k.add([
-                k.rect(48 * width, k.rand(48 * height, 72 * height)),
+                k.rect(48 * width, k.rand(48, 72) * height),
                 k.area(),
                 k.outline(4),
                 k.pos(k.width() - 10, k.height() - 300),
@@ -155,7 +163,6 @@ function startChromeDinoGame(k) {
             k.wait(k.rand(1.5, 3), () => {
                 spawnTree();
             });
-            console.log(SPEED * scaleFactor + score / 10);
         }
         spawnTree();
 
@@ -199,18 +206,34 @@ function startChromeDinoGame(k) {
             k.anchor('center'),
         ]);
 
-        // go back to game with space is pressed
-        k.onKeyPress('space', () =>
+        // Add "Play Again" button
+        const playAgainButton = k.add([
+            k.text('Play Again'),
+            k.pos(k.width() / 2, k.height() / 2 + 140),
+            k.scale(1),
+            k.area(),
+            k.anchor('center'),
+        ]);
+
+        // Add "Play Again" button
+        const exitButton = k.add([
+            k.text('Exit'),
+            k.pos(k.width() / 2, k.height() / 2 + 200),
+            k.scale(1),
+            k.area(),
+            k.anchor('center'),
+        ]);
+
+        // When the button is clicked or space is pressed, restart the game
+        playAgainButton.onClick(() => {
+            startChromeDinoGame(k); // Restart the game
+        });
+
+        exitButton.onClick(() => {
             import('../../scenes/arcade').then((_) => {
                 k.go('arcade');
-            })
-        );
-        k.onClick(() =>
-            import('../../scenes/arcade').then((_) => {
-                k.go('arcade');
-            })
-        );
-        k.setGravity(0);
+            });
+        });
     });
 
     // Start the game scene
