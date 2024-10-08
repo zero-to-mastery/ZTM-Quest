@@ -35,3 +35,7 @@ https://arks.itch.io/dino-characters @ScissorMarks
 https://mixkit.co/free-sound-effects/game/
 
 https://www.nicepng.com/
+
+https://skalding.itch.io/free-tree-pack-001
+
+https://axulart.itch.io/dirt-and-grass-2d-platform-tileset
