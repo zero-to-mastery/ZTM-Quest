@@ -4,7 +4,7 @@ import { getGameState, setGameState } from '../utils/gameState';
 
 export function makePlayer(playerProps = {}, customScale = scaleFactor) {
     if (!k.getSprite('player')) {
-        k.loadSprite('player', './characters.png', {
+        k.loadSprite('player', './assets/sprites/characters.png', {
             sliceX: 10,
             sliceY: 20,
             anims: {
@@ -25,7 +25,7 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
         const [idleDown, walkDown, idleSide, walkSide, idleUp, walkUp] =
             chosenCharacter.frames;
 
-        k.loadSprite('player', './characters.png', {
+        k.loadSprite('player', './assets/sprites/characters.png', {
             sliceX: 10,
             sliceY: 20,
             anims: {

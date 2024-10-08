@@ -1,6 +1,7 @@
 import { enterMapCityInteraction } from './enterMapCity.interactions';
 import { interactionWithGameMachine8 } from './game_machine_8';
 import { interactionWithGameMachine2 } from './game_machine_2.interactions';
+import { interactionWithGameMachine4 } from './game_machine_4.interactions';
 import { interactionWithGameMachine6 } from './game_machine_6.interactions';
 
 const interactions = [
@@ -9,6 +10,7 @@ const interactions = [
 
     // new interaction
     interactionWithGameMachine2,
+    interactionWithGameMachine4,
     interactionWithGameMachine6,
     interactionWithGameMachine8,
 ];
