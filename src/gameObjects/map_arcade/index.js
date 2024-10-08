@@ -1,6 +1,11 @@
 import { coins } from './coins.gameObjects';
+import { npcsInArcadeMap } from './npcsOnmap';
 
-const gameObjects = [coins];
+const gameObjects = [
+    npcsInArcadeMap,
+    coins,
+    // Add more game objects here
+];
 
 export const addGameObjects = (k, map, spawnpoints) => {
     return gameObjects.reduce((gameObjAcc, cb) => {
