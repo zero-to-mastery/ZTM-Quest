@@ -1,5 +1,6 @@
+import { enterMap } from '../../core/kaplay/game/scene';
 import { displayPermissionBox } from '../../utils';
-export const enterMapStartLeftInteraction = (player, k) => {
+export const enterMapStartLeftInteraction = (player, k, map) => {
     player.onCollide('enter_map_start_left', async () => {
         player.isInDialog = true;
         let granted = await displayPermissionBox({
@@ -13,9 +14,7 @@ export const enterMapStartLeftInteraction = (player, k) => {
             },
         });
         if (granted) {
-            import('../../scenes/start').then((_) => {
-                k.go('start', 'spawn_left');
-            });
+            enterMap('./scenes/start', 'start', 'spawn_left');
         }
     });
 };
