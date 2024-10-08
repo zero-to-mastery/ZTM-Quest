@@ -1,9 +1,8 @@
-<<<<<<< HEAD
+
 import { jessie } from "./jessie.gameObject";
 
-=======
 import { npcsInArcadeMap } from './npcsOnmap';
->>>>>>> bda3a537a25f7769dd8bc32aa5975f9ed7303af0
+
 const gameObjects = [
     npcsInArcadeMap,
     // Add more game objects here
