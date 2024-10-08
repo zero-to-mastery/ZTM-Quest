@@ -21,6 +21,7 @@ export const initMap = async (
         k.sprite('map'),
         k.pos(0),
         k.scale(scaleFactor),
+        k.z(0),
         'main_map',
     ]);
 
