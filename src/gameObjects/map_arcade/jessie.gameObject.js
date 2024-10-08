@@ -1,7 +1,7 @@
 import { scaleFactor } from '../../constants';
 
 export const jessie = (k, map, spawnpoints) => {
-    k.loadSprite('jessie', './characters.png', {
+    k.loadSprite('jessie', './assets/sprites/characters.png', {
         sliceX: 10,
         sliceY: 20,
         anims: {
