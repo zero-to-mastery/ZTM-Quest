@@ -1,6 +1,7 @@
 :root {
     --header-height: 60px;
     --footer-height: 300px;
+    --side-panels-width: 10%;
 }
 
 #screen {
@@ -39,7 +40,7 @@
     top: var(--header-height);
     bottom: var(--footer-height);
     padding: 5px;
-    width: 10%;
+    width: var(--side-panels-width);
     min-width: 140px;
 }
 
@@ -133,53 +134,36 @@
     padding: 5px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px) or (orientation: landscape) {
     :root {
-        --header-height: 40px;
+        --footer-height: auto;
     }
-
-    .left,
-    .right {
-        min-width: auto;
-    }
-
+    .top,
     .left,
     .right,
-    .bottom {
-        padding: 5px;
+    #footer .control-btns {
+        display: none;
     }
-
-    .footer-head-info {
-        display: flex;
-    }
-
     .control-text-container {
-        margin-top: 0;
-        color: white;
+        margin: 0;
+    }
+
+    #footer {
         padding: 15px;
     }
 
-    .control-btns {
-        width: 80px;
-        height: 80px;
-        margin: 10px;
-    }
-
-    .control-btn {
-        width: 28px;
-        height: 28px;
-        font-size: 18px;
-    }
-
-    #header {
-        height: 40px;
-    }
-
-    .dialogs-wrapper {
-        height: calc(100% - 100px);
+    #textbox {
+        max-height: 250px;
     }
 
     .note {
-        padding: 0px;
+        padding: 5px;
+        margin: 0;
+    }
+
+    .dialogs-wrapper {
+        padding: 0;
+        box-shadow: none;
+        border: none;
     }
 }

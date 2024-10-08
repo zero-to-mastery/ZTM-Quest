@@ -112,7 +112,7 @@ export const addPlayerControls = (k, player) => {
 
         if (k.height() / camScale > mapH) {
             const diff = k.height() / camScale - mapH;
-            y = boundaries.bottom - halfHeightScreen - diff / 2;
+            y = boundaries.bottom - halfHeightScreen + diff / 2;
         } else {
             const hViewPort =
                 (k.height() - footerBounds.height - headerBounds.height) /

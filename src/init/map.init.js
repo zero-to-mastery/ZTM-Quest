@@ -29,7 +29,9 @@ export const initMap = async (
         if (!uiLoaded) {
             const app = document.getElementById('app');
             app.classList.add('loaded');
-            const matchesMobile = matchMedia('(max-width: 768px)');
+            const matchesMobile = matchMedia(
+                '(max-width: 768px) or (orientation: landscape)'
+            );
             const controlText = `
                     <p id="controlNote" class="d-mobile-hide note">
                         Tap/Click/&uarr;&darr;&larr;&rarr; around to move
