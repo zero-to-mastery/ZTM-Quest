@@ -91,3 +91,9 @@ With each added map, you will also find object screenshots to identify objects w
     <img src="./map_forest_junction/objects_map_forest_junction_5.png" height="300" width="400">
     <figcaption>Spawn Points</figcaption>
 </figure>
+
+## Player House (map_campus_house_1)
+<figure>
+    <img src="./map_campus_house_1/map_campus_house_1.png" height="300" width="400">
+    <figcaption>Interactive Objects</figcaption>
+</figure>

@@ -1,7 +1,7 @@
 export const scaleFactor = 2;
 export const speedByScaleFactor = 65 * scaleFactor;
 
-// ./characters.png sprites
+// ./assets/sprites/characters.png sprites
 export const characters = [
     { name: 'stuart', frames: [0, 4, 2, 8, 1, 6] },
     { name: 'frank', frames: [10, 14, 12, 18, 11, 16] },

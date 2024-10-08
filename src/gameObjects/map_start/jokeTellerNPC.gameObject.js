@@ -4,7 +4,7 @@ const duke = characters[4];
 const [idleDown, walkDown, idleSide, walkSide, idleUp, walkUp] = duke.frames;
 
 export const jokeTellerNPC = (k, map, spawnpoints) => {
-    k.loadSprite('jokeTeller', './characters.png', {
+    k.loadSprite('jokeTeller', './assets/sprites/characters.png', {
         sliceX: 10,
         sliceY: 20,
         anims: {
