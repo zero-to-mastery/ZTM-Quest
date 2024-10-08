@@ -87,11 +87,12 @@ function startChromeDinoGame(k) {
     k.debug.log('Chrome Dino Game started!');
 
     //variables for different things in the game
-    const FLOOR_HEIGHT = 48;
+    const scaleFactor = (k.width() / k.height()) * 2;
     const JUMP_FORCE = 800;
     const SPEED = 480;
     const GRAVITY = 1600;
     let score = 0;
+
     // Set up the game scene
     k.scene('dinoGame', () => {
         //gravity for dino
@@ -105,13 +106,21 @@ function startChromeDinoGame(k) {
             },
         });
 
+        k.loadSprite('tree1', './assets/sprites/tree001.png');
+        k.loadSprite('tree2', './assets/sprites/tree002.png');
+        k.loadSprite('tree3', './assets/sprites/tree003.png');
+        k.loadSprite('tree4', './assets/sprites/tree004.png');
+        k.loadSprite('floor_sprite', './assets/sprites/dino_floor.png');
+        // Set up the parallax background
+        const { cloud1, cloud2, cloud3 } = setupParallaxBackground(k);
+
         //add the dino to screen
         const dino = k.add([
             k.sprite('dino', { anim: 'run' }),
             k.pos(40, k.height() - 350),
             k.area(),
             k.body(),
-            k.scale(1),
+            k.scale(scaleFactor),
         ]);
 
         //pressing the spacebar lets the dino jump
@@ -138,40 +147,42 @@ function startChromeDinoGame(k) {
 
         //add platform
         const floor = k.add([
-            k.rect(k.width() + 100, FLOOR_HEIGHT),
+            k.sprite('floor_sprite'),
             k.area(),
-            k.outline(4),
-            k.pos(0, k.height() - 200),
+            k.pos(0, k.height() - 100),
             k.anchor('botleft'),
             k.body({ isStatic: true }),
-            k.color(127, 200, 255),
-            'floor',
+            k.scale(3, 3),
         ]);
 
+        const treeSprites = ['tree1', 'tree2', 'tree3', 'tree4'];
         //spawn trees with different heights at different intervals
         function spawnTree() {
+            // Array of tree sprite names
+
             const scaleFactor = k.width() / k.height();
-            const width = k.width() / k.height() < 1 ? 0.5 : 1;
-            const height = k.width() / k.height() < 1 ? 0.5 : 1;
+            const randomHeight = k.rand(2, 6); // Random height for trees
+            // Randomly choose a tree sprite
+            const randomTreeSprite =
+                treeSprites[Math.floor(Math.random() * treeSprites.length)];
 
             k.wait(k.rand(1.5, 3), () => {
                 k.add([
-                    k.rect(48 * width, k.rand(48, 72) * height),
+                    k.sprite(randomTreeSprite),
                     k.area(),
-                    k.outline(4),
-                    k.pos(k.width(), k.height() - 300),
+                    k.pos(k.width() + 100, k.height() - 300),
                     k.anchor('botleft'),
                     k.body(),
-                    k.color(255, 180, 255),
                     k.move(k.LEFT, SPEED * scaleFactor + score / 10),
                     k.offscreen({ destroy: true }),
+                    k.scale(scaleFactor * 2, scaleFactor * (randomHeight / 2)), // Scale height randomly
                     'tree',
                 ]);
                 spawnTree();
             });
         }
 
-        spawnTree();
+        spawnTree(k, SPEED, score);
 
         //on hit show an animation and change scenes
         dino.onCollide('tree', () => {
@@ -180,21 +191,54 @@ function startChromeDinoGame(k) {
             k.go('lose', score); // go to "lose" scene here
         });
 
-        // keep track of score
+        const SPEEDS = {
+            far: 0.2, // Speed for the far background
+            mid: 0.3, // Speed for the mid background
+            near: 0.4, // Speed for the near background
+        };
 
+        // Variables to track direction
+        const direction = {
+            cloud1: 1, // 1 for moving left, -1 for moving right
+            cloud2: 1,
+            cloud3: 1,
+        };
+
+        // Function to move backgrounds back and forth
+        function updateBackgrounds(cloud1, cloud2, cloud3) {
+            // Move backgrounds based on direction
+            cloud1.pos.x -= SPEEDS.far * direction.cloud1;
+            cloud2.pos.x -= SPEEDS.mid * direction.cloud2;
+            cloud3.pos.x -= SPEEDS.near * direction.cloud3;
+
+            // Check if clouds need to reverse direction
+            if (cloud1.pos.x <= -k.width() || cloud1.pos.x >= 0) {
+                direction.cloud1 *= -1; // Reverse direction
+            }
+            if (cloud2.pos.x <= -k.width() || cloud2.pos.x >= 0) {
+                direction.cloud2 *= -1; // Reverse direction
+            }
+            if (cloud3.pos.x <= -k.width() || cloud3.pos.x >= 0) {
+                direction.cloud3 *= -1; // Reverse direction
+            }
+        }
+
+        // keep track of score
         const scoreLabel = k.add([k.text(score), k.pos(68, 100)]);
         // increment score every frame
         k.onUpdate(() => {
             score++;
             scoreLabel.text = score;
+            updateBackgrounds(cloud1, cloud2, cloud3);
         });
+
         // Handle screen resize
         k.onResize(() => {
             const scaleFactor = k.width() / k.height();
             if (scaleFactor < 1) {
                 dino.scaleTo(1);
             } else {
-                dino.scaleTo(scaleFactor);
+                dino.scaleTo(scaleFactor * 2);
             }
             floor.width = k.width();
         });
@@ -245,4 +289,37 @@ function startChromeDinoGame(k) {
 
     // Start the game scene
     k.go('dinoGame');
+}
+
+// Function to set up the parallax background
+function setupParallaxBackground(k) {
+    k.loadSprite('cloud1', './assets/sprites/cloud1.png'); // Background layer 1
+    k.loadSprite('cloud2', './assets/sprites/cloud2.png'); // Background layer 2
+    k.loadSprite('cloud3', './assets/sprites/cloud3.png'); // Background layer 3
+
+    // Far background (slowest)
+    const cloud1 = k.add([
+        k.sprite('cloud1'),
+        k.pos(-10, -10), // Adjust the Y position as necessary
+        k.scale(4, 2), // Scale to your needs
+        k.layer('bg'), // Optional: add to a specific layer
+    ]);
+
+    // Mid background (medium speed)
+    const cloud2 = k.add([
+        k.sprite('cloud2'),
+        k.pos(-10, -10),
+        k.scale(4, 2),
+        k.layer('bg'),
+    ]);
+
+    // Near background (fastest)
+    const cloud3 = k.add([
+        k.sprite('cloud3'),
+        k.pos(-10, -10),
+        k.scale(4, 2),
+        k.layer('bg'),
+    ]);
+
+    return { cloud1, cloud2, cloud3 };
 }
