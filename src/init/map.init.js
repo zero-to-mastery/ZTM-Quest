@@ -30,7 +30,7 @@ export const initMap = async (
             const app = document.getElementById('app');
             app.classList.add('loaded');
             const matchesMobile = matchMedia(
-                '(max-width: 768px) or (orientation: landscape)'
+                '(max-width: 768px), (max-width: 900px) and (orientation: landscape)'
             );
             const controlText = `
                     <p id="controlNote" class="d-mobile-hide note">
