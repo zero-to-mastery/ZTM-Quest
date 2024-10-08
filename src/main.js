@@ -1,14 +1,15 @@
 import { k } from './kplayCtx';
 
 import './scenes/start';
-import './scenes/forest_junction';
-import './scenes/arcade';
 import { setCamScale } from './utils';
 import './styles/global.css';
+import { clearImportCache } from './utils/imports-cache.storage';
 
 k.onResize(() => {
     setCamScale(k);
 });
+
+clearImportCache();
 
 k.go('start');
 // To test different maps instead of going through each and every scene to get to yours,
