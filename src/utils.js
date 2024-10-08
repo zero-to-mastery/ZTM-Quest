@@ -1,3 +1,5 @@
+import { scaleFactor } from './constants';
+
 const processDialogue = async ({
     dialog,
     text,
@@ -36,7 +38,7 @@ export async function displayDialogue({
     player,
     characterName,
     text,
-    onDisplayEnd = () => {},
+    onDisplayEnd = () => { },
 }) {
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
@@ -90,7 +92,7 @@ export async function displayPermissionBox({
     k,
     player,
     text,
-    onDisplayEnd = () => {},
+    onDisplayEnd = () => { },
 }) {
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
@@ -141,7 +143,7 @@ export function setCamScale(k) {
     if (resizeFactor < 1) {
         k.camScale(k.vec2(1));
     } else {
-        k.camScale(k.vec2(1.5));
+        k.camScale(k.vec2(scaleFactor));
     }
 }
 
