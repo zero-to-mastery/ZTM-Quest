@@ -84,6 +84,7 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
         k.anchor('center'),
         k.pos(),
         k.scale(customScale),
+        k.z(1),
         {
             speed: speedByScaleFactor,
             direction: 'down',
@@ -93,6 +94,7 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
             state: state,
             changePlayer,
         },
+        'player'
     ]);
 
     return player;
