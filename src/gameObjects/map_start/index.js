@@ -9,6 +9,7 @@ import { misterFu } from './misterFu.gameObject';
 import { jokeTellerNPC } from './jokeTellerNPC.gameObject';
 import { tvVideo } from './tv_main_room_video.gameObject';
 import { randNpcsOnRestroomSinkCounch } from './randNpcsOnRestroomSinkCounch.gameObject';
+import {coins} from './coins.gameObject'
 
 const gameObjects = [
     bruno,
@@ -21,6 +22,7 @@ const gameObjects = [
     randNpcsOnRestroomSinkCounch,
     misterFu,
     tvVideo,
+    coins,
 ];
 
 export const addGameObjects = (k, map, spawnpoints) => {

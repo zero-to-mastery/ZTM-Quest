@@ -25,7 +25,7 @@ export const initMap = async (
     ]);
 
     const spawnpointsCharacters = {};
-
+    
     for (const layer of layers) {
         const isStaticObject = objectConfig.static.includes(layer.name);
         const isInteractionObject = objectConfig.interactionObjects.includes(

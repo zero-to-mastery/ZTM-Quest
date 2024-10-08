@@ -11,6 +11,7 @@ import {
     snackBarStreetInteraction,
 } from './snackBars.interactions';
 import { stall1Interaction, stall2Interaction } from './stalls.interaction';
+import { collectCoins } from './collectCoins.interactions'
 
 const interactions = [
     enterMapArcadeInteraction,
@@ -26,6 +27,7 @@ const interactions = [
     stall2Interaction,
     // Add more interactions here
     enterMapCampusHouse1Interaction,
+    collectCoins,
 ];
 
 export const attachInteractions = (gameObj, k) => {

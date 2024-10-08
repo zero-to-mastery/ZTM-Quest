@@ -3,6 +3,7 @@ import { enterMapForestInteraction } from './enterMapForest.interactions';
 import { interactionWithFlowers } from './flowers.interactions';
 import { interactionWithTree } from './tree.interactions';
 import { interactionWithMushroom } from './mushroom.interactions';
+import {collectCoins } from './collectCoins.interactions'
 
 const interactions = [
     enterMapCityInteraction,
@@ -11,6 +12,7 @@ const interactions = [
     interactionWithTree,
     interactionWithFlowers,
     interactionWithMushroom,
+    collectCoins,
 ];
 
 export const attachInteractions = (gameObj, k) => {

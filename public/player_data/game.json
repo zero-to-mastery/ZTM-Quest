@@ -1,0 +1,11 @@
+{
+    "player": {
+        "hasTalkedToBruno": false,
+        "wasInRestroom": false,
+        "hasHandsWashed": false,
+        "backpack": {
+
+        },
+        "hasBackpack": false
+    }
+}

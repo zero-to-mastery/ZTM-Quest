@@ -1,5 +1,7 @@
+import {coins} from './coins.gameObjects'
+
 const gameObjects = [
-    // Add more game objects here
+    coins
 ];
 
 export const addGameObjects = (k, map, spawnpoints) => {

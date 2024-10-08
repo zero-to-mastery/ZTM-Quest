@@ -59,7 +59,7 @@
                  "name":"streets",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -110,7 +110,7 @@
                  "name":"side_walks",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -134,7 +134,7 @@
                         }],
                  "opacity":1,
                  "type":"objectgroup",
-                 "visible":true,
+                 "visible":false,
                  "x":0,
                  "y":0
                 }, 
@@ -184,7 +184,7 @@
                  "name":"street_objects",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -192,7 +192,7 @@
          "name":"street_global",
          "opacity":1,
          "type":"group",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -242,7 +242,7 @@
          "name":"parks",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":60,
          "x":0,
          "y":0
@@ -293,7 +293,7 @@
          "name":"objects_parks",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":60,
          "x":0,
          "y":0
@@ -347,7 +347,7 @@
                  "name":"objects_parking_lots",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -398,7 +398,7 @@
                  "name":"parking_lots",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -458,7 +458,7 @@
                         }],
                  "opacity":1,
                  "type":"objectgroup",
-                 "visible":true,
+                 "visible":false,
                  "x":0,
                  "y":0
                 }, 
@@ -508,7 +508,7 @@
                  "name":"cars_parking_lots",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -569,7 +569,7 @@
                  "name":"building_2",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -620,7 +620,7 @@
                  "name":"objects_building_2",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -671,7 +671,7 @@
                  "name":"building_1",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -722,7 +722,7 @@
                  "name":"objects_building_1",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -773,7 +773,7 @@
                  "name":"buildings_ztm_campus",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -824,7 +824,7 @@
                  "name":"objects_ztm_campus",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -875,7 +875,7 @@
                  "name":"building_arcade",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -985,7 +985,7 @@
                  "name":"building_burger_stalls",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -1036,7 +1036,7 @@
                  "name":"buildings_appartments",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -1294,7 +1294,7 @@
                  "name":"building_ztm",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -1345,7 +1345,7 @@
                  "name":"logo_building_ztm",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -1396,7 +1396,7 @@
                  "name":"objects_building_ztm",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -1576,7 +1576,7 @@
                         }],
                  "opacity":1,
                  "type":"objectgroup",
-                 "visible":true,
+                 "visible":false,
                  "x":0,
                  "y":0
                 }, 
@@ -1607,7 +1607,7 @@
                  "offsety":-1.66666666666663,
                  "opacity":1,
                  "type":"objectgroup",
-                 "visible":true,
+                 "visible":false,
                  "x":0,
                  "y":0
                 }, 
@@ -1638,7 +1638,7 @@
                  "offsety":-1.66666666666663,
                  "opacity":1,
                  "type":"objectgroup",
-                 "visible":true,
+                 "visible":false,
                  "x":0,
                  "y":0
                 }, 
@@ -1817,7 +1817,7 @@
                         }],
                  "opacity":1,
                  "type":"objectgroup",
-                 "visible":true,
+                 "visible":false,
                  "x":0,
                  "y":0
                 }, 
@@ -1867,7 +1867,7 @@
                  "name":"lights",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":60,
                  "x":0,
                  "y":0
@@ -3018,6 +3018,50 @@
                  "width":8.625,
                  "x":754.829545454545,
                  "y":116.481227272727
+                }, 
+                {
+                 "height":16,
+                 "id":470,
+                 "name":"coin",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":912,
+                 "y":576
+                }, 
+                {
+                 "height":16,
+                 "id":471,
+                 "name":"coin",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":304,
+                 "y":560
+                }, 
+                {
+                 "height":16,
+                 "id":472,
+                 "name":"coin",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":864,
+                 "y":320
+                }, 
+                {
+                 "height":16,
+                 "id":473,
+                 "name":"coin",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":96,
+                 "y":32
                 }],
          "opacity":1,
          "properties":[
@@ -3027,7 +3071,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -3605,7 +3649,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -3754,7 +3798,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -3848,7 +3892,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -4009,12 +4053,12 @@
                  "value":false
                 }],
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],
  "nextlayerid":49,
- "nextobjectid":465,
+ "nextobjectid":474,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
