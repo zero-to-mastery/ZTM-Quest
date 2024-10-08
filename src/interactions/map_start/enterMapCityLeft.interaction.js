@@ -1,14 +1,14 @@
 import { displayDialogue } from '../../utils';
 
-export const enterMapCityInteraction = (player, k, map) => {
-    player.onCollide('enter_map_right', () => {
+export const enterMapCityLeftInteraction = (player, k, map) => {
+    player.onCollide('enter_map_left', () => {
         if (
             player.state.hasTalkedToBruno &&
             player.state.wasInRestroom &&
             player.state.hasHandsWashed
         ) {
             import('../../scenes/city').then((_) => {
-                k.go('city');
+                k.go('city', 'spawn_office_left');
             });
         } else {
             if (!player.state.hasTalkedToBruno) {

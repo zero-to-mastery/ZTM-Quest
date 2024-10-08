@@ -7,14 +7,93 @@ With each added map, you will also find object screenshots to identify objects w
 
 ## Start map (map_start)
 
-![global map objects](./map_start/objects_map_start_1.png)
-![chairs in map start](./map_start/objects_chairs_map_start.png)
+
+<figure>
+    <img src="./map_start/objects_map_start_1.png" height="300" width="400">
+    <figcaption>Interactive Objects</figcaption>
+</figure>
+
+<figure>
+    <img src="./map_start/objects_chairs_map_start.png" height="300" width="400">
+    <figcaption>Chair Objects</figcaption>
+</figure>
 
 ## City (map_city)
-![map section 1 objects](./map_city/objects_map_city_1.png)
-![map section 2 objects](./map_city/objects_map_city_2.png)
-![map section 3 objects](./map_city/objects_map_city_3.png)
-![map section 4 (enter new maps) objects](./map_city/objects_map_city_4.png)
+
+<figure>
+    <img src="./map_city/objects_map_city_1.png" height="300" width="400">
+    <figcaption>Section 1 Objects</figcaption>
+</figure>
+<figure>
+    <img src="./map_city/objects_map_city_2.png" height="300" width="400">
+    <figcaption>Section 2 Objects</figcaption>
+</figure>
+<figure>
+    <img src="./map_city/objects_map_city_3.png" height="300" width="400">
+    <figcaption>Section 3 Objects</figcaption>
+</figure>
+<figure>
+    <img src="./map_city/objects_map_city_4.png" height="300" width="400">
+    <figcaption>Section 4 Objects</figcaption>
+</figure>
+
 
 ## Arcade (map_arcade)
-![map section 1 objects](./map_arcade/objects_map_arcade_1.png)
+
+<figure>
+    <img src="./map_arcade/objects_map_arcade_1.png" height="300" width="400">
+    <figcaption>Interactive Objects</figcaption>
+</figure>
+
+## Forest (map_forest)
+
+<figure>
+    <img src="./map_forest/objects_map_forest_1.png" height="300" width="400">
+    <figcaption>Interactive Objects</figcaption>
+</figure>
+<figure>
+    <img src="./map_forest/objects_map_forest_2.png" height="300" width="400">
+    <figcaption>Building Boundaries</figcaption>
+</figure>
+<figure>
+    <img src="./map_forest/objects_map_forest_3.png" height="300" width="400">
+    <figcaption>Map Boundaries</figcaption>
+</figure>
+<figure>
+    <img src="./map_forest/objects_map_forest_4.png" height="300" width="400">
+    <figcaption>Enter Map Boundaries</figcaption>
+</figure>
+<figure>
+    <img src="./map_forest/objects_map_forest_5.png" height="300" width="400">
+    <figcaption>Spawn Points</figcaption>
+</figure>
+
+
+## Forest Junction (map_forest_junction)
+
+<figure>
+    <img src="./map_forest_junction/objects_map_forest_junction_1.png" height="300" width="400">
+    <figcaption>Interactive Objects</figcaption>
+</figure>
+<figure>
+    <img src="./map_forest_junction/objects_map_forest_junction_2.png" height="300" width="400">
+    <figcaption>Building Boundaries</figcaption>
+</figure>
+<figure>
+    <img src="./map_forest_junction/objects_map_forest_junction_3.png" height="300" width="400">
+    <figcaption>Map Boundaries</figcaption>
+</figure>
+<figure>
+    <img src="./map_forest_junction/objects_map_forest_junction_4.png" height="300" width="400">
+    <figcaption>Enter Map Boundaries</figcaption>
+</figure>
+<figure>
+    <img src="./map_forest_junction/objects_map_forest_junction_5.png" height="300" width="400">
+    <figcaption>Spawn Points</figcaption>
+</figure>
+
+## Player House (map_campus_house_1)
+<figure>
+    <img src="./map_campus_house_1/map_campus_house_1.png" height="300" width="400">
+    <figcaption>Interactive Objects</figcaption>
+</figure>

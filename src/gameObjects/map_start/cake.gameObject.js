@@ -1,7 +1,7 @@
 import { scaleFactor } from '../../constants';
 
 export const cake = (k, map, spawnpoints) => {
-    k.loadSprite('cake', './cake.png');
+    k.loadSprite('cake', './assets/sprites/cake.png');
 
     const cakeSpawnX = spawnpoints.cake ? spawnpoints.cake.x : 55;
     const cakeSpawnY = spawnpoints.cake ? spawnpoints.cake.y : 80;
