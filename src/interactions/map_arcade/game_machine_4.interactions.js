@@ -11,7 +11,9 @@ export const interactionWithGameMachine4 = (player, k, map) => {
                     displayDialogue({
                         k,
                         player,
-                        text: ['Launching Flappy Bird... Time to spread your wings! Good luck!'],
+                        text: [
+                            'Launching Flappy Bird... Time to spread your wings! Good luck!',
+                        ],
                         onDisplayEnd: () => {
                             player.isInDialog = false;
                             startBirdGame(k);
@@ -87,7 +89,7 @@ function startBirdGame(k) {
     const JUMP_FORCE = 400;
     const PIPE_SPEED = 250;
     const PIPE_WIDTH = 60;
-    const PIPE_GAP = 300;  
+    const PIPE_GAP = 300;
     const GRAVITY = 1600;
 
     k.loadSprite('bird', './assets/sprites/bird.png', {
@@ -98,7 +100,6 @@ function startBirdGame(k) {
 
     k.loadSound('button-click-sound', './assets/sprites/jump.wav');
     k.loadSound('game-over-sound', './assets/sprites/game_over.wav');
-
 
     k.scene('startScreen', () => {
         k.add([
@@ -122,10 +123,12 @@ function startBirdGame(k) {
         ]);
 
         k.onMousePress(() => {
-            if (k.mousePos().x > startButton.pos.x - 100 &&
+            if (
+                k.mousePos().x > startButton.pos.x - 100 &&
                 k.mousePos().x < startButton.pos.x + 100 &&
                 k.mousePos().y > startButton.pos.y - 30 &&
-                k.mousePos().y < startButton.pos.y + 30) {
+                k.mousePos().y < startButton.pos.y + 30
+            ) {
                 k.go('birdGame');
             }
         });
@@ -142,9 +145,9 @@ function startBirdGame(k) {
             k.sprite('bird'),
             k.pos(80, k.height() / 2),
             k.anchor('center'),
-            k.area(),  
+            k.area(),
             k.body(),
-            k.scale(0.2),  
+            k.scale(0.2),
             'bird',
         ]);
 
@@ -187,7 +190,7 @@ function startBirdGame(k) {
                 }
             });
 
-            k.wait(3, spawnPipe); 
+            k.wait(3, spawnPipe);
         }
 
         k.wait(1, spawnPipe);
@@ -237,10 +240,12 @@ function startBirdGame(k) {
         ]);
 
         k.onMousePress(() => {
-            if (k.mousePos().x > restartButton.pos.x - 100 &&
+            if (
+                k.mousePos().x > restartButton.pos.x - 100 &&
                 k.mousePos().x < restartButton.pos.x + 100 &&
                 k.mousePos().y > restartButton.pos.y - 30 &&
-                k.mousePos().y < restartButton.pos.y + 30) {
+                k.mousePos().y < restartButton.pos.y + 30
+            ) {
                 k.go('startScreen');
             }
         });
