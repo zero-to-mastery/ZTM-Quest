@@ -1,9 +1,7 @@
 import { displayDialogue } from '../../utils';
 import { interactionHandler } from '../handler.interactions';
 
-const bagDialogue = [
-    'You picked up the bag!',
-];
+const bagDialogue = ['You picked up the bag!'];
 
 export const interactionWithBag = (player, k, map) => {
     interactionHandler(player, 'bag', k, () => {

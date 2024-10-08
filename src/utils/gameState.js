@@ -5,9 +5,7 @@ const initialState = () => ({
         hasTalkedToBruno: false,
         wasInRestroom: false,
         hasHandsWashed: false,
-        backpack: {
-
-        },
+        backpack: {},
         hasBackpack: false,
         currency: 0,
     },

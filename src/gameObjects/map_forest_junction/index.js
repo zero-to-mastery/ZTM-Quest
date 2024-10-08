@@ -1,4 +1,4 @@
-import {coins} from './coins.gameObjects'
+import { coins } from './coins.gameObjects';
 
 const gameObjects = [coins];
 

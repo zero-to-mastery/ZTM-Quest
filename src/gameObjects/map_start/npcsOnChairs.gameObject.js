@@ -11,7 +11,7 @@ export const npcsOnChairs = (k, map, spawnpoints) => {
                 obj.tags.filter((tag) => new RegExp(chairPattern).test(tag))
                     .length > 0
         );
-        
+
     for (const chair of chairs) {
         let direction = 'idle-side';
 

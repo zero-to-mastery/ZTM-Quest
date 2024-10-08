@@ -21,8 +21,8 @@ export const interactionHandler = (
             clickHandler.cancel();
             keyHandler.cancel();
         }
-        
-        // Possible refaction - implement the key to be dynamic. 
+
+        // Possible refaction - implement the key to be dynamic.
         // This would allow developers to use the interaction handler with different keys
         clickHandler = k.onClick(`${sprite.tags[0]}`, () => handleOnCollide());
         keyHandler = k.onKeyPress('t', () => handleOnCollide());

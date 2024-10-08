@@ -8,7 +8,7 @@ import { interactionWithHole } from './hole.interactions';
 import { interactionWithFlower } from './flower.interactions';
 import { interactionWithFirepit } from './firepit.interactions';
 import { interactionWithBag } from './bag.interactions';
-import { collectCoins } from './collectCoins.interactions'
+import { collectCoins } from './collectCoins.interactions';
 
 const interactions = [
     enterMapForestJunctionInteraction,

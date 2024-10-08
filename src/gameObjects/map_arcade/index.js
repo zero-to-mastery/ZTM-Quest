@@ -1,8 +1,6 @@
-import {coins} from './coins.gameObjects'
+import { coins } from './coins.gameObjects';
 
-const gameObjects = [
-    coins
-];
+const gameObjects = [coins];
 
 export const addGameObjects = (k, map, spawnpoints) => {
     return gameObjects.reduce((gameObjAcc, cb) => {

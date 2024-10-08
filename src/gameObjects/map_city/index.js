@@ -1,6 +1,6 @@
 import { campusHouse1OpenDoor } from './campusHouse1OpenDoor';
 import { npcsInCityMap } from './npcsOnmap_city';
-import { coins } from './coins.gameObjects'
+import { coins } from './coins.gameObjects';
 
 const gameObjects = [
     npcsInCityMap,

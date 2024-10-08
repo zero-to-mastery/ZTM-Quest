@@ -11,7 +11,7 @@ import { interactionWithMisterFu } from './misterFu.interaction';
 import { interactionWithTV } from './tv_main_room.interaction';
 import { interactionWithCake } from './cake.interaction';
 import { interactionWithLocker } from './locker.interaction';
-import { collectCoins } from './collectCoins.interactions'
+import { collectCoins } from './collectCoins.interactions';
 
 const interactions = [
     restroomInteractions,

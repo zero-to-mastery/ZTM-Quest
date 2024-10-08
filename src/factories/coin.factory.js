@@ -1,11 +1,6 @@
 import { k } from '../kplayCtx';
-import { scaleFactor } from '../constants';
 
-export function makeCoin(
-    pos,
-    startAnimation = 'idle-left',
-) {
-
+export function makeCoin(pos, startAnimation = 'idle-left') {
     k.loadSprite('coin', './assets/sprites/coin.png', {
         anims: {
             'idle-left': 0,

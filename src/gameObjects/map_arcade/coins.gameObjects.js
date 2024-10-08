@@ -1,4 +1,4 @@
-import { scaleFactor } from '../../constants'
+import { scaleFactor } from '../../constants';
 import { makeCoin } from '../../factories/coin.factory';
 
 export const coins = (k, map, spawnpoints) => {
@@ -17,7 +17,7 @@ export const coins = (k, map, spawnpoints) => {
             k.vec2(
                 (map.pos.x + coin.pos.x + 37) * scaleFactor,
                 (map.pos.y + coin.pos.y + 19) * scaleFactor
-            ),
+            )
         );
 
         coinStore.push(newCoin);

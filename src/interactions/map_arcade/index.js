@@ -12,7 +12,7 @@ const interactions = [
     interactionWithGameMachine2,
     interactionWithGameMachine4,
     interactionWithGameMachine6,
-    collectCoins
+    collectCoins,
 ];
 
 export const attachInteractions = (gameObj, k) => {

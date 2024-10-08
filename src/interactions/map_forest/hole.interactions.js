@@ -10,11 +10,15 @@ export const interactionWithHole = (player, k, map) => {
             ['Yes', 'No'],
             (selectedOption) => {
                 const texts = {
-                    Yes: ["You actually threw it down the hole...", "You are so generous!", "Thanks for playing my little mini game for collecting coins ;) fullspeccoder"],
+                    Yes: [
+                        'You actually threw it down the hole...',
+                        'You are so generous!',
+                        'Thanks for playing my little mini game for collecting coins ;) fullspeccoder',
+                    ],
                     No: ["Oh... you're just gonna walk away? Ok..."],
                 };
 
-                if(selectedOption == "Yes" && player.state.currency >= 10) {
+                if (selectedOption == 'Yes' && player.state.currency >= 10) {
                     displayDialogue({
                         k,
                         player,
@@ -28,16 +32,18 @@ export const interactionWithHole = (player, k, map) => {
                     displayDialogue({
                         k,
                         player,
-                        text: selectedOption == "No" ? texts[selectedOption] : ["You don't even have enough money..."],
+                        text:
+                            selectedOption == 'No'
+                                ? texts[selectedOption]
+                                : ["You don't even have enough money..."],
                         onDisplayEnd: () => {
                             player.isInDialog = false;
-                            console.log(selectedOption);
                         },
-                    })
+                    });
                 }
             }
         );
-    })
+    });
 };
 
 function showCustomPrompt(message, options, callback) {
