@@ -26,7 +26,6 @@ export const misterFu = (k, map, spawnpoints) => {
             map.pos.y + spawnpoints.player.y
         ),
         k.scale(scaleFactor),
-        k.offscreen({ hide: true, distance: 10 }),
         'misterFu',
     ]);
 

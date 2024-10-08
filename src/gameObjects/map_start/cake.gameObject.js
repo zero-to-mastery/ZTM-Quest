@@ -15,7 +15,6 @@ export const cake = (k, map, spawnpoints) => {
         k.anchor('center'),
         k.pos(map.pos.x + cakeSpawnX, map.pos.y + cakeSpawnY),
         k.scale(scaleFactor),
-        k.offscreen({ hide: true, distance: 10 }),
         'cake',
     ]);
 

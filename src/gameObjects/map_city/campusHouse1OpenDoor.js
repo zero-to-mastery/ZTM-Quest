@@ -17,7 +17,6 @@ export const campusHouse1OpenDoor = (k, map, spawnpoints) => {
             (campusHouseDoor1.pos.y - 1) * scaleFactor
         ),
         k.body({ isStatic: true }),
-        k.offscreen({ hide: true, distance: 10 }),
         'campusHouse1Door',
     ]);
 };
