@@ -1,4 +1,4 @@
-import { interactionHandler } from '../handler.interactions';
+import { interactionHandler } from '../utils/handler.interactions';
 import { displayDialogue } from '../../utils';
 import { conversationBruno, bruno } from '../../constants';
 

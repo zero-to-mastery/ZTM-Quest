@@ -1,5 +1,5 @@
 import { displayDialogue } from '../../utils';
-import { interactionHandler } from '../handler.interactions';
+import { interactionHandler } from '../utils/handler.interactions';
 
 const bagDialogue = ['You picked up the bag!'];
 

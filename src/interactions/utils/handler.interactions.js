@@ -1,4 +1,4 @@
-import { buildInteractionPrompt, tearDownInteractionPrompt } from '../utils';
+import { buildInteractionPrompt, tearDownInteractionPrompt } from '../../utils';
 
 export const interactionHandler = (
     player,

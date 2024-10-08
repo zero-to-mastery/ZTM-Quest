@@ -1,5 +1,5 @@
 import { displayDialogue } from '../../utils';
-import { interactionHandler } from '../handler.interactions';
+import { interactionHandler } from '../utils/handler.interactions';
 
 const shrubDialogue = [
     'The shrub is dense and thorny, its dark green leaves glistening with dew. Small berries hang from its branches, half-hidden beneath the thick foliage.',

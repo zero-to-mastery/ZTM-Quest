@@ -11,7 +11,7 @@ import {
     snackBarStreetInteraction,
 } from './snackBars.interactions';
 import { stall1Interaction, stall2Interaction } from './stalls.interaction';
-import { collectCoins } from './collectCoins.interactions';
+import { collectCoins } from '../utils/collectCoins.interactions';
 
 const interactions = [
     enterMapArcadeInteraction,
