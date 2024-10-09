@@ -15,7 +15,7 @@ export const initMap = async (
     const mapData = await (await fetch(pathToMapJson)).json();
     const { layers } = mapData;
 
-    shapeOffset = shapeOffset || k.vec2(0, 0);
+    shapeOffset = shapeOffset ?? k.vec2(0, 0);
 
     const map = k.make([
         k.sprite('map'),
