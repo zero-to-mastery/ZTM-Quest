@@ -85,6 +85,7 @@ function closeCustomPrompt() {
 function startBirdGame(k) {
     k.debug.log('Bird Game initialized');
 
+    
     const JUMP_FORCE = 400;
     const PIPE_SPEED = 250;
     const PIPE_WIDTH = 60;
@@ -155,6 +156,11 @@ function startBirdGame(k) {
             bird.jump(JUMP_FORCE);
         });
 
+        k.onMousePress(() => {
+            k.play('button-click-sound');
+            bird.jump(JUMP_FORCE);
+        });
+
         function spawnPipe() {
             const pipeY = k.rand(PIPE_GAP, k.height() - PIPE_GAP);
             const topPipe = k.add([
@@ -215,7 +221,7 @@ function startBirdGame(k) {
         k.add([
             k.text(`Score: ${score}`),
             k.pos(k.width() / 2, k.height() / 2 + 80),
-            k.scale(2),
+            k.scale(1),
             k.anchor('center'),
         ]);
 
