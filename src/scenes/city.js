@@ -24,7 +24,7 @@ export const cityScene = ({ k, enter_tag }) => {
             './exports/maps/map_city.png',
             './maps/map_city.json'
         );
-        const player = makePlayer({}, scaleFactor);
+        const player = makePlayer(k, {}, scaleFactor);
 
         player.pos = (enter_tag && spawnpoint[enter_tag]) || spawnpoint.player;
 

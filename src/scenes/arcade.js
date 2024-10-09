@@ -25,7 +25,7 @@ export const arcadeScene = ({ k }) => {
             './maps/map_arcade.json',
             k.vec2(29, 11)
         );
-        const player = makePlayer({}, scaleFactor);
+        const player = makePlayer(k, {}, scaleFactor);
 
         player.pos = spawnpoint.player;
         k.add(map);

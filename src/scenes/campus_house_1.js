@@ -25,7 +25,7 @@ export const campusHouse1Scene = ({ k, enter_tag }) => {
             './maps/map_campus_house_1.json'
         );
 
-        const player = makePlayer({}, scaleFactor);
+        const player = makePlayer(k, {}, scaleFactor);
 
         player.pos = (enter_tag && spawnpoint[enter_tag]) || spawnpoint.player;
 

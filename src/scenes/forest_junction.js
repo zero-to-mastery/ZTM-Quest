@@ -25,7 +25,7 @@ export const forestJunctionScene = ({ k, enter_tag }) => {
         );
 
         const gameState = getGameState();
-        const player = makePlayer(gameState.player);
+        const player = makePlayer(k, gameState.player);
 
         player.pos = (enter_tag && spawnpoint[enter_tag]) || spawnpoint.player;
 

@@ -1,8 +1,7 @@
-import { k } from '../kplayCtx';
 import { characters, scaleFactor, speedByScaleFactor } from '../constants';
 import { getGameState, setGameState } from '../utils/gameState';
 
-export function makePlayer(playerProps = {}, customScale = scaleFactor) {
+export function makePlayer(k, playerProps = {}, customScale = scaleFactor) {
     if (!k.getSprite('player')) {
         k.loadSprite('player', './assets/sprites/characters.png', {
             sliceX: 10,
