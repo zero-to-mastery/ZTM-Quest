@@ -5,6 +5,7 @@ const initialState = () => ({
         hasTalkedToBruno: false,
         wasInRestroom: false,
         hasHandsWashed: false,
+        energy: 100,
     },
 });
 
@@ -12,7 +13,7 @@ const initialState = () => ({
 let currentState = undefined;
 
 export const clearSavedGame = () => {
-    localStorage.removeItemItem(LOCAL_STORAGE_GAME_STATE_KEY);
+    localStorage.removeItem(LOCAL_STORAGE_GAME_STATE_KEY);
 };
 
 export const loadSavedGameState = () => {
