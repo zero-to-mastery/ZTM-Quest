@@ -1,6 +1,8 @@
 import { hideOnReference } from '../../core/kaplay/components/hideOnReference';
 import { campusHouse1OpenDoor } from './campusHouse1OpenDoor';
 import { npcsInCityMap } from './npcsOnmap_city';
+import { DISTANCE_TO_HIDE_OBJECT } from '../../constants';
+
 const gameObjects = [
     npcsInCityMap,
     // Add more game objects here
@@ -14,13 +16,13 @@ export const addGameObjects = (k, map, spawnpoints) => {
         const temp = cb(k, map, spawnpoints);
 
         if (Array.isArray(temp)) {
-            temp.forEach(comp => comp.use(hideOnReference({ hide: true, pause: true, distance: 400, referenceGameObj: player })))
+            temp.forEach(comp => comp.use(hideOnReference({ hide: true, pause: true, distance: DISTANCE_TO_HIDE_OBJECT, referenceGameObj: player })))
 
             gameObjAcc.push(...temp);
             return gameObjAcc;
         }
 
-        temp.use(hideOnReference({ hide: true, pause: true, distance: 400, referenceGameObj: player }));
+        temp.use(hideOnReference({ hide: true, pause: true, distance: DISTANCE_TO_HIDE_OBJECT, referenceGameObj: player }));
 
         gameObjAcc.push(temp);
 

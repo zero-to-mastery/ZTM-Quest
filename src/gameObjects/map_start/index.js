@@ -10,6 +10,7 @@ import { jokeTellerNPC } from './jokeTellerNPC.gameObject';
 import { tvVideo } from './tv_main_room_video.gameObject';
 import { randNpcsOnRestroomSinkCounch } from './randNpcsOnRestroomSinkCounch.gameObject';
 import { hideOnReference } from '../../core/kaplay/components/hideOnReference';
+import { DISTANCE_TO_HIDE_OBJECT } from '../../constants';
 
 const gameObjects = [
     bruno,
@@ -32,12 +33,12 @@ export const addGameObjects = (k, map, spawnpoints) => {
 
         if (Array.isArray(temp)) {
 
-            temp.forEach(comp => comp.use(hideOnReference({ hide: true, pause: true, distance: 400, referenceGameObj: player })))
+            temp.forEach(comp => comp.use(hideOnReference({ hide: true, pause: true, distance: DISTANCE_TO_HIDE_OBJECT, referenceGameObj: player })))
             gameObjAcc.push(...temp);
             return gameObjAcc;
         }
 
-        temp.use(hideOnReference({ hide: true, pause: true, distance: 400, referenceGameObj: player }));
+        temp.use(hideOnReference({ hide: true, pause: true, distance: DISTANCE_TO_HIDE_OBJECT, referenceGameObj: player }));
         gameObjAcc.push(temp);
 
         return gameObjAcc;
