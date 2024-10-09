@@ -1,4 +1,5 @@
 import { displayPermissionBox } from '../../utils';
+import { updateEnergyState } from '../../utils/energyUpdate';
 
 export const snackBarGreenInteraction = (player, k) => {
     player.onCollide('snack_bar_green', async () => {
@@ -18,6 +19,7 @@ export const snackBarGreenInteraction = (player, k) => {
             k.debug.log(
                 'Congratulations! You’ve mastered the art of snacking, ZTM style!'
             );
+            updateEnergyState(player.state, 25);
         } else {
             let secondSnackChance = await displayPermissionBox({
                 k,
@@ -34,6 +36,7 @@ export const snackBarGreenInteraction = (player, k) => {
                 k.debug.log(
                     'Great choice! You’re on your way to becoming a Snack Sensei!'
                 );
+                updateEnergyState(player.state, 25);
             } else {
                 k.debug.log(
                     'Looks like you missed the Snack Mastery Bootcamp. Better luck next time!'
@@ -61,6 +64,7 @@ export const snackBarRedInteraction = (player, k) => {
             k.debug.log(
                 'Excellent choice! You clearly have superior taste. Snack Bar Green can’t compete!'
             );
+            updateEnergyState(player.state, 24);
         } else {
             let changeMind = await displayPermissionBox({
                 k,
@@ -77,6 +81,7 @@ export const snackBarRedInteraction = (player, k) => {
                 k.debug.log(
                     'Wise move! Snack Bar Red – where the real snack mastery happens!'
                 );
+                updateEnergyState(player.state, 24);
             } else {
                 k.debug.log(
                     'Suit yourself! But don’t say I didn’t warn you... Snack Bar Green’s snacks are basically "Zero to Mediocrity."'
@@ -102,6 +107,7 @@ export const snackBarStreetInteraction = (player, k) => {
             k.debug.log(
                 'Yum! You just ate the best mystery snack of your life!'
             );
+            updateEnergyState(player.state, 24);
         } else {
             let secondChance = await displayPermissionBox({
                 text: [
@@ -116,6 +122,7 @@ export const snackBarStreetInteraction = (player, k) => {
                 k.debug.log(
                     'Ah, there we go! Enjoy your... totally normal snack.'
                 );
+                updateEnergyState(player.state, 24);
             } else {
                 k.debug.log(
                     'Your loss! The snack of the century is only a bite away...'
