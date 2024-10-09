@@ -46,13 +46,7 @@ export function makeNpc(
 
     return k.make([
         k.sprite(npcKey, { anim: startAnimation }),
-        k.area({
-            shape: new k.Rect(k.vec2(0), 16, 16),
-            collisionIgnore: ['player'],
-        }),
-        k.body({ isStatic: true }),
         k.pos(pos.x, pos.y),
-        //k.scale(scaleFactor),
         k.anchor('center'),
         k.z(1),
         npcKey,
