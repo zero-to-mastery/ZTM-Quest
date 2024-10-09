@@ -1,10 +1,11 @@
 import { k } from './kplayCtx';
 import { getGameState, setGameState } from './utils/gameState';
 import { updateEnergyUI } from './utils/energyUpdate';
-
+import { start } from './scenes/start';
+import './scenes/gameOver';
+import { setCamScale } from './utils';
 import './styles/global.css';
 
-import { start } from './scenes/start';
 import { city } from './scenes/city';
 import { arcade } from './scenes/arcade';
 import { forest } from './scenes/forest';
