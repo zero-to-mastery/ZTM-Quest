@@ -1,6 +1,9 @@
+import { coins } from './coins.gameObjects';
 import { npcsInArcadeMap } from './npcsOnmap';
+
 const gameObjects = [
     npcsInArcadeMap,
+    coins,
     // Add more game objects here
 ];
 

@@ -1,5 +1,5 @@
 import { displayDialogue } from '../../utils';
-import { interactionHandler } from '../handler.interactions';
+import { interactionHandler } from '../utils/handler.interactions';
 
 const flowerDialogue = [
     'The delicate petals are bright and vibrant, standing in stark contrast to the earth around it. A soft fragrance drifts from the bloom, bringing a sense of calm and serenity.',

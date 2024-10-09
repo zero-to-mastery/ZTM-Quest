@@ -1,7 +1,7 @@
 import { k } from './kplayCtx';
 
 import './scenes/start';
-import './scenes/forest_junction';
+import './scenes/forest';
 import './scenes/arcade';
 import { setCamScale } from './utils';
 import './styles/global.css';
@@ -10,7 +10,7 @@ k.onResize(() => {
     setCamScale(k);
 });
 
-k.go('start');
+k.go('forest', 'spawn_topright');
 // To test different maps instead of going through each and every scene to get to yours,
 // Import the scene, name the scene, and then name the spawn point as an additional tag
 // k.go('insert_scene_name_here', 'insert_spawn_point_here');

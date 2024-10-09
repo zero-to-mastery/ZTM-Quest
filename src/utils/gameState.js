@@ -5,6 +5,9 @@ const initialState = () => ({
         hasTalkedToBruno: false,
         wasInRestroom: false,
         hasHandsWashed: false,
+        backpack: {},
+        hasBackpack: false,
+        currency: 0,
     },
 });
 
@@ -28,7 +31,7 @@ export const saveGameState = (newState) => {
 };
 
 export const getGameState = () => {
-    if (currentState) {
+    if (currentState != undefined) {
         return currentState;
     } else {
         // persistent state

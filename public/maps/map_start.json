@@ -230,6 +230,17 @@
          "y":0
         }, 
         {
+         "draworder":"topdown",
+         "id":27,
+         "name":"coins",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1937, 1938, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1953, 1954, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2071, 2072, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -851,7 +862,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -985,7 +996,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -1190,7 +1201,7 @@
                 {
                  "height":28.5,
                  "id":149,
-                 "name":"cabin_edge_room_1",
+                 "name":"cabin_egde_room_1",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1417,6 +1428,17 @@
                  "width":26,
                  "x":435,
                  "y":91.375
+                }, 
+                {
+                 "height":16,
+                 "id":202,
+                 "name":"coin",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":208,
+                 "y":16
                 }],
          "opacity":1,
          "properties":[
@@ -1426,7 +1448,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -1470,7 +1492,7 @@
                  "value":false
                 }],
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -1689,8 +1711,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":27,
- "nextobjectid":198,
+ "nextlayerid":28,
+ "nextobjectid":203,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
