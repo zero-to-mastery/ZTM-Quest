@@ -1,6 +1,8 @@
 export const scaleFactor = 2;
 export const speedByScaleFactor = 65 * scaleFactor;
 
+export const DISTANCE_TO_HIDE_OBJECT = 500;
+
 // ./assets/sprites/characters.png sprites
 export const characters = [
     { name: 'stuart', frames: [0, 4, 2, 8, 1, 6] },
