@@ -78,8 +78,9 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
     const player = k.make([
         k.sprite('player', { anim: 'idle-down' }),
         k.area({
-            shape: new k.Rect(k.vec2(0), 16, 16),
+            shape: new k.Rect(k.vec2(0), 10, 10),
         }),
+        k.layer('player'),
         k.body(),
         k.anchor('center'),
         k.pos(),
