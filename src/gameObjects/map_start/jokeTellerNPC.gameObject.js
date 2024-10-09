@@ -1,4 +1,4 @@
-import { characters, scaleFactor } from '../../constants';
+import { characters } from '../../constants';
 
 const duke = characters[4];
 const [idleDown, walkDown, idleSide, walkSide, idleUp, walkUp] = duke.frames;
@@ -32,7 +32,7 @@ export const jokeTellerNPC = (k, map, spawnpoints) => {
         },
     });
 
-    const spawnPoint = spawnpoints.jokeTeller || { x: 180, y: 467 };
+    const spawnPoint = spawnpoints.jokeTeller || { x: 90, y: 235 };
 
     return k.make([
         k.sprite('jokeTeller', { anim: 'idle-side' }),
@@ -41,7 +41,6 @@ export const jokeTellerNPC = (k, map, spawnpoints) => {
         }),
         k.body({ isStatic: true }),
         k.pos(spawnPoint.x, spawnPoint.y),
-        k.scale(scaleFactor),
         k.anchor('center'),
         'jokeTellerNpc',
     ]);

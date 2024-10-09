@@ -167,19 +167,24 @@ export const buildInteractionPrompt = (sprite, k) => {
         },
     });
 
-    k.add([
+    const map = k.get('main_map')[0];
+
+    map.add([
         k.sprite('question-bubble', { anim: 'float' }),
         k.animate([0, 1, 2, 3, 4, 5, 6, 7]),
-        k.area(),
+        k.area({ collisionIgnore: ['player'] }),
         k.color(255, 255, 255),
         k.outline(2, k.Color.BLACK),
-        k.pos(spritePos.x + 5, spritePos.y - sprite.height - 20),
-        k.layer('ui'),
+        k.pos(spritePos.x - 5, spritePos.y - sprite.height - 5),
+        k.layer('game'),
+        k.z(100),
         `question-bubble`,
     ]);
 };
 
 export const tearDownInteractionPrompt = (k) => {
+    const map = k.get('main_map')[0];
+
     if (k.isTouchscreen()) {
         document.getElementById('interaction-note-mobile').style.display =
             'none';
@@ -187,8 +192,8 @@ export const tearDownInteractionPrompt = (k) => {
         document.getElementById('interaction-note').style.display = 'none';
     }
 
-    if (k.get('question-bubble')[0]) {
-        k.destroy(k.get('question-bubble')[0]);
+    if (map.get('question-bubble')[0]) {
+        map.get('question-bubble')[0].destroy();
     }
 };
 

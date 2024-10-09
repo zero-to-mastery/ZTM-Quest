@@ -22,11 +22,12 @@ export const npcsInCityMap = (k, map, spawnpoints) => {
             const { xAdjust, yAdjust } = adjustments;
             const npcDirection = obj.tiledProps?.direction || direction;
 
+
             const npc = makeNpc(
                 obj.name,
                 k.vec2(
-                    (map.pos.x + obj.pos.x + xAdjust) * scaleFactor,
-                    (map.pos.y + obj.pos.y + yAdjust) * scaleFactor
+                    (obj.pos.x + xAdjust),
+                    (obj.pos.y + yAdjust)
                 ),
                 npcDirection,
                 'map_city'
@@ -34,6 +35,7 @@ export const npcsInCityMap = (k, map, spawnpoints) => {
 
             npcStore.push(npc);
         });
+
     };
 
     // Define patterns and their corresponding adjustments
@@ -52,11 +54,6 @@ export const npcsInCityMap = (k, map, spawnpoints) => {
             patterns: [/burger_bar_chairs/],
             adjustments: { xAdjust: 12, yAdjust: 6 },
             direction: 'idle-up',
-        },
-        {
-            patterns: [/enter_map_arcade/],
-            adjustments: { xAdjust: 12, yAdjust: 6 },
-            direction: 'idle-down',
         },
         {
             patterns: [/car_/],

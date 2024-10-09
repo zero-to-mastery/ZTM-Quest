@@ -1,5 +1,3 @@
-import { scaleFactor } from '../../constants';
-
 export const tvVideo = (k, map, spawnpoints) => {
     k.loadSprite('ztmTrailer', './assets/sprites/ztm_trailer.png', {
         sliceX: 3,
@@ -24,12 +22,16 @@ export const tvVideo = (k, map, spawnpoints) => {
         }),
         k.body(),
         k.pos(
-            (tv_main_room.pos.x + 2) * scaleFactor,
-            (tv_main_room.pos.y + 13) * scaleFactor
+            (tv_main_room.pos.x + 2),
+            (tv_main_room.pos.y + 13)
         ),
-        k.scale(scaleFactor - 0.63),
+        k.scale(0.7),
         k.body({ isStatic: true }),
+        k.offscreen({ hidden: true, pause: true }),
         `tv_video`,
         'map_start',
+        {
+            turnedOff: true,
+        }
     ]);
 };

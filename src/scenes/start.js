@@ -34,7 +34,7 @@ k.scene('start', async (enter_tag) => {
     k.add(player);
     k.canvas.focus();
 
-    addGameObjects(k, map, spawnpoint).forEach((obj) => k.add(obj));
+    addGameObjects(k, map, spawnpoint).forEach((obj) => map.add(obj));
     attachInteractions(player, k);
 
     addPlayerControls(k, player);

@@ -21,8 +21,8 @@ export const npcsOnChairs = (k, map, spawnpoints) => {
         const npc = makeNpc(
             chair.name,
             k.vec2(
-                (map.pos.x + chair.pos.x + 6) * scaleFactor,
-                (map.pos.y + chair.pos.y + 12) * scaleFactor
+                (chair.pos.x + 6),
+                (chair.pos.y + 12)
             ),
             'idle-side',
             'map_start'

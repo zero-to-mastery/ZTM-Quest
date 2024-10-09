@@ -4,11 +4,11 @@ import { animations, stopCharacterAnims } from './utils/animation';
 const pressed = new Set();
 
 export const addPlayerControls = (k, player) => {
-    k.onButtonPress(
+    player.onButtonPress(
         ['up', 'down', 'left', 'right'],
         (dir) => player.isInDialog || pressed.add(dir)
     );
-    k.onButtonRelease(
+    player.onButtonRelease(
         ['up', 'down', 'left', 'right'],
         (dir) => player.isInDialog || pressed.delete(dir)
     );
@@ -19,12 +19,12 @@ export const addPlayerControls = (k, player) => {
         stopCharacterAnims(player);
     });
 
-    k.onButtonPress(['up', 'down'], (dir) => {
+    player.onButtonPress(['up', 'down'], (dir) => {
         if (player.isInDialog) return;
         player.direction = dir;
         player.play(animations[dir]);
     });
-    k.onButtonPress(['left', 'right'], (dir) => {
+    player.onButtonPress(['left', 'right'], (dir) => {
         if (player.isInDialog) return;
         player.direction = dir;
         player.play(animations[dir]);
@@ -33,7 +33,7 @@ export const addPlayerControls = (k, player) => {
     });
 
     // When a button is released, check if there are other buttons pressed
-    k.onButtonRelease(['up', 'down', 'left', 'right'], (dir) => {
+    player.onButtonRelease(['up', 'down', 'left', 'right'], (dir) => {
         stopCharacterAnims(player);
         pressed.delete(dir);
         if (!pressed.size) return;
@@ -45,7 +45,7 @@ export const addPlayerControls = (k, player) => {
         if (player.curAnim() !== a) player.play(a);
     });
 
-    k.onButtonDown(['up', 'down', 'left', 'right'], (dir) => {
+    player.onButtonDown(['up', 'down', 'left', 'right'], (dir) => {
         if (player.isInDialog) return;
         // If three buttons are pressed, the player should not move
         if (pressed.size > 2) return;
@@ -62,7 +62,7 @@ export const addPlayerControls = (k, player) => {
             pressed.size === 1
                 ? player.speed
                 : // Dot product for diagonal movement 45%
-                  player.speed * 0.707106781188095; // 1 / sqrt(2)
+                player.speed * 0.707106781188095; // 1 / sqrt(2)
 
         player.move(moveDir.unit().scale(speed));
     });
@@ -71,7 +71,7 @@ export const addPlayerControls = (k, player) => {
         k.camPos(player.pos.x, player.pos.y + 100);
     });
 
-    k.onMouseDown((mouseBtn) => {
+    player.onMouseDown((mouseBtn) => {
         if (mouseBtn !== 'left' || player.isInDialog || pressed.size) return;
 
         const worldMousePos = k.toWorld(k.mousePos());
@@ -119,5 +119,5 @@ export const addPlayerControls = (k, player) => {
         }
     });
     // Only stop animations if no buttons are pressed
-    k.onMouseRelease(() => pressed.size || stopCharacterAnims(player));
+    player.onMouseRelease(() => pressed.size || stopCharacterAnims(player));
 };
