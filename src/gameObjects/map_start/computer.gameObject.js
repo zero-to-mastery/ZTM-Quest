@@ -1,5 +1,3 @@
-import { scaleFactor } from '../../constants';
-
 export const computer = (k, map, spawnpoints) => {
     k.loadSprite('computer', './assets/sprites/laptop.png', {
         sliceX: 4,
