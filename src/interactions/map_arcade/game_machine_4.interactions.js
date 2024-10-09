@@ -85,7 +85,6 @@ function closeCustomPrompt() {
 function startBirdGame(k) {
     k.debug.log('Bird Game initialized');
 
-    
     const JUMP_FORCE = 400;
     const PIPE_SPEED = 250;
     const PIPE_WIDTH = 60;
