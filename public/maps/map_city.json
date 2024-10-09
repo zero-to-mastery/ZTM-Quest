@@ -935,7 +935,7 @@
                         }],
                  "opacity":1,
                  "type":"objectgroup",
-                 "visible":false,
+                 "visible":true,
                  "x":0,
                  "y":0
                 }, 
@@ -1204,7 +1204,7 @@
                         }],
                  "opacity":1,
                  "type":"objectgroup",
-                 "visible":false,
+                 "visible":true,
                  "x":0,
                  "y":0
                 }, 
@@ -1234,7 +1234,7 @@
                         }],
                  "opacity":1,
                  "type":"objectgroup",
-                 "visible":false,
+                 "visible":true,
                  "x":0,
                  "y":0
                 }],
@@ -3008,6 +3008,28 @@
                  "width":8.625,
                  "x":754.829545454545,
                  "y":116.481227272727
+                }, 
+                {
+                 "height":38.0751,
+                 "id":468,
+                 "name":"park_bench_bottom_park",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":5.10041,
+                 "x":818.556040088012,
+                 "y":568.398840969907
+                }, 
+                {
+                 "height":6.40516,
+                 "id":469,
+                 "name":"park_bench_bottom_park",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32.0258,
+                 "x":896.604040088012,
+                 "y":561.637840969907
                 }],
          "opacity":1,
          "properties":[
@@ -3595,7 +3617,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -3838,7 +3860,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -4004,7 +4026,7 @@
          "y":0
         }],
  "nextlayerid":49,
- "nextobjectid":466,
+ "nextobjectid":470,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
