@@ -1,7 +1,7 @@
 # ZTM Quest - A Journey Begins
 
 <p align="center">
-  <img src="./public/game_cover.png"/ alt="ztm quest - a journey begins cover">
+  <img src="./public/assets/sprites/game_cover.png"/ alt="ztm quest - a journey begins cover">
 </p>
 
 Whether you're an experienced game developer, a Javascript expert, an HTML and CSS pro, or have never worked with any of these, this project is designed for everyone who's interested in creating something new and special. The core languages used in this project are Javascript, HTML, and CSS, enhanced with the magic of kaplay.js (formerly kaboom.js). However, even if you're not familiar with Javascript, you can still contribute by submitting non-code pull requests. We also need game assets like spritesheets, music, or even ideas in the form of a screenplay, which will serve as a guide for developers to create assets that align with the project's vision.
