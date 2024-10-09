@@ -2,7 +2,6 @@ import { startScene } from '../../scenes/start';
 import { displayPermissionBox } from '../../utils';
 export const enterMapStartLeftInteraction = (player, k, map) => {
     player.onCollide('enter_map_start_left', async () => {
-
         player.isInDialog = true;
         let granted = await displayPermissionBox({
             k,

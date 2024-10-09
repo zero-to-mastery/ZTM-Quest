@@ -21,20 +21,15 @@ export const npcsInCityMap = (k, map, spawnpoints) => {
             const { xAdjust, yAdjust } = adjustments;
             const npcDirection = obj.tiledProps?.direction || direction;
 
-
             const npc = makeNpc(
                 obj.name,
-                k.vec2(
-                    (obj.pos.x + xAdjust),
-                    (obj.pos.y + yAdjust)
-                ),
+                k.vec2(obj.pos.x + xAdjust, obj.pos.y + yAdjust),
                 npcDirection,
                 'map_city'
             );
 
             npcStore.push(npc);
         });
-
     };
 
     // Define patterns and their corresponding adjustments

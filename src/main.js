@@ -8,7 +8,6 @@ k.onResize(() => {
     setCamScale(k);
 });
 
-
 startScene({ k });
 
 //k.go('start', { k });

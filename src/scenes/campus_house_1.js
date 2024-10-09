@@ -5,9 +5,7 @@ import { addGameObjects } from '../gameObjects/map_campus_house_1';
 import { addPlayerControls } from '../player.controls';
 import { scaleFactor } from '../constants';
 
-
 export const campusHouse1Scene = ({ k, enter_tag }) => {
-
     k.scene('campus_house_1', async (enter_tag) => {
         const objectConfig = {
             static: [
@@ -39,4 +37,4 @@ export const campusHouse1Scene = ({ k, enter_tag }) => {
     });
 
     k.go('campus_house_1', enter_tag);
-}
+};

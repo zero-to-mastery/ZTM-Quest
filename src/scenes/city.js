@@ -5,7 +5,6 @@ import { attachInteractions } from '../interactions/map_city';
 import { addGameObjects } from '../gameObjects/map_city';
 import { addPlayerControls } from '../player.controls';
 
-
 export const cityScene = ({ k, enter_tag }) => {
     k.scene('city', async (enter_tag) => {
         const objectConfig = {
@@ -39,4 +38,4 @@ export const cityScene = ({ k, enter_tag }) => {
     });
 
     k.go('city', enter_tag);
-}
+};

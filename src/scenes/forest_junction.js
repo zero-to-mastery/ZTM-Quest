@@ -5,7 +5,6 @@ import { addGameObjects } from '../gameObjects/map_forest_junction';
 import { addPlayerControls } from '../player.controls';
 import { getGameState } from '../utils/gameState';
 
-
 export const forestJunctionScene = ({ k, enter_tag }) => {
     k.scene('forest_junction', async (enter_tag) => {
         const objectConfig = {
@@ -40,4 +39,4 @@ export const forestJunctionScene = ({ k, enter_tag }) => {
     });
 
     k.go('forest_junction', enter_tag);
-}
+};

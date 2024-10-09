@@ -62,7 +62,7 @@ export const addPlayerControls = (k, player) => {
             pressed.size === 1
                 ? player.speed
                 : // Dot product for diagonal movement 45%
-                player.speed * 0.707106781188095; // 1 / sqrt(2)
+                  player.speed * 0.707106781188095; // 1 / sqrt(2)
 
         player.move(moveDir.unit().scale(speed));
     });

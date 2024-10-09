@@ -26,7 +26,8 @@ export const forestScene = ({ k, enter_tag }) => {
         const gameState = getGameState();
         const player = makePlayer(k, gameState.player);
 
-        player.pos = (enter_tag && spawnpoint[enter_tag]) || spawnpoint.spawn_bottom;
+        player.pos =
+            (enter_tag && spawnpoint[enter_tag]) || spawnpoint.spawn_bottom;
 
         k.add(map);
         k.add(player);
@@ -39,4 +40,4 @@ export const forestScene = ({ k, enter_tag }) => {
     });
 
     k.go('forest', enter_tag);
-}
+};

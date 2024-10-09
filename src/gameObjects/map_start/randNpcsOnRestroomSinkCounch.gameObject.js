@@ -14,10 +14,7 @@ const createNpcs = (k, map, pattern, positionAdjustments, npcStore) => {
 
         const npc = makeNpc(
             obj.name,
-            k.vec2(
-                obj.pos.x + adjustX,
-                obj.pos.y + adjustY
-            ),
+            k.vec2(obj.pos.x + adjustX, obj.pos.y + adjustY),
             'idle-side',
             'map_start'
         );
@@ -49,10 +46,7 @@ export const randNpcsOnRestroomSinkCounch = (k, map, spawnpoints) => {
     for (const restroom of selectedRestrooms) {
         const npc = makeNpc(
             restroom.name,
-            k.vec2(
-                restroom.pos.x,
-                restroom.pos.y
-            ),
+            k.vec2(restroom.pos.x, restroom.pos.y),
             'idle-down',
             'map_start'
         );

@@ -5,7 +5,6 @@ import { attachInteractions } from '../interactions/map_arcade';
 import { addGameObjects } from '../gameObjects/map_arcade';
 import { addPlayerControls } from '../player.controls';
 
-
 export const arcadeScene = ({ k }) => {
     k.scene('arcade', async () => {
         const objectConfig = {
@@ -38,4 +37,4 @@ export const arcadeScene = ({ k }) => {
     });
 
     k.go('arcade');
-}
+};
