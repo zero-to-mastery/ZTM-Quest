@@ -18,7 +18,7 @@ const cakeDialogue = [
 export const interactionWithCake = (player, k, map) => {
     player.onCollide('cake', (table) => {
         player.isInDialog = true;
-        player.speed = 500;
+        player.speed = speedByScaleFactor * 2;
         displayDialogue({
             k,
             player,
