@@ -95,6 +95,8 @@ export const snackBarStreetInteraction = (player, k) => {
     player.onCollide('snack_bar_street', async () => {
         player.isInDialog = true;
         let snackDecision = await displayPermissionBox({
+            k,
+            player,
             text: [
                 'Psst! You look hungry! How about a snack? It’s a secret recipe!',
             ],
@@ -110,6 +112,8 @@ export const snackBarStreetInteraction = (player, k) => {
             updateEnergyState(player.state, 24);
         } else {
             let secondChance = await displayPermissionBox({
+                k,
+                player,
                 text: [
                     'Are you sure? It’s low calorie and totally NOT haunted! Still no?',
                 ],
