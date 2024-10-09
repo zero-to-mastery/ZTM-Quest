@@ -21,7 +21,6 @@ export const interactionHandler = (
             clickHandler.cancel();
             keyHandler.cancel();
         }
-        console.log(sprite);
         clickHandler = k.onClick(`${sprite.tags[0]}`, () => handleOnCollide());
         keyHandler = k.onKeyPress('t', () => handleOnCollide());
     });

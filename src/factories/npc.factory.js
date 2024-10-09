@@ -1,5 +1,4 @@
 import { k } from '../kplayCtx';
-import { scaleFactor } from '../constants';
 import { getRandomCharacter } from '../utils/sprites';
 
 export function makeNpc(
