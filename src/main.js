@@ -29,7 +29,7 @@ k.go('start');
 */
 
 updateEnergyUI(getGameState().player.energy);
-const intervalRef = setInterval(() => {
+setInterval(() => {
     const gameState = getGameState(); // This should be inside setInterval so that gameState variable is updated at every interval.
     if (gameState.player.energy) {
         gameState.player.energy -= 1;
