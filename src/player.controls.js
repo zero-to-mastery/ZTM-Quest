@@ -1,4 +1,6 @@
+import { scaleFactor } from './constants';
 import { animations, stopCharacterAnims } from './utils/animation';
+import { getCamScale } from './utils';
 
 // Manage multiple pressed buttons
 const pressed = new Set();
@@ -67,8 +69,75 @@ export const addPlayerControls = (k, player) => {
         player.move(moveDir.unit().scale(speed));
     });
 
+    const [map] = k.get('main_map');
+    const camScale = getCamScale(k);
+
+    const leftPanel = document.getElementById('left-panel');
+    const rightPanel = document.getElementById('right-panel');
+    const header = document.getElementById('header');
+    const footer = document.getElementById('footer');
+
+    const leftBounds = leftPanel.getBoundingClientRect();
+    const rightBounds = rightPanel.getBoundingClientRect();
+    const headerBounds = header.getBoundingClientRect();
+    const footerBounds = footer.getBoundingClientRect();
+
+    function getBoundaries() {
+        return {
+            left: -leftBounds.width / camScale,
+            right: map.width * scaleFactor + rightBounds.width / camScale,
+            top: -headerBounds.height / camScale,
+            bottom: map.height * scaleFactor + footerBounds.height / camScale,
+        };
+    }
+
+    function updatePos({ k, x, y }) {
+        const boundaries = getBoundaries(k);
+
+        const halfHeightScreen = k.height() / 2 / camScale;
+        const halfWidthScreen = k.width() / 2 / camScale;
+        const mapW = boundaries.right + Math.abs(boundaries.left);
+        const mapH = boundaries.bottom + Math.abs(boundaries.top);
+
+        if (k.width() / camScale > mapW) {
+            const diff = k.width() / camScale - mapW;
+            x = boundaries.left + halfWidthScreen - diff / 2;
+        } else {
+            if (x + halfWidthScreen > boundaries.right) {
+                x = boundaries.right - halfWidthScreen;
+            } else if (x - halfWidthScreen < boundaries.left) {
+                x = boundaries.left + halfWidthScreen;
+            }
+        }
+
+        if (k.height() / camScale > mapH) {
+            const diff = k.height() / camScale - mapH;
+            y = boundaries.bottom - halfHeightScreen + diff / 2;
+        } else {
+            const hViewPort =
+                (k.height() - footerBounds.height - headerBounds.height) /
+                camScale;
+
+            const dy =
+                halfHeightScreen -
+                (k.height() - footerBounds.height) / camScale +
+                hViewPort / 2;
+
+            if (y + halfHeightScreen + dy > boundaries.bottom) {
+                y = boundaries.bottom - halfHeightScreen;
+            } else if (y - halfHeightScreen + dy < boundaries.top) {
+                y = boundaries.top + halfHeightScreen;
+            } else {
+                y += dy;
+            }
+        }
+
+        return [x, y];
+    }
+
     k.onUpdate(() => {
-        k.camPos(player.pos.x, player.pos.y + 100);
+        const updPos = updatePos({ k, ...player.pos });
+        k.camPos(...updPos);
     });
 
     k.onMouseDown((mouseBtn) => {

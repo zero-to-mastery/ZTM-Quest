@@ -1,5 +1,6 @@
 import { scaleFactor } from '../constants';
-import { initializeMovementPrompt, setCamScale } from '../utils';
+let uiLoaded = false;
+import { setCamScale } from '../utils';
 
 export const initMap = async (
     k,
@@ -23,6 +24,37 @@ export const initMap = async (
         k.scale(scaleFactor),
         'main_map',
     ]);
+
+    k.onLoad(() => {
+        if (!uiLoaded) {
+            const app = document.getElementById('app');
+            app.classList.add('loaded');
+            const matchesMobile = matchMedia(
+                '(max-width: 768px), (max-width: 900px) and (orientation: landscape)'
+            );
+            const controlText = `
+                    <p id="controlNote" class="d-mobile-hide note">
+                        Tap/Click/&uarr;&darr;&larr;&rarr; around to move
+                    </p>
+                    <p class="d-desktop-hide note">Tap to move around</p>
+                    <p id="interaction-info" class='note' style='display: none'>
+                        ${matchesMobile.matches ? 'Tap to Interact' : 'T - Interact with NPC/Object'}
+                    </p>
+                    `;
+            const div = document.createElement('div');
+            div.classList.add('control-text-container');
+            div.innerHTML = controlText;
+
+            if (matchesMobile.matches) {
+                const footer = document.getElementById('text-info');
+                footer.appendChild(div);
+            } else {
+                const leftPanel = document.getElementById('left-panel');
+                leftPanel.appendChild(div);
+            }
+            uiLoaded = true;
+        }
+    });
 
     const spawnpointsCharacters = {};
 
@@ -98,6 +130,5 @@ export const initMap = async (
         }
     }
 
-    initializeMovementPrompt(k);
     return [map, spawnpointsCharacters];
 };

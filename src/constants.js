@@ -45,3 +45,18 @@ export const conversationMisterFu = [
     "If you're itching to start your journey, the path lies through that gate.",
     "But don't forget to stock up on supplies before you go. It's a long road ahead.",
 ];
+
+export const jessie = {
+    name: 'jessie',
+    frames: [180, 184, 182, 188, 181, 186],
+};
+export const conversationJessie = [
+    'Hey there! Welcome to the arcade! Ready to have some fun?',
+    "Hi! I'm Jessie. Need any tips on the best games here?",
+    "Hello! Have you tried the new racing game? It's awesome!",
+    "Welcome! I'm Jessie. Let's see if you can beat my high score!",
+    'Hey! Looking for a challenge? I can show you the toughest games.',
+    "Hi there! Don't forget to check out the prize counter after playing!",
+    "Hello! Need any help finding a game? I'm your go-to guide!",
+    "Hey! Ready to play? I've got some great game recommendations for you.",
+];
