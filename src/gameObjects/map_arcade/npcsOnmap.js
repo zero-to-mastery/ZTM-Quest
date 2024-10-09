@@ -1,4 +1,3 @@
-import { scaleFactor } from '../../constants';
 import { makeNpc } from '../../factories/npc.factory';
 
 export const npcsInArcadeMap = (k, map, spawnpoints) => {
@@ -25,8 +24,8 @@ export const npcsInArcadeMap = (k, map, spawnpoints) => {
             const npc = makeNpc(
                 obj.name,
                 k.vec2(
-                    (map.pos.x + obj.pos.x + xAdjust) * scaleFactor,
-                    (map.pos.y + obj.pos.y + yAdjust) * scaleFactor
+                    (map.pos.x + obj.pos.x + xAdjust),
+                    (map.pos.y + obj.pos.y + yAdjust)
                 ),
                 npcDirection,
                 'map_arcade'

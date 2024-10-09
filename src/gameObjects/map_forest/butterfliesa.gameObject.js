@@ -1,4 +1,3 @@
-import { scaleFactor } from '../../constants';
 import { makeNpc } from '../../factories/npc.factory';
 
 export const butterfliesa = (k, map, spawnpoints) => {
@@ -22,8 +21,8 @@ export const butterfliesa = (k, map, spawnpoints) => {
         const npc = makeNpc(
             butterfly.name,
             k.vec2(
-                (map.pos.x + butterfly.pos.x + 6) * scaleFactor,
-                (map.pos.y + butterfly.pos.y + 12) * scaleFactor
+                (map.pos.x + butterfly.pos.x + 6),
+                (map.pos.y + butterfly.pos.y + 12)
             ),
             'idle-side',
             'map_start'
