@@ -1,7 +1,7 @@
-import { enterMap } from '../../core/kaplay/game/scene';
+import { forestScene } from '../../scenes/forest';
 
 export const enterMapForestInteraction = (player, k, map) => {
     player.onCollide('enter_map_top', () => {
-        enterMap('./scenes/forest', 'foresst', 'spawn_bottom');
+        forestScene({ k, enter_tag: 'spawn_bottom' });
     });
 };

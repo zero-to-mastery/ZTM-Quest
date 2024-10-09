@@ -1,4 +1,4 @@
-import { enterMap } from '../../core/kaplay/game/scene';
+import { cityScene } from '../../scenes/city';
 import { displayDialogue } from '../../utils';
 
 export const enterMapCityLeftInteraction = (player, k, map) => {
@@ -8,7 +8,7 @@ export const enterMapCityLeftInteraction = (player, k, map) => {
             player.state.wasInRestroom &&
             player.state.hasHandsWashed
         ) {
-            enterMap('./scenes/city', 'city', 'spawn_office_left');
+            cityScene({ k, enter_tag: 'spawn_office_left' });
         } else {
             if (!player.state.hasTalkedToBruno) {
                 player.isInDialog = true;

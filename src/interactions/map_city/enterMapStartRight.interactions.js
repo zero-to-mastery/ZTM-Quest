@@ -1,4 +1,4 @@
-import { enterMap } from '../../core/kaplay/game/scene';
+import { startScene } from '../../scenes/start';
 import { displayPermissionBox } from '../../utils';
 export const enterMapStartRightInteraction = (player, k) => {
     player.onCollide('enter_map_start_right', async () => {
@@ -15,7 +15,7 @@ export const enterMapStartRightInteraction = (player, k) => {
         });
         // console.log(granted);
         if (granted) {
-            enterMap('./scenes/start', 'start', 'spawn_right');
+            startScene({ k, enter_tag: 'spawn_right' });
         }
     });
 };

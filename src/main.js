@@ -1,22 +1,32 @@
 import { k } from './kplayCtx';
 
-import './scenes/start';
 import { setCamScale } from './utils';
 import './styles/global.css';
-import { clearImportCache } from './utils/imports-cache.storage';
+import { startScene } from './scenes/start';
 
 k.onResize(() => {
     setCamScale(k);
 });
 
-clearImportCache();
 
-k.go('start');
+startScene({ k });
+
+//k.go('start', { k });
 // To test different maps instead of going through each and every scene to get to yours,
-// Import the scene, name the scene, and then name the spawn point as an additional tag
-// k.go('insert_scene_name_here', 'insert_spawn_point_here');
+// Import the scene builder function
+// you can pass also a spawn point as an additional tag like
+// startScene({ k, enter_tag: 'spawn_left' });
 
 /*
+    Available scenes:
+    Start - startScene
+    City - cityScene
+    Arcade - arcadeScene
+    Forest Junction - forestJunctionScene
+    Forest - forestScene
+    Campus House - campusHouse1Scene
+
+
     Spawn Points
     Start - spawn_left, spawn_right
     City - spawn_left, spawn_top, spawn_arcade, spawn_right, spawn_office_left, spawn_office_right
