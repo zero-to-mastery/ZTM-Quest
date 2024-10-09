@@ -1,12 +1,10 @@
 import { hideOnReference } from '../../core/kaplay/components/hideOnReference';
-import { campusHouse1OpenDoor } from './campusHouse1OpenDoor';
 import { npcsInCityMap } from './npcsOnmap_city';
 import { DISTANCE_TO_HIDE_OBJECT } from '../../constants';
 
 const gameObjects = [
     npcsInCityMap,
     // Add more game objects here
-    campusHouse1OpenDoor,
 ];
 
 export const addGameObjects = (k, map, spawnpoints) => {
