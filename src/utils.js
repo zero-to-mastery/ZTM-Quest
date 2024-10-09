@@ -24,6 +24,7 @@ const processDialogue = async ({
             ? `<strong>${characterName}:</strong><br>${currentText}`
             : currentText;
         await new Promise((res) => {
+            dialog.scrollTop = dialog.scrollHeight;
             timeoutIds.push(setTimeout(res, 20));
         });
     }
@@ -56,6 +57,7 @@ export async function displayDialogue({
         abort = new AbortController();
         await new Promise((res) => {
             if (t === text[text.length - 1]) res(); // resolve on last text
+
             processDialogue({ dialog, text: t, characterName, abort });
 
             nextBtn.addEventListener('click', () => {
@@ -81,7 +83,10 @@ export async function displayDialogue({
     closeBtn.addEventListener('click', onCloseBtnClick);
 
     addEventListener('keydown', (key) => {
-        if (['Enter', 'Escape'].includes(key.code)) closeBtn.click();
+        if (key.code === 'Enter') {
+            document.activeElement.click();
+        }
+        if (key.code === 'Escape') closeBtn.click();
     });
     k.triggerEvent('dialog-displayed', { player, characterName, text });
 }
@@ -103,11 +108,13 @@ export async function displayPermissionBox({
     nextBtn.style.display = 'block';
     nextBtn.focus();
 
-    processDialogue({ dialog, text: text.join(' ') });
+    const abort = new AbortController();
+    processDialogue({ dialog, text: text.join(' '), abort });
 
     return new Promise((resolve) => {
         function onCloseBtnClick() {
             onDisplayEnd();
+            abort.abort();
             dialogUI.style.display = 'none';
             dialog.innerHTML = '';
             closeBtn.removeEventListener('click', onCloseBtnClick);
@@ -120,6 +127,7 @@ export async function displayPermissionBox({
 
         function onNextBtnClick() {
             onDisplayEnd();
+            abort.abort();
             dialogUI.style.display = 'none';
             dialog.innerHTML = '';
             nextBtn.removeEventListener('click', onNextBtnClick);
@@ -132,26 +140,34 @@ export async function displayPermissionBox({
 
         nextBtn.addEventListener('click', onNextBtnClick);
         closeBtn.addEventListener('click', onCloseBtnClick);
+        addEventListener('keydown', (key) => {
+            if (key.code === 'Enter') {
+                document.activeElement.click();
+            }
+            if (key.code === 'Escape') closeBtn.click();
+        });
         k.triggerEvent('dialog-displayed', { player, text });
     });
 }
 
-export function setCamScale(k) {
+export function getCamScale(k) {
     const resizeFactor = k.width() / k.height();
     if (resizeFactor < 1) {
-        k.camScale(k.vec2(1));
+        return 1;
     } else {
-        k.camScale(k.vec2(1.5));
+        return 1.5;
     }
 }
 
+export function setCamScale(k) {
+    const scale = getCamScale(k);
+    k.camScale(k.vec2(scale));
+}
+
+// NOTE: sprite must be an npc not an object like mailbox
 export const buildInteractionPrompt = (sprite, k) => {
-    if (k.isTouchscreen()) {
-        document.getElementById('interaction-note-mobile').style.display =
-            'flex';
-    } else {
-        document.getElementById('interaction-note').style.display = 'flex';
-    }
+    const info = document.getElementById('interaction-info');
+    info.style.display = 'flex';
     const spritePos = sprite.pos;
 
     k.loadSprite('question-bubble', './assets/sprites/question-bubble.png', {
@@ -178,27 +194,9 @@ export const buildInteractionPrompt = (sprite, k) => {
 };
 
 export const tearDownInteractionPrompt = (k) => {
-    if (k.isTouchscreen()) {
-        document.getElementById('interaction-note-mobile').style.display =
-            'none';
-    } else {
-        document.getElementById('interaction-note').style.display = 'none';
-    }
-
+    const info = document.getElementById('interaction-info');
+    info.style.display = 'none';
     if (k.get('question-bubble')[0]) {
         k.destroy(k.get('question-bubble')[0]);
-    }
-};
-
-export const initializeMovementPrompt = (k) => {
-    if (k.isTouchscreen()) {
-        document.getElementById('note-mobile').style.display = 'flex';
-        document.getElementById('note').style.display = 'none';
-        document.getElementById('interaction-note').style.display = 'none';
-    } else {
-        document.getElementById('note').style.display = 'flex';
-        document.getElementById('note-mobile').style.display = 'none';
-        document.getElementById('interaction-note-mobile').style.display =
-            'none';
     }
 };
