@@ -17,4 +17,4 @@ export const interactionWithMisterFu = (player, k, map) => {
             },
         });
     });
-}
+};

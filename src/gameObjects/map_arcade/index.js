@@ -1,5 +1,4 @@
-
-import { jessie } from "./jessie.gameObject";
+import { jessie } from './jessie.gameObject';
 
 import { npcsInArcadeMap } from './npcsOnmap';
 
