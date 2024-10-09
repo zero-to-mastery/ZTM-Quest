@@ -1965,8 +1965,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":744.5,
-                 "y":629.125
+                 "x":759.744519392917,
+                 "y":629.934443507589
                 }],
          "opacity":1,
          "properties":[
@@ -3192,26 +3192,26 @@
                  "y":545.0907
                 }, 
                 {
-                 "height":13.5278655884366,
+                 "height":9.14406044557266,
                  "id":296,
                  "name":"boundary_campus_house",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":719.318841666667,
-                 "y":610.108434411563
+                 "x":720.262010676349,
+                 "y":609.904985987809
                 }, 
                 {
-                 "height":13.3008406023656,
+                 "height":9.27734821096983,
                  "id":297,
                  "name":"boundary_campus_house",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":15.8182,
-                 "x":751.318841666667,
-                 "y":610.154059397634
+                 "x":751.375672656985,
+                 "y":609.893396837441
                 }, 
                 {
                  "height":64.1818,
@@ -3595,7 +3595,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -3765,7 +3765,7 @@
                  "y":193.446665
                 }, 
                 {
-                 "height":113.181818181818,
+                 "height":110.483673156523,
                  "id":276,
                  "name":"boundary_ocean_bottom",
                  "rotation":0,
@@ -3776,7 +3776,7 @@
                  "y":527.446665
                 }, 
                 {
-                 "height":4.16667,
+                 "height":0.270001651437951,
                  "id":277,
                  "name":"boundary_bottom_side",
                  "rotation":0,
@@ -3784,7 +3784,7 @@
                  "visible":true,
                  "width":958.667,
                  "x":1.48089572727267,
-                 "y":639.265119545455
+                 "y":640.265119545455
                 }, 
                 {
                  "height":207,
@@ -3838,7 +3838,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
