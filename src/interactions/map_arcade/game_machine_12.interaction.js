@@ -11,7 +11,9 @@ export const interactionWithGameMachine12 = (player, k, map) => {
                     displayDialogue({
                         k,
                         player,
-                        text: ['Starting Pattern Memory Challenge... Get ready!'],
+                        text: [
+                            'Starting Pattern Memory Challenge... Get ready!',
+                        ],
                         onDisplayEnd: () => {
                             player.isInDialog = false;
                             startPatternMemoryGame(k);
@@ -38,7 +40,7 @@ function startPatternMemoryGame(k) {
         { sequenceLength: 5, timeLimit: 4 },
         { sequenceLength: 7, timeLimit: 3 },
         { sequenceLength: 9, timeLimit: 3 },
-        { sequenceLength: 11, timeLimit: 3 }
+        { sequenceLength: 11, timeLimit: 3 },
     ];
 
     let currentLevel = 0;
@@ -128,9 +130,9 @@ function startPatternMemoryGame(k) {
         ]);
 
         playAgainBtn.onClick(() => {
-            currentLevel = 0; 
+            currentLevel = 0;
             score = 0;
-            isGameActive = true; 
+            isGameActive = true;
             loadLevel(currentLevel);
         });
     });
@@ -151,29 +153,31 @@ function startPatternMemoryGame(k) {
         ]);
 
         playAgainBtn.onClick(() => {
-            currentLevel = 0; 
-            score = 0; 
-            isGameActive = true; 
+            currentLevel = 0;
+            score = 0;
+            isGameActive = true;
             loadLevel(currentLevel);
         });
     });
 
-    loadLevel(currentLevel); 
+    loadLevel(currentLevel);
 }
 
 function generateSequence(length) {
     const sequence = [];
     for (let i = 0; i < length; i++) {
-        sequence.push(Math.floor(Math.random() * 10)); 
+        sequence.push(Math.floor(Math.random() * 10));
     }
     return sequence;
 }
 
 function arraysEqual(a, b) {
-    return Array.isArray(a) &&
+    return (
+        Array.isArray(a) &&
         Array.isArray(b) &&
         a.length === b.length &&
-        a.every((val, index) => val === b[index]);
+        a.every((val, index) => val === b[index])
+    );
 }
 
 function showCustomPrompt(message, options, callback) {
@@ -189,7 +193,7 @@ function showCustomPrompt(message, options, callback) {
     messageElement.textContent = message;
     optionsContainer.innerHTML = '';
 
-    options.forEach(option => {
+    options.forEach((option) => {
         const button = document.createElement('button');
         button.textContent = option;
         button.classList.add('option-btn');

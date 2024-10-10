@@ -27,7 +27,7 @@ const interactions = [
     interactionWithGameMachine8,
     interactionWithGameMachine10,
     interactionWithGameMachine11,
-    interactionWithGameMachine12
+    interactionWithGameMachine12,
 ];
 
 export default interactions;
