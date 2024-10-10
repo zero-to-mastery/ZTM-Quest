@@ -8,6 +8,7 @@ import { interactionWithGameMachine6 } from './game_machine_6.interactions';
 import { interactionWithJessie } from './jessie.interaction';
 import { interactionWithGameMachine10 } from './game_machine_10.interactions';
 import { interactionWithGameMachine11 } from './game_machine_11.interaction';
+import { interactionWithGameMachine12 } from './game_machine_12.interaction';
 
 const interactions = [
     enterMapCityInteraction,
@@ -26,6 +27,7 @@ const interactions = [
     interactionWithGameMachine8,
     interactionWithGameMachine10,
     interactionWithGameMachine11,
+    interactionWithGameMachine12
 ];
 
 export default interactions;
