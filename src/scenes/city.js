@@ -29,6 +29,9 @@ k.scene('city', async (enter_tag) => {
     k.add(map);
     k.add(player);
     k.canvas.focus();
+    k.onKeyPress('o', () => {
+        k.go('gameOver');
+    });
 
     attachInteractions(player, k);
     addGameObjects(k, map, spawnpoint).forEach((obj) => k.add(obj));

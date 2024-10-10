@@ -36,6 +36,9 @@ k.scene('start', async (enter_tag) => {
 
     addGameObjects(k, map, spawnpoint).forEach((obj) => k.add(obj));
     attachInteractions(player, k);
+    k.onKeyPress('o', () => {
+        k.go('gameOver');
+    });
 
     addPlayerControls(k, player);
 });
