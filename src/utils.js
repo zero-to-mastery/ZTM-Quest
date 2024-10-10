@@ -244,9 +244,9 @@ export async function getContributors(){
 }
 
 export function hideInstructions(){
-    document.getElementById("instructions").style.display = "none"
+    document.getElementById("controlNote").style.display = "none"
 }
 
 export function addInstructions(){
-    document.getElementById("instructions").style.display = "block"
+    document.getElementById("controlNote").style.display = "block"
 }
