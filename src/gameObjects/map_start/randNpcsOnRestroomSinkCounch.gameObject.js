@@ -1,4 +1,3 @@
-import { scaleFactor } from '../../constants';
 import { makeNpc } from '../../factories/npc.factory';
 
 const createNpcs = (k, map, pattern, positionAdjustments, npcStore) => {
@@ -16,8 +15,8 @@ const createNpcs = (k, map, pattern, positionAdjustments, npcStore) => {
         const npc = makeNpc(
             obj.name,
             k.vec2(
-                (map.pos.x + obj.pos.x + adjustX) * scaleFactor,
-                (map.pos.y + obj.pos.y + adjustY) * scaleFactor
+                map.pos.x + obj.pos.x + adjustX,
+                map.pos.y + obj.pos.y + adjustY
             ),
             'idle-side',
             'map_start'
@@ -50,11 +49,8 @@ export const randNpcsOnRestroomSinkCounch = (k, map, spawnpoints) => {
     for (const restroom of selectedRestrooms) {
         const npc = makeNpc(
             restroom.name,
-            k.vec2(
-                (map.pos.x + restroom.pos.x) * scaleFactor,
-                (map.pos.y + restroom.pos.y) * scaleFactor
-            ),
-            'idle-side',
+            k.vec2(map.pos.x + restroom.pos.x, map.pos.y + restroom.pos.y),
+            'idle-down',
             'map_start'
         );
 

@@ -1,7 +1,7 @@
 import { displayDialogue } from '../../utils';
 
 export const interactionWithTV = (player, k, map) => {
-    const [tv_video] = k.query({ include: 'tv_video' });
+    const [tv_video] = map.query({ include: 'tv_video' });
     tv_video.hidden = true;
     player.onCollide('tv_main_room', () => {
         player.isInDialog = true;
