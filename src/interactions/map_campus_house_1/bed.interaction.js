@@ -13,7 +13,7 @@ export const bedInteractions = (player, k, map) => {
                 player.isInDialog = false;
             },
         });
-        
+
         const dialogue = [];
 
         if (wantSleep) {
@@ -24,7 +24,7 @@ export const bedInteractions = (player, k, map) => {
             if (player.state.energy < 70) {
                 dialogue.push('You look tired');
                 dialogue.push('You should take a nap!');
-            }else{
+            } else {
                 dialogue.push('Maybe next time!');
             }
         }
