@@ -3,19 +3,19 @@ import { displayDialogue } from '../../utils';
 export const interactionWithGameMachine11 = (player, k, map) =>{
     player.onCollide('game_machine_11', () => {
         player.isInDialog = true;
+
         showCustomPrompt(
-            'Do you want to play the Sinusoid Car Game? Collect trophies and overtake formulas!', // Updated Prompt message
-            ['Yes', 'No'], // Options for the game prompt
+            'Do you want to play the Sinusoid Formula Game? Collect trophies and overtake formulas!',
+            ['Yes', 'No'],
             (selectedOption) => {
-                // Logic based on the selected option
                 if (selectedOption === 'Yes') {
                     displayDialogue({
                         k,
                         player,
-                        text: ['Starting the Sinusoid Car Game... Fasten your belts!'],
+                        text: ['Starting the Sinusoid Formula Game... Fasten your belts!'],
                         onDisplayEnd: () => {
                             player.isInDialog = false;
-                            startChromeFormulaGame(k); // Pass k to the game start function
+                            startChromeFormulaGame(k);
                         },
                     });
                 } else {
@@ -34,30 +34,23 @@ export const interactionWithGameMachine11 = (player, k, map) =>{
 }
 
 function showCustomPrompt(message, options, callback) {
-    // Set the prompt message
     document.getElementById('prompt-message').textContent = message;
-
-    // Clear any existing options in the container
     const optionsContainer = document.getElementById('options-container');
     optionsContainer.innerHTML = '';
 
-    // Create buttons for each option
     options.forEach((option) => {
         const button = document.createElement('button');
         button.textContent = option;
         button.classList.add('option-btn');
-        button.setAttribute('tabindex', '0'); // Make the button focusable
-
-        // Add click event for mouse interactions
+        button.setAttribute('tabindex', '0');
         button.onclick = function () {
             callback(option);
             closeCustomPrompt();
         };
 
-        // Add keyboard event listener for accessibility
         button.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault(); // Prevent the default behavior
+                e.preventDefault();
                 callback(option);
                 closeCustomPrompt();
             }
@@ -66,278 +59,270 @@ function showCustomPrompt(message, options, callback) {
         optionsContainer.appendChild(button);
     });
 
-    // Display the custom prompt
     document.getElementById('custom-prompt').style.display = 'flex';
 
-    // Set focus on the first button
     if (optionsContainer.children.length > 0) {
         optionsContainer.children[0].focus();
     }
 }
 
 function closeCustomPrompt() {
-    // Hide the custom prompt
     document.getElementById('custom-prompt').style.display = 'none';
 }
 
 function startChromeFormulaGame(k) {
-    const squareHeight = (k.height() / 3); 
-    const squareYPosition = (k.height() / 3);
+    const roadHeight = (k.height() / 3); 
+    const roadPosition = (k.height() / 3);
     const scaleFactor = (k.width() / k.height()) * 2;
-    const carCenter = k.height() / 2 - 12 * scaleFactor;
-    const carUp = squareYPosition + (squareHeight / 3) / 2 - 12 * scaleFactor;
-    const carDown = 2 * squareYPosition - (squareHeight / 3) / 2 - 12 * scaleFactor;
-    const values = [carCenter, carUp, carDown];
-    let racingMusic;
-    let counter;
-    let songCounter = 1;
-    let speedy = 300;
-    let score = 0;
-    let trophyCount = 0;
-    let lightsOut = false; // Pridáme premennú, ktorá sleduje, či je light5 červené
+    const formulaCenter = k.height() / 2 - 12 * scaleFactor;
+    const formulaUp = roadPosition + (roadHeight / 3) / 2 - 12 * scaleFactor;
+    const formulaDown = 2 * roadPosition - (roadHeight / 3) / 2 - 12 * scaleFactor;
+    const formulaValues = [formulaCenter, formulaUp, formulaDown];
+    let racingMusic, currentSong, lineCounter, songCounter, speedy, score, trophyCount, formulasCount, lightsOut, isButtonClicked;
 
-    // set background color
-    k.setBackground(141, 183, 255);
-
-    // load assets
-    k.loadSprite("bean", "./assets/sprites/formula.png");
-    k.loadSprite('trophy', './assets/sprites/trophy.png');
+    k.setBackground(132, 101, 236);
+    k.loadFont("Pixelify", "./assets/fonts/PixelifySans-VariableFont_wght.ttf",{outline: 2});
+    k.loadFont("Pixelify2", "./assets/fonts/PixelifySans-VariableFont_wght.ttf");
     k.loadSound("collecttrophy", "./assets/sounds/trophycollected.mp3");
-    k.loadSound("carcrash", "./assets/sounds/carcrash.mp3");
+    k.loadSound("losttrophy", "./assets/sounds/trophylost.mp3");
+    k.loadSound("celebratetrophies", "./assets/sounds/celebratingtrophies.mp3");
+    k.loadSound("formulaovertake", "./assets/sounds/formulaovertake.mp3");
+    k.loadSound("formulacrash", "./assets/sounds/formulacrash.mp3");
+    k.loadSound("celebrateformulas", "./assets/sounds/celebratingformulas.mp3");
     k.loadSound("lightstart", "./assets/sounds/lightstart.mp3");
     k.loadSound("racestart", "./assets/sounds/racestart.mp3");
     k.loadSound("racemusic", "./assets/sounds/racemusic.mp3");
     k.loadSound("racemusic2", "./assets/sounds/racemusic2.mp3");
     k.loadSound("spectators", "./assets/sounds/spectators.mp3");
+    k.loadSprite("formula", "./assets/sprites/formula.png");
+    k.loadSprite('trophy', './assets/sprites/trophy.png');
+    k.loadSprite('racemap', './assets/sprites/RaceBackground.png');
+
+    k.loadSprite('formula', './assets/sprites/newformulasheet.png', {
+        sliceX: 81,
+        sliceY: 1,
+        anims: {
+            run: { from: 0, to: 80, loop: true, speed: 10 },
+        },
+    });
 
     k.scene("game", () => {
-
         lightsOut = false;
         score = 0;
         trophyCount = 0;
-        counter = 0;
-        // define gravity
+        formulasCount = 0;
+        songCounter = 1;
+        lineCounter = 0;
+        speedy = 300;
+
         k.setGravity(0);
-
-        k.loadSprite('racemap', './assets/sprites/RaceBackground.png');
-
-        // Pridanie pozadia
         k.add([
             k.sprite('racemap', {
                 width: k.width(),
                 height: k.height()
             }),
             k.pos(0, 0),
-            k.layer('bg'),
+            k.layer('bg')
         ]);
 
-        // Vytvorenie cesty
         k.add([
-            k.rect(k.width(), squareHeight),
+            k.rect(k.width(), roadHeight),
             k.outline(4),
-            k.pos(0, squareYPosition),
+            k.pos(0, roadPosition),
             k.body({ isStatic: true }),
-            k.color(55, 55, 55),
+            k.color(55, 55, 55)
         ]);
 
         k.add([
-            k.rect(2 * scaleFactor, squareHeight),
+            k.rect(2 * scaleFactor, roadHeight),
             k.pos(k.width() / 6, k.height() / 3),
             k.body({ isStatic: true }),
             k.color(100, 100, 100),
             k.area(),
-            "wall",
+            "wall"
         ]);
 
-        k.loadSprite('bean', './assets/sprites/newformulasheet.png', {
-            sliceX: 81,
-            sliceY: 1,
-            anims: {
-                run: { from: 0, to: 80, loop: true, speed: 10 },
-            },
-        });
-
         const player = k.add([
-            k.sprite('bean', { anim: 'run' }),
+            k.sprite('formula', { anim: 'run' }),
             k.pos(k.width() / 4, k.height() / 2 - 12 * scaleFactor),
             k.area(),
             k.body(),
             k.scale(scaleFactor),
-            "player",
+            "player"
         ]);
 
         function changeLine() {
             if(lightsOut){
-                if (player.pos.y == values[0]) {
-                    if (counter == 0) {
-                        player.pos.y = values[1];
-                        counter = 1;
+                if (player.pos.y == formulaValues[0]) {
+                    if (lineCounter == 0) {
+                        player.pos.y = formulaValues[1];
+                        lineCounter = 1;
                     } 
-                    else if (counter == 1) {
-                        player.pos.y = values[2];
-                        counter = 0;
+                    else if (lineCounter == 1) {
+                        player.pos.y = formulaValues[2];
+                        lineCounter = 0;
                     }
-                } else if (player.pos.y == values[1]) {
-                    player.pos.y = values[0];
-                } else if (player.pos.y == values[2]) {
-                    player.pos.y = values[0];
+                } else if (player.pos.y == formulaValues[1]) {
+                    player.pos.y = formulaValues[0];
+                } else if (player.pos.y == formulaValues[2]) {
+                    player.pos.y = formulaValues[0];
                 }
             }
         }
 
-        // jump when user presses space or clicks
         k.onKeyPress("space", changeLine);
         k.onClick(changeLine);
 
-        function getRandomValue() {
-            const randomIndex = Math.floor(Math.random() * values.length);
-            return values[randomIndex];
+        function getRandomValueOfTrack() {
+            const randomIndex = Math.floor(Math.random() * formulaValues.length);
+            return formulaValues[randomIndex];
         }
 
-        function spawnCar() {
-            // Spawning auta alebo trofeje po červenej zmene svetla
-            if (!lightsOut) return; // Ak nie je červené, nevykoná spawn
-        
-            // Náhodný výber medzi autom alebo trofejou
-            const spawnTrophy = Math.random() < 0.5; // 50% šanca na trofej
-        
+        function spawnFormula() {
+            if (!lightsOut) return;
+            const spawnTrophy = Math.random() < 0.5;
+
             if (spawnTrophy) {
-                // Spawn trofeje
                 var trophy = k.add([
-                    k.sprite("trophy"),  // Nahraď "trophy" vhodným assetom pre trofej
+                    k.sprite("trophy"),
                     k.area(),
-                    k.pos(k.width(), getRandomValue()),
+                    k.pos(k.width(), getRandomValueOfTrack()),
                     k.move(k.LEFT, speedy),
                     k.scale(scaleFactor),
-                    "trophy",
+                    "trophy"
                 ]);
 
                 trophy.onCollide("player", () => {
                     trophy.destroy();
                     k.play("collecttrophy", {
-                        volume: 0.5, // set the volume to 50%
-                        speed: 1, // speed up the sound
-                        loop: false, // loop the sound
-                    })
-                });
-        
-                trophy.onCollide("wall", () => {
-                    trophy.destroy();
+                        volume: 0.5,
+                        speed: 1,
+                        loop: false
+                    });
                 });
 
-                
-        
+                trophy.onCollide("wall", () => {
+                    trophy.destroy();
+                    k.play("losttrophy", {
+                        volume: 0.5,
+                        speed: 1,
+                        loop: false
+                    });
+                });
             } else {
-                // Spawn auta
-                var car = k.add([
-                    k.sprite("bean"),
+                const formula = k.add([
+                    k.sprite("formula"),
                     k.area(),
-                    k.pos(k.width(), getRandomValue()),
+                    k.body(),
+                    k.pos(k.width(), getRandomValueOfTrack()),
                     k.move(k.LEFT, speedy),
                     k.scale(scaleFactor),
-                    "car",
+                    "otherformula"
                 ]);
-        
-                car.onCollide("wall", () => {
-                    car.destroy();
+
+                formula.onCollide("wall", () => {
+                    k.play("formulaovertake", {
+                        volume: 1.2,
+                        speed: 1,
+                        loop: false
+                    });
+                    formula.destroy();
+                    formulasCount++;
                 });
             }
-        
-            // Po čase znovu spawnuje auto alebo trofej
-            k.wait(k.rand(5, 3), spawnCar);
+
+            k.wait(k.rand(5, 3), spawnFormula);
         }
 
         function addLights() {
             var light1 = k.add([
-                k.circle(((squareHeight / 5) / 2) / 1.5),
+                k.circle(((roadHeight / 5) / 2) / 1.5),
                 k.outline(4),
                 k.color(0, 0, 0),
                 k.area(),
-                k.pos((k.width() / 6) / 2, squareHeight + squareHeight / 6),
-                "light1",
+                k.pos((k.width() / 6) / 2, roadHeight + roadHeight / 6),
+                "light1"
             ]);
-        
+
             var light2 = k.add([
-                k.circle(((squareHeight / 5) / 2) / 1.5),
+                k.circle(((roadHeight / 5) / 2) / 1.5),
                 k.outline(4),
                 k.color(0, 0, 0),
                 k.area(),
-                k.pos((k.width() / 6) / 2, squareHeight + 2 * (squareHeight / 6)),
-                "light2",
+                k.pos((k.width() / 6) / 2, roadHeight + 2 * (roadHeight / 6)),
+                "light2"
             ]);
-        
+
             var light3 = k.add([
-                k.circle(((squareHeight / 5) / 2) / 1.5),
+                k.circle(((roadHeight / 5) / 2) / 1.5),
                 k.outline(4),
                 k.color(0, 0, 0),
                 k.area(),
-                k.pos((k.width() / 6) / 2, squareHeight + 3 * (squareHeight / 6)),
-                "light3",
+                k.pos((k.width() / 6) / 2, roadHeight + 3 * (roadHeight / 6)),
+                "light3"
             ]);
-        
+
             var light4 = k.add([
-                k.circle(((squareHeight / 5) / 2) / 1.5),
+                k.circle(((roadHeight / 5) / 2) / 1.5),
                 k.outline(4),
                 k.color(0, 0, 0),
                 k.area(),
-                k.pos((k.width() / 6) / 2, squareHeight + 4 * (squareHeight / 6)),
-                "light4",
+                k.pos((k.width() / 6) / 2, roadHeight + 4 * (roadHeight / 6)),
+                "light4"
             ]);
-        
+
             var light5 = k.add([
-                k.circle(((squareHeight / 5) / 2) / 1.5),
+                k.circle(((roadHeight / 5) / 2) / 1.5),
                 k.outline(4),
                 k.color(0, 0, 0),
                 k.area(),
-                k.pos((k.width() / 6) / 2, squareHeight + 5 * (squareHeight / 6)),
-                "light5",
+                k.pos((k.width() / 6) / 2, roadHeight + 5 * (roadHeight / 6)),
+                "light5"
             ]);
-        
-            // Zmena farby svetiel
+
             k.wait(1, () => {
                 light1.color = k.rgb(255, 0, 0);
                 k.play("lightstart", {
-                    volume: 0.5, // set the volume to 50%
-                    speed: 1, // speed up the sound
-                    loop: false, // loop the sound
-                })
+                    volume: 0.5,
+                    speed: 1,
+                    loop: false
+                });
             });
-        
+
             k.wait(2, () => {
                 light2.color = k.rgb(255, 0, 0);
                 k.play("lightstart", {
-                    volume: 0.5, // set the volume to 50%
-                    speed: 1, // speed up the sound
-                    loop: false, // loop the sound
-                })
+                    volume: 0.5,
+                    speed: 1,
+                    loop: false
+                });
             });
-        
+
             k.wait(3, () => {
                 light3.color = k.rgb(255, 0, 0);
                 k.play("lightstart", {
-                    volume: 0.5, // set the volume to 50%
-                    speed: 1, // speed up the sound
-                    loop: false, // loop the sound
-                })
+                    volume: 0.5,
+                    speed: 1,
+                    loop: false
+                });
             });
-        
+
             k.wait(4, () => {
                 light4.color = k.rgb(255, 0, 0);
                 k.play("lightstart", {
-                    volume: 0.5, // set the volume to 50%
-                    speed: 1, // speed up the sound
-                    loop: false, // loop the sound
-                })
+                    volume: 0.5,
+                    speed: 1,
+                    loop: false
+                });
             });
-        
+
             k.wait(5, () => {
                 light5.color = k.rgb(255, 0, 0);
                 k.play("lightstart", {
-                    volume: 0.5, // set the volume to 50%
-                    speed: 1, // speed up the sound
-                    loop: false, // loop the sound
-                })
-                //spawnCar(); // Teraz spawnuje autá
+                    volume: 0.5,
+                    speed: 1,
+                    loop: false
+                });
             });
 
             k.wait(7, () => {
@@ -346,103 +331,89 @@ function startChromeFormulaGame(k) {
                 light3.color = k.rgb(0, 0, 0);
                 light4.color = k.rgb(0, 0, 0);
                 light5.color = k.rgb(0, 0, 0);
-                lightsOut = true; // Svetlo light5 sa zmenilo na červenú, môže sa spustiť spawn
+                lightsOut = true;
                 k.play("racestart", {
-                    volume: 0.5, // set the volume to 50%
-                    speed: 1, // speed up the sound
-                    loop: false, // loop the sound
-                })
-                spawnCar(); // Teraz spawnuje autá
+                    volume: 0.5,
+                    speed: 1,
+                    loop: false
+                });
             });
 
             k.wait(8, () => {
                 racingMusic = k.play("racemusic", {
-                    volume: 0.5, // set the volume to 50%
-                    speed: 1, // speed up the sound
-                    loop: true, // loop the sound
-                })
-                //spawnCar(); // Teraz spawnuje autá
+                    volume: 0.5,
+                    speed: 1,
+                    loop: true
+                });
+                spawnFormula();
             });
-
-            
         }
 
         function addDashedLine(speedy) {
-            const lineHeight = 2 * scaleFactor; // výška čiary
-            const segmentWidth = 10 * scaleFactor; // šírka jednej čiarky
-            let currentOffset = 0; // aktuálny offset na posunutie ciar
-            const segments = []; // array na uloženie referencií na segmenty
-            let forward = true; // určuje smer - dopredu alebo späť
-        
-            const upLine = squareYPosition + (squareHeight / 3);
-            const downLine = squareYPosition + 2 * (squareHeight / 3);
-        
-            // Funkcia na výpočet dynamického intervalu na základe rýchlosti
+            const lineHeight = 2 * scaleFactor;
+            const segmentWidth = 10 * scaleFactor;
+            const segments = [];
+            const upLine = roadPosition + (roadHeight / 3);
+            const downLine = roadPosition + 2 * (roadHeight / 3);
+            let forward = true;
+            let currentOffset = 0;
+
             function calculateInterval(speedy) {
-                const minInterval = 0.05; // minimálny interval (aby to nebolo príliš rýchle)
-                const baseInterval = 0.1; // základný interval pre rýchlosť 1
+                const minInterval = 0.05;
+                const baseInterval = 0.1;
                 return Math.max(minInterval, baseInterval / speedy);
             }
-        
+
             function drawDashedLines(offset) {
-                // Najprv odstráň všetky aktuálne segmenty
                 segments.forEach(segment => {
                     segment.destroy();
                 });
-                segments.length = 0; // Vyprázdni array segmentov
-        
-                // Pridanie vrchnej prerušovanej čiary s posunom
+                segments.length = 0;
+
                 for (let x = k.width() / 6 + 2 * scaleFactor + offset; x < k.width(); x += segmentWidth + segmentWidth) {
                     const segment = k.add([
                         k.rect(segmentWidth, lineHeight),
                         k.pos(x, upLine),
-                        k.color(255, 255, 255), // farba čiary (biela)
+                        k.color(255, 255, 255),
                         k.area(),
-                        "dashedLine",
+                        "dashedLine"
                     ]);
-                    segments.push(segment); // Uloženie segmentu do array
+                    segments.push(segment);
                 }
-                // Pridanie spodnej prerušovanej čiary s posunom
+
                 for (let x = k.width() / 6 + 2 * scaleFactor + offset; x < k.width(); x += segmentWidth + segmentWidth) {
                     const segment = k.add([
                         k.rect(segmentWidth, lineHeight),
                         k.pos(x, downLine),
-                        k.color(255, 255, 255), // farba čiary (biela)
+                        k.color(255, 255, 255),
                         k.area(),
-                        "dashedLine",
+                        "dashedLine"
                     ]);
-                    segments.push(segment); // Uloženie segmentu do array
+                    segments.push(segment);
                 }
             }
-        
-            // Funkcia, ktorá sa bude opakovať podľa dynamického intervalu
+
             function updateDashedLines() {
-                // Vykresli čiary s aktuálnym offsetom
                 drawDashedLines(currentOffset);
-        
-                // Ak sme vpred, posúvame offset dopredu, inak dozadu
+
                 if(lightsOut){
                     if (forward) {
                         currentOffset += segmentWidth;
-                        if (currentOffset >= segmentWidth) { // limit je teraz 1 segment
+                        if (currentOffset >= segmentWidth) {
                             forward = false;
                         }
                     } else {
                         currentOffset -= segmentWidth;
-                        if (currentOffset <= 0) { // ak sa vráti na začiatok, zmeň smer
+                        if (currentOffset <= 0) {
                             forward = true;
                         }
                     }
                 }
-        
-                // Vypočítaj dynamický interval na základe rýchlosti
+
                 const interval = calculateInterval(speedy);
-        
-                // Znova spusti cyklus s novým intervalom
                 k.wait(interval, updateDashedLines);
             }
-        
-            // Spustenie prvého cyklu
+
             updateDashedLines();
         }
 
@@ -450,26 +421,26 @@ function startChromeFormulaGame(k) {
         addDashedLine(1);
 
         const textLabel = k.add([
-            k.text("Sinusoid Car", {
-                size: ((k.height() / 3) / 3) / 2,
+            k.text("Sinusoid Formula", {
+                size: ((k.height() / 3) / 3) / 3,
+                font: "Pixelify2"
             }),
             k.pos(k.width(), k.height() / 2),
             k.move(k.LEFT, speedy),
             k.offscreen({ destroy: true }),
             k.area(),
-            //k.body(),
+            k.color(132, 101, 236)
         ]);
 
-        player.onCollide("car", () => {
+        player.onCollide("otherformula", () => {
             speedy = 300;
-            //counter = 0;
-            k.go("lose", score);
+            k.go("lose", score, formulasCount, trophyCount);
             racingMusic.stop();
-            k.play("carcrash", {
-                volume: 0.5, // set the volume to 50%
-                speed: 1, // speed up the sound
-                loop: false, // loop the sound
-            })
+            k.play("formulacrash", {
+                volume: 0.5,
+                speed: 1,
+                loop: false
+            });
             k.addKaboom(player.pos);
         });
 
@@ -481,15 +452,22 @@ function startChromeFormulaGame(k) {
             trophyCount++;
         });
 
-
         const scoreLabel = k.add([
-            k.text(`Score: ${score}`),
-            k.pos(k.width() / 2, k.height() / 4),
+            k.text(`Score: ${score}`, {font: "Pixelify"}),
+            k.color(132, 101, 236),
+            k.pos(k.width() / 2, k.height() / 4)
         ]);
 
         const trophyLabel = k.add([
-            k.text(`Trophies: ${trophyCount}`),
-            k.pos(k.width() / 2, 3*(k.height() / 4)),
+            k.text(`Trophies: ${trophyCount}`, {font: "Pixelify"}),
+            k.color(132, 101, 236),
+            k.pos(k.width() / 2, 3*(k.height() / 4))
+        ]);
+
+        const formulasLabel = k.add([
+            k.text(`Formulas: ${formulasCount}`, {font: "Pixelify"}),
+            k.color(132, 101, 236),
+            k.pos(k.width() / 2, 3*(k.height() / 4))
         ]);
 
         k.onUpdate(() => {
@@ -498,15 +476,12 @@ function startChromeFormulaGame(k) {
             }
 
             if(score != 0 && score%1000 == 0){
-                
 
                 k.play("spectators", {
-                    volume: 1, // set the volume to 50%
-                    speed: 1, // speed up the sound
-                    loop: false, // loop the sound
-                })
-
-                let currentSong = "racemusic2";
+                    volume: 1,
+                    speed: 1,
+                    loop: false
+                });
 
                 if(songCounter == 0){
                     currentSong = "racemusic";
@@ -515,71 +490,133 @@ function startChromeFormulaGame(k) {
                     currentSong = "racemusic2";
                     songCounter = 0;
                 }
-                
+
                 racingMusic.stop();
                 racingMusic = k.play(currentSong, {
-                    volume: 0.5, // set the volume to 50%
-                    speed: 1, // speed up the sound
-                    loop: true, // loop the sound
-                })
+                    volume: 0.5,
+                    speed: 1,
+                    loop: true
+                });
             }
+
             scoreLabel.text = `Score: ${score}`;
-            trophyLabel.text = `Tophies: ${trophyCount}`;
+            trophyLabel.text = `Trophies: ${trophyCount}`;
+            formulasLabel.text = `Formulas: ${formulasCount}`;
             scoreLabel.pos.x = (k.width() / 2) - (scoreLabel.width / 2);
             trophyLabel.pos.x = (k.width() / 2) - (trophyLabel.width / 2);
+            formulasLabel.pos.x = (k.width() / 2) - (formulasLabel.width / 2);
+            trophyLabel.pos.y = (k.width() / 2, 3*(k.height() / 4) - (trophyLabel.height));
+            formulasLabel.pos.y = (k.width() / 2, 3*(k.height() / 4) + (formulasLabel.height));
             textLabel.pos.y = (k.height() / 2) - textLabel.height / 2 + (2 * scaleFactor);
             speedy += 0.1 * scaleFactor;
         });
     });
 
-    k.scene("lose", (score) => {
+    k.scene("lose", (score, formulasOvertaken, trophyCount) => {
+        if (formulasOvertaken == 0) {
+            score = score * 0.5;
+        } else {
+            score = score * formulasOvertaken * 2;
+        }
+
+        if (trophyCount == 0) {
+            score = score * 0.5;
+        } else {
+            score = score * trophyCount;
+        }
+
         k.add([
-            k.sprite("bean"),
-            k.pos(k.width() / 2, k.height() / 2 - 64),
-            k.scale(2),
+            k.text("Formulas: " + formulasOvertaken, { font: "Pixelify" }),
+            k.pos(k.width() / 2, 1 * (k.height() / 7)),
             k.anchor("center"),
+            k.color(0, 255, 255)
         ]);
 
         k.add([
-            k.text(score),
-            k.pos(k.width() / 2, k.height() / 2 + 64),
-            k.scale(2),
+            k.text("Trophies: " + trophyCount, { font: "Pixelify" }),
+            k.pos(k.width() / 2, 2 * (k.height() / 7)),
             k.anchor("center"),
+            k.color(0, 255, 255)
         ]);
 
-        // Add "Play Again" button
+        k.add([
+            k.text("Final Score", { font: "Pixelify" }),
+            k.pos(k.width() / 2, 3 * (k.height() / 7) - (k.height() / 28)),
+            k.anchor("center"),
+            k.color(0, 255, 255)
+        ]);
+
+        k.add([
+            k.text(Math.round(score), { font: "Pixelify" }),
+            k.pos(k.width() / 2, 3 * (k.height() / 7) + (k.height() / 28)),
+            k.anchor("center"),
+            k.color(0, 255, 255)
+        ]);
+
+        k.add([
+            k.sprite("formula"),
+            k.pos(k.width() / 2, 4 * (k.height() / 7)),
+            k.scale(scaleFactor),
+            k.anchor("center")
+        ]);
+
         const playAgainButton = k.add([
-            k.text('Play Again'),
-            k.pos(k.width() / 2, k.height() / 2 + 140),
-            k.scale(1),
+            k.text('Play Again', { font: "Pixelify" }),
+            k.pos(k.width() / 2, 5 * (k.height() / 7)),
             k.area(),
             k.anchor('center'),
+            k.color(0, 255, 255)
         ]);
 
-        // Add "Play Again" button
         const exitButton = k.add([
-            k.text('Exit'),
-            k.pos(k.width() / 2, k.height() / 2 + 200),
-            k.scale(1),
+            k.text('Exit', { font: "Pixelify" }),
+            k.pos(k.width() / 2, 6 * (k.height() / 7)),
             k.area(),
             k.anchor('center'),
+            k.color(0, 255, 255)
         ]);
 
-        // When the button is clicked or space is pressed, restart the game
+        async function countdownAndGo(button, scene) {
+            for (let i = 5; i > 0; i--) {
+                button.text = `${i}`;
+                await k.wait(1);
+            }
+            k.go(scene);
+        }
+
+        isButtonClicked = false;
+
         playAgainButton.onClick(() => {
-            startChromeFormulaGame(k); // Restart the game
+            if (!isButtonClicked) {
+                isButtonClicked = true;
+                countdownAndGo(playAgainButton, "game");
+            }
         });
 
         exitButton.onClick(() => {
-            import('../../scenes/arcade').then((_) => {
-                k.go('arcade');
-            });
+            if (!isButtonClicked) {
+                isButtonClicked = true;
+
+                import('../../scenes/arcade').then((_) => {
+                    countdownAndGo(exitButton, 'arcade');
+                });
+            }
         });
 
-        k.onKeyPress("space", () => k.go("game"));
-        k.onClick(() => k.go("game"));
-    });
+        k.onKeyPress("space", () => {
+            if (!isButtonClicked) {
+                isButtonClicked = true;
+                countdownAndGo(playAgainButton, "game");
+            }
+        });
 
+        k.onClick(() => {
+            if (!isButtonClicked) {
+                isButtonClicked = true;
+                countdownAndGo(playAgainButton, "game");
+            }
+        });
+    });
+    
     k.go("game");
 }
-
