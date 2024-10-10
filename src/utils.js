@@ -174,16 +174,16 @@ export async function getAssets(){
     const fileSHA = await fetch("https://api.github.com/repos/zero-to-mastery/ZTM-Quest/contents/asset_credits.md")
     const data = await fileSHA.json()
     const fileContents = atob(data.content)
-    const contentArray = fileContents.split("\n").filter(content=>content.trim()!=='')
-    return contentArray
+    return fileContents.split("\n").filter(content=>content.trim()!=='').join("\n")
+    
 }
 
 export async function getContributors(){
     const contributors = await fetch("https://api.github.com/repos/zero-to-mastery/ZTM-Quest/contributors")
     const data = await contributors.json()
-    const listOfNames = data.map((person)=>{
+    return data.map((person)=>{
         return person.login
-    })
+    }).join("\n")
+    
 }
-
 
