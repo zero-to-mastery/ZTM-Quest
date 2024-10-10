@@ -1,3 +1,5 @@
+import { addGameObjects } from '../core/kaplay/gameObjects';
+import { attachInteractions } from '../core/kaplay/interactions';
 import { makePlayer } from '../factories/player.factory';
 import { k } from '../kplayCtx';
 import { getGameState } from '../utils/gameState';
@@ -8,7 +10,7 @@ export async function bootstrap(bootMapCb, mapArgs) {
   const gameState = getGameState();
   const player = makePlayer(gameState.player);
 
-  const [map, spawnpoint, addGameObjects, attachInteractions] = await bootMapCb();
+  const [map, spawnpoint, gameObjects, interactions] = await bootMapCb();
 
   player.pos = (mapArgs?.enter_tag && spawnpoint[mapArgs?.enter_tag]) || spawnpoint.player;
 
@@ -17,6 +19,6 @@ export async function bootstrap(bootMapCb, mapArgs) {
   k.canvas.focus();
 
   addPlayerControls(player);
-  addGameObjects(map, spawnpoint).forEach((obj) => map.add(obj));
-  attachInteractions('player');
+  addGameObjects(gameObjects, map, spawnpoint).forEach((obj) => map.add(obj));
+  attachInteractions(interactions, 'player');
 }

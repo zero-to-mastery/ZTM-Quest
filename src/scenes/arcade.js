@@ -1,7 +1,7 @@
-import { addGameObjects } from '../gameObjects/map_arcade';
-import { initMap } from '../init/map.init';
-import { attachInteractions } from '../interactions/map_arcade';
 import { k } from '../kplayCtx';
+import { initMap } from '../init/map.init';
+import gameObjects from '../gameObjects/map_arcade';
+import interactions from '../interactions/map_arcade';
 
 export async function arcade() {
     const objectConfig = {
@@ -21,5 +21,5 @@ export async function arcade() {
         k.vec2(29, 11)
     );
 
-    return [map, spawnpoint, addGameObjects, attachInteractions]
+    return [map, spawnpoint, gameObjects, interactions]
 }

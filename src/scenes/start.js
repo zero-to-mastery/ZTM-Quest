@@ -1,7 +1,8 @@
 import { initMap } from '../init/map.init';
 import { k } from '../kplayCtx';
-import { addGameObjects } from './../gameObjects/map_start';
-import { attachInteractions } from './../interactions/map_start';
+import gameObjects from '../gameObjects/map_start';
+import interactions from '../interactions/map_start';
+
 
 export async function start() {
     const objectConfig = {
@@ -21,5 +22,5 @@ export async function start() {
         k.vec2(0, 11)
     );
 
-    return [map, spawnpoint, addGameObjects, attachInteractions]
+    return [map, spawnpoint, gameObjects, interactions]
 }

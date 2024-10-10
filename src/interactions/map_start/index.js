@@ -1,5 +1,3 @@
-import { k } from '../../kplayCtx';
-
 import { interactionWithBruno } from './bruno.interaction';
 import { enterMapCityLeftInteraction } from './enterMapCityLeft.interaction';
 import { enterMapCityRightInteraction } from './enterMapCityRight.interactions';
@@ -30,9 +28,4 @@ const interactions = [
     interactionWithLocker,
 ];
 
-export const attachInteractions = (gameObjTag) => {
-    const map = k.get('main_map')[0];
-    const gameObj = k.get(gameObjTag)[0];
-
-    interactions.forEach((cb) => cb(gameObj, k, map));
-};
+export default interactions;

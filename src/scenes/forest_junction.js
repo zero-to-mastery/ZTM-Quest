@@ -1,6 +1,6 @@
-import { addGameObjects } from '../gameObjects/map_forest_junction';
+import gameObjects from '../gameObjects/map_forest_junction';
 import { initMap } from '../init/map.init';
-import { attachInteractions } from '../interactions/map_forest_junction';
+import interactions from '../interactions/map_forest_junction';
 
 export async function forestJunction() {
     const objectConfig = {
@@ -18,5 +18,5 @@ export async function forestJunction() {
         './maps/map_forest_junction.json'
     );
 
-    return [map, spawnpoint, addGameObjects, attachInteractions]
+    return [map, spawnpoint, gameObjects, interactions]
 }

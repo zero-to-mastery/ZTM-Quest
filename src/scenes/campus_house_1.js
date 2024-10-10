@@ -1,6 +1,6 @@
-import { addGameObjects } from '../gameObjects/map_campus_house_1';
+import gameObjects from '../gameObjects/map_campus_house_1';
 import { initMap } from '../init/map.init';
-import { attachInteractions } from '../interactions/map_campus_house_1';
+import interactions from '../interactions/map_campus_house_1';
 
 export async function campusHouse1() {
     const objectConfig = {
@@ -18,5 +18,5 @@ export async function campusHouse1() {
         './maps/map_campus_house_1.json'
     );
 
-    return [map, spawnpoint, addGameObjects, attachInteractions]
+    return [map, spawnpoint, gameObjects, interactions]
 }
