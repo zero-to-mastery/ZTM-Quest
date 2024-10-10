@@ -1,3 +1,5 @@
+import { k } from '../../kplayCtx';
+
 import { jessie } from './jessie.gameObject';
 
 import { npcsInArcadeMap } from './npcsOnmap';
@@ -8,7 +10,7 @@ const gameObjects = [
     jessie,
 ];
 
-export const addGameObjects = (k, map, spawnpoints) => {
+export const addGameObjects = (map, spawnpoints) => {
     return gameObjects.reduce((gameObjAcc, cb) => {
         const temp = cb(k, map, spawnpoints);
 

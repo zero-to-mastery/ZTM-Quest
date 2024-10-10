@@ -1,11 +1,12 @@
 import { scaleFactor } from './constants';
 import { animations, stopCharacterAnims } from './utils/animation';
 import { getCamScale } from './utils';
+import { k } from './kplayCtx';
 
 // Manage multiple pressed buttons
 const pressed = new Set();
 
-export const addPlayerControls = (k, player) => {
+export const addPlayerControls = (player) => {
     k.onButtonPress(
         ['up', 'down', 'left', 'right'],
         (dir) => player.isInDialog || pressed.add(dir)
@@ -64,7 +65,7 @@ export const addPlayerControls = (k, player) => {
             pressed.size === 1
                 ? player.speed
                 : // Dot product for diagonal movement 45%
-                  player.speed * 0.707106781188095; // 1 / sqrt(2)
+                player.speed * 0.707106781188095; // 1 / sqrt(2)
 
         player.move(moveDir.unit().scale(speed));
     });

@@ -1,3 +1,5 @@
+import { k } from '../../kplayCtx';
+
 import { bruno } from './bruno.gameObject';
 import { cake } from './cake.gameObject';
 import { npcsOnChairs } from './npcsOnChairs.gameObject';
@@ -23,7 +25,7 @@ const gameObjects = [
     tvVideo,
 ];
 
-export const addGameObjects = (k, map, spawnpoints) => {
+export const addGameObjects = (map, spawnpoints) => {
     return gameObjects.reduce((gameObjAcc, cb) => {
         const temp = cb(k, map, spawnpoints);
 

@@ -1,3 +1,5 @@
+import { k } from '../../kplayCtx';
+
 import { enterMapCityInteraction } from './enterMapCity.interactions';
 import { interactionWithGameMachine8 } from './game_machine_8';
 import { interactionWithGameMachine2 } from './game_machine_2.interactions';
@@ -22,8 +24,9 @@ const interactions = [
     interactionWithGameMachine11,
 ];
 
-export const attachInteractions = (gameObj, k) => {
+export const attachInteractions = (gameObjTag) => {
     const map = k.get('main_map')[0];
+    const gameObj = k.get(gameObjTag)[0];
 
     interactions.forEach((cb) => cb(gameObj, k, map));
 };

@@ -1,6 +1,8 @@
+import { k } from '../../kplayCtx';
+
 const gameObjects = [];
 
-export const addGameObjects = (k, map, spawnpoints) => {
+export const addGameObjects = (map, spawnpoints) => {
     return gameObjects.reduce((gameObjAcc, cb) => {
         const temp = cb(k, map, spawnpoints);
 

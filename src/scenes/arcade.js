@@ -1,12 +1,9 @@
-import { scaleFactor } from '../constants';
-import { makePlayer } from '../factories/player.factory';
-import { initMap } from '../init/map.init';
-import { k } from '../kplayCtx';
-import { attachInteractions } from '../interactions/map_arcade';
 import { addGameObjects } from '../gameObjects/map_arcade';
-import { addPlayerControls } from '../player.controls';
+import { initMap } from '../init/map.init';
+import { attachInteractions } from '../interactions/map_arcade';
+import { k } from '../kplayCtx';
 
-k.scene('arcade', async () => {
+export async function arcade() {
     const objectConfig = {
         static: [
             'map_boundaries',
@@ -18,20 +15,11 @@ k.scene('arcade', async () => {
         interactionObjects: ['interaction_objects'],
     };
     const [map, spawnpoint] = await initMap(
-        k,
         objectConfig,
         './exports/maps/map_arcade.png',
         './maps/map_arcade.json',
         k.vec2(29, 11)
     );
-    const player = makePlayer({}, scaleFactor);
 
-    player.pos = spawnpoint.player;
-    k.add(map);
-    k.add(player);
-    k.canvas.focus();
-
-    attachInteractions(player, k);
-    addGameObjects(k, map, spawnpoint).forEach((obj) => k.add(obj));
-    addPlayerControls(k, player);
-});
+    return [map, spawnpoint, addGameObjects, attachInteractions]
+}

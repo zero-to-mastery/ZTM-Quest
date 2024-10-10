@@ -1,9 +1,10 @@
+import { k } from '../kplayCtx';
+
 import { scaleFactor } from '../constants';
 let uiLoaded = false;
 import { setCamScale } from '../utils';
 
 export const initMap = async (
-    k,
     objectConfig,
     pathToMapPng,
     pathToMapJson,

@@ -1,3 +1,5 @@
+import { k } from '../../kplayCtx';
+
 import { campusHouse1OpenDoor } from './campusHouse1OpenDoor';
 import { npcsInCityMap } from './npcsOnmap_city';
 const gameObjects = [
@@ -6,7 +8,7 @@ const gameObjects = [
     campusHouse1OpenDoor,
 ];
 
-export const addGameObjects = (k, map, spawnpoints) => {
+export const addGameObjects = (map, spawnpoints) => {
     return gameObjects.reduce((gameObjAcc, cb) => {
         const temp = cb(k, map, spawnpoints);
 
