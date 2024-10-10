@@ -1,5 +1,3 @@
-import { scaleFactor } from '../../constants';
-
 export const ztmTrailer = (k, map, spawnpoints) => {
     k.loadSprite('ztmTrailer', './assets/sprites/ztm_trailer.png', {
         sliceX: 3,
@@ -23,10 +21,10 @@ export const ztmTrailer = (k, map, spawnpoints) => {
         }),
         k.body(),
         k.pos(
-            (monitorLobby.pos.x + 4) * scaleFactor,
-            (monitorLobby.pos.y + 11) * scaleFactor
+            (monitorLobby.pos.x + 2),
+            (monitorLobby.pos.y + 9)
         ),
-        k.scale(scaleFactor - 0.7),
+        k.scale(0.8),
         k.body({ isStatic: true }),
         `anim_monitor_lobby`,
         'map_start',

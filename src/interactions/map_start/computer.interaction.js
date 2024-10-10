@@ -20,7 +20,7 @@ const careerPathDialogue = [
 ];
 
 export const interactionWithComputer = (player, k, map) => {
-    const [computer] = k.query({ include: 'computer' });
+    const [computer] = map.query({ include: 'computer' });
 
     player.onCollide('computer', () => {
         player.isInDialog = true;
