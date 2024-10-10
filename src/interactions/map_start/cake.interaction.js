@@ -16,9 +16,9 @@ const cakeDialogue = [
 ];
 
 export const interactionWithCake = (player, k, map) => {
-    player.onCollide('cake', (table) => {
+    player.onCollide('cake', () => {
         player.isInDialog = true;
-        player.speed = 500;
+        player.speed = speedByScaleFactor * 2.5;
         displayDialogue({
             k,
             player,
@@ -29,7 +29,7 @@ export const interactionWithCake = (player, k, map) => {
         });
     });
 
-    player.onCollideEnd('cake', (table) => {
+    player.onCollideEnd('cake', () => {
         setTimeout(() => {
             player.isInDialog = true;
             player.speed = speedByScaleFactor; // Reset to default speed
