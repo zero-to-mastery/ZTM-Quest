@@ -560,6 +560,22 @@ function startChromeFormulaGame(k) {
             k.anchor("center")
         ]);
 
+        const playAgainButton2 = k.add([
+            k.text('Again', { font: "Pixelify" }),
+            k.pos(k.width() / 2 + k.width()/4, 4 * (k.height() / 8)),
+            k.area(),
+            k.anchor('center'),
+            k.color(0, 255, 255)
+        ]);
+
+        const exitButton2 = k.add([
+            k.text('Exit', { font: "Pixelify" }),
+            k.pos(k.width() / 2 - k.width()/4, 4 * (k.height() / 8)),
+            k.area(),
+            k.anchor('center'),
+            k.color(0, 255, 255)
+        ]);
+
         const playAgainButton = k.add([
             k.text('Play Again', { font: "Pixelify" }),
             k.pos(k.width() / 2, 5 * (k.height() / 7)),
@@ -603,17 +619,34 @@ function startChromeFormulaGame(k) {
             }
         });
 
+        playAgainButton2.onClick(() => {
+            if (!isButtonClicked) {
+                isButtonClicked = true;
+                countdownAndGo(playAgainButton2, "game");
+            }
+        });
+
+        exitButton2.onClick(() => {
+            if (!isButtonClicked) {
+                isButtonClicked = true;
+
+                import('../../scenes/arcade').then((_) => {
+                    countdownAndGo(exitButton2, 'arcade');
+                });
+            }
+        });
+
         k.onKeyPress("space", () => {
             if (!isButtonClicked) {
                 isButtonClicked = true;
-                countdownAndGo(playAgainButton, "game");
+                countdownAndGo(playAgainButton2, "game");
             }
         });
 
         k.onClick(() => {
             if (!isButtonClicked) {
                 isButtonClicked = true;
-                countdownAndGo(playAgainButton, "game");
+                countdownAndGo(playAgainButton2, "game");
             }
         });
     });
