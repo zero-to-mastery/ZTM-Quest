@@ -232,7 +232,6 @@ export async function getAssets(){
     const data = await fileSHA.json()
     const fileContents = atob(data.content)
     return fileContents.split("\n").filter(content=>content.trim()!=='').join("\n")
-
 }
 
 export async function getContributors(){
@@ -241,5 +240,6 @@ export async function getContributors(){
     return data.map((person)=>{
         return person.login
     }).join("\n")
+
 }
 
