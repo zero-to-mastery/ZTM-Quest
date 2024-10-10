@@ -5,6 +5,7 @@ import { attachInteractions } from '../interactions/map_start';
 import { addGameObjects } from '../gameObjects/map_start';
 import { addPlayerControls } from '../player.controls';
 import { getGameState } from '../utils/gameState';
+import { addInstructions } from '../utils';
 
 k.scene('start', async (enter_tag) => {
     const objectConfig = {
@@ -34,6 +35,7 @@ k.scene('start', async (enter_tag) => {
     k.add(player);
     k.canvas.focus();
 
+    addInstructions()
     addGameObjects(k, map, spawnpoint).forEach((obj) => k.add(obj));
     attachInteractions(player, k);
     k.onKeyPress('o', () => {

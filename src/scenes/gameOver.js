@@ -1,5 +1,5 @@
 import { k } from '../kplayCtx';
-import { getAssets,getContributors } from '../utils';
+import { getAssets,getContributors,hideInstructions } from '../utils';
 
 k.scene('gameOver', async () => {
 
@@ -13,6 +13,8 @@ k.scene('gameOver', async () => {
     const scrollSpeed = 70
     const contributors = await getContributors()
     const assets = await getAssets() 
+
+    hideInstructions()
 
     const creditText =`
 Special Thanks To All Of The Contributors!!
