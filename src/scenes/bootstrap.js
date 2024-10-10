@@ -17,6 +17,6 @@ export async function bootstrap(bootMapCb, mapArgs) {
   k.canvas.focus();
 
   addPlayerControls(player);
-  addGameObjects(map, spawnpoint).forEach((obj) => k.add(obj));
+  addGameObjects(map, spawnpoint).forEach((obj) => map.add(obj));
   attachInteractions('player');
 }
