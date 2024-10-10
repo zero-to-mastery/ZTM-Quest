@@ -1,4 +1,3 @@
-import { scaleFactor } from '../../constants';
 import { makeNpc } from '../../factories/npc.factory';
 
 export const npcsInArcadeMap = (k, map, spawnpoints) => {
@@ -8,7 +7,8 @@ export const npcsInArcadeMap = (k, map, spawnpoints) => {
     const createNpcsForPattern = (
         patterns,
         adjustments,
-        direction = 'idle-side'
+        direction = 'idle-side',
+        flipX = false
     ) => {
         const objects = map
             .get('*')
@@ -25,12 +25,16 @@ export const npcsInArcadeMap = (k, map, spawnpoints) => {
             const npc = makeNpc(
                 obj.name,
                 k.vec2(
-                    (map.pos.x + obj.pos.x + xAdjust) * scaleFactor,
-                    (map.pos.y + obj.pos.y + yAdjust) * scaleFactor
+                    map.pos.x + obj.pos.x + xAdjust,
+                    map.pos.y + obj.pos.y + yAdjust
                 ),
                 npcDirection,
                 'map_arcade'
             );
+
+            if (flipX) {
+                npc.flipX = true;
+            }
 
             npcStore.push(npc);
         });
@@ -45,8 +49,9 @@ export const npcsInArcadeMap = (k, map, spawnpoints) => {
         },
         {
             patterns: [/bench_/],
-            adjustments: { xAdjust: 20, yAdjust: 18 },
+            adjustments: { xAdjust: 30, yAdjust: 18 },
             direction: 'idle-side',
+            flipX: true,
         },
         {
             patterns: [/game_machine_crawl/],
@@ -61,9 +66,11 @@ export const npcsInArcadeMap = (k, map, spawnpoints) => {
     ];
 
     // Generate NPCs
-    npcPatterns.forEach(({ patterns, adjustments, direction }) => {
-        createNpcsForPattern(patterns, adjustments, direction);
-    });
+    npcPatterns.forEach(
+        ({ patterns, adjustments, direction, flipX = false }) => {
+            createNpcsForPattern(patterns, adjustments, direction, flipX);
+        }
+    );
 
     return npcStore;
 };

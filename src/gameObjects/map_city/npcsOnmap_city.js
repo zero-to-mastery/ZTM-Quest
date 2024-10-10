@@ -1,4 +1,3 @@
-import { scaleFactor } from '../../constants';
 import { makeNpc } from '../../factories/npc.factory';
 
 export const npcsInCityMap = (k, map, spawnpoints) => {
@@ -16,7 +15,8 @@ export const npcsInCityMap = (k, map, spawnpoints) => {
                 patterns.some((pattern) =>
                     obj.tags.some((tag) => pattern.test(tag))
                 )
-            );
+            )
+            .splice(0, 1);
 
         objects.forEach((obj) => {
             const { xAdjust, yAdjust } = adjustments;
@@ -25,8 +25,8 @@ export const npcsInCityMap = (k, map, spawnpoints) => {
             const npc = makeNpc(
                 obj.name,
                 k.vec2(
-                    (map.pos.x + obj.pos.x + xAdjust) * scaleFactor,
-                    (map.pos.y + obj.pos.y + yAdjust) * scaleFactor
+                    map.pos.x + obj.pos.x + xAdjust,
+                    map.pos.y + obj.pos.y + yAdjust
                 ),
                 npcDirection,
                 'map_city'
@@ -39,7 +39,17 @@ export const npcsInCityMap = (k, map, spawnpoints) => {
     // Define patterns and their corresponding adjustments
     const npcPatterns = [
         {
-            patterns: [/stall_/, /snack_bar_/],
+            patterns: [/stall_/],
+            adjustments: { xAdjust: 12, yAdjust: 18 },
+            direction: 'idle-down',
+        },
+        {
+            patterns: [/snack_bar_/],
+            adjustments: { xAdjust: 12, yAdjust: 18 },
+            direction: 'idle-down',
+        },
+        {
+            patterns: [/snack_bar_street/],
             adjustments: { xAdjust: 12, yAdjust: 18 },
             direction: 'idle-down',
         },
@@ -52,11 +62,6 @@ export const npcsInCityMap = (k, map, spawnpoints) => {
             patterns: [/burger_bar_chairs/],
             adjustments: { xAdjust: 12, yAdjust: 6 },
             direction: 'idle-up',
-        },
-        {
-            patterns: [/enter_map_arcade/],
-            adjustments: { xAdjust: 12, yAdjust: 6 },
-            direction: 'idle-down',
         },
         {
             patterns: [/car_/],

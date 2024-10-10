@@ -1,4 +1,3 @@
-import { scaleFactor } from '../../constants';
 import { makeNpc } from '../../factories/npc.factory';
 
 export const npcsOnChairs = (k, map, spawnpoints) => {
@@ -20,10 +19,7 @@ export const npcsOnChairs = (k, map, spawnpoints) => {
         // createa npc for each chair
         const npc = makeNpc(
             chair.name,
-            k.vec2(
-                (map.pos.x + chair.pos.x + 6) * scaleFactor,
-                (map.pos.y + chair.pos.y + 12) * scaleFactor
-            ),
+            k.vec2(map.pos.x + chair.pos.x + 8, map.pos.y + chair.pos.y + 12),
             'idle-side',
             'map_start'
         );

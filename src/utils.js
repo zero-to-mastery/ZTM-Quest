@@ -175,7 +175,6 @@ export function setCamScale(k) {
 export const buildInteractionPrompt = (sprite, k) => {
     const info = document.getElementById('interaction-info');
     info.style.display = 'flex';
-    const spritePos = sprite.pos;
 
     k.loadSprite('question-bubble', './assets/sprites/question-bubble.png', {
         sliceX: 8,
@@ -188,13 +187,14 @@ export const buildInteractionPrompt = (sprite, k) => {
         },
     });
 
-    k.add([
+    sprite.add([
         k.sprite('question-bubble', { anim: 'float' }),
         k.animate([0, 1, 2, 3, 4, 5, 6, 7]),
         k.area(),
         k.color(255, 255, 255),
         k.outline(2, k.Color.BLACK),
-        k.pos(spritePos.x + 5, spritePos.y - sprite.height - 20),
+        k.anchor('botleft'),
+        k.pos(k.vec2(0, -10)),
         k.layer('ui'),
         `question-bubble`,
     ]);
@@ -203,7 +203,12 @@ export const buildInteractionPrompt = (sprite, k) => {
 export const tearDownInteractionPrompt = (k) => {
     const info = document.getElementById('interaction-info');
     info.style.display = 'none';
-    if (k.get('question-bubble')[0]) {
-        k.destroy(k.get('question-bubble')[0]);
+
+    const questionBubbles = k.get('question-bubble', { recursive: true });
+
+    if (questionBubbles.length > 0) {
+        questionBubbles.forEach((bubble) => {
+            bubble.destroy();
+        });
     }
 };
