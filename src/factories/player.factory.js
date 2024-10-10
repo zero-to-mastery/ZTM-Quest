@@ -94,7 +94,7 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
             changePlayer,
         },
         k.layer('player'),
-        'player'
+        'player',
     ]);
 
     return player;

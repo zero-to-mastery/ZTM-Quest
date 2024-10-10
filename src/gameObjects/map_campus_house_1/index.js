@@ -1,4 +1,3 @@
-
 const gameObjects = [
     // Add more game objects here
 ];

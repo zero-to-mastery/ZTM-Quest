@@ -1,4 +1,3 @@
-
 import { enterMapForestJunctionInteraction } from './enterMapForestJunction.interactions';
 import { interactionWithTree } from './tree.interactions';
 import { interactionWithSwampyLog } from './swampyLog.interactions';

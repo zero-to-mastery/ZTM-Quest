@@ -18,5 +18,5 @@ export async function campusHouse1() {
         './maps/map_campus_house_1.json'
     );
 
-    return [map, spawnpoint, gameObjects, interactions]
+    return [map, spawnpoint, gameObjects, interactions];
 }

@@ -18,5 +18,5 @@ export async function forestJunction() {
         './maps/map_forest_junction.json'
     );
 
-    return [map, spawnpoint, gameObjects, interactions]
+    return [map, spawnpoint, gameObjects, interactions];
 }

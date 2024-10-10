@@ -15,7 +15,8 @@ export const npcsInCityMap = (k, map, spawnpoints) => {
                 patterns.some((pattern) =>
                     obj.tags.some((tag) => pattern.test(tag))
                 )
-            ).splice(0, 1);
+            )
+            .splice(0, 1);
 
         objects.forEach((obj) => {
             const { xAdjust, yAdjust } = adjustments;
@@ -24,8 +25,8 @@ export const npcsInCityMap = (k, map, spawnpoints) => {
             const npc = makeNpc(
                 obj.name,
                 k.vec2(
-                    (map.pos.x + obj.pos.x + xAdjust),
-                    (map.pos.y + obj.pos.y + yAdjust)
+                    map.pos.x + obj.pos.x + xAdjust,
+                    map.pos.y + obj.pos.y + yAdjust
                 ),
                 npcDirection,
                 'map_city'

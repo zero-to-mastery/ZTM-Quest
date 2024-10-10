@@ -6,19 +6,20 @@ import { getGameState } from '../utils/gameState';
 import { addPlayerControls } from './../player.controls';
 
 export async function bootstrap(bootMapCb, mapArgs) {
+    const gameState = getGameState();
+    const player = makePlayer(gameState.player);
 
-  const gameState = getGameState();
-  const player = makePlayer(gameState.player);
+    const [map, spawnpoint, gameObjects, interactions] = await bootMapCb();
 
-  const [map, spawnpoint, gameObjects, interactions] = await bootMapCb();
+    player.pos =
+        (mapArgs?.enter_tag && spawnpoint[mapArgs?.enter_tag]) ||
+        spawnpoint.player;
 
-  player.pos = (mapArgs?.enter_tag && spawnpoint[mapArgs?.enter_tag]) || spawnpoint.player;
+    k.add(map);
+    k.add(player);
+    k.canvas.focus();
 
-  k.add(map);
-  k.add(player);
-  k.canvas.focus();
-
-  addPlayerControls(player);
-  addGameObjects(gameObjects, map, spawnpoint).forEach((obj) => map.add(obj));
-  attachInteractions(interactions, 'player');
+    addPlayerControls(player);
+    addGameObjects(gameObjects, map, spawnpoint).forEach((obj) => map.add(obj));
+    attachInteractions(interactions, 'player');
 }

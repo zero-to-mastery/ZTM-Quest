@@ -1,4 +1,3 @@
-
 export const cake = (k, map, spawnpoints) => {
     k.loadSprite('cake', './assets/sprites/cake.png');
 

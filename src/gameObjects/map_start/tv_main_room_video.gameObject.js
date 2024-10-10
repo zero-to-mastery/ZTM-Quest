@@ -21,10 +21,7 @@ export const tvVideo = (k, map, spawnpoints) => {
             ),
         }),
         k.body(),
-        k.pos(
-            (tv_main_room.pos.x + 2),
-            (tv_main_room.pos.y + 13)
-        ),
+        k.pos(tv_main_room.pos.x + 2, tv_main_room.pos.y + 13),
         k.scale(0.7),
         k.body({ isStatic: true }),
         `tv_video`,

@@ -13,10 +13,7 @@ export const computer = (k, map, spawnpoints) => {
     return k.make([
         k.sprite('computer', { frame: 2 }),
         k.area(),
-        k.pos(
-            (tableRoom1.pos.x + 3),
-            (tableRoom1.pos.y + 23)
-        ),
+        k.pos(tableRoom1.pos.x + 3, tableRoom1.pos.y + 23),
         k.scale(0.7),
         k.body({ isStatic: true }),
         k.offscreen({ hide: true, distance: 10 }),

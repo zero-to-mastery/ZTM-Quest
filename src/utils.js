@@ -37,7 +37,7 @@ export async function displayDialogue({
     player,
     characterName,
     text,
-    onDisplayEnd = () => { },
+    onDisplayEnd = () => {},
 }) {
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
@@ -98,7 +98,7 @@ export async function displayPermissionBox({
     k,
     player,
     text,
-    onDisplayEnd = () => { },
+    onDisplayEnd = () => {},
 }) {
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');

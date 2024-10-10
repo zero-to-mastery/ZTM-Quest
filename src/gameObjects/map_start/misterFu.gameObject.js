@@ -22,8 +22,8 @@ export const misterFu = (k, map, spawnpoints) => {
         k.body({ isStatic: true }),
         k.anchor('center'),
         k.pos(
-            map.pos.x + (spawnpoints.player.x / scaleFactor) + 25,
-            map.pos.y + (spawnpoints.player.y / scaleFactor) - 20
+            map.pos.x + spawnpoints.player.x / scaleFactor + 25,
+            map.pos.y + spawnpoints.player.y / scaleFactor - 20
         ),
         k.offscreen({ hide: true, distance: 10 }),
         'misterFu',

@@ -25,8 +25,8 @@ export const npcsInArcadeMap = (k, map, spawnpoints) => {
             const npc = makeNpc(
                 obj.name,
                 k.vec2(
-                    (map.pos.x + obj.pos.x + xAdjust),
-                    (map.pos.y + obj.pos.y + yAdjust)
+                    map.pos.x + obj.pos.x + xAdjust,
+                    map.pos.y + obj.pos.y + yAdjust
                 ),
                 npcDirection,
                 'map_arcade'
@@ -66,9 +66,11 @@ export const npcsInArcadeMap = (k, map, spawnpoints) => {
     ];
 
     // Generate NPCs
-    npcPatterns.forEach(({ patterns, adjustments, direction, flipX = false }) => {
-        createNpcsForPattern(patterns, adjustments, direction, flipX);
-    });
+    npcPatterns.forEach(
+        ({ patterns, adjustments, direction, flipX = false }) => {
+            createNpcsForPattern(patterns, adjustments, direction, flipX);
+        }
+    );
 
     return npcStore;
 };

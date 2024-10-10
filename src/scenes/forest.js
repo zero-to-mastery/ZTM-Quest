@@ -18,5 +18,5 @@ export async function forest() {
         './maps/map_forest.json'
     );
 
-    return [map, spawnpoint, gameObjects, interactions]
+    return [map, spawnpoint, gameObjects, interactions];
 }

@@ -19,5 +19,5 @@ export async function city() {
         './maps/map_city.json'
     );
 
-    return [map, spawnpoint, gameObjects, interactions]
+    return [map, spawnpoint, gameObjects, interactions];
 }

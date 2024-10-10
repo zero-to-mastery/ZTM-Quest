@@ -20,10 +20,7 @@ export const ztmTrailer = (k, map, spawnpoints) => {
             ),
         }),
         k.body(),
-        k.pos(
-            (monitorLobby.pos.x + 2),
-            (monitorLobby.pos.y + 9)
-        ),
+        k.pos(monitorLobby.pos.x + 2, monitorLobby.pos.y + 9),
         k.scale(0.8),
         k.body({ isStatic: true }),
         `anim_monitor_lobby`,
