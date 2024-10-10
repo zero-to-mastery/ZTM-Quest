@@ -32,52 +32,12 @@
                 position: relative;
             }
 
-            #custom-prompt {
+            .d-desktop-hide {
                 display: none;
-                position: absolute;
-                left: 15%;
-                right: 15%;
-                bottom: 2vh;
-                background: #fff;
-                border-radius: 10px;
-                border: 2px solid #007bff;
-                padding: 1rem;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-                flex-direction: column;
-                align-items: flex-start;
-                word-spacing: 0.2rem;
-                z-index: 10; /* Ensure it's above other UI elements */
             }
 
-            #textbox {
-                position: absolute;
-                left: 15%;
-                right: 15%;
-                bottom: 2vh;
-                min-height: 8vh;
-                background: #fff;
-                border-radius: 10px;
-                border: 2px solid #007bff;
-                outline: none;
-                padding: 1.5rem;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-                word-spacing: 0.2rem;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-                transition:
-                    box-shadow 0.3s ease,
-                    transform 0.3s ease,
-                    opacity 0.5s ease;
-                opacity: 0;
-                animation: fadeIn 0.8s forwards;
-                font-size: 1.2rem;
-            }
-
-            #textbox:hover {
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-                transform: translateY(-2px);
+            .d-mobile-hide {
+                display: none;
             }
 
             .btn-container {
@@ -87,56 +47,6 @@
                 gap: 0.6rem;
                 opacity: 0;
                 animation: fadeIn 1s forwards 0.6s;
-            }
-
-            #note,
-            #note-mobile {
-                position: absolute;
-                left: 5%;
-                top: 2vh;
-                /* display: flex; */
-                flex-direction: column;
-                color: #fff;
-                text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
-                font-size: 1.25rem;
-                line-height: 1.6;
-                background-color: black;
-                border-radius: 15px;
-                padding: 0.5rem 1rem;
-                opacity: 0;
-                animation: fadeIn 1s forwards 0.7s;
-            }
-
-            #note-mobile {
-                top: auto;
-                bottom: 2vh;
-                font-size: 1rem;
-            }
-
-            #interaction-note,
-            #interaction-note-mobile {
-                position: absolute;
-                right: 5%;
-                top: 2vh;
-                display: flex;
-                text-align: center;
-                align-items: center;
-                gap: 1rem;
-                color: #fff;
-                text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
-                font-size: 1.25rem;
-                line-height: 1.6;
-                background-color: black;
-                border-radius: 15px;
-                padding: 0.5rem 1rem;
-                opacity: 0;
-                animation: fadeIn 0.5s forwards;
-            }
-
-            #interaction-note-mobile {
-                bottom: 2vh;
-                top: auto;
-                font-size: 1rem;
             }
 
             @keyframes fadeIn {
@@ -160,56 +70,108 @@
                     transform: translateY(0);
                 }
             }
+
+            #energy-container {
+                padding: 0.5rem 1rem;
+                position: absolute;
+                bottom: 2vh;
+                right: calc(50% - 105px);
+                display: flex;
+                align-items: center;
+                background-color: black;
+                border-radius: 15px;
+                opacity: 0;
+                animation: fadeIn 1s forwards 0.7s;
+            }
+
+            #energy-title {
+                margin: 0;
+                margin-right: 5px;
+                color: #fff;
+                text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+                font-size: 1.25rem;
+                line-height: 1.6;
+            }
+
+            #energy-bar-total {
+                width: 100px;
+                height: 0.8rem;
+                background-color: red;
+            }
+
+            #energy-bar-remain {
+                width: 100%;
+                height: 100%;
+                background-color: lightgreen;
+            }
         </style>
     </head>
 
     <body>
         <div id="app">
-            <div>
-                <p id="note" style="display: none">
-                    Tap/Click/&uarr;&darr;&larr;&rarr; around to move
-                </p>
-                <p id="interaction-note" style="display: none">
-                    T - Interact with NPC/Object
-                </p>
-                <p id="note-mobile" style="display: none">Tap to move around</p>
-                <p id="interaction-note-mobile" style="display: none">
-                    Tap to Interact
-                </p>
+            <canvas id="game"></canvas>
 
-                <p id="dialog-text"></p>
-                <div id="custom-prompt" class="custom-prompt">
-                    <div class="prompt-content">
-                        <p id="prompt-message"></p>
-                        <div
-                            id="options-container"
-                            class="options-container"
-                        ></div>
-                    </div>
+            <div id="header" class="top"></div>
+            <div id="left-panel" class="left">
+                <div class="control-btns d-mobile-hide">
+                    <div class="control-btn y">Y</div>
+                    <div class="control-btn z">Z</div>
+                    <div class="control-btn a">A</div>
+                    <div class="control-btn b">B</div>
                 </div>
-                <div id="textbox-container" style="display: none">
-                    <div id="textbox">
-                        <p id="dialog" class="ui-text"></p>
-                        <div class="btn-container">
-                            <button
-                                id="dialog-close-btn"
-                                class="ui-close-btn"
-                                aria-label="Close dialog"
-                            >
-                                Close
-                            </button>
-                            <button
-                                id="dialog-next-btn"
-                                class="ui-next-btn"
-                                aria-label="Next dialog"
-                            >
-                                Next
-                            </button>
+            </div>
+            <div id="right-panel" class="right"></div>
+            <div id="footer" class="bottom">
+                <div class="footer-head-info">
+                    <div class="control-btns d-desktop-hide">
+                        <div class="control-btn y">Y</div>
+                        <div class="control-btn z">Z</div>
+                        <div class="control-btn a">A</div>
+                        <div class="control-btn b">B</div>
+                    </div>
+                    <div id="text-info"></div>
+                </div>
+
+                <div class="dialogs-wrapper">
+                    <p id="dialog-text"></p>
+                    <div id="custom-prompt" class="custom-prompt">
+                        <div class="prompt-content">
+                            <p id="prompt-message"></p>
+                            <div
+                                id="options-container"
+                                class="options-container"
+                            ></div>
+                        </div>
+                    </div>
+                    <div id="textbox-container" style="display: none">
+                        <div id="textbox">
+                            <p id="dialog" class="ui-text"></p>
+                            <div class="btn-container">
+                                <button
+                                    id="dialog-close-btn"
+                                    class="ui-close-btn"
+                                    aria-label="Close dialog"
+                                >
+                                    Close
+                                </button>
+                                <button
+                                    id="dialog-next-btn"
+                                    class="ui-next-btn"
+                                    aria-label="Next dialog"
+                                >
+                                    Next
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div id="energy-container">
+                    <p id="energy-title">Energy:</p>
+                    <div id="energy-bar-total">
+                        <div id="energy-bar-remain"></div>
+                    </div>
+                </div>
             </div>
-            <canvas id="game"></canvas>
         </div>
         <script type="module" src="src/main.js"></script>
     </body>
