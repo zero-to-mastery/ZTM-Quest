@@ -1,4 +1,5 @@
 import kaplay from 'kaplay';
+import { setCamScale } from './utils';
 
 export const k = kaplay({
     global: false,
@@ -18,3 +19,7 @@ k.onCustomEvent = (eventName, cb) => {
 k.triggerEvent = (eventName, detail) => {
     k.canvas.dispatchEvent(new CustomEvent(eventName, { detail }));
 };
+
+k.onResize(() => {
+    setCamScale(k);
+});

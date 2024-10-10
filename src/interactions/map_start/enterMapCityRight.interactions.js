@@ -8,9 +8,7 @@ export const enterMapCityRightInteraction = (player, k, map) => {
             player.state.wasInRestroom &&
             player.state.hasHandsWashed
         ) {
-            import('../../scenes/city').then((_) => {
-                k.go('city', 'spawn_office_right'); // City spawn point
-            });
+            k.go('city', 'spawn_office_right'); // City spawn point
         } else {
             if (!player.state.hasTalkedToBruno) {
                 player.isInDialog = true;
