@@ -21,6 +21,12 @@ export async function start() {
         './maps/map_start.json',
         k.vec2(0, 11)
     );
+    
+    k.onKeyPress('o', () => {
+        k.go('gameOver');
+    });
+
 
     return [map, spawnpoint, gameObjects, interactions, sounds];
 }
+
