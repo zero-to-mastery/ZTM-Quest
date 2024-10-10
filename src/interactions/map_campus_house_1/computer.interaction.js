@@ -27,12 +27,14 @@ const options = [
 ];
 
 export const computerInteractions = async (player, k, map) => {
+    const [computer] = map.query({ include: 'computer' });
+
     player.onCollide('computer', async () => {
         const energyUI = document.getElementById('energy-container');
         energyUI.style.display = 'none';
-        const [computer] = k.query({ include: 'computer' });
-        computer.play('on');
+
         player.isInDialog = true;
+        computer.play('on');
 
         showCustomPrompt(challengeText, options, async (selectedOption) => {
             const response = [];
@@ -65,7 +67,6 @@ export const computerInteractions = async (player, k, map) => {
     player.onCollideEnd('computer', () => {
         const energyUI = document.getElementById('energy-container');
         energyUI.style.display = 'flex';
-        const [computer] = k.query({ include: 'computer' });
         computer.play('off');
     });
 };
