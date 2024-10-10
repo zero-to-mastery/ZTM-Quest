@@ -93,6 +93,7 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
             state: state,
             changePlayer,
         },
+        'player'
     ]);
 
     return player;
