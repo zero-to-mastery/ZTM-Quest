@@ -24,13 +24,12 @@ const processDialogue = async ({
             ? `<strong>${characterName}:</strong><br>${currentText}`
             : currentText;
         await new Promise((res) => {
+            dialog.scrollTop = dialog.scrollHeight;
             timeoutIds.push(setTimeout(res, 20));
         });
     }
 };
 
-// Seems to be a bug where when the canvas loses focus,
-// the keypress event listener is not triggered
 const slightPause = () => new Promise((res) => setTimeout(res, 500));
 
 export async function displayDialogue({
@@ -44,8 +43,10 @@ export async function displayDialogue({
     const dialog = document.getElementById('dialog');
     const closeBtn = document.getElementById('dialog-close-btn');
     const nextBtn = document.getElementById('dialog-next-btn');
+    const energyUI = document.getElementById('energy-container');
     let abort = new AbortController();
 
+    energyUI.style.display = 'none';
     dialogUI.style.display = 'block';
 
     if (text.length > 1) {
@@ -58,6 +59,7 @@ export async function displayDialogue({
         abort = new AbortController();
         await new Promise((res) => {
             if (t === text[text.length - 1]) res(); // resolve on last text
+
             processDialogue({ dialog, text: t, characterName, abort });
 
             nextBtn.addEventListener('click', () => {
@@ -76,6 +78,7 @@ export async function displayDialogue({
         abort.abort();
         dialogUI.style.display = 'none';
         dialog.innerHTML = '';
+        energyUI.style.display = 'flex';
         closeBtn.removeEventListener('click', onCloseBtnClick);
         k.triggerEvent('dialog-closed', { player, characterName, text });
         k.canvas.focus();
@@ -83,7 +86,10 @@ export async function displayDialogue({
     closeBtn.addEventListener('click', onCloseBtnClick);
 
     addEventListener('keydown', (key) => {
-        if (['Enter', 'Escape'].includes(key.code)) closeBtn.click();
+        if (key.code === 'Enter') {
+            document.activeElement.click();
+        }
+        if (key.code === 'Escape') closeBtn.click();
     });
     k.triggerEvent('dialog-displayed', { player, characterName, text });
 }
@@ -98,75 +104,106 @@ export async function displayPermissionBox({
     const dialog = document.getElementById('dialog');
     const closeBtn = document.getElementById('dialog-close-btn');
     const nextBtn = document.getElementById('dialog-next-btn');
+    const energyUI = document.getElementById('energy-container');
     closeBtn.innerHTML = 'No';
     nextBtn.innerHTML = 'Yes';
+    energyUI.style.display = 'none';
     dialogUI.style.display = 'block';
     closeBtn.style.display = 'block';
     nextBtn.style.display = 'block';
     nextBtn.focus();
 
-    processDialogue({ dialog, text: text.join(' ') });
+    const abort = new AbortController();
+    processDialogue({ dialog, text: text.join(' '), abort });
 
     return new Promise((resolve) => {
         function onCloseBtnClick() {
             onDisplayEnd();
+            abort.abort();
             dialogUI.style.display = 'none';
             dialog.innerHTML = '';
+            energyUI.style.display = 'flex';
             closeBtn.removeEventListener('click', onCloseBtnClick);
             nextBtn.removeEventListener('click', onNextBtnClick);
             closeBtn.innerHTML = 'Close';
             nextBtn.innerHTML = 'Next';
+            k.canvas.focus();
             resolve(false); // Resolve with false when "No" is clicked
         }
 
         function onNextBtnClick() {
             onDisplayEnd();
+            abort.abort();
             dialogUI.style.display = 'none';
             dialog.innerHTML = '';
+            energyUI.style.display = 'flex';
             nextBtn.removeEventListener('click', onNextBtnClick);
             closeBtn.removeEventListener('click', onCloseBtnClick);
             closeBtn.innerHTML = 'Close';
             nextBtn.innerHTML = 'Next';
+            k.canvas.focus();
             resolve(true); // Resolve with true when "Yes" is clicked
         }
 
         nextBtn.addEventListener('click', onNextBtnClick);
         closeBtn.addEventListener('click', onCloseBtnClick);
+        addEventListener('keydown', (key) => {
+            if (key.code === 'Enter') {
+                document.activeElement.click();
+            }
+            if (key.code === 'Escape') closeBtn.click();
+        });
         k.triggerEvent('dialog-displayed', { player, text });
     });
 }
 
-export function setCamScale(k) {
+export function getCamScale(k) {
     const resizeFactor = k.width() / k.height();
     if (resizeFactor < 1) {
-        k.camScale(k.vec2(1));
+        return 1;
     } else {
-        k.camScale(k.vec2(1.5));
+        return 1.5;
     }
 }
 
+export function setCamScale(k) {
+    const scale = getCamScale(k);
+    k.camScale(k.vec2(scale));
+}
+
 // NOTE: sprite must be an npc not an object like mailbox
-export function buildActionModal(sprite, k) {
+export const buildInteractionPrompt = (sprite, k) => {
+    const info = document.getElementById('interaction-info');
+    info.style.display = 'flex';
     const spritePos = sprite.pos;
 
-    const actionModal = k.add([
-        k.rect(20, 20),
+    k.loadSprite('question-bubble', './assets/sprites/question-bubble.png', {
+        sliceX: 8,
+        sliceY: 1,
+        anims: {
+            float: {
+                from: 0,
+                to: 7,
+            },
+        },
+    });
+
+    k.add([
+        k.sprite('question-bubble', { anim: 'float' }),
+        k.animate([0, 1, 2, 3, 4, 5, 6, 7]),
         k.area(),
         k.color(255, 255, 255),
         k.outline(2, k.Color.BLACK),
-        k.pos(spritePos.x - 10, spritePos.y - sprite.height - 30),
+        k.pos(spritePos.x + 5, spritePos.y - sprite.height - 20),
         k.layer('ui'),
-        `action-modal-${sprite.tags[0]}`,
-        // k.offscreen({ hide: true, pause: true })
+        `question-bubble`,
     ]);
+};
 
-    const actionLabel = k.add([
-        k.text('t', { size: 16, align: 'center' }),
-        k.color(0, 0, 0),
-        k.pos(actionModal.pos.x + 5, actionModal.pos.y + 4),
-        `action-label-${sprite.tags[0]}`,
-        //k.offscreen({ hide: true, pause: true })
-    ]);
-
-    return { actionModal, actionLabel };
-}
+export const tearDownInteractionPrompt = (k) => {
+    const info = document.getElementById('interaction-info');
+    info.style.display = 'none';
+    if (k.get('question-bubble')[0]) {
+        k.destroy(k.get('question-bubble')[0]);
+    }
+};

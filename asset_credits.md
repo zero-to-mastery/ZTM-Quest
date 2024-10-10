@@ -29,3 +29,17 @@ https://adriccustoms.itch.io/little-bits-office
 
 https://opengameart.org/content/lpc-forest-tiles 
 By users Sharm, Hyptosis, Johann C, Beast, William. Thompsonj, & Reemax | Assets made by Lanea Zimmerman, Tuomo Untinen, Manuel Riecke
+
+https://arks.itch.io/dino-characters @ScissorMarks
+
+https://mixkit.co/free-sound-effects/game/
+
+https://www.nicepng.com/
+
+https://skalding.itch.io/free-tree-pack-001
+
+https://axulart.itch.io/dirt-and-grass-2d-platform-tileset
+
+https://elevenlabs.io/ - sounds for Sinusoid Formula Game on Machine #11
+
+https://openart.ai/ - sprites for Sinusoid Formula Game on Machine #11 (formula sprite animation by @purifiedlight)

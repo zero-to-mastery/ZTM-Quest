@@ -1,7 +1,7 @@
 import { scaleFactor } from '../../constants';
 
 export const butterfly = (k, map, spawnpoints) => {
-    k.loadSprite('butterfly', './forest_sprites.png', {
+    k.loadSprite('butterfly', './assets/sprites/forest_sprites.png', {
         sliceX: 16,
         sliceY: 16,
         anims: {
