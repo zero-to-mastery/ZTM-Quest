@@ -1,10 +1,9 @@
-import { scaleFactor } from '../../constants';
 
 export const cake = (k, map, spawnpoints) => {
     k.loadSprite('cake', './assets/sprites/cake.png');
 
-    const cakeSpawnX = spawnpoints.cake ? spawnpoints.cake.x : 55;
-    const cakeSpawnY = spawnpoints.cake ? spawnpoints.cake.y : 80;
+    const cakeSpawnX = 60;
+    const cakeSpawnY = 60;
 
     const cakeObj = k.make([
         k.sprite('cake'),
@@ -14,7 +13,7 @@ export const cake = (k, map, spawnpoints) => {
         k.body({ isStatic: true }),
         k.anchor('center'),
         k.pos(map.pos.x + cakeSpawnX, map.pos.y + cakeSpawnY),
-        k.scale(scaleFactor),
+        k.scale(0.9),
         k.offscreen({ hide: true, distance: 10 }),
         'cake',
     ]);

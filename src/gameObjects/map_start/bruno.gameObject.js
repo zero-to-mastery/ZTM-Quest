@@ -21,8 +21,8 @@ export const bruno = (k, map, spawnpoints) => {
         }),
         k.body({ isStatic: true }),
         k.anchor('center'),
-        k.pos(map.pos.x + spawnpoints.bruno.x, map.pos.y + spawnpoints.bruno.y),
-        k.scale(scaleFactor + 0.5),
+        k.pos(spawnpoints.bruno.x / scaleFactor, spawnpoints.bruno.y / scaleFactor),
+        k.scale(1.1),
         k.offscreen({ hide: true, distance: 10 }),
         'bruno',
     ]);

@@ -13,9 +13,7 @@ export const enterMapStartLeftInteraction = (player, k) => {
             },
         });
         if (granted) {
-            import('../../scenes/start').then((_) => {
-                k.go('start', 'spawn_left');
-            });
+            k.go('start', 'spawn_left');
         }
     });
 };

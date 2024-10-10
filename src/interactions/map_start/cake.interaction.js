@@ -16,35 +16,31 @@ const cakeDialogue = [
 ];
 
 export const interactionWithCake = (player, k, map) => {
-    player.onCollide('table_room_1', (table) => {
-        if (table.id == 35) {
+    player.onCollide('cake', () => {
+        player.isInDialog = true;
+        player.speed = speedByScaleFactor * 2.5;
+        displayDialogue({
+            k,
+            player,
+            text: cakeDialogue,
+            onDisplayEnd: () => {
+                player.isInDialog = false;
+            },
+        });
+    });
+
+    player.onCollideEnd('cake', () => {
+        setTimeout(() => {
             player.isInDialog = true;
-            player.speed = 500;
+            player.speed = speedByScaleFactor; // Reset to default speed
             displayDialogue({
                 k,
                 player,
-                text: cakeDialogue,
+                text: ['SUGAR CRASH'],
                 onDisplayEnd: () => {
                     player.isInDialog = false;
                 },
             });
-        }
-    });
-
-    player.onCollideEnd('table_room_1', (table) => {
-        if (table.id == 35) {
-            setTimeout(() => {
-                player.isInDialog = true;
-                player.speed = speedByScaleFactor; // Reset to default speed
-                displayDialogue({
-                    k,
-                    player,
-                    text: ['SUGAR CRASH'],
-                    onDisplayEnd: () => {
-                        player.isInDialog = false;
-                    },
-                });
-            }, 10000);
-        }
+        }, 10000);
     });
 };

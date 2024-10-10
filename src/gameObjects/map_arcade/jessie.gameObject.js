@@ -15,17 +15,16 @@ export const jessie = (k, map, spawnpoints) => {
     });
 
     const jessieObj = k.make([
-        k.sprite('jessie', { anim: 'idle-down' }),
+        k.sprite('jessie', { anim: 'idle-side' }),
         k.area({
             shape: new k.Rect(k.vec2(0), 16, 16),
         }),
         k.body({ isStatic: true }),
         k.anchor('center'),
         k.pos(
-            map.pos.x + spawnpoints.player.x + 40,
-            map.pos.y + spawnpoints.player.y
+            map.pos.x + (spawnpoints.player.x / scaleFactor) - 60,
+            map.pos.y + (spawnpoints.player.y / scaleFactor) - 20
         ),
-        k.scale(scaleFactor),
         k.offscreen({ hide: true, distance: 10 }),
         'jessie',
     ]);
