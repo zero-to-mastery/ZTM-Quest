@@ -190,4 +190,8 @@ export const addPlayerControls = (player) => {
     });
     // Only stop animations if no buttons are pressed
     k.onMouseRelease(() => pressed.size || stopCharacterAnims(player));
+
+    player.onDestroy(() => {
+        pressed.clear();
+    });
 };
