@@ -1,11 +1,10 @@
 import { k } from '../../kplayCtx';
 
-import { campusHouse1OpenDoor } from './campusHouse1OpenDoor';
 import { npcsInCityMap } from './npcsOnmap_city';
 const gameObjects = [
     npcsInCityMap,
     // Add more game objects here
-    campusHouse1OpenDoor,
+
 ];
 
 export const addGameObjects = (map, spawnpoints) => {
