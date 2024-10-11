@@ -1,12 +1,7 @@
 import { k } from '../../../kplayCtx';
 import { scaleFactor } from '../../../constants';
 
-export const initMap = async (
-    objectConfig,
-    pathToMapPng,
-    pathToMapJson,
-    type
-) => {
+export const initMap = async (objectConfig, pathToMapPng, pathToMapJson) => {
     k.loadSprite('fishing_map', pathToMapPng);
 
     const mapData = await (await fetch(pathToMapJson)).json();
@@ -24,7 +19,6 @@ export const initMap = async (
             pressedTwice: false,
             fishSpawnTimer: Math.random() * 5,
             score: 0,
-            type,
         },
     ]);
 
