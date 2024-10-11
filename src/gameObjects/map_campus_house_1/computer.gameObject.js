@@ -18,11 +18,11 @@ export const computer = (k, map, spawnpoints) => {
         k.sprite('computer', { frame: 4 }),
         k.area(),
         k.pos(
-            (tableWidth + diningRoomTable.pos.x - 20),
-            (tableHeight + diningRoomTable.pos.y - 20)
+            tableWidth + diningRoomTable.pos.x - 20,
+            tableHeight + diningRoomTable.pos.y - 20
         ),
         k.body({ isStatic: true }),
-        k.scale(scaleFactor - 0.7),
+        k.scale(scaleFactor * 0.4),
         k.offscreen({ hide: true, distance: 10 }),
         'computer',
     ]);
