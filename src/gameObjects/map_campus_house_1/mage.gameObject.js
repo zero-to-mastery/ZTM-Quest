@@ -22,10 +22,7 @@ export const mage = (k, map, spawnpoints) => {
         }),
         k.body({ isStatic: true }),
         k.anchor('center'),
-        k.pos(
-            bedRoomTable.pos.x + 5,
-            bedRoomTable.pos.y - 70
-        ),
+        k.pos(bedRoomTable.pos.x + 5, bedRoomTable.pos.y - 70),
         k.scale(scaleFactor * 0.5),
         k.offscreen({ hide: true, distance: 10 }),
         'mage',
