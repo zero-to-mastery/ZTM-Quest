@@ -1,6 +1,8 @@
 import { k } from '../kplayCtx';
 import { characters, scaleFactor, speedByScaleFactor } from '../constants';
 import { getGameState, setGameState } from '../utils/gameState';
+import { triggerFishingAnimations } from './utils/triggerFishingAnimations';
+import { triggerNormalAnimations } from './utils/triggerNormalAnimations';
 
 export function makePlayer(playerProps = {}, customScale = scaleFactor) {
     if (!k.getSprite('player')) {
@@ -92,6 +94,8 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
             score: 0,
             state: state,
             changePlayer,
+            triggerFishingAnimations,
+            triggerNormalAnimations,
         },
         k.layer('player'),
         'player',

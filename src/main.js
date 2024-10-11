@@ -11,6 +11,7 @@ import { forest } from './scenes/forest';
 import { forestJunction } from './scenes/forest_junction';
 import { campusHouse1 } from './scenes/campus_house_1';
 import { bootstrap } from './scenes/bootstrap';
+import { fishingGameConfig } from './minigames/fishing_game/src/fishingCreator';
 
 k.scene('start', (enter_tag) => bootstrap(start, { enter_tag }));
 k.scene('city', (enter_tag) => bootstrap(city, { enter_tag }));
@@ -22,8 +23,11 @@ k.scene('forest_junction', (enter_tag) =>
 k.scene('campus_house_1', (enter_tag) =>
     bootstrap(campusHouse1, { enter_tag })
 );
+k.scene('fishing', (type) => {
+    fishingGameConfig(k, type);
+});
 
-k.go('start');
+k.go('forest', 'spawn_bottom');
 
 // To test different maps instead of going through each and every scene to get to yours,
 // Import the scene, name the scene, and then name the spawn point as an additional tag
