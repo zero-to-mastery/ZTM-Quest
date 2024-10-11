@@ -8,7 +8,7 @@ const interactions = [
     enterMapCityInteraction,
     bedInteractions,
     computerInteractions,
-    bedroomVanityInteractions
+    bedroomVanityInteractions,
 ];
 
 export default interactions;
