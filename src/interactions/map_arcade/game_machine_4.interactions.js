@@ -82,11 +82,11 @@ function closeCustomPrompt() {
     document.getElementById('custom-prompt').style.display = 'none';
 }
 
-function startBirdGame(k) {
+export function startBirdGame(k) {
     k.debug.log('Bird Game initialized');
 
     const JUMP_FORCE = 400;
-    const PIPE_SPEED = 250;
+    const PIPE_SPEED = 450;
     const PIPE_WIDTH = 60;
     const PIPE_GAP = 300;
     const GRAVITY = 1600;
@@ -97,45 +97,7 @@ function startBirdGame(k) {
 
     k.loadSprite('pipe', './assets/sprites/pipe.png');
 
-    k.loadSound('button-click-sound', './assets/sprites/jump.wav');
-    k.loadSound('game-over-sound', './assets/sprites/game_over.wav');
-
-    k.scene('startScreen', () => {
-        k.add([
-            k.text('Bird Game', { size: 48 }),
-            k.pos(k.width() / 2, k.height() / 3),
-            k.anchor('center'),
-        ]);
-
-        const startButton = k.add([
-            k.rect(200, 60),
-            k.pos(k.width() / 2, k.height() / 2),
-            k.anchor('center'),
-            k.color(0, 255, 0),
-            'button',
-        ]);
-
-        startButton.add([
-            k.text('Start Game', { size: 24 }),
-            k.anchor('center'),
-            k.color(0, 0, 0),
-        ]);
-
-        k.onMousePress(() => {
-            if (
-                k.mousePos().x > startButton.pos.x - 100 &&
-                k.mousePos().x < startButton.pos.x + 100 &&
-                k.mousePos().y > startButton.pos.y - 30 &&
-                k.mousePos().y < startButton.pos.y + 30
-            ) {
-                k.go('birdGame');
-            }
-        });
-
-        k.onKeyPress('space', () => {
-            k.go('birdGame');
-        });
-    });
+    k.go('startScreen', { title: 'Flappy Bird', gameSceneName: 'birdGame' });
 
     k.scene('birdGame', () => {
         k.setGravity(GRAVITY);
@@ -192,16 +154,16 @@ function startBirdGame(k) {
             k.wait(3, spawnPipe);
         }
 
-        k.wait(1, spawnPipe);
+        k.wait(0.5, spawnPipe);
 
         bird.onCollide('pipe', () => {
             k.play('game-over-sound');
-            k.go('lose', score);
+            k.go('lose', { title: 'Flappy Bird', gameRestartSceneName: 'birdGame', gameExitSceneName: 'arcade', score });
         });
 
         k.onUpdate(() => {
             if (bird.pos.y > k.height() || bird.pos.y < 0) {
-                k.go('lose', score);
+                k.go('lose', { title: 'Flappy Bird', gameRestartSceneName: 'birdGame', gameExitSceneName: 'arcade', score });
             }
         });
 
@@ -214,45 +176,4 @@ function startBirdGame(k) {
         });
     });
 
-    k.scene('lose', (score) => {
-        k.play('game-over-sound');
-        k.add([k.text('Game Over'), k.pos(k.center()), k.anchor('center')]);
-        k.add([
-            k.text(`Score: ${score}`),
-            k.pos(k.width() / 2, k.height() / 2 + 80),
-            k.scale(1),
-            k.anchor('center'),
-        ]);
-
-        const restartButton = k.add([
-            k.rect(200, 60),
-            k.pos(k.width() / 2, k.height() / 2 + 160),
-            k.anchor('center'),
-            k.color(0, 255, 0),
-            'button',
-        ]);
-
-        restartButton.add([
-            k.text('Restart', { size: 24 }),
-            k.anchor('center'),
-            k.color(0, 0, 0),
-        ]);
-
-        k.onMousePress(() => {
-            if (
-                k.mousePos().x > restartButton.pos.x - 100 &&
-                k.mousePos().x < restartButton.pos.x + 100 &&
-                k.mousePos().y > restartButton.pos.y - 30 &&
-                k.mousePos().y < restartButton.pos.y + 30
-            ) {
-                k.go('startScreen');
-            }
-        });
-
-        k.onKeyPress('space', () => {
-            k.go('startScreen');
-        });
-    });
-
-    k.go('startScreen');
 }

@@ -93,6 +93,9 @@ function startCatchTheMoon(k) {
     let score = 0;
     const moonPositions = [];
 
+
+    k.go('startScreen', { title: 'Catch the moon', gameSceneName: 'catchTheMoon' });
+
     k.scene('catchTheMoon', () => {
         k.loadSprite('moon', './assets/sprites/moon.png');
         k.loadSprite('tkey', './assets/sprites/TKey.png');
@@ -174,7 +177,7 @@ function startCatchTheMoon(k) {
         function updateTimer() {
             clearTimeout(timer);
             timer = setTimeout(() => {
-                k.go('lose', score);
+                k.go('lose', { title: 'Catch the moon', gameRestartSceneName: 'catchTheMoon', gameExitSceneName: 'arcade', score });
             }, timerDuration);
         }
 
@@ -182,6 +185,7 @@ function startCatchTheMoon(k) {
         updateTimer();
 
         k.onKeyPress('escape', () => {
+            k.go('lose', { title: 'Catch the moon', gameRestartSceneName: 'catchTheMoon', gameExitSceneName: 'arcade', score });
             clearTimeout(timer);
             import('../../scenes/arcade').then((_) => {
                 k.go('arcade');
@@ -194,47 +198,4 @@ function startCatchTheMoon(k) {
             scoreLabel.text = `Score: ${score}`;
         });
     });
-
-    // Lose scene setup
-    k.scene('lose', (finalScore) => {
-        k.add([
-            k.text('Game Over'),
-            k.pos(k.width() / 2, k.height() / 2 - 140),
-            k.anchor('center'),
-        ]);
-        k.add([
-            k.text(`Final Score: ${finalScore}`),
-            k.pos(k.width() / 2, k.height() / 2 - 70),
-            k.scale(2),
-            k.anchor('center'),
-        ]);
-
-        const playAgainButton = k.add([
-            k.text('Play Again'),
-            k.pos(k.width() / 2, k.height() / 2),
-            k.scale(1),
-            k.area(),
-            k.anchor('center'),
-        ]);
-
-        const exitButton = k.add([
-            k.text('Exit'),
-            k.pos(k.width() / 2, k.height() / 2 + 80),
-            k.scale(1),
-            k.area(),
-            k.anchor('center'),
-        ]);
-
-        playAgainButton.onClick(() => {
-            startCatchTheMoon(k);
-        });
-
-        exitButton.onClick(() => {
-            import('../../scenes/arcade').then((_) => {
-                k.go('arcade');
-            });
-        });
-    });
-
-    k.go('catchTheMoon');
 }
