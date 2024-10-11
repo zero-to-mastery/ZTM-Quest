@@ -29,7 +29,7 @@ export const bedInteractions = (player, k, map) => {
             }
         }
 
-        //player.isInDialog = true;
+        player.isInDialog = true;
         displayDialogue({
             k,
             player,
