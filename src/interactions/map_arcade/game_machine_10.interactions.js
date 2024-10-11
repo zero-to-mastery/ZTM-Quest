@@ -93,8 +93,10 @@ function startCatchTheMoon(k) {
     let score = 0;
     const moonPositions = [];
 
-
-    k.go('startScreen', { title: 'Catch the moon', gameSceneName: 'catchTheMoon' });
+    k.go('startScreen', {
+        title: 'Catch the moon',
+        gameSceneName: 'catchTheMoon',
+    });
 
     k.scene('catchTheMoon', () => {
         k.loadSprite('moon', './assets/sprites/moon.png');
@@ -177,7 +179,12 @@ function startCatchTheMoon(k) {
         function updateTimer() {
             clearTimeout(timer);
             timer = setTimeout(() => {
-                k.go('lose', { title: 'Catch the moon', gameRestartSceneName: 'catchTheMoon', gameExitSceneName: 'arcade', score });
+                k.go('lose', {
+                    title: 'Catch the moon',
+                    gameRestartSceneName: 'catchTheMoon',
+                    gameExitSceneName: 'arcade',
+                    score,
+                });
             }, timerDuration);
         }
 
@@ -185,7 +192,12 @@ function startCatchTheMoon(k) {
         updateTimer();
 
         k.onKeyPress('escape', () => {
-            k.go('lose', { title: 'Catch the moon', gameRestartSceneName: 'catchTheMoon', gameExitSceneName: 'arcade', score });
+            k.go('lose', {
+                title: 'Catch the moon',
+                gameRestartSceneName: 'catchTheMoon',
+                gameExitSceneName: 'arcade',
+                score,
+            });
             clearTimeout(timer);
             import('../../scenes/arcade').then((_) => {
                 k.go('arcade');

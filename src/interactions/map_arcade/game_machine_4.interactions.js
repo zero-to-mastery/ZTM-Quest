@@ -158,12 +158,22 @@ export function startBirdGame(k) {
 
         bird.onCollide('pipe', () => {
             k.play('game-over-sound');
-            k.go('lose', { title: 'Flappy Bird', gameRestartSceneName: 'birdGame', gameExitSceneName: 'arcade', score });
+            k.go('lose', {
+                title: 'Flappy Bird',
+                gameRestartSceneName: 'birdGame',
+                gameExitSceneName: 'arcade',
+                score,
+            });
         });
 
         k.onUpdate(() => {
             if (bird.pos.y > k.height() || bird.pos.y < 0) {
-                k.go('lose', { title: 'Flappy Bird', gameRestartSceneName: 'birdGame', gameExitSceneName: 'arcade', score });
+                k.go('lose', {
+                    title: 'Flappy Bird',
+                    gameRestartSceneName: 'birdGame',
+                    gameExitSceneName: 'arcade',
+                    score,
+                });
             }
         });
 
@@ -175,5 +185,4 @@ export function startBirdGame(k) {
             scoreLabel.text = score;
         });
     });
-
 }

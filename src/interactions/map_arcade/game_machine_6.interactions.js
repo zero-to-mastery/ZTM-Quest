@@ -93,7 +93,6 @@ function startChromeDinoGame(k) {
     const SPEED = 480;
     const GRAVITY = 1600;
 
-
     k.go('startScreen', { title: 'Dino game', gameSceneName: 'dinoGame' });
 
     // Set up the game scene
@@ -144,7 +143,12 @@ function startChromeDinoGame(k) {
 
         //pressing the esc lets player leave game
         k.onKeyPress('escape', () => {
-            k.go('lose', { title: 'Dino game', gameRestartSceneName: 'dinoGame', gameExitSceneName: 'arcade', score });
+            k.go('lose', {
+                title: 'Dino game',
+                gameRestartSceneName: 'dinoGame',
+                gameExitSceneName: 'arcade',
+                score,
+            });
         });
 
         //add platform
@@ -177,7 +181,7 @@ function startChromeDinoGame(k) {
                     k.body(),
                     k.move(k.LEFT, SPEED * scaleFactor + score / 10),
                     k.offscreen({ destroy: true }),
-                    k.scale(scaleFactor * 3, scaleFactor * (randomHeight)), // Scale height randomly
+                    k.scale(scaleFactor * 3, scaleFactor * randomHeight), // Scale height randomly
                     'tree',
                 ]);
                 spawnTree();
@@ -190,7 +194,12 @@ function startChromeDinoGame(k) {
         dino.onCollide('tree', () => {
             k.addKaboom(dino.pos);
             k.shake();
-            k.go('lose', { title: 'Dino game', gameRestartSceneName: 'dinoGame', gameExitSceneName: 'arcade', score });
+            k.go('lose', {
+                title: 'Dino game',
+                gameRestartSceneName: 'dinoGame',
+                gameExitSceneName: 'arcade',
+                score,
+            });
         });
 
         const SPEEDS = {
@@ -245,7 +254,6 @@ function startChromeDinoGame(k) {
             floor.width = k.width();
         });
     });
-
 }
 
 // Function to set up the parallax background

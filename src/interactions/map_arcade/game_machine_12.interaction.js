@@ -55,7 +55,10 @@ function startPatternMemoryGame(k) {
         if (currentLevel > 0) {
             k.go('patternMemory');
         } else {
-            k.go('startScreen', { title: 'Memorize the pattern!', gameSceneName: 'patternMemory' });
+            k.go('startScreen', {
+                title: 'Memorize the pattern!',
+                gameSceneName: 'patternMemory',
+            });
         }
     }
 
@@ -114,7 +117,12 @@ function startPatternMemoryGame(k) {
             }
         } else {
             isGameActive = false;
-            k.go('lose', { title: 'Memorize the pattern!', gameRestartSceneName: 'patternMemory', gameExitSceneName: 'arcade', score });
+            k.go('lose', {
+                title: 'Memorize the pattern!',
+                gameRestartSceneName: 'patternMemory',
+                gameExitSceneName: 'arcade',
+                score,
+            });
         }
     }
 

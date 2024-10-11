@@ -111,7 +111,12 @@ export function initGame(k) {
         player.onCollide('tree', () => {
             k.addKaboom(player.pos);
             k.shake();
-            k.go('lose', { title: 'Robo Runner', gameRestartSceneName: 'roboRunner', gameExitSceneName: 'arcade', score });
+            k.go('lose', {
+                title: 'Robo Runner',
+                gameRestartSceneName: 'roboRunner',
+                gameExitSceneName: 'arcade',
+                score,
+            });
         });
         k.onResize(() => {
             const scaleFactor = k.width() / k.height();

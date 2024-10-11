@@ -37,7 +37,7 @@ export async function displayDialogue({
     player,
     characterName,
     text,
-    onDisplayEnd = () => { },
+    onDisplayEnd = () => {},
 }) {
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
@@ -98,7 +98,7 @@ export async function displayPermissionBox({
     k,
     player,
     text,
-    onDisplayEnd = () => { },
+    onDisplayEnd = () => {},
 }) {
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
@@ -225,7 +225,7 @@ export const getCanvasFrame = () => {
         header,
         footer,
     };
-}
+};
 
 export const hideCanvasFrame = () => {
     const { leftPanel, rightPanel, header, footer } = getCanvasFrame();
@@ -234,7 +234,7 @@ export const hideCanvasFrame = () => {
     rightPanel.style.visibility = 'hidden';
     header.style.visibility = 'hidden';
     footer.style.visibility = 'hidden';
-}
+};
 
 export const showCanvasFrame = () => {
     const { leftPanel, rightPanel, header, footer } = getCanvasFrame();
@@ -243,4 +243,4 @@ export const showCanvasFrame = () => {
     rightPanel.style.visibility = 'visible';
     header.style.visibility = 'visible';
     footer.style.visibility = 'visible';
-}
+};

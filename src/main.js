@@ -25,12 +25,9 @@ k.scene('campus_house_1', (enter_tag) =>
     bootstrap(campusHouse1, { enter_tag })
 );
 
-
-
 // Game Machine Scenes
 k.scene('startScreen', gameStartScreen);
 k.scene('lose', loseScreen);
-
 
 k.go('start');
 
