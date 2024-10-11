@@ -28,40 +28,64 @@ const options = [
 
 export const computerInteractions = async (player, k, map) => {
     const [computer] = map.query({ include: 'computer' });
-
     player.onCollide('computer', async () => {
-        const energyUI = document.getElementById('energy-container');
-        energyUI.style.display = 'none';
-
-        player.isInDialog = true;
-        computer.play('on');
-
-        showCustomPrompt(challengeText, options, async (selectedOption) => {
-            const response = [];
-
-            if (selectedOption == 'C') {
-                updateEnergyState(player.state, -10);
-                response.push("Correct!, you're a genius!");
-                response.push('It was a tough one!, You look tired');
-            } else {
-                updateEnergyState(player.state, -30);
-                response.push('Incorrect! Try again next time!');
-                response.push('Anyway it was a good effort, You look tired');
-            }
-
-            response.push(
-                'You should take a nap before you continue exploring the campus'
-            );
+        if (!player.state.alreadyTalkedToMage) {
+            player.isInDialog = true;
+            computer.play('on');
 
             await displayDialogue({
                 k,
                 player,
-                text: response,
+                text: [
+                    'It looks like the computer has a interesting challenge for you but it is locked.',
+                    'It has some kind of protection spell.',
+                    'You should talk to the house mage to unlock it.',
+                ],
                 onDisplayEnd: () => {
                     player.isInDialog = false;
                 },
             });
-        });
+
+            computer.play('off');
+        }
+
+        if (player.state.alreadyTalkedToMage) {
+            const energyUI = document.getElementById('energy-container');
+            energyUI.style.display = 'none';
+
+            player.isInDialog = true;
+            computer.play('on');
+
+            showCustomPrompt(challengeText, options, async (selectedOption) => {
+                const response = [];
+
+                if (selectedOption == 'C') {
+                    updateEnergyState(player.state, -10);
+                    response.push("Correct!, you're a genius!");
+                    response.push('It was a tough one!, You look tired');
+                } else {
+                    updateEnergyState(player.state, -30);
+                    response.push('Incorrect! Try again next time!');
+                    response.push(
+                        'Anyway it was a good effort, You look tired'
+                    );
+                }
+
+                response.push(
+                    'You should take a nap before you continue exploring the campus'
+                );
+
+                await displayDialogue({
+                    k,
+                    player,
+                    text: response,
+                    onDisplayEnd: () => {
+                        player.isInDialog = false;
+                        player.state.alreadyTalkedToMage = false;
+                    },
+                });
+            });
+        }
     });
 
     player.onCollideEnd('computer', () => {
