@@ -567,7 +567,7 @@
          "name":"map_sprites",
          "opacity":1,
          "type":"group",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -1297,13 +1297,13 @@
                 {
                  "height":13.5,
                  "id":105,
-                 "name":"game_machine_12",
+                 "name":"game_machine_13",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":10.5,
-                 "x":106.916666666667,
-                 "y":163.25
+                 "x":105.916666666667,
+                 "y":117.5
                 }, 
                 {
                  "height":6.75,
@@ -1382,6 +1382,17 @@
                  "width":21.2727272727273,
                  "x":253.212121212121,
                  "y":272.727272727273
+                }, 
+                {
+                 "height":13.5,
+                 "id":114,
+                 "name":"game_machine_12",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":10.5,
+                 "x":109,
+                 "y":162.75
                 }],
          "opacity":1,
          "properties":[
@@ -1391,7 +1402,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -1437,7 +1448,7 @@
          "y":0
         }],
  "nextlayerid":24,
- "nextobjectid":114,
+ "nextobjectid":115,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
