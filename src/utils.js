@@ -212,3 +212,35 @@ export const tearDownInteractionPrompt = (k) => {
         });
     }
 };
+
+export const getCanvasFrame = () => {
+    const leftPanel = document.getElementById('left-panel');
+    const rightPanel = document.getElementById('right-panel');
+    const header = document.getElementById('header');
+    const footer = document.getElementById('footer');
+
+    return {
+        leftPanel,
+        rightPanel,
+        header,
+        footer,
+    };
+};
+
+export const hideCanvasFrame = () => {
+    const { leftPanel, rightPanel, header, footer } = getCanvasFrame();
+
+    leftPanel.style.visibility = 'hidden';
+    rightPanel.style.visibility = 'hidden';
+    header.style.visibility = 'hidden';
+    footer.style.visibility = 'hidden';
+};
+
+export const showCanvasFrame = () => {
+    const { leftPanel, rightPanel, header, footer } = getCanvasFrame();
+
+    leftPanel.style.visibility = 'visible';
+    rightPanel.style.visibility = 'visible';
+    header.style.visibility = 'visible';
+    footer.style.visibility = 'visible';
+};

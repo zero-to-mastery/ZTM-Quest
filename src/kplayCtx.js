@@ -13,6 +13,8 @@ export const k = kaplay({
         right: { keyboard: ['d', 'right'], gamepad: 'east' },
     },
 });
+
+k.loadFont('pixelFont', './assets/fonts/PixelifySans-VariableFont_wght.ttf');
 k.onCustomEvent = (eventName, cb) => {
     k.canvas.addEventListener(eventName, cb.bind(k));
 };

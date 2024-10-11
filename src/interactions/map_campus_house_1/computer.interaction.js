@@ -28,7 +28,6 @@ const options = [
 
 export const computerInteractions = async (player, k, map) => {
     const [computer] = map.query({ include: 'computer' });
-
     player.onCollide('computer', async () => {
         if (!player.state.alreadyTalkedToMage) {
             player.isInDialog = true;
