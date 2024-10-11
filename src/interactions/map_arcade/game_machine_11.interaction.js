@@ -1,4 +1,4 @@
-import { displayDialogue } from '../../utils';
+import { displayDialogue, hideCanvasFrame, showCanvasFrame } from '../../utils';
 
 export const interactionWithGameMachine11 = (player, k, map) => {
     player.onCollide('game_machine_11', () => {
@@ -124,6 +124,8 @@ function startChromeFormulaGame(k) {
             run: { from: 0, to: 80, loop: true, speed: 10 },
         },
     });
+
+    hideCanvasFrame();
 
     k.scene('game', () => {
         lightsOut = false;
@@ -627,6 +629,10 @@ function startChromeFormulaGame(k) {
                 button.text = `${i}`;
                 await k.wait(1);
             }
+
+            if (scene === 'acade') {
+                showCanvasFrame();
+            }
             k.go(scene);
         }
 
@@ -643,9 +649,7 @@ function startChromeFormulaGame(k) {
             if (!isButtonClicked) {
                 isButtonClicked = true;
 
-                import('../../scenes/arcade').then((_) => {
-                    countdownAndGo(exitButton, 'arcade');
-                });
+                countdownAndGo(exitButton, 'arcade');
             }
         });
 
@@ -660,9 +664,7 @@ function startChromeFormulaGame(k) {
             if (!isButtonClicked) {
                 isButtonClicked = true;
 
-                import('../../scenes/arcade').then((_) => {
-                    countdownAndGo(exitButton2, 'arcade');
-                });
+                countdownAndGo(exitButton2, 'arcade');
             }
         });
 

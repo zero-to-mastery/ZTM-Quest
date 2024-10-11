@@ -165,73 +165,7 @@ function startNumberGuessingGame(k) {
 
     k.go('numberGuessing');
 }
-
-function injectCSS() {
-    const style = document.createElement('style');
-    style.innerHTML = `
-    #custom-prompt {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.6);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-    }
-
-    #prompt-message {
-        font-size: 1.5rem;
-        color: white;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    #options-container {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    .option-btn {
-        padding: 10px 20px;
-        background-color: #007BFF;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 1.2rem;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    .option-btn:hover {
-        background-color: #0056b3;
-    }
-
-    .option-btn:focus {
-        outline: none;
-        box-shadow: 0 0 5px 2px rgba(0, 123, 255, 0.8);
-    }
-
-    @media (max-width: 600px) {
-        #options-container {
-            flex-direction: column;
-        }
-
-        .option-btn {
-            width: 100%;
-            text-align: center;
-        }
-    }
-    `;
-    document.head.appendChild(style);
-}
-
 function showCustomPrompt(message, options, callback) {
-    injectCSS(); // Inject the CSS styles
     document.getElementById('prompt-message').textContent = message;
     const optionsContainer = document.getElementById('options-container');
     optionsContainer.innerHTML = '';

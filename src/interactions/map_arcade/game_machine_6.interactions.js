@@ -86,17 +86,22 @@ function closeCustomPrompt() {
 function startChromeDinoGame(k) {
     k.debug.log('Chrome Dino Game started!');
 
+    const scaleConst = 4;
     //variables for different things in the game
-    const scaleFactor = (k.width() / k.height()) * 2;
-    const JUMP_FORCE = 800;
+    const scaleFactor = (k.width() / k.height()) * scaleConst;
+    const JUMP_FORCE = 280 * scaleConst;
     const SPEED = 480;
     const GRAVITY = 1600;
-    let score = 0;
+
+
+    k.go('startScreen', { title: 'Dino game', gameSceneName: 'dinoGame' });
 
     // Set up the game scene
     k.scene('dinoGame', () => {
+        let score = 0;
         //gravity for dino
         k.setGravity(GRAVITY);
+
         //load a sprite name dino with run animation
         k.loadSprite('dino', './assets/sprites/doux.png', {
             sliceX: 24,
@@ -138,18 +143,15 @@ function startChromeDinoGame(k) {
         });
 
         //pressing the esc lets player leave game
-        k.onKeyPress('escape', () =>
-            import('../../scenes/arcade').then((_) => {
-                k.setGravity(0);
-                k.go('arcade');
-            })
-        );
+        k.onKeyPress('escape', () => {
+            k.go('lose', { title: 'Dino game', gameRestartSceneName: 'dinoGame', gameExitSceneName: 'arcade', score });
+        });
 
         //add platform
         const floor = k.add([
             k.sprite('floor_sprite'),
             k.area(),
-            k.pos(0, k.height() - 100),
+            k.pos(0, k.height()),
             k.anchor('botleft'),
             k.body({ isStatic: true }),
             k.scale(3, 3),
@@ -175,7 +177,7 @@ function startChromeDinoGame(k) {
                     k.body(),
                     k.move(k.LEFT, SPEED * scaleFactor + score / 10),
                     k.offscreen({ destroy: true }),
-                    k.scale(scaleFactor * 2, scaleFactor * (randomHeight / 2)), // Scale height randomly
+                    k.scale(scaleFactor * 3, scaleFactor * (randomHeight)), // Scale height randomly
                     'tree',
                 ]);
                 spawnTree();
@@ -188,7 +190,7 @@ function startChromeDinoGame(k) {
         dino.onCollide('tree', () => {
             k.addKaboom(dino.pos);
             k.shake();
-            k.go('lose', score); // go to "lose" scene here
+            k.go('lose', { title: 'Dino game', gameRestartSceneName: 'dinoGame', gameExitSceneName: 'arcade', score });
         });
 
         const SPEEDS = {
@@ -244,51 +246,6 @@ function startChromeDinoGame(k) {
         });
     });
 
-    //set up lose screen
-    k.scene('lose', (score) => {
-        k.setGravity(0);
-        //add "game over" text
-        k.add([k.text('Game Over'), k.pos(k.center()), k.anchor('center')]);
-        // display score
-        k.add([
-            k.text(score),
-            k.pos(k.width() / 2, k.height() / 2 + 80),
-            k.scale(2),
-            k.anchor('center'),
-        ]);
-
-        // Add "Play Again" button
-        const playAgainButton = k.add([
-            k.text('Play Again'),
-            k.pos(k.width() / 2, k.height() / 2 + 140),
-            k.scale(1),
-            k.area(),
-            k.anchor('center'),
-        ]);
-
-        // Add "Play Again" button
-        const exitButton = k.add([
-            k.text('Exit'),
-            k.pos(k.width() / 2, k.height() / 2 + 200),
-            k.scale(1),
-            k.area(),
-            k.anchor('center'),
-        ]);
-
-        // When the button is clicked or space is pressed, restart the game
-        playAgainButton.onClick(() => {
-            startChromeDinoGame(k); // Restart the game
-        });
-
-        exitButton.onClick(() => {
-            import('../../scenes/arcade').then((_) => {
-                k.go('arcade');
-            });
-        });
-    });
-
-    // Start the game scene
-    k.go('dinoGame');
 }
 
 // Function to set up the parallax background
@@ -301,7 +258,7 @@ function setupParallaxBackground(k) {
     const cloud1 = k.add([
         k.sprite('cloud1'),
         k.pos(-10, -10), // Adjust the Y position as necessary
-        k.scale(4, 2), // Scale to your needs
+        k.scale(4, 5), // Scale to your needs
         k.layer('bg'), // Optional: add to a specific layer
     ]);
 
@@ -309,7 +266,7 @@ function setupParallaxBackground(k) {
     const cloud2 = k.add([
         k.sprite('cloud2'),
         k.pos(-10, -10),
-        k.scale(4, 2),
+        k.scale(4, 5),
         k.layer('bg'),
     ]);
 
@@ -317,7 +274,7 @@ function setupParallaxBackground(k) {
     const cloud3 = k.add([
         k.sprite('cloud3'),
         k.pos(-10, -10),
-        k.scale(4, 2),
+        k.scale(4, 5),
         k.layer('bg'),
     ]);
 
