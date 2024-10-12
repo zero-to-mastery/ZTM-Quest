@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"map_forest_junction.json"
+        }
+    },
  "height":20,
  "infinite":false,
  "layers":[

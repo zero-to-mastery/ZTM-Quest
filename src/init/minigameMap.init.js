@@ -1,5 +1,5 @@
-import { k } from '../../../kplayCtx';
-import { scaleFactor } from '../../../constants';
+import { k } from '../kplayCtx';
+import { scaleFactor } from '../constants';
 
 export const initMap = async (objectConfig, pathToMapPng, pathToMapJson) => {
     k.loadSprite('fishing_map', pathToMapPng);
@@ -11,8 +11,12 @@ export const initMap = async (objectConfig, pathToMapPng, pathToMapJson) => {
 
     const map = k.make([
         k.sprite('fishing_map'),
-        k.pos(leftPanel.offsetWidth + 20, leftPanel.offsetTop),
-        k.scale(scaleFactor * 1.5),
+        k.pos(
+            leftPanel.offsetWidth * 2 + leftPanel.offsetWidth / 4,
+            header.offsetHeight
+        ),
+        k.scale(scaleFactor),
+        k.layer('map'),
         'main_map',
         {
             pressed: false,

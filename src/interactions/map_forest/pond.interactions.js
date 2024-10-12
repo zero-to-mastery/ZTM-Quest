@@ -28,5 +28,5 @@ export const interactionWithPond = (player, k, map) => {
 };
 
 export const initGame = (k) => {
-    k.go('pond_fishing');
+    k.go('fishing');
 };
