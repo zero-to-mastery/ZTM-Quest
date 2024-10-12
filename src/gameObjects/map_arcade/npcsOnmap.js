@@ -59,7 +59,7 @@ export const npcsInArcadeMap = (k, map, spawnpoints) => {
             direction: 'idle-up',
         },
         {
-            patterns: [/painting_/],
+            patterns: [/painting_near_game_machine_10/],
             adjustments: { xAdjust: 35, yAdjust: 25 },
             direction: 'idle-up',
         },

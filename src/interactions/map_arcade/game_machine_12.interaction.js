@@ -52,7 +52,14 @@ function startPatternMemoryGame(k) {
     function loadLevel(level) {
         userSequence = [];
         currentSequence = generateSequence(levels[level].sequenceLength);
-        k.go('patternMemory');
+        if (currentLevel > 0) {
+            k.go('patternMemory');
+        } else {
+            k.go('startScreen', {
+                title: 'Memorize the pattern!',
+                gameSceneName: 'patternMemory',
+            });
+        }
     }
 
     k.scene('patternMemory', () => {
@@ -110,36 +117,18 @@ function startPatternMemoryGame(k) {
             }
         } else {
             isGameActive = false;
-            k.go('lose', score);
+            k.go('lose', {
+                title: 'Memorize the pattern!',
+                gameRestartSceneName: 'patternMemory',
+                gameExitSceneName: 'arcade',
+                score,
+            });
         }
     }
 
     k.scene('win', (finalScore) => {
         k.add([
             k.text(`Congratulations! Your score: ${finalScore}`),
-            k.pos(k.width() / 2, k.height() / 2 - 50),
-            k.anchor('center'),
-            k.scale(2),
-        ]);
-
-        const playAgainBtn = k.add([
-            k.text('Play Again'),
-            k.pos(k.width() / 2, k.height() / 2 + 20),
-            k.anchor('center'),
-            k.area(),
-        ]);
-
-        playAgainBtn.onClick(() => {
-            currentLevel = 0;
-            score = 0;
-            isGameActive = true;
-            loadLevel(currentLevel);
-        });
-    });
-
-    k.scene('lose', (finalScore) => {
-        k.add([
-            k.text(`Game Over! Your score: ${finalScore}`),
             k.pos(k.width() / 2, k.height() / 2 - 50),
             k.anchor('center'),
             k.scale(2),
@@ -186,7 +175,7 @@ function showCustomPrompt(message, options, callback) {
     const optionsContainer = document.getElementById('options-container');
 
     if (!promptElement || !messageElement || !optionsContainer) {
-        console.error('Required DOM elements for custom prompt not found');
+        k.debug.error('Required DOM elements for custom prompt not found');
         return;
     }
 
