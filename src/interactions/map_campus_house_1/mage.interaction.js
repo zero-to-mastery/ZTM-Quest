@@ -1,4 +1,5 @@
 import { displayDialogue, displayPermissionBox } from '../../utils';
+import { updateEnergyState } from '../../utils/energyUpdate';
 
 const alredyUnlockText = ['The challenge is waiting for you!'];
 
@@ -22,6 +23,16 @@ const spell = [
 const noSpell = [
     'It does not seem like thou art yet prepared for the challenge...',
 ];
+
+const butterBeerDialog = {
+    ask: [
+        "Hey, is that a butterbeer you're carrying? That's my favorite drink! If you're not going to drink it, may I have it?",
+    ],
+    thank: [
+        'Thank you so much! "Since this dev has been so great, his energy is now top rate!"',
+    ],
+    denied: ['Oh, ok. I understand...'],
+};
 
 export const mageInteractions = async (player, k, map) => {
     const [computer] = map.query({ include: 'computer' });
@@ -89,17 +100,56 @@ export const mageInteractions = async (player, k, map) => {
                 }
             }
         } else {
-            player.isInDialog = true;
             computer.play('on');
 
-            await displayDialogue({
-                k,
-                player,
-                text: alredyUnlockText,
-                onDisplayEnd: () => {
-                    player.isInDialog = false;
-                },
-            });
+            if (player?.state?.hasButterBeer) {
+                // Mage asks if he can have the butterbeer
+                let giveButterBeer = await displayPermissionBox({
+                    k,
+                    player,
+                    text: butterBeerDialog.ask,
+                    characterName: 'Mage',
+                    onDisplayEnd: () => {
+                        player.isInDialog = false;
+                    },
+                });
+
+                if (giveButterBeer) {
+                    player.isInDialog = true;
+                    await displayDialogue({
+                        k,
+                        player,
+                        text: butterBeerDialog.thank,
+                        characterName: 'Mage',
+                        onDisplayEnd: () => {
+                            player.isInDialog = false;
+                            player.state.hasButterBeer = false;
+                            updateEnergyState(player.state, 99);
+                        },
+                    });
+                } else {
+                    player.isInDialog = true;
+                    await displayDialogue({
+                        k,
+                        player,
+                        text: butterBeerDialog.denied,
+                        characterName: 'Mage',
+                        onDisplayEnd: () => {
+                            player.isInDialog = false;
+                        },
+                    });
+                }
+            } else {
+                player.isInDialog = true;
+                await displayDialogue({
+                    k,
+                    player,
+                    text: alredyUnlockText,
+                    onDisplayEnd: () => {
+                        player.isInDialog = false;
+                    },
+                });
+            }
         }
     });
 
