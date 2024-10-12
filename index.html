@@ -32,6 +32,30 @@
                 position: relative;
             }
 
+            .game-window {
+                position: absolute;
+                top: var(--header-height);
+                left: 140px;
+                width: calc(100% - 280px);
+                height: calc(
+                    100% - calc(var(--header-height) + var(--footer-height))
+                );
+            }
+
+            .full-screen {
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1000;
+            }
+
+            #header {
+                color: white;
+                text-align: center;
+                font-size: 2em;
+            }
+
             .d-desktop-hide {
                 display: none;
             }
@@ -73,12 +97,8 @@
 
             #energy-container {
                 padding: 0.5rem 1rem;
-                position: absolute;
-                bottom: 2vh;
-                right: calc(50% - 105px);
                 display: flex;
                 align-items: center;
-                background-color: black;
                 border-radius: 15px;
                 opacity: 0;
                 animation: fadeIn 1s forwards 0.7s;
@@ -104,14 +124,34 @@
                 height: 100%;
                 background-color: lightgreen;
             }
+
+            @media (min-width: 768px) {
+                #header {
+                    font-size: 1.2em;
+                }
+            }
+
+            @media (max-width: 900px) {
+                .game-window {
+                    left: 0;
+                    width: 100%;
+                    height: 72%;
+                }
+
+                .full-screen {
+                    height: 100%;
+                }
+            }
         </style>
     </head>
 
     <body>
         <div id="app">
-            <canvas id="game"></canvas>
+            <div class="game-window">
+                <canvas id="game"></canvas>
+            </div>
 
-            <div id="header" class="top"></div>
+            <div id="header" class="top">ZTM Quest</div>
             <div id="left-panel" class="left">
                 <div class="control-btns d-mobile-hide">
                     <div class="control-btn y">Y</div>
@@ -164,11 +204,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="energy-container">
-                    <p id="energy-title">Energy:</p>
-                    <div id="energy-bar-total">
-                        <div id="energy-bar-remain"></div>
+                    <div id="energy-container">
+                        <p id="energy-title">Energy:</p>
+                        <div id="energy-bar-total">
+                            <div id="energy-bar-remain"></div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -73,67 +73,46 @@ export const addPlayerControls = (player) => {
     const [map] = k.get('main_map');
     const camScale = getCamScale(k);
 
-    const leftPanel = document.getElementById('left-panel');
-    const rightPanel = document.getElementById('right-panel');
-    const header = document.getElementById('header');
-    const footer = document.getElementById('footer');
-
-    const leftBounds = leftPanel.getBoundingClientRect();
-    const rightBounds = rightPanel.getBoundingClientRect();
-    const headerBounds = header.getBoundingClientRect();
-    const footerBounds = footer.getBoundingClientRect();
-
-    function getBoundaries() {
-        return {
-            left: -leftBounds.width / camScale,
-            right: map.width * scaleFactor + rightBounds.width / camScale,
-            top: -headerBounds.height / camScale,
-            bottom: map.height * scaleFactor + footerBounds.height / camScale,
-        };
-    }
-
     function updatePos({ k, x, y }) {
-        const boundaries = getBoundaries(k);
+        let camX = x;
+        let camY = y;
 
-        const halfHeightScreen = k.height() / 2 / camScale;
-        const halfWidthScreen = k.width() / 2 / camScale;
-        const mapW = boundaries.right + Math.abs(boundaries.left);
-        const mapH = boundaries.bottom + Math.abs(boundaries.top);
+        // scaleFactor needs to multiplied with map dimensions to get values that are relative to player's position and speed.
+        const mapWidth = map.width * scaleFactor;
+        const mapHeight = map.height * scaleFactor;
+        const mapCenterX = mapWidth / 2;
+        const mapCenterY = mapHeight / 2;
 
-        if (k.width() / camScale > mapW) {
-            const diff = k.width() / camScale - mapW;
-            x = boundaries.left + halfWidthScreen - diff / 2;
-        } else {
-            if (x + halfWidthScreen > boundaries.right) {
-                x = boundaries.right - halfWidthScreen;
-            } else if (x - halfWidthScreen < boundaries.left) {
-                x = boundaries.left + halfWidthScreen;
+        // canvas dimensions needs to be adjusted with respect to camScale.
+        const canvasWidth = k.canvas.offsetWidth / camScale;
+        const canvasHeight = k.canvas.offsetHeight / camScale;
+
+        const maxDistX = mapWidth / 2 - canvasWidth / 2;
+        const maxDistY = mapHeight / 2 - canvasHeight / 2;
+
+        if (mapWidth > canvasWidth) {
+            if (x > mapCenterX + maxDistX) {
+                camX = mapCenterX + maxDistX;
             }
+            if (x < mapCenterX - maxDistX) {
+                camX = mapCenterX - maxDistX;
+            }
+        } else {
+            camX = mapCenterX;
         }
 
-        if (k.height() / camScale > mapH) {
-            const diff = k.height() / camScale - mapH;
-            y = boundaries.bottom - halfHeightScreen + diff / 2;
-        } else {
-            const hViewPort =
-                (k.height() - footerBounds.height - headerBounds.height) /
-                camScale;
-
-            const dy =
-                halfHeightScreen -
-                (k.height() - footerBounds.height) / camScale +
-                hViewPort / 2;
-
-            if (y + halfHeightScreen + dy > boundaries.bottom) {
-                y = boundaries.bottom - halfHeightScreen;
-            } else if (y - halfHeightScreen + dy < boundaries.top) {
-                y = boundaries.top + halfHeightScreen;
-            } else {
-                y += dy;
+        if (mapHeight > canvasHeight) {
+            if (y > mapCenterY + maxDistY) {
+                camY = mapCenterY + maxDistY;
             }
+            if (y < mapCenterY - maxDistY) {
+                camY = mapCenterY - maxDistY;
+            }
+        } else {
+            camY = mapCenterY;
         }
 
-        return [x, y];
+        return [camX, camY];
     }
 
     k.onUpdate(() => {
