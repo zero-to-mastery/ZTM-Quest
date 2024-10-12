@@ -14,7 +14,7 @@ const interactions = [
     mageInteractions,
     bedroomVanityInteractions,
     kitchenFridgeInteractions,
-    bedroomShelfInteractions
+    bedroomShelfInteractions,
 ];
 
 export default interactions;
