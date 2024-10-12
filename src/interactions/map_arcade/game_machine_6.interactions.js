@@ -102,7 +102,7 @@ function startChromeDinoGame(k) {
             data = {
                 score: 0,
                 lastDinoPosition: { x: 40, y: k.height() - 350 },
-                activeTrees : []
+                activeTrees: [],
             }
         ) => {
             console.log(data);
@@ -111,7 +111,7 @@ function startChromeDinoGame(k) {
             k.setGravity(GRAVITY);
             let isPaused = false;
             let lastDinoPosition = data.lastDinoPosition;
-            let activeTrees = data.activeTrees
+            let activeTrees = data.activeTrees;
 
             //load a sprite name dino with run animation
             k.loadSprite('dino', './assets/sprites/doux.png', {
