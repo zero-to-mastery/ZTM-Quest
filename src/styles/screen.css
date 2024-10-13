@@ -172,6 +172,36 @@
     background-color: lightgreen;
 }
 
+#minimap-container {
+    display: flex;
+    padding: 0.5rem 1rem;
+    justify-content: center;
+}
+
+#minimap-button-container {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    gap: 10px;
+    font-size: 1.25rem;
+    font-family: pixelifysans;
+}
+
+#minimap-button {
+    margin: 0;
+    padding: 5px;
+    border: 0;
+    outline: 0;
+    border-radius: 8px;
+    font-size: 1.25rem;
+    font-family: pixelifysans;
+}
+
+#minimap {
+    display: none;
+}
+
 .top,
 .bottom,
 .left,

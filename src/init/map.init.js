@@ -26,7 +26,7 @@ export const initMap = async (
         k.layer('map'),
         'main_map',
     ]);
-
+    map.png = pathToMapPng;
     k.onLoad(() => {
         if (!uiLoaded) {
             const app = document.getElementById('app');

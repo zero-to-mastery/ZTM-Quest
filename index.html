@@ -38,7 +38,9 @@
                 top: var(--header-height);
                 left: 140px;
                 width: calc(100% - 280px);
-                height: calc(100% - calc(var(--header-height) + var(--footer-height)));
+                height: calc(
+                    100% - calc(var(--header-height) + var(--footer-height))
+                );
             }
 
             .full-screen {
@@ -169,6 +171,13 @@
                         <div id="energy-bar-total">
                             <div id="energy-bar-remain"></div>
                         </div>
+                        <div id="minimap-button-container">
+                            <span>"M"</span>
+                            <button id="minimap-button">Map</button>
+                        </div>
+                    </div>
+                    <div id="minimap-container">
+                        <canvas id="minimap"></canvas>
                     </div>
                 </div>
             </div>
