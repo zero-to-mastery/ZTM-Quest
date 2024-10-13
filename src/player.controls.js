@@ -2,6 +2,7 @@ import { scaleFactor } from './constants';
 import { animations, stopCharacterAnims } from './utils/animation';
 import { getCamScale } from './utils';
 import { k } from './kplayCtx';
+import { drawMinimap, toggleMinimap } from './utils/miniMap';
 
 // Manage multiple pressed buttons
 const pressed = new Set();
@@ -118,6 +119,7 @@ export const addPlayerControls = (player) => {
     k.onUpdate(() => {
         const updPos = updatePos({ k, ...player.pos });
         k.camPos(...updPos);
+        drawMinimap(k, player); // Update minimap
     });
 
     k.onMouseDown((mouseBtn) => {
@@ -167,6 +169,12 @@ export const addPlayerControls = (player) => {
             return;
         }
     });
+
+    // Set up the button press event to toggle the minimap
+    k.onButtonPress('map', () => {
+        toggleMinimap();
+    });
+
     // Only stop animations if no buttons are pressed
     k.onMouseRelease(() => pressed.size || stopCharacterAnims(player));
 
