@@ -30,7 +30,6 @@ Thank you for playing!
 
     const background = k.add([
         k.sprite("backgroundImage"),
-        k.size(k.width(), k.height()),
         k.pos(0, 0),
         k.scale(1),
         k.z(0),  
