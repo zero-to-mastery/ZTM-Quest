@@ -38,9 +38,7 @@
                 top: var(--header-height);
                 left: 140px;
                 width: calc(100% - 280px);
-                height: calc(
-                    100% - calc(var(--header-height) + var(--footer-height))
-                );
+                height: calc(100% - calc(var(--header-height) + var(--footer-height)));
             }
 
             .full-screen {
@@ -49,87 +47,6 @@
                 width: 100%;
                 height: 100%;
                 z-index: 1000;
-            }
-
-            #header {
-                color: white;
-                text-align: center;
-                font-size: 2em;
-            }
-
-            .d-desktop-hide {
-                display: none;
-            }
-
-            .d-mobile-hide {
-                display: none;
-            }
-
-            .btn-container {
-                align-self: flex-end;
-                margin-top: 1rem;
-                display: flex;
-                gap: 0.6rem;
-                opacity: 0;
-                animation: fadeIn 1s forwards 0.6s;
-            }
-
-            @keyframes fadeIn {
-                0% {
-                    opacity: 0;
-                }
-
-                100% {
-                    opacity: 1;
-                }
-            }
-
-            @keyframes slideIn {
-                0% {
-                    opacity: 0;
-                    transform: translateY(20px);
-                }
-
-                100% {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            #energy-container {
-                padding: 0.5rem 1rem;
-                display: flex;
-                align-items: center;
-                border-radius: 15px;
-                opacity: 0;
-                animation: fadeIn 1s forwards 0.7s;
-            }
-
-            #energy-title {
-                margin: 0;
-                margin-right: 5px;
-                color: #fff;
-                text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
-                font-size: 1.25rem;
-                line-height: 1.6;
-            }
-
-            #energy-bar-total {
-                width: 100px;
-                height: 0.8rem;
-                background-color: red;
-            }
-
-            #energy-bar-remain {
-                width: 100%;
-                height: 100%;
-                background-color: lightgreen;
-            }
-
-            @media (min-width: 768px) {
-                #header {
-                    font-size: 1.2em;
-                }
             }
 
             @media (max-width: 900px) {
@@ -152,6 +69,39 @@
                 <canvas id="game"></canvas>
             </div>
 
+            <div class="alert-window">
+                <div class="alert new-game-alert">
+                    <p class="alert-text">
+                        Do you want to start a new game? (This clears the saved
+                        game data.)
+                    </p>
+                    <div class="alert-options">
+                        <button id="new-game-no-button" class="option-btn">
+                            No
+                        </button>
+                        <button id="new-game-yes-button" class="option-btn">
+                            Yes
+                        </button>
+                    </div>
+                </div>
+                <div class="alert stats-alert">
+                    <p id="coins-collected" class="alert-text"></p>
+                    <p id="coins-spent" class="alert-text"></p>
+                    <p id="time-spent" class="alert-text"></p>
+                    <div class="alert-options">
+                        <button id="stats-close-button" class="option-btn">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="menu-button">
+                <div class="menu-bar"></div>
+                <div class="menu-bar"></div>
+                <div class="menu-bar"></div>
+            </div>
+
             <div id="header" class="top">ZTM Quest</div>
             <div id="left-panel" class="left">
                 <div class="control-btns d-mobile-hide">
@@ -161,7 +111,16 @@
                     <div class="control-btn b">B</div>
                 </div>
             </div>
-            <div id="right-panel" class="right"></div>
+            <div id="right-panel" class="right">
+                <button id="close-btn">X</button>
+                <button id="new-game-button" class="setting-btn">
+                    New Game
+                </button>
+                <button id="stats-button" class="setting-btn">Stats</button>
+                <button id="debug-button" class="setting-btn">
+                    Debug Mode
+                </button>
+            </div>
             <div id="footer" class="bottom">
                 <div class="footer-head-info">
                     <div class="control-btns d-desktop-hide">
