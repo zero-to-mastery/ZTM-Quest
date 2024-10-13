@@ -1,5 +1,3 @@
-import { scaleFactor } from "./constants";
-
 const processDialogue = async ({
     dialog,
     text,
