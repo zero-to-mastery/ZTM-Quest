@@ -56,3 +56,11 @@ setInterval(() => {
         k.debug.log('I need some energy.');
     }
 }, 10000);
+
+const creditsButton = document.getElementById("credits-button")
+
+if(creditsButton){
+    creditsButton.addEventListener("click",()=>{
+        k.go('gameOver')
+    })
+}
