@@ -83,7 +83,6 @@ export async function displayDialogue({
         dialogUI.style.display = 'none';
         dialog.innerHTML = '';
         energyUI.style.display = 'flex';
-        miniMapUI.style.display = "block"
         closeBtn.removeEventListener('click', onCloseBtnClick);
         k.triggerEvent('dialog-closed', { player, characterName, text });
         k.canvas.focus();
@@ -130,7 +129,6 @@ export async function displayPermissionBox({
             dialogUI.style.display = 'none';
             dialog.innerHTML = '';
             energyUI.style.display = 'flex';
-            miniMapUI.style.display = "block"
             closeBtn.removeEventListener('click', onCloseBtnClick);
             nextBtn.removeEventListener('click', onNextBtnClick);
             closeBtn.innerHTML = 'Close';
@@ -145,7 +143,6 @@ export async function displayPermissionBox({
             dialogUI.style.display = 'none';
             dialog.innerHTML = '';
             energyUI.style.display = 'flex';
-            miniMapUI.style.display = "block"
             nextBtn.removeEventListener('click', onNextBtnClick);
             closeBtn.removeEventListener('click', onCloseBtnClick);
             closeBtn.innerHTML = 'Close';

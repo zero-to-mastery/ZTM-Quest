@@ -125,6 +125,25 @@
                 background-color: lightgreen;
             }
 
+            #minimap-container {
+                padding: 0.5rem 1rem;
+            }
+
+            #minimap-button {
+                margin: 0;
+                padding: 10px;
+                font-size: 1.25rem;
+                font-family: pixelifysans;
+                margin-left: auto;
+                border: 0;
+                outline: 0;
+                border-radius: 8px;
+            }
+
+            #minimap {
+                display: none;
+            }
+
             @media (min-width: 768px) {
                 #header {
                     font-size: 1.2em;
@@ -209,8 +228,11 @@
                         <div id="energy-bar-total">
                             <div id="energy-bar-remain"></div>
                         </div>
+                        <button id="minimap-button">Map</button>
                     </div>
-                    <canvas id="minimap" style="display: block"></canvas>
+                    <div id="minimap-container">
+                        <canvas id="minimap"></canvas>
+                    </div>
                 </div>
             </div>
         </div>

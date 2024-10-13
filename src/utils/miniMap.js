@@ -4,6 +4,14 @@ export const drawMinimap = (k, player) => {
     // Get minimap element
     const minimapCanvas = document.getElementById('minimap');
     const minimapCtx = minimapCanvas.getContext('2d');
+
+    const minimapButton = document.getElementById("minimap-button")
+    const miniMapVisible = minimapCanvas.style.display === "block";
+    minimapButton.addEventListener("click", () => {
+        minimapCanvas.style.display = miniMapVisible ? 'none' : 'block';
+        k.canvas.focus()
+    })
+
     // Create new image
     const mapImage = new Image()
     // Get current map
