@@ -3,7 +3,6 @@ import { getGameState, setGameState } from './utils/gameState';
 import { updateEnergyUI } from './utils/energyUpdate';
 import { start } from './scenes/start';
 import './scenes/gameOver';
-import { setCamScale } from './utils';
 import './styles/global.css';
 
 import { city } from './scenes/city';

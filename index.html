@@ -142,12 +142,28 @@
                     height: 100%;
                 }
             }
+            #credits-button {
+                margin-left: 10px;
+                padding: 5px 10px;
+                background-color: #4caf50;
+                color: white;
+                border: none;
+                cursor: pointer;
+                font-family: pixelifysans, monospace;
+                border-radius: 12px;
+                position: absolute;
+
+                margin-bottom: 5px;
+            }
+
+            #credits-button:hover {
+                background-color: #45a049;
+            }
         </style>
     </head>
 
     <body>
         <div id="app">
-
             <div class="game-window">
                 <canvas id="game"></canvas>
             </div>
@@ -204,12 +220,14 @@
                             </div>
                         </div>
                     </div>
+                    <div>
                     <div id="energy-container">
                         <p id="energy-title">Energy:</p>
                         <div id="energy-bar-total">
                             <div id="energy-bar-remain"></div>
                         </div>
                     </div>
+                    <button id="credits-button">Credits</button>
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 import { k } from '../kplayCtx';
-import { getAssets,getContributors,hideInstructions } from '../utils';
+import { getAssets,getContributors } from '../utils';
 
 k.scene('gameOver', async () => {
 

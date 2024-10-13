@@ -2,7 +2,6 @@ import { initMap } from '../init/map.init';
 import { k } from '../kplayCtx';
 import gameObjects from '../gameObjects/map_start';
 import interactions from '../interactions/map_start';
-import { addInstructions } from '../utils';
 
 
 export async function start() {
@@ -23,7 +22,6 @@ export async function start() {
         k.vec2(0, 11)
     );
 
-    addInstructions()
     k.onKeyPress('o', () => {
         k.go('gameOver');
     });
