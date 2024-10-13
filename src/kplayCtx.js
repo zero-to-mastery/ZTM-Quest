@@ -12,7 +12,7 @@ export const k = kaplay({
         left: { keyboard: ['a', 'left'], gamepad: 'west' },
         right: { keyboard: ['d', 'right'], gamepad: 'east' },
         // Configure map key to be bound to m
-        map: { keyboard: ["m"] }
+        map: { keyboard: ['m'] },
     },
 });
 
