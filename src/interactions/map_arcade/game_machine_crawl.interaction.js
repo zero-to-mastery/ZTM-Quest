@@ -5,7 +5,7 @@ export const interactionWithGameMachineCrawl = (player, k, map) => {
         player.isInDialog = true;
         // Trigger the custom prompt when the player collides with the game machine
         showCustomPrompt(
-            'Do you want to play the Chrome Dino Game?', // Updated Prompt message
+            'Do you want to play the Crawl Game?', // Updated Prompt message
             ['Yes', 'No'], // Options for the game prompt
             (selectedOption) => {
                 // Logic based on the selected option
@@ -13,7 +13,7 @@ export const interactionWithGameMachineCrawl = (player, k, map) => {
                     displayDialogue({
                         k,
                         player,
-                        text: ['Starting the Chrome Dino Game... Good luck!'],
+                        text: ['Starting the Crawl Game... Good luck!'],
                         onDisplayEnd: () => {
                             player.isInDialog = false;
                             startCrawlGame(k); // Pass k to the game start function
@@ -88,6 +88,7 @@ function startCrawlGame(k) {
     k.go('startScreen', { title: 'Crawl Game', gameSceneName: 'crawlGame' });
 
     let score = 60000
+    let width = k.width()
     k.scene("crawlGame", () => {
         // Pressing escape lets the player leave the game
         k.onKeyPress('escape', () => {
@@ -128,14 +129,14 @@ function startCrawlGame(k) {
 
         // Crane movement left
         k.onButtonDown(["left"], () => {
-            if (!crane.isMovingDown && !crane.isMovingUp && !crane.isMovingHorizontal) {
+            if (!crane.isMovingDown && !crane.isMovingUp && !crane.isMovingHorizontal && crane.pos.x > 0) {
                 crane.move(-crane.speed, 0);
             }
         });
 
         // Crane movement right
         k.onButtonDown(["right"], () => {
-            if (!crane.isMovingDown && !crane.isMovingUp && !crane.isMovingHorizontal) {
+            if (!crane.isMovingDown && !crane.isMovingUp && !crane.isMovingHorizontal && crane.pos.x < width - 40) {
                 crane.move(crane.speed, 0);
             }
         });
@@ -152,6 +153,7 @@ function startCrawlGame(k) {
 
         // Update the crane position during each frame
         k.onUpdate(() => {
+            width = k.width()
             score--
             scoreLabel.text = score;
             if (crane.isMovingDown) {
@@ -161,14 +163,14 @@ function startCrawlGame(k) {
                 if (item && !crane.grabbedItem) {
                     crane.grabbedItem = item;  // Attach the item to the crane
                     k.debug.log("Item grabbed!");
-                    score+= 10000
+                    score += 10000
                     // Reset crane position after reaching item
                     crane.isMovingDown = false;  // Reset the flag so the crane can move again
                     crane.isMovingUp = true;
                 }
                 if (crane.pos.y > k.height()) {
                     // Reset crane position after reaching bottom
-                    score-= 5000
+                    score -= 5000
                     crane.isMovingDown = false;  // Reset the flag so the crane can move again
                     crane.isMovingUp = true;
                 }
