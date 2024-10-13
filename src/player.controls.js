@@ -1,7 +1,8 @@
 import { scaleFactor } from './constants';
 import { animations, stopCharacterAnims } from './utils/animation';
-import { drawMinimap, getCamScale, toggleMinimap } from './utils';
+import { getCamScale} from './utils';
 import { k } from './kplayCtx';
+import { drawMinimap, toggleMinimap } from './utils/miniMap';
 
 // Manage multiple pressed buttons
 const pressed = new Set();

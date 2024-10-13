@@ -46,10 +46,12 @@ export async function displayDialogue({
     const closeBtn = document.getElementById('dialog-close-btn');
     const nextBtn = document.getElementById('dialog-next-btn');
     const energyUI = document.getElementById('energy-container');
+    const miniMapUI = document.getElementById("minimap")
     let abort = new AbortController();
 
     energyUI.style.display = 'none';
     dialogUI.style.display = 'block';
+    miniMapUI.style.display = 'none'
 
     if (text.length > 1) {
         nextBtn.style.display = 'block';
@@ -81,6 +83,7 @@ export async function displayDialogue({
         dialogUI.style.display = 'none';
         dialog.innerHTML = '';
         energyUI.style.display = 'flex';
+        miniMapUI.style.display = "block"
         closeBtn.removeEventListener('click', onCloseBtnClick);
         k.triggerEvent('dialog-closed', { player, characterName, text });
         k.canvas.focus();
@@ -107,9 +110,11 @@ export async function displayPermissionBox({
     const closeBtn = document.getElementById('dialog-close-btn');
     const nextBtn = document.getElementById('dialog-next-btn');
     const energyUI = document.getElementById('energy-container');
+    const miniMapUI = document.getElementById("minimap")
     closeBtn.innerHTML = 'No';
     nextBtn.innerHTML = 'Yes';
     energyUI.style.display = 'none';
+    miniMapUI.style.display = "none"
     dialogUI.style.display = 'block';
     closeBtn.style.display = 'block';
     nextBtn.style.display = 'block';
@@ -125,6 +130,7 @@ export async function displayPermissionBox({
             dialogUI.style.display = 'none';
             dialog.innerHTML = '';
             energyUI.style.display = 'flex';
+            miniMapUI.style.display = "block"
             closeBtn.removeEventListener('click', onCloseBtnClick);
             nextBtn.removeEventListener('click', onNextBtnClick);
             closeBtn.innerHTML = 'Close';
@@ -139,6 +145,7 @@ export async function displayPermissionBox({
             dialogUI.style.display = 'none';
             dialog.innerHTML = '';
             energyUI.style.display = 'flex';
+            miniMapUI.style.display = "block"
             nextBtn.removeEventListener('click', onNextBtnClick);
             closeBtn.removeEventListener('click', onCloseBtnClick);
             closeBtn.innerHTML = 'Close';
@@ -223,44 +230,4 @@ export const hideCanvasFrame = () => {
 
 export const showCanvasFrame = () => {
     gameWindow.classList.remove('full-screen');
-};
-
-export const drawMinimap = (k, player) => {
-    // Get minimap element
-    const minimapCanvas = document.getElementById('minimap');
-    const minimapCtx = minimapCanvas.getContext('2d');
-    // Create new image
-    const mapImage = new Image()
-    // Get current map
-    const [map] = k.get("main_map");
-    // Set the image to be drawn to the png of current map
-    mapImage.src = map.png
-    // Clear previous frame
-    minimapCtx.clearRect(0, 0, minimapCanvas.width, minimapCanvas.height);
-
-    // Calculate scaling factors
-    const xScale = minimapCanvas.width / (map.width * scaleFactor);
-    const yScale = minimapCanvas.height / (map.height * scaleFactor);
-
-    // Draw the map image
-    minimapCtx.drawImage(mapImage, 0, 0, minimapCanvas.width, minimapCanvas.height);
-
-    // Scale player positions
-    const playerMinimapX = player.pos.x * xScale; // Scale player X position
-    const playerMinimapY = player.pos.y * yScale; // Scale player Y position
-
-    // Draw player market on the map
-    minimapCtx.fillStyle = 'red'; // Player marker color
-    minimapCtx.fillRect(playerMinimapX, playerMinimapY, 5, 5); // Player marker
-}
-
-
-// Function to toggle the minimap
-export const toggleMinimap = () => {
-    // Get minimap element
-    const minimapCanvas = document.getElementById('minimap');
-    // Set a true/false variable depending on current minimap status
-    const miniMapVisible = minimapCanvas.style.display === "block";
-    // Set minimap on/off depending on current status
-    minimapCanvas.style.display = miniMapVisible ? 'none' : 'block';
 };
