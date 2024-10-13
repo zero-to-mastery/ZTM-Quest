@@ -242,11 +242,3 @@ export async function getContributors(){
     }).join("\n")
 
 }
-
-export function hideInstructions(){
-    document.getElementById("controlNote").style.display = "none"
-}
-
-export function addInstructions(){
-    document.getElementById("controlNote").style.display = "block"
-}

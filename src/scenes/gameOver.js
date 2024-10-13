@@ -1,5 +1,5 @@
 import { k } from '../kplayCtx';
-import { getAssets,getContributors,hideInstructions } from '../utils';
+import { getAssets,getContributors , getCamScale } from '../utils';
 
 k.scene('gameOver', async () => {
 
@@ -8,13 +8,9 @@ k.scene('gameOver', async () => {
     //  the text
     //  the exit button 
 
-    
 
-    const scrollSpeed = 70
     const contributors = await getContributors()
     const assets = await getAssets() 
-
-    hideInstructions()
 
     const creditText =`
 Special Thanks To All Of The Contributors!!
@@ -27,52 +23,76 @@ ${assets}
 
 Thank you for playing!
 `.trim()
+
+    const camScale = getCamScale(k);
     const background =k.add([
-        k.rect(k.width(), k.height(),),
+        k.rect(k.width(), k.height()),
         k.color(0,0,0,0.5),
         k.z(100),
         k.fixed()
     ])
     const text = k.add([
-        k.text(creditText,{size:26,width:k.width()*0.7,lineSpacing:15,align:"center"}),
-        k.pos(k.width()*0.5, k.height()*1.5),
+        k.text(creditText,{size:15/camScale,width:k.width()*0.7/camScale,lineSpacing:15/camScale,align:"center"}),
         k.anchor('center'),
         k.color(255,255,255),
-        k.z(101)
+        k.z(101),
+        k.scale(camScale)
     ])
+
+    const updateTextPosition = () => {
+        text.pos = k.vec2(k.width() * 0.5, k.height() * 0.5); // Center the text
+    };
+
+    // Initial position update
+    updateTextPosition();
+
+    // Update positions on resize
+    k.onResize(() => {
+        background.width = k.width(); // Update background width
+        background.height = k.height(); // Update background height
+        updateTextPosition();
+
+        const newSize = Math.max(12, 15 / getCamScale(k)); // Minimum size of 12
+        text.text = creditText; // Reset text to apply new size
+        text.size = newSize;
+        // Update exit button position as well
+        updateExitButtonPosition();
+    });
+
 
     const crossButton = k.add([
         k.rect(65,35),
         k.color(255,0,0),
-        k.pos(k.width()-35, 30),
         k.anchor('topright'),
         k.z(101),
         k.area(),
         k.scale(1),
-        k.fixed()
-    ])
+    ]);
 
     const exitText = k.add([
-        k.text("Exit",{size:26}),
+        k.text("Exit",{size:26/camScale}),
         k.color(255,255,255),
         k.anchor("topright"),
-        k.pos(k.width()-35, 35),
         k.z(102),
+        k.scale(camScale)
 
     ])
 
 
     // function to add functionality to the scenes
-    const textHeight = text.height
-    let scrollComplete = false
+    const textHeight = text.height * camScale
+    let scrollPosition = -textHeight
+    const scrollSpeed = 40 * camScale
+    const maxScroll = textHeight + k.height()*1.1 // Total scroll distance
+    
     k.onUpdate(() => {
-        if(!scrollComplete){
-        text.pos.y -= scrollSpeed * k.dt()
-        if (text.pos.y < -textHeight) {
-                text.pos.y = -textHeight
-                scrollComplete = true
-                k.go("start");
-            }
+        if (scrollPosition < maxScroll) {
+            scrollPosition += scrollSpeed * k.dt()
+            text.pos.y = k.height() - scrollPosition / camScale
+        } else {
+            k.wait(2, () => { // Wait for 2 seconds before going back to start
+                k.go("start")
+            })
         }
     })
 
@@ -91,4 +111,20 @@ Thank you for playing!
     crossButton.onClick(()=>{
         k.go("start")
     })
+
+    const updateExitButtonPosition = () => {
+        const buttonWidth = crossButton.width;
+        const padding = 10; // Padding from the edges
+    
+        crossButton.pos = k.vec2(k.width() - buttonWidth*0.7 - padding, padding);
+        exitText.pos = k.vec2(k.width() - buttonWidth*0.7 - padding, padding + 5); // Adjusting for text height
+    };
+    
+    // Initial position update
+    updateExitButtonPosition();
+    
+    // Update positions on resize
+    k.onResize(() => {
+        updateExitButtonPosition();
+    });
 });
