@@ -10,9 +10,7 @@ export const bedroomTableInteractions = async (player, k, map) => {
         let quizDecision = await displayPermissionBox({
             k,
             player,
-            text: [
-                'Do you want to play a quick quiz about JavaScript?',
-            ],
+            text: ['Do you want to play a quick quiz about JavaScript?'],
             onDisplayEnd: () => {
                 player.isInDialog = false;
             },
@@ -22,10 +20,12 @@ export const bedroomTableInteractions = async (player, k, map) => {
             const quizQuestion = getRandomQuestion();
 
             const questionText = quizQuestion.question;
-            const options = Object.entries(quizQuestion.options).map(([key, value]) => ({
-                value: key,
-                text: `<pre style="font-size: 14px;"><code>${value}</code></pre>`
-            }));
+            const options = Object.entries(quizQuestion.options).map(
+                ([key, value]) => ({
+                    value: key,
+                    text: `<pre style="font-size: 14px;"><code>${value}</code></pre>`,
+                })
+            );
 
             showCustomPrompt(questionText, options, async (selectedOption) => {
                 let feedbackText = [];
@@ -38,9 +38,13 @@ export const bedroomTableInteractions = async (player, k, map) => {
                     feedbackText.push("Oops! That's not right.");
                 }
 
-                feedbackText.push(`Correct answer: ${quizQuestion.answer}. ${quizQuestion.explanation}`);
-                feedbackText.push('Thanks for playing! You can continue exploring.');
-                
+                feedbackText.push(
+                    `Correct answer: ${quizQuestion.answer}. ${quizQuestion.explanation}`
+                );
+                feedbackText.push(
+                    'Thanks for playing! You can continue exploring.'
+                );
+
                 await displayDialogue({
                     k,
                     player,
