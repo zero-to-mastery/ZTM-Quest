@@ -1,6 +1,6 @@
 import { scaleFactor } from './constants';
 import { animations, stopCharacterAnims } from './utils/animation';
-import { drawMinimap, getCamScale } from './utils';
+import { drawMinimap, getCamScale, toggleMinimap } from './utils';
 import { k } from './kplayCtx';
 
 // Manage multiple pressed buttons
@@ -168,6 +168,12 @@ export const addPlayerControls = (player) => {
             return;
         }
     });
+
+    // Set up the button press event to toggle the minimap
+    k.onButtonPress("map", () => {
+        toggleMinimap();
+    });
+
     // Only stop animations if no buttons are pressed
     k.onMouseRelease(() => pressed.size || stopCharacterAnims(player));
 
