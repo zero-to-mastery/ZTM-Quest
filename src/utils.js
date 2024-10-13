@@ -1,3 +1,5 @@
+import { scaleFactor } from "./constants";
+
 const processDialogue = async ({
     dialog,
     text,
@@ -37,7 +39,7 @@ export async function displayDialogue({
     player,
     characterName,
     text,
-    onDisplayEnd = () => {},
+    onDisplayEnd = () => { },
 }) {
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
@@ -98,7 +100,7 @@ export async function displayPermissionBox({
     k,
     player,
     text,
-    onDisplayEnd = () => {},
+    onDisplayEnd = () => { },
 }) {
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
@@ -222,3 +224,28 @@ export const hideCanvasFrame = () => {
 export const showCanvasFrame = () => {
     gameWindow.classList.remove('full-screen');
 };
+
+export const drawMinimap = (k, player) => {
+    const minimapCanvas = document.getElementById('minimap');
+    const minimapCtx = minimapCanvas.getContext('2d');
+    const mapImage = new Image()
+    const [map] = k.get("main_map");
+
+    mapImage.src  = map.png
+    // Clear previous frame
+    minimapCtx.clearRect(0, 0, minimapCanvas.width, minimapCanvas.height);
+
+    // Calculate scaling factors
+    const xScale = minimapCanvas.width / (map.width * scaleFactor);
+    const yScale = minimapCanvas.height / (map.height * scaleFactor);
+
+    // Draw the map image
+    minimapCtx.drawImage(mapImage, 0, 0, minimapCanvas.width, minimapCanvas.height);
+
+    // Scale player positions
+    const playerMinimapX = player.pos.x * xScale; // Scale player X position
+    const playerMinimapY = player.pos.y * yScale; // Scale player Y position
+
+    minimapCtx.fillStyle = 'red'; // Player marker color
+    minimapCtx.fillRect(playerMinimapX, playerMinimapY, 5, 5); // Player marker
+}
