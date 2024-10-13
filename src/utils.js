@@ -37,17 +37,19 @@ export async function displayDialogue({
     player,
     characterName,
     text,
-    onDisplayEnd = () => {},
+    onDisplayEnd = () => { },
 }) {
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
     const closeBtn = document.getElementById('dialog-close-btn');
     const nextBtn = document.getElementById('dialog-next-btn');
     const energyUI = document.getElementById('energy-container');
+    const miniMapUI = document.getElementById("minimap")
     let abort = new AbortController();
 
     energyUI.style.display = 'none';
     dialogUI.style.display = 'block';
+    miniMapUI.style.display = 'none'
 
     if (text.length > 1) {
         nextBtn.style.display = 'block';
@@ -98,16 +100,18 @@ export async function displayPermissionBox({
     k,
     player,
     text,
-    onDisplayEnd = () => {},
+    onDisplayEnd = () => { },
 }) {
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
     const closeBtn = document.getElementById('dialog-close-btn');
     const nextBtn = document.getElementById('dialog-next-btn');
     const energyUI = document.getElementById('energy-container');
+    const miniMapUI = document.getElementById("minimap")
     closeBtn.innerHTML = 'No';
     nextBtn.innerHTML = 'Yes';
     energyUI.style.display = 'none';
+    miniMapUI.style.display = "none"
     dialogUI.style.display = 'block';
     closeBtn.style.display = 'block';
     nextBtn.style.display = 'block';
