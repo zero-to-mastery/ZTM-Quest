@@ -213,34 +213,12 @@ export const tearDownInteractionPrompt = (k) => {
     }
 };
 
-export const getCanvasFrame = () => {
-    const leftPanel = document.getElementById('left-panel');
-    const rightPanel = document.getElementById('right-panel');
-    const header = document.getElementById('header');
-    const footer = document.getElementById('footer');
-
-    return {
-        leftPanel,
-        rightPanel,
-        header,
-        footer,
-    };
-};
+const gameWindow = document.querySelector('.game-window');
 
 export const hideCanvasFrame = () => {
-    const { leftPanel, rightPanel, header, footer } = getCanvasFrame();
-
-    leftPanel.style.visibility = 'hidden';
-    rightPanel.style.visibility = 'hidden';
-    header.style.visibility = 'hidden';
-    footer.style.visibility = 'hidden';
+    gameWindow.classList.add('full-screen');
 };
 
 export const showCanvasFrame = () => {
-    const { leftPanel, rightPanel, header, footer } = getCanvasFrame();
-
-    leftPanel.style.visibility = 'visible';
-    rightPanel.style.visibility = 'visible';
-    header.style.visibility = 'visible';
-    footer.style.visibility = 'visible';
+    gameWindow.classList.remove('full-screen');
 };
