@@ -87,30 +87,35 @@ function startCrawlGame(k) {
     k.debug.log('Crawl game Started!');
     k.go('startScreen', { title: 'Crawl Game', gameSceneName: 'crawlGame' });
 
-    let score = 60000
-    let width = k.width()
     k.scene("crawlGame", () => {
+        let width = k.width()
+        // Set the initial time remaining (e.g., 60 seconds or 1 minute)
+        let timeRemaining = 60 * 1000; // 60 seconds in milliseconds
+
+        // keep track of score
+        const timeLabel = k.add([k.text(timeRemaining), k.pos(68, 10)]);
+
         // Pressing escape lets the player leave the game
         k.onKeyPress('escape', () => {
             k.go('lose', {
                 title: 'Crawl Game',
                 gameRestartSceneName: 'crawlGame',
                 gameExitSceneName: 'arcade',
-                score
+                score: timeLabel.text
             });
         });
 
         // Create Crane
         const crane = k.add([
             k.rect(40, 20),
-            k.pos(50, 50),
+            k.pos(50, 150),
             k.area(),
             k.body(),
-            { isMovingDown: false, isMovingUp: false, isMovingHorizontal: false, speed: 300, startPos: k.vec2(50, 50), grabbedItem: null }
+            { isMovingDown: false, isMovingUp: false, isMovingHorizontal: false, speed: 300, startPos: k.vec2(50, 150), grabbedItem: null }
         ]);
 
         // Number of items
-        const numItems = 5;
+        const numItems = 1;
 
         // Create items for the crane to pick up
         for (let i = 0; i < numItems; i++) {
@@ -142,20 +147,50 @@ function startCrawlGame(k) {
         });
 
         // Drop the crane using the spacebar
-        k.onKeyPress("space", () => {
+        k.onKeyPress(["space", "down"], () => {
             if (!crane.isMovingDown && !crane.isMovingUp && !crane.isMovingHorizontal) {
                 crane.isMovingDown = true;
             }
         });
 
-        // keep track of score
-        const scoreLabel = k.add([k.text(score), k.pos(68, 100)]);
+        // Drop the crane using a mouse click
+        k.onClick(() => {
+            if (!crane.isMovingDown && !crane.isMovingUp && !crane.isMovingHorizontal) {
+                crane.isMovingDown = true;
+            }
+        });
+
+
+        // Add instructions with proper positioning
+        k.add([
+            k.text("Tap/Click/←→ or to move the crane left and right"),
+            k.pos(68, 40),  // Position slightly below the score label
+        ]);
+
+        k.add([
+            k.text("Tap/Click/↓ or space or mouse to move crane down"),
+            k.pos(68, 70),  // Positioned below the first line of instructions
+        ]);
 
         // Update the crane position during each frame
         k.onUpdate(() => {
             width = k.width()
-            score--
-            scoreLabel.text = score;
+
+            const deltaTime = k.dt() * 1000;  // Get the time since last frame (in milliseconds)
+            timeRemaining -= deltaTime;
+
+            // Update the time label with the formatted remaining time
+            timeLabel.text = formatTime(timeRemaining);
+
+            const items = k.get("item")
+            if (items.length === 0) {
+                k.go('lose', {
+                    title: 'Crawl game',
+                    gameRestartSceneName: 'crawlGame',
+                    gameExitSceneName: 'arcade',
+                    score: timeLabel.text,
+                });
+            }
             if (crane.isMovingDown) {
                 crane.move(0, crane.speed);
                 // Check for collision with any items
@@ -163,14 +198,14 @@ function startCrawlGame(k) {
                 if (item && !crane.grabbedItem) {
                     crane.grabbedItem = item;  // Attach the item to the crane
                     k.debug.log("Item grabbed!");
-                    score += 10000
+                    timeRemaining += 10000
                     // Reset crane position after reaching item
                     crane.isMovingDown = false;  // Reset the flag so the crane can move again
                     crane.isMovingUp = true;
                 }
                 if (crane.pos.y > k.height()) {
                     // Reset crane position after reaching bottom
-                    score -= 5000
+                    timeRemaining -= 5000
                     crane.isMovingDown = false;  // Reset the flag so the crane can move again
                     crane.isMovingUp = true;
                 }
@@ -215,4 +250,13 @@ function startCrawlGame(k) {
             }
         });
     });
+}
+
+
+// Helper function to format time as MM:SS
+function formatTime(milliseconds) {
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
