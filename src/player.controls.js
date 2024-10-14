@@ -62,11 +62,15 @@ export const addPlayerControls = (player) => {
         const dirX = pressed.has('left') ? -1 : pressed.has('right') ? 1 : 0;
         const dirY = pressed.has('up') ? -1 : pressed.has('down') ? 1 : 0;
         const moveDir = k.vec2(dirX, dirY);
+
         const speed =
             pressed.size === 1
-                ? player.speed
-                : // Dot product for diagonal movement 45%
-                  player.speed * 0.707106781188095; // 1 / sqrt(2)
+                ? player.state.energy > 50
+                    ? player.speed * 1.25
+                    : player.speed * 1.1
+                : player.state.energy > 50
+                  ? player.speed * 0.707106781188095 * 1.25 // Dot product for diagonal movement 45%
+                  : player.speed * 0.707106781188095 * 1.1;
 
         player.move(moveDir.unit().scale(speed));
     });
