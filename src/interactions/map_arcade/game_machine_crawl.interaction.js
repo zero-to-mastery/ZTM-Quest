@@ -87,8 +87,8 @@ function startCrawlGame(k) {
     k.debug.log('Crawl game Started!');
     k.go('startScreen', { title: 'Crawl Game', gameSceneName: 'crawlGame' });
 
-    k.scene("crawlGame", () => {
-        let width = k.width()
+    k.scene('crawlGame', () => {
+        let width = k.width();
         // Set the initial time remaining (e.g., 60 seconds or 1 minute)
         let timeRemaining = 60 * 1000; // 60 seconds in milliseconds
 
@@ -101,7 +101,7 @@ function startCrawlGame(k) {
                 title: 'Crawl Game',
                 gameRestartSceneName: 'crawlGame',
                 gameExitSceneName: 'arcade',
-                score: timeLabel.text
+                score: timeLabel.text,
             });
         });
 
@@ -111,7 +111,14 @@ function startCrawlGame(k) {
             k.pos(50, 150),
             k.area(),
             k.body(),
-            { isMovingDown: false, isMovingUp: false, isMovingHorizontal: false, speed: 300, startPos: k.vec2(50, 150), grabbedItem: null }
+            {
+                isMovingDown: false,
+                isMovingUp: false,
+                isMovingHorizontal: false,
+                speed: 300,
+                startPos: k.vec2(50, 150),
+                grabbedItem: null,
+            },
         ]);
 
         // Number of items
@@ -124,65 +131,82 @@ function startCrawlGame(k) {
                 // Calculate the position of each item, spacing them evenly
                 k.pos(
                     (k.width() / (numItems + 1)) * (i + 1), // Spacing items evenly between width
-                    k.height() - 200                        // Y position (fixed 200 units from the bottom)
+                    k.height() - 200 // Y position (fixed 200 units from the bottom)
                 ),
                 k.area(),
-                k.body({ isStatic: true }),  // Ensure items don't move
-                "item",
+                k.body({ isStatic: true }), // Ensure items don't move
+                'item',
             ]);
         }
 
         // Crane movement left
-        k.onButtonDown(["left"], () => {
-            if (!crane.isMovingDown && !crane.isMovingUp && !crane.isMovingHorizontal && crane.pos.x > 0) {
+        k.onButtonDown(['left'], () => {
+            if (
+                !crane.isMovingDown &&
+                !crane.isMovingUp &&
+                !crane.isMovingHorizontal &&
+                crane.pos.x > 0
+            ) {
                 crane.move(-crane.speed, 0);
             }
         });
 
         // Crane movement right
-        k.onButtonDown(["right"], () => {
-            if (!crane.isMovingDown && !crane.isMovingUp && !crane.isMovingHorizontal && crane.pos.x < width - 40) {
+        k.onButtonDown(['right'], () => {
+            if (
+                !crane.isMovingDown &&
+                !crane.isMovingUp &&
+                !crane.isMovingHorizontal &&
+                crane.pos.x < width - 40
+            ) {
                 crane.move(crane.speed, 0);
             }
         });
 
         // Drop the crane using the spacebar
-        k.onKeyPress(["space", "down"], () => {
-            if (!crane.isMovingDown && !crane.isMovingUp && !crane.isMovingHorizontal) {
+        k.onKeyPress(['space', 'down'], () => {
+            if (
+                !crane.isMovingDown &&
+                !crane.isMovingUp &&
+                !crane.isMovingHorizontal
+            ) {
                 crane.isMovingDown = true;
             }
         });
 
         // Drop the crane using a mouse click
         k.onClick(() => {
-            if (!crane.isMovingDown && !crane.isMovingUp && !crane.isMovingHorizontal) {
+            if (
+                !crane.isMovingDown &&
+                !crane.isMovingUp &&
+                !crane.isMovingHorizontal
+            ) {
                 crane.isMovingDown = true;
             }
         });
 
-
         // Add instructions with proper positioning
         k.add([
-            k.text("Tap/Click/←→ or to move the crane left and right"),
-            k.pos(68, 40),  // Position slightly below the score label
+            k.text('Tap/Click/←→ or to move the crane left and right'),
+            k.pos(68, 40), // Position slightly below the score label
         ]);
 
         k.add([
-            k.text("Tap/Click/↓ or space or mouse to move crane down"),
-            k.pos(68, 70),  // Positioned below the first line of instructions
+            k.text('Tap/Click/↓ or space or mouse to move crane down'),
+            k.pos(68, 70), // Positioned below the first line of instructions
         ]);
 
         // Update the crane position during each frame
         k.onUpdate(() => {
-            width = k.width()
+            width = k.width();
 
-            const deltaTime = k.dt() * 1000;  // Get the time since last frame (in milliseconds)
+            const deltaTime = k.dt() * 1000; // Get the time since last frame (in milliseconds)
             timeRemaining -= deltaTime;
 
             // Update the time label with the formatted remaining time
             timeLabel.text = formatTime(timeRemaining);
 
-            const items = k.get("item")
+            const items = k.get('item');
             if (items.length === 0) {
                 k.go('lose', {
                     title: 'Crawl game',
@@ -194,19 +218,21 @@ function startCrawlGame(k) {
             if (crane.isMovingDown) {
                 crane.move(0, crane.speed);
                 // Check for collision with any items
-                const item = k.get("item").find(item => crane.isColliding(item));
+                const item = k
+                    .get('item')
+                    .find((item) => crane.isColliding(item));
                 if (item && !crane.grabbedItem) {
-                    crane.grabbedItem = item;  // Attach the item to the crane
-                    k.debug.log("Item grabbed!");
-                    timeRemaining += 10000
+                    crane.grabbedItem = item; // Attach the item to the crane
+                    k.debug.log('Item grabbed!');
+                    timeRemaining += 10000;
                     // Reset crane position after reaching item
-                    crane.isMovingDown = false;  // Reset the flag so the crane can move again
+                    crane.isMovingDown = false; // Reset the flag so the crane can move again
                     crane.isMovingUp = true;
                 }
                 if (crane.pos.y > k.height()) {
                     // Reset crane position after reaching bottom
-                    timeRemaining -= 5000
-                    crane.isMovingDown = false;  // Reset the flag so the crane can move again
+                    timeRemaining -= 5000;
+                    crane.isMovingDown = false; // Reset the flag so the crane can move again
                     crane.isMovingUp = true;
                 }
             }
@@ -215,43 +241,43 @@ function startCrawlGame(k) {
                 crane.move(0, -crane.speed);
                 // Move the grabbed item with the crane
                 if (crane.grabbedItem) {
-                    crane.grabbedItem.pos.x = crane.pos.x;  // Align item's x position with the crane
-                    crane.grabbedItem.pos.y = crane.pos.y + 20;  // Adjust y position (offset for the crane's size)
+                    crane.grabbedItem.pos.x = crane.pos.x; // Align item's x position with the crane
+                    crane.grabbedItem.pos.y = crane.pos.y + 20; // Adjust y position (offset for the crane's size)
                 }
 
                 // Check if crane has reached its starting position
                 if (crane.pos.y <= crane.startPos.y) {
-                    crane.isMovingHorizontal = true
-                    crane.isMovingUp = false;    // Stop moving up
+                    crane.isMovingHorizontal = true;
+                    crane.isMovingUp = false; // Stop moving up
                 }
             }
             // Move crane horizontally back to the starting x position
             if (crane.isMovingHorizontal) {
-                const moveDirection = crane.pos.x > crane.startPos.x ? -1 : 1;  // Determine direction
+                const moveDirection = crane.pos.x > crane.startPos.x ? -1 : 1; // Determine direction
                 crane.move(moveDirection * crane.speed, 0);
 
                 // Move the grabbed item with the crane horizontally
                 if (crane.grabbedItem) {
-                    crane.grabbedItem.pos.x = crane.pos.x;  // Align item's x position with the crane
+                    crane.grabbedItem.pos.x = crane.pos.x; // Align item's x position with the crane
                 }
 
                 // Check if crane has reached its starting x position
-                if (Math.abs(crane.pos.x - crane.startPos.x) <= 1) {  // Small tolerance for precision
-                    crane.pos.x = crane.startPos.x;  // Ensure exact x positioning
-                    crane.isMovingHorizontal = false;  // Stop movement
+                if (Math.abs(crane.pos.x - crane.startPos.x) <= 1) {
+                    // Small tolerance for precision
+                    crane.pos.x = crane.startPos.x; // Ensure exact x positioning
+                    crane.isMovingHorizontal = false; // Stop movement
 
                     // Drop the grabbed item after reaching the start position
                     if (crane.grabbedItem) {
-                        crane.grabbedItem.destroy()
-                        crane.grabbedItem = null;  // Release the item
-                        k.debug.log("Item released!");
+                        crane.grabbedItem.destroy();
+                        crane.grabbedItem = null; // Release the item
+                        k.debug.log('Item released!');
                     }
                 }
             }
         });
     });
 }
-
 
 // Helper function to format time as MM:SS
 function formatTime(milliseconds) {
