@@ -82,18 +82,29 @@ function closeCustomPrompt() {
     document.getElementById('custom-prompt').style.display = 'none';
 }
 
-// Function to start the Chrome Dino Game
+// Function to start the crawl game
 function startCrawlGame(k) {
     k.debug.log('Crawl game Started!');
     k.go('startScreen', { title: 'Crawl Game', gameSceneName: 'crawlGame' });
 
     k.scene('crawlGame', () => {
         let width = k.width();
+
+        // Scale size of game depending on size of screen
+        let currentScreenSize = k.height() / k.width();
+        if (currentScreenSize <= 1) {
+            k.camScale(1);
+        } else {
+            k.camScale(0.75, 1);
+        }
         // Set the initial time remaining (e.g., 60 seconds or 1 minute)
-        let timeRemaining = 60 * 1000; // 60 seconds in milliseconds
+        let timeRemaining = 10 * 1000; // 60 seconds in milliseconds
 
         // keep track of score
-        const timeLabel = k.add([k.text(timeRemaining), k.pos(68, 10)]);
+        const timeLabel = k.add([
+            k.text(timeRemaining, { size: 32 }),
+            k.pos(0, 10),
+        ]);
 
         // Pressing escape lets the player leave the game
         k.onKeyPress('escape', () => {
@@ -115,14 +126,14 @@ function startCrawlGame(k) {
                 isMovingDown: false,
                 isMovingUp: false,
                 isMovingHorizontal: false,
-                speed: 300,
+                speed: 450,
                 startPos: k.vec2(50, 150),
                 grabbedItem: null,
             },
         ]);
 
         // Number of items
-        const numItems = 1;
+        const numItems = 6;
 
         // Create items for the crane to pick up
         for (let i = 0; i < numItems; i++) {
@@ -139,6 +150,7 @@ function startCrawlGame(k) {
             ]);
         }
 
+        // Default Controls
         // Crane movement left
         k.onButtonDown(['left'], () => {
             if (
@@ -174,8 +186,96 @@ function startCrawlGame(k) {
             }
         });
 
-        // Drop the crane using a mouse click
-        k.onClick(() => {
+        // Extra buttons to allow mobile users to play
+        // Add left button for mobile users
+        const leftButtonTxt = k.make([
+            k.text('<', { font: 'pixelFont' }),
+            k.anchor('center'),
+            k.color(0, 0, 0),
+        ]);
+
+        const leftButton = k.add([
+            k.rect(leftButtonTxt.width + 20, 40),
+            k.pos(10, k.height() - 100),
+            k.anchor('center'),
+            k.area(),
+            'leftButton',
+            { isPressed: false },
+        ]);
+
+        leftButton.onUpdate(() => {
+            if (
+                leftButton.isPressed &&
+                !crane.isMovingDown &&
+                !crane.isMovingUp &&
+                !crane.isMovingHorizontal &&
+                crane.pos.x > 0
+            ) {
+                crane.move(-crane.speed, 0);
+            }
+        });
+
+        leftButton.onClick(() => {
+            leftButton.isPressed = true;
+        });
+
+        k.onMouseRelease(() => {
+            leftButton.isPressed = false;
+        });
+
+        // Add right button for mobile users
+        const rightButtonTxt = k.make([
+            k.text('>', { font: 'pixelFont' }),
+            k.anchor('center'),
+            k.color(0, 0, 0),
+        ]);
+
+        const rightButton = k.add([
+            k.rect(rightButtonTxt.width + 20, 40),
+            k.pos(k.width() - 10, k.height() - 100),
+            k.anchor('center'),
+            k.area(),
+            'rightButton',
+            { isPressed: false },
+        ]);
+
+        rightButton.onUpdate(() => {
+            if (
+                rightButton.isPressed &&
+                !crane.isMovingDown &&
+                !crane.isMovingUp &&
+                !crane.isMovingHorizontal &&
+                crane.pos.x < width - 40
+            ) {
+                crane.move(crane.speed, 0);
+            }
+        });
+
+        rightButton.onClick(() => {
+            rightButton.isPressed = true;
+        });
+
+        k.onMouseRelease(() => {
+            rightButton.isPressed = false;
+        });
+
+        // Add drop button for mobile users
+        const center = k.center();
+        const dropButtonTxt = k.make([
+            k.text('DROP', { font: 'pixelFont' }),
+            k.anchor('center'),
+            k.color(0, 0, 0),
+        ]);
+
+        const dropButton = k.add([
+            k.rect(dropButtonTxt.width + 20, 40),
+            k.pos(center.x, k.height() - 100),
+            k.anchor('center'),
+            k.area(),
+            'dropButton',
+        ]);
+
+        dropButton.onClick(() => {
             if (
                 !crane.isMovingDown &&
                 !crane.isMovingUp &&
@@ -185,29 +285,27 @@ function startCrawlGame(k) {
             }
         });
 
-        // Add instructions with proper positioning
-        k.add([
-            k.text('Tap/Click/←→ or to move the crane left and right'),
-            k.pos(68, 40), // Position slightly below the score label
-        ]);
+        rightButton.add(rightButtonTxt);
+        leftButton.add(leftButtonTxt);
+        dropButton.add(dropButtonTxt);
 
-        k.add([
-            k.text('Tap/Click/↓ or space or mouse to move crane down'),
-            k.pos(68, 70), // Positioned below the first line of instructions
-        ]);
+        // Controls for players
+        k.add([k.text('← → or to move the crane', { size: 32 }), k.pos(0, 40)]);
+        k.add([k.text('↓ to drop crane', { size: 32 }), k.pos(0, 70)]);
 
         // Update the crane position during each frame
         k.onUpdate(() => {
             width = k.width();
-
             const deltaTime = k.dt() * 1000; // Get the time since last frame (in milliseconds)
             timeRemaining -= deltaTime;
-
+            if (timeRemaining < 0) {
+                timeRemaining = 0;
+            }
             // Update the time label with the formatted remaining time
             timeLabel.text = formatTime(timeRemaining);
 
             const items = k.get('item');
-            if (items.length === 0) {
+            if (items.length === 0 || timeRemaining <= 0) {
                 k.go('lose', {
                     title: 'Crawl game',
                     gameRestartSceneName: 'crawlGame',
@@ -229,7 +327,7 @@ function startCrawlGame(k) {
                     crane.isMovingDown = false; // Reset the flag so the crane can move again
                     crane.isMovingUp = true;
                 }
-                if (crane.pos.y > k.height()) {
+                if (crane.pos.y > k.height() - 150) {
                     // Reset crane position after reaching bottom
                     timeRemaining -= 5000;
                     crane.isMovingDown = false; // Reset the flag so the crane can move again
