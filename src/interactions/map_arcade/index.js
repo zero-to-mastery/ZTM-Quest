@@ -31,7 +31,7 @@ const interactions = [
     interactionWithGameMachine10,
     interactionWithGameMachine11,
     interactionWithGameMachine12,
-    interactionWithGameMachineCrawl
+    interactionWithGameMachineCrawl,
 ];
 
 export default interactions;
