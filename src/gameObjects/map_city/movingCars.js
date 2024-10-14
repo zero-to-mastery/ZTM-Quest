@@ -4,9 +4,9 @@ export const movingCars = (k, map) => {
         sliceX: 7,
         sliceY: 2,
         anims: {
-            drive: { from: 0, to: 0, loop: true }, 
+            drive: { from: 0, to: 0, loop: true },
             turningPoint: { from: 5, to: 11, loop: true },
-            down: { from: 12, to: 12, loop: true } 
+            down: { from: 12, to: 12, loop: true },
         },
     });
 
@@ -19,9 +19,9 @@ export const movingCars = (k, map) => {
     function spawnCar(street) {
         const car = k.add([
             k.sprite('car'),
-            k.pos(street.start), 
-            k.area(), 
-            'car', 
+            k.pos(street.start),
+            k.area(),
+            'car',
             {
                 state: 'right',
             },
@@ -32,23 +32,22 @@ export const movingCars = (k, map) => {
         // Update car movement and animation based on its state
         car.onUpdate(() => {
             if (car.state === 'right') {
-                car.move(160, 0); 
+                car.move(160, 0);
 
                 if (car.pos.x >= street.turnPoint.x) {
                     car.state = 'down';
-                    car.play('turningPoint'); 
+                    car.play('turningPoint');
                 }
-
             } else if (car.state === 'down') {
-                car.move(0, 160); 
+                car.move(0, 160);
 
-                if (car.curAnim() === 'turningPoint' && car.frame === 11) { 
-                    car.play('down'); 
+                if (car.curAnim() === 'turningPoint' && car.frame === 11) {
+                    car.play('down');
                 }
 
                 if (car.pos.y > street.end.y - 100) {
                     k.destroy(car);
-                } 
+                }
             }
         });
 
