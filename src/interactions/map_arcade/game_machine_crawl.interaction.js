@@ -87,22 +87,24 @@ function startCrawlGame(k) {
     k.debug.log('Crawl game Started!');
     k.go('startScreen', { title: 'Crawl Game', gameSceneName: 'crawlGame' });
 
-    k.scene("crawlGame", () => {
-        let width = k.width()
+    k.scene('crawlGame', () => {
+        let width = k.width();
 
         // Scale size of game depending on size of screen
-        let currentScreenSize = k.height() / k.width()
+        let currentScreenSize = k.height() / k.width();
         if (currentScreenSize <= 1) {
-            k.camScale(1)
-        }
-        else {
-            k.camScale(0.75, 1)
+            k.camScale(1);
+        } else {
+            k.camScale(0.75, 1);
         }
         // Set the initial time remaining (e.g., 60 seconds or 1 minute)
         let timeRemaining = 10 * 1000; // 60 seconds in milliseconds
 
         // keep track of score
-        const timeLabel = k.add([k.text(timeRemaining, { size: 32 }), k.pos(0, 10)]);
+        const timeLabel = k.add([
+            k.text(timeRemaining, { size: 32 }),
+            k.pos(0, 10),
+        ]);
 
         // Pressing escape lets the player leave the game
         k.onKeyPress('escape', () => {
@@ -120,7 +122,14 @@ function startCrawlGame(k) {
             k.pos(50, 150),
             k.area(),
             k.body(),
-            { isMovingDown: false, isMovingUp: false, isMovingHorizontal: false, speed: 450, startPos: k.vec2(50, 150), grabbedItem: null }
+            {
+                isMovingDown: false,
+                isMovingUp: false,
+                isMovingHorizontal: false,
+                speed: 450,
+                startPos: k.vec2(50, 150),
+                grabbedItem: null,
+            },
         ]);
 
         // Number of items
@@ -190,12 +199,18 @@ function startCrawlGame(k) {
             k.pos(10, k.height() - 100),
             k.anchor('center'),
             k.area(),
-            "leftButton",
-            { isPressed: false }
+            'leftButton',
+            { isPressed: false },
         ]);
 
         leftButton.onUpdate(() => {
-            if (leftButton.isPressed && !crane.isMovingDown && !crane.isMovingUp && !crane.isMovingHorizontal && crane.pos.x > 0) {
+            if (
+                leftButton.isPressed &&
+                !crane.isMovingDown &&
+                !crane.isMovingUp &&
+                !crane.isMovingHorizontal &&
+                crane.pos.x > 0
+            ) {
                 crane.move(-crane.speed, 0);
             }
         });
@@ -220,12 +235,18 @@ function startCrawlGame(k) {
             k.pos(k.width() - 10, k.height() - 100),
             k.anchor('center'),
             k.area(),
-            "rightButton",
-            { isPressed: false }
+            'rightButton',
+            { isPressed: false },
         ]);
 
         rightButton.onUpdate(() => {
-            if (rightButton.isPressed && !crane.isMovingDown && !crane.isMovingUp && !crane.isMovingHorizontal && crane.pos.x < width - 40) {
+            if (
+                rightButton.isPressed &&
+                !crane.isMovingDown &&
+                !crane.isMovingUp &&
+                !crane.isMovingHorizontal &&
+                crane.pos.x < width - 40
+            ) {
                 crane.move(crane.speed, 0);
             }
         });
@@ -251,27 +272,31 @@ function startCrawlGame(k) {
             k.pos(center.x, k.height() - 100),
             k.anchor('center'),
             k.area(),
-            "dropButton",
+            'dropButton',
         ]);
 
         dropButton.onClick(() => {
-            if (!crane.isMovingDown && !crane.isMovingUp && !crane.isMovingHorizontal) {
+            if (
+                !crane.isMovingDown &&
+                !crane.isMovingUp &&
+                !crane.isMovingHorizontal
+            ) {
                 crane.isMovingDown = true;
             }
         });
 
-        rightButton.add(rightButtonTxt)
-        leftButton.add(leftButtonTxt)
-        dropButton.add(dropButtonTxt)
+        rightButton.add(rightButtonTxt);
+        leftButton.add(leftButtonTxt);
+        dropButton.add(dropButtonTxt);
 
         // Controls for players
-        k.add([k.text("← → or to move the crane", { size: 32 }), k.pos(0, 40)]);
-        k.add([k.text("↓ to drop crane", { size: 32 }), k.pos(0, 70)]);
+        k.add([k.text('← → or to move the crane', { size: 32 }), k.pos(0, 40)]);
+        k.add([k.text('↓ to drop crane', { size: 32 }), k.pos(0, 70)]);
 
         // Update the crane position during each frame
         k.onUpdate(() => {
-            width = k.width()
-            const deltaTime = k.dt() * 1000;  // Get the time since last frame (in milliseconds)
+            width = k.width();
+            const deltaTime = k.dt() * 1000; // Get the time since last frame (in milliseconds)
             timeRemaining -= deltaTime;
             if (timeRemaining < 0) {
                 timeRemaining = 0;
@@ -279,7 +304,7 @@ function startCrawlGame(k) {
             // Update the time label with the formatted remaining time
             timeLabel.text = formatTime(timeRemaining);
 
-            const items = k.get("item")
+            const items = k.get('item');
             if (items.length === 0 || timeRemaining <= 0) {
                 k.go('lose', {
                     title: 'Crawl game',
