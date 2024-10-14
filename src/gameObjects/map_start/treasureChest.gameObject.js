@@ -1,19 +1,46 @@
-// src/gameObjects/map_start/treasureChest.gameObject.js
 import { scaleFactor } from '../../constants';
 
 export const treasureChest = (k, map, spawnpoints) => {
-    // Load the sprite for the treasure chest
-    k.loadSprite('treasureChest', './assets/sprites/treasure_chest.png', {
-        sliceX: 1,
-        sliceY: 1,
-        anims: {
-            idle: 0,
-        },
-    });
+    // Load the sprite for the Open treasure chest
+    k.loadSprite(
+        'treasureChestClosed',
+        './assets/sprites/treasure_chest_closed.png',
+        {
+            sliceX: 1,
+            sliceY: 1,
+            anims: {
+                idle: 0,
+            },
+        }
+    );
+    // Load the sprite for the Closed treasure chest open
+    k.loadSprite(
+        'treasureChestOpen',
+        './assets/sprites/treasure_chest_open.png',
+        {
+            sliceX: 1,
+            sliceY: 1,
+            anims: {
+                idle: 0,
+            },
+        }
+    );
+
+    // Load the chest opening sound
+    k.loadSound('chestOpen', './assets/sounds/chest_opening.wav');
+
+    const chestPosition = spawnpoints.treasureChest;
+
+    if (!chestPosition) {
+        return; // Prevent further execution
+    }
+
+    // Create a variable to track whether the chest is open
+    let isOpen = false;
 
     // Create the treasure chest object
     const chestObj = k.make([
-        k.sprite('treasureChest', { anim: 'idle' }),
+        k.sprite('treasureChestClosed', { anim: 'idle' }),
         k.area({
             shape: new k.Rect(k.vec2(0), 32, 32), // Adjust dimensions
         }),
@@ -28,6 +55,18 @@ export const treasureChest = (k, map, spawnpoints) => {
         k.offscreen({ hide: false, distance: 10 }), // Optional
         'treasureChest', // Tag for identifying this object type
     ]);
+
+    // Add interaction logic to open the chest
+    chestObj.onCollide('player', () => {
+        if (!isOpen) {
+            isOpen = true;
+            // Change sprite to the open treasure chest
+            chestObj.useSprite('treasureChestOpen');
+
+            // Play the chest opening sound
+            k.playSound('chestOpen');
+        }
+    });
 
     return chestObj;
 };
