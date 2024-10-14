@@ -65,10 +65,10 @@ export const addPlayerControls = (player) => {
 
         const speed =
             pressed.size === 1
-                ? player.state.energy > 50
+                ? player.state.energy >= 50
                     ? player.speed * 1.25
                     : player.speed * 1.1
-                : player.state.energy > 50
+                : player.state.energy >= 50
                   ? player.speed * 0.707106781188095 * 1.25 // Dot product for diagonal movement 45%
                   : player.speed * 0.707106781188095 * 1.1;
 
