@@ -86,4 +86,14 @@ function closeCustomPrompt() {
 function startChromeDinoGame(k) {
     k.debug.log('Chrome Dino Game started!');
     // Here you can implement the logic to actually start the game
+
+    /*
+    k.go('startScreen', { title: 'Dino Game', gameSceneName: 'dinoGame' });
+    k.scene('dinoGame', () => {
+
+        // if yu want to exit the game add this code to your callback function
+        // k.go('lose', { title: 'Dine Game', gameRestartSceneName: 'dinoGame', gameExitSceneName: 'arcade', score });
+
+    });
+    */
 }

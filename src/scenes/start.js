@@ -1,12 +1,9 @@
-import { makePlayer } from '../factories/player.factory';
 import { initMap } from '../init/map.init';
 import { k } from '../kplayCtx';
-import { attachInteractions } from '../interactions/map_start';
-import { addGameObjects } from '../gameObjects/map_start';
-import { addPlayerControls } from '../player.controls';
-import { getGameState } from '../utils/gameState';
+import gameObjects from '../gameObjects/map_start';
+import interactions from '../interactions/map_start';
 
-k.scene('start', async (enter_tag) => {
+export async function start() {
     const objectConfig = {
         static: [
             'map_boundaries',
@@ -18,24 +15,11 @@ k.scene('start', async (enter_tag) => {
         interactionObjects: ['interaction_objects'],
     };
     const [map, spawnpoint] = await initMap(
-        k,
         objectConfig,
         './exports/maps/map_start.png',
         './maps/map_start.json',
         k.vec2(0, 11)
     );
 
-    const gameState = getGameState();
-    const player = makePlayer(gameState.player);
-
-    player.pos = (enter_tag && spawnpoint[enter_tag]) || spawnpoint.player;
-
-    k.add(map);
-    k.add(player);
-    k.canvas.focus();
-
-    addGameObjects(k, map, spawnpoint).forEach((obj) => k.add(obj));
-    attachInteractions(player, k);
-
-    addPlayerControls(k, player);
-});
+    return [map, spawnpoint, gameObjects, interactions];
+}

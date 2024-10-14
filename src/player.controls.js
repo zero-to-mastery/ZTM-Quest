@@ -1,9 +1,13 @@
+import { scaleFactor } from './constants';
 import { animations, stopCharacterAnims } from './utils/animation';
+import { getCamScale } from './utils';
+import { k } from './kplayCtx';
+import { drawMinimap, toggleMinimap } from './utils/miniMap';
 
 // Manage multiple pressed buttons
 const pressed = new Set();
 
-export const addPlayerControls = (k, player) => {
+export const addPlayerControls = (player) => {
     k.onButtonPress(
         ['up', 'down', 'left', 'right'],
         (dir) => player.isInDialog || pressed.add(dir)
@@ -67,8 +71,55 @@ export const addPlayerControls = (k, player) => {
         player.move(moveDir.unit().scale(speed));
     });
 
+    const [map] = k.get('main_map');
+    const camScale = getCamScale(k);
+
+    function updatePos({ k, x, y }) {
+        let camX = x;
+        let camY = y;
+
+        // scaleFactor needs to multiplied with map dimensions to get values that are relative to player's position and speed.
+        const mapWidth = map.width * scaleFactor;
+        const mapHeight = map.height * scaleFactor;
+        const mapCenterX = mapWidth / 2;
+        const mapCenterY = mapHeight / 2;
+
+        // canvas dimensions needs to be adjusted with respect to camScale.
+        const canvasWidth = k.canvas.offsetWidth / camScale;
+        const canvasHeight = k.canvas.offsetHeight / camScale;
+
+        const maxDistX = mapWidth / 2 - canvasWidth / 2;
+        const maxDistY = mapHeight / 2 - canvasHeight / 2;
+
+        if (mapWidth > canvasWidth) {
+            if (x > mapCenterX + maxDistX) {
+                camX = mapCenterX + maxDistX;
+            }
+            if (x < mapCenterX - maxDistX) {
+                camX = mapCenterX - maxDistX;
+            }
+        } else {
+            camX = mapCenterX;
+        }
+
+        if (mapHeight > canvasHeight) {
+            if (y > mapCenterY + maxDistY) {
+                camY = mapCenterY + maxDistY;
+            }
+            if (y < mapCenterY - maxDistY) {
+                camY = mapCenterY - maxDistY;
+            }
+        } else {
+            camY = mapCenterY;
+        }
+
+        return [camX, camY];
+    }
+
     k.onUpdate(() => {
-        k.camPos(player.pos.x, player.pos.y + 100);
+        const updPos = updatePos({ k, ...player.pos });
+        k.camPos(...updPos);
+        drawMinimap(k, player); // Update minimap
     });
 
     k.onMouseDown((mouseBtn) => {
@@ -118,6 +169,16 @@ export const addPlayerControls = (k, player) => {
             return;
         }
     });
+
+    // Set up the button press event to toggle the minimap
+    k.onButtonPress('map', () => {
+        toggleMinimap();
+    });
+
     // Only stop animations if no buttons are pressed
     k.onMouseRelease(() => pressed.size || stopCharacterAnims(player));
+
+    player.onDestroy(() => {
+        pressed.clear();
+    });
 };

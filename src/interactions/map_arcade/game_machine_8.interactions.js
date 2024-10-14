@@ -31,14 +31,16 @@ export function initGame(k) {
     const SPEED = 480;
     const GRAVITY = 2400;
 
-    k.scene('miniGame', () => {
+    k.go('startScreen', { title: 'Robo runner', gameSceneName: 'roboRunner' });
+
+    k.scene('roboRunner', () => {
         // Set gravity
         k.setGravity(GRAVITY);
 
         // Set background color
         k.setBackground(141, 183, 255);
 
-        k.loadSprite('runner', 'characters.png', {
+        k.loadSprite('runner', './assets/sprites/characters.png', {
             sliceX: 10,
             sliceY: 20,
             anims: {
@@ -109,7 +111,12 @@ export function initGame(k) {
         player.onCollide('tree', () => {
             k.addKaboom(player.pos);
             k.shake();
-            k.go('lose', score);
+            k.go('lose', {
+                title: 'Robo Runner',
+                gameRestartSceneName: 'roboRunner',
+                gameExitSceneName: 'arcade',
+                score,
+            });
         });
         k.onResize(() => {
             const scaleFactor = k.width() / k.height();
@@ -121,44 +128,4 @@ export function initGame(k) {
             floor.width = k.width();
         });
     });
-
-    k.scene('lose', (score) => {
-        k.setGravity(0);
-        //add "game over" text
-        k.add([k.text('Game Over'), k.pos(k.center()), k.anchor('center')]);
-        // display score
-        k.add([
-            k.text(score),
-            k.pos(k.width() / 2, k.height() / 2 + 80),
-            k.scale(2),
-            k.anchor('center'),
-        ]);
-
-        const playAgainButton = k.add([
-            k.text('Play Again'),
-            k.pos(k.width() / 2, k.height() / 2 + 140),
-            k.scale(1),
-            k.area(),
-            k.anchor('center'),
-        ]);
-
-        const exitButton = k.add([
-            k.text('Exit'),
-            k.pos(k.width() / 2, k.height() / 2 + 200),
-            k.scale(1),
-            k.area(),
-            k.anchor('center'),
-        ]);
-
-        playAgainButton.onClick(() => {
-            initGame(k); // Restart the game
-        });
-        exitButton.onClick(() => {
-            import('../../scenes/arcade').then((_) => {
-                k.go('arcade');
-            });
-        });
-    });
-
-    k.go('miniGame');
 }

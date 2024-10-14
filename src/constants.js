@@ -27,9 +27,10 @@ export const conversationBruno = [
     "I'm pretty sure you heard already about me.",
     "This time, I won't give you a assignment. At least not yet *hihihihi*.",
     'You will explore the world of ZTM here!',
-    'As you already see, we have a lot of people in here which are already interested.',
+    'As you already see, we have a lot of people in here who are already interested.',
     'Maybe the one or other will talk to you.',
     "Otherwise if you can't wait to explore the outside world, just go through the door.",
+    'As you explore the world, you will lose your energy overtime. Consume drinks/eatables when you are low on energy.',
     'But, make sure you visit the restroom before you go. It will be a long journey.',
 ];
 
