@@ -14,9 +14,7 @@ export const enterMapStartRightInteraction = (player, k) => {
         });
         // console.log(granted);
         if (granted) {
-            import('../../scenes/start').then((_) => {
-                k.go('start', 'spawn_right');
-            });
+            k.go('start', 'spawn_right');
         }
     });
 };

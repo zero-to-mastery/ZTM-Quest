@@ -1,6 +1,40 @@
 @import url(./dialogs.css);
+@import url(./screen.css);
 
 button:focus {
     box-shadow: 2px 3px 5px #8383af;
     outline: 2px solid blue;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+p {
+    margin: 0.25em 0;
+}
+
+h2 {
+    margin: 0.5rem 0;
+}
+
+.loaded .d-mobile-hide {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+    .loaded .d-mobile-hide {
+        display: none;
+    }
+
+    .loaded .d-desktop-hide {
+        display: block;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
 }
