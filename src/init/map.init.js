@@ -19,14 +19,22 @@ export const initMap = async (
 
     shapeOffset = shapeOffset || k.vec2(0, 0);
 
+    // Convert the map name from the file path
+    const mapFileName = pathToMapJson.split('/').pop(); // Extract 'map_start.json'
+    const mapName = mapFileName.replace('map_', '').replace('.json', ''); // Get 'start
+
     const map = k.make([
         k.sprite('map'),
         k.pos(0),
         k.scale(scaleFactor),
         k.layer('map'),
         'main_map',
+        {
+            png: pathToMapPng,
+            name: mapName
+
+        }
     ]);
-    map.png = pathToMapPng;
     k.onLoad(() => {
         if (!uiLoaded) {
             const app = document.getElementById('app');
