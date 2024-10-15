@@ -32,7 +32,7 @@ k.scene('fishing', (enter_tag) => miniGameBootstrap(fishing, { enter_tag }));
 k.scene('startScreen', gameStartScreen);
 k.scene('lose', loseScreen);
 
-k.go('forest', 'spawn_bottom');
+k.go('fishing');
 
 // To test different maps instead of going through each and every scene to get to yours,
 // Import the scene, name the scene, and then name the spawn point as an additional tag

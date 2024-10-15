@@ -7,10 +7,14 @@ export const scoreUI = (k, map) => {
             'score',
         ]);
     }
+    console.log(map.screenPos());
     return k.make([
-        k.text(`Score: ${map.score}`, { size: 10 }),
-        k.pos(k.center().x, k.center().y - 8),
-        k.z(10),
+        k.text(`Score: ${map.score}`, {
+            size: 10,
+            transform: { color: k.BLACK },
+        }),
+        k.pos(190, 320 - 64),
+        k.anchor('center'),
         'score',
     ]);
 };

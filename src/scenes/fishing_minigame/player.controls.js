@@ -37,7 +37,7 @@ export const addPlayerControls = (player, hook, map) => {
     });
 
     // For mobile screens
-    k.onClick(() => {
+    k.onClick('controls', () => {
         if (map.pressedTwice) return;
         if (map.pressed) {
             hook.vel.y = -300;
