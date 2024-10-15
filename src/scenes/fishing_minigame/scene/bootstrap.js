@@ -5,7 +5,6 @@ import { makePlayer } from '../../../factories/player.factory';
 import { k } from '../../../kplayCtx';
 import { addPlayerControls } from '../player.controls';
 import { getGameState } from '../../../utils/gameState';
-import { setCamScale } from '../../../utils';
 
 export async function bootstrap(bootMapCb, mapArgs) {
     const gameState = getGameState();
