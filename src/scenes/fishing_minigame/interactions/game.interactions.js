@@ -1,4 +1,4 @@
-import { makeFish } from '../../../../factories/fish.factory';
+import { makeFish } from '../factories/fish.factory';
 
 export const gameInteractions = (player, k, map) => {
     // Game Configuration that spawns fish randomly

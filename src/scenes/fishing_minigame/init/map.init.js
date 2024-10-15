@@ -31,7 +31,6 @@ export const initMap = async (objectConfig, pathToMapPng, pathToMapJson) => {
             },
         ]);
     } else {
-        console.log(window.innerWidth);
         map = k.make([
             k.sprite('fishing_map'),
             k.pos(-window.innerWidth / 2, header.offsetHeight),
