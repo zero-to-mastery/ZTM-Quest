@@ -1,6 +1,6 @@
 import gameObjects from '../gameObjects/index.js';
 import interactions from '../interactions/index.js';
-import { initMap } from '../init/map.init.js';
+import { initMap } from '../init/map.init';
 
 export async function fishing() {
     const objectConfig = {

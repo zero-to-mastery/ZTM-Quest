@@ -1,13 +1,4 @@
-// Actual scale factor based on screen size
-const header = document.getElementById('header');
-const leftPanel = document.getElementById('left-panel');
-const canvas = document.getElementById('game');
-const footer = document.getElementById('footer');
-
-const scaleFactorWidth = (canvas.offsetWidth - leftPanel.offsetWidth * 2) / 480;
-const scaleFactorHeight =
-    (canvas.offsetHeight - (header.offsetHeight + footer.offsetHeight)) / 320;
-export const scaleFactor = Math.min(scaleFactorWidth, scaleFactorHeight);
+export const scaleFactor = 2;
 export const speedByScaleFactor = 65 * scaleFactor;
 
 // ./assets/sprites/characters.png sprites

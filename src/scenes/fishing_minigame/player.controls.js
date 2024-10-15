@@ -1,5 +1,5 @@
 import { k } from '../../kplayCtx';
-import { makeFish } from './factories/fish.factory';
+import { makeFish } from '../../factories/fish.factory';
 
 export const addPlayerControls = (player, hook, map) => {
     k.onKeyDown('left', () => {
