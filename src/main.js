@@ -11,8 +11,8 @@ import { forest } from './scenes/forest';
 import { forestJunction } from './scenes/forest_junction';
 import { campusHouse1 } from './scenes/campus_house_1';
 import { bootstrap } from './scenes/bootstrap';
-import { minigameBootstrap } from './scenes/minigameBootstrap';
-import { fishing } from './scenes/fishing';
+import { bootstrap as miniGameBootstrap } from './scenes/fishing_minigame/scene/bootstrap';
+import { fishing } from './scenes/fishing_minigame/scene/fishing';
 import { gameStartScreen } from './scenes/gameMachine/startSceen';
 import { loseScreen } from './scenes/gameMachine/lose';
 
@@ -26,13 +26,13 @@ k.scene('forest_junction', (enter_tag) =>
 k.scene('campus_house_1', (enter_tag) =>
     bootstrap(campusHouse1, { enter_tag })
 );
-k.scene('fishing', (enter_tag) => minigameBootstrap(fishing, { enter_tag }));
+k.scene('fishing', (enter_tag) => miniGameBootstrap(fishing, { enter_tag }));
 
 // Game Machine Scenes
 k.scene('startScreen', gameStartScreen);
 k.scene('lose', loseScreen);
 
-k.go('start');
+k.go('forest', 'spawn_bottom');
 
 // To test different maps instead of going through each and every scene to get to yours,
 // Import the scene, name the scene, and then name the spawn point as an additional tag

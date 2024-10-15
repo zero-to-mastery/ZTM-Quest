@@ -1,6 +1,6 @@
-import gameObjects from '../gameObjects/map_fishing';
-import interactions from '../interactions/map_fishing';
-import { initMap } from '../init/minigameMap.init.js';
+import gameObjects from '../gameObjects/index.js';
+import interactions from '../interactions/index.js';
+import { initMap } from '../init/map.init.js';
 
 export async function fishing() {
     const objectConfig = {

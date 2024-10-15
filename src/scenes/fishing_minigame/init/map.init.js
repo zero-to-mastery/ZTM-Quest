@@ -1,7 +1,9 @@
-import { k } from '../kplayCtx';
-import { scaleFactor } from '../constants';
+import { k } from '../../../kplayCtx';
+import { scaleFactor } from '../../../constants';
 
 export const initMap = async (objectConfig, pathToMapPng, pathToMapJson) => {
+    k.setBackground(k.Color.fromHex('#311047'));
+
     k.loadSprite('fishing_map', pathToMapPng);
 
     const mapData = await (await fetch(pathToMapJson)).json();
@@ -9,22 +11,41 @@ export const initMap = async (objectConfig, pathToMapPng, pathToMapJson) => {
 
     const leftPanel = document.getElementById('left-panel');
 
-    const map = k.make([
-        k.sprite('fishing_map'),
-        k.pos(
-            leftPanel.offsetWidth * 2 + leftPanel.offsetWidth / 4,
-            header.offsetHeight
-        ),
-        k.scale(scaleFactor),
-        k.layer('map'),
-        'main_map',
-        {
-            pressed: false,
-            pressedTwice: false,
-            fishSpawnTimer: Math.random() * 5,
-            score: 0,
-        },
-    ]);
+    let map;
+
+    if (!k.isTouchscreen()) {
+        map = k.make([
+            k.sprite('fishing_map'),
+            k.pos(
+                leftPanel.offsetWidth * 2 + leftPanel.offsetWidth / 4,
+                header.offsetHeight
+            ),
+            k.scale(scaleFactor),
+            k.layer('map'),
+            'main_map',
+            {
+                pressed: false,
+                pressedTwice: false,
+                fishSpawnTimer: Math.random() * 5,
+                score: 0,
+            },
+        ]);
+    } else {
+        console.log(window.innerWidth);
+        map = k.make([
+            k.sprite('fishing_map'),
+            k.pos(-window.innerWidth / 2, header.offsetHeight),
+            k.scale(scaleFactor * 2),
+            k.layer('map'),
+            'main_map',
+            {
+                pressed: false,
+                pressedTwice: false,
+                fishSpawnTimer: Math.random() * 5,
+                score: 0,
+            },
+        ]);
+    }
 
     const spawnpointsCharacters = {};
 

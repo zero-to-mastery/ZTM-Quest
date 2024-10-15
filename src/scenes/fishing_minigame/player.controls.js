@@ -1,4 +1,4 @@
-import { k } from './kplayCtx';
+import { k } from '../../kplayCtx';
 import { makeFish } from './factories/fish.factory';
 
 export const addPlayerControls = (player, hook, map) => {
@@ -34,6 +34,23 @@ export const addPlayerControls = (player, hook, map) => {
         }
         hook.vel.y = 300;
         map.pressed = true;
+    });
+
+    // For mobile screens
+    k.onClick(() => {
+        if (map.pressedTwice) return;
+        if (map.pressed) {
+            hook.vel.y = -300;
+            map.pressed = false;
+            map.pressedTwice = true;
+            return;
+        }
+        hook.vel.y = 300;
+        map.pressed = true;
+    });
+
+    k.onClick('quitText', () => {
+        k.go('forest', 'spawn_bottom');
     });
 
     k.onKeyPress('escape', () => {
