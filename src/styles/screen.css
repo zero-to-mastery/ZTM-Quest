@@ -176,6 +176,8 @@
     display: flex;
     padding: 0.5rem 1rem;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #minimap-button-container {
@@ -200,6 +202,12 @@
 
 #minimap {
     display: none;
+}
+
+#minimap-name {
+    color: #FFF;
+    text-transform: capitalize;
+    font-size: 1rem;
 }
 
 .top,
