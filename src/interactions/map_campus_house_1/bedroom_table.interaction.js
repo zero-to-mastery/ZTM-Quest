@@ -1,7 +1,6 @@
-import { displayDialogue } from '../../utils';
+import { displayDialogue, displayPermissionBox } from '../../utils';
 import { updateEnergyState } from '../../utils/energyUpdate';
 import { getRandomQuestion } from '../../utils/randomJSQuestion';
-import { displayPermissionBox } from '../../utils';
 
 export const bedroomTableInteractions = async (player, k, map) => {
     player.onCollide('bedroom_table', async () => {

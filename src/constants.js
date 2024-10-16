@@ -19,6 +19,9 @@ export const characters = [
     { name: 'jessie', frames: [180, 184, 182, 188, 181, 186] },
 ];
 
+// ./assets/sprites/fish.png sprites
+export const fishSpriteNames = ['fish_1', 'fish_2', 'fish_3', 'fish_4'];
+
 // ./bruno.png sprite
 export const bruno = { name: 'bruno', frames: [0, 3, 2, 7, 1, 5] };
 
