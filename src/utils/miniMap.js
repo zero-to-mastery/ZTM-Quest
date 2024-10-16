@@ -20,8 +20,8 @@ export const drawMinimap = (k, player) => {
     mapImage.src = map.png;
 
     // Draw the map title
-    const mapName = document.getElementById("minimap-name")
-    mapName.innerHTML = miniMapVisible ? map.name : "";
+    const mapName = document.getElementById('minimap-name');
+    mapName.innerHTML = miniMapVisible ? map.name : '';
 
     // Clear previous frame
     minimapCtx.clearRect(0, 0, minimapCanvas.width, minimapCanvas.height);
@@ -43,7 +43,6 @@ export const drawMinimap = (k, player) => {
     const playerMinimapX = player.pos.x * xScale; // Scale player X position
     const playerMinimapY = player.pos.y * yScale; // Scale player Y position
 
-
     // Once the sprite is loaded, extract the specific frame for the player's current animation
     const spriteSheet = new Image();
     spriteSheet.src = './assets/sprites/characters.png'; // Load the sprite sheet
@@ -51,12 +50,15 @@ export const drawMinimap = (k, player) => {
     // Draw the specific frame on the minimap
     minimapCtx.drawImage(
         spriteSheet,
-        0, 32,   // Source X and Y position on the sprite sheet
-        16, 16,  // Source width and height
-        playerMinimapX, playerMinimapY - 10,  // Destination X and Y on the minimap canvas
-        16, 16 // size on mini-map
+        0,
+        32, // Source X and Y position on the sprite sheet
+        16,
+        16, // Source width and height
+        playerMinimapX,
+        playerMinimapY - 10, // Destination X and Y on the minimap canvas
+        16,
+        16 // size on mini-map
     );
-
 };
 
 // Function to toggle the minimap
@@ -67,5 +69,4 @@ export const toggleMinimap = (k) => {
     const miniMapVisible = minimapCanvas.style.display === 'block';
     // Set minimap on/off depending on current status
     minimapCanvas.style.display = miniMapVisible ? 'none' : 'block';
-
 };
