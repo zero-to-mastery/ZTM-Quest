@@ -36,8 +36,6 @@ export const initMap = async (
             name: mapName,
         },
     ]);
-
-    map.png = pathToMapPng;
     k.onLoad(() => {
         if (!uiLoaded) {
             const app = document.getElementById('app');
