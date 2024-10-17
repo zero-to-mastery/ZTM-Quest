@@ -18,3 +18,5 @@ k.onCustomEvent = (eventName, cb) => {
 k.triggerEvent = (eventName, detail) => {
     k.canvas.dispatchEvent(new CustomEvent(eventName, { detail }));
 };
+
+
