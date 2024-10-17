@@ -130,7 +130,11 @@ export const addPlayerControls = (player) => {
         if (mouseBtn !== 'left' || player.isInDialog || pressed.size) return;
 
         const worldMousePos = k.toWorld(k.mousePos());
-        player.moveTo(worldMousePos, player.speed);
+        if (player.state.energy >= 50) {
+            player.moveTo(worldMousePos, player.speed * 1.25);
+        } else {
+            player.moveTo(worldMousePos, player.speed);
+        }
 
         const mouseAngle = player.pos.angle(worldMousePos);
 
