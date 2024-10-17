@@ -11,9 +11,7 @@ export const interactionWithGameMachine9 = (player, k, map) => {
                     displayDialogue({
                         k,
                         player,
-                        text: [
-                            'Starting Color Sequence Puzzle... Get ready!',
-                        ],
+                        text: ['Starting Color Sequence Puzzle... Get ready!'],
                         onDisplayEnd: () => {
                             player.isInDialog = false;
                             startColorSequencePuzzle(k);
@@ -36,11 +34,11 @@ export const interactionWithGameMachine9 = (player, k, map) => {
 
 function startColorSequencePuzzle(k) {
     const colors = [
-        k.rgb(255, 0, 0),   
-        k.rgb(0, 0, 255),    
-        k.rgb(0, 255, 0),    
-        k.rgb(255, 255, 0),  
-        k.rgb(128, 0, 128)  
+        k.rgb(255, 0, 0),
+        k.rgb(0, 0, 255),
+        k.rgb(0, 255, 0),
+        k.rgb(255, 255, 0),
+        k.rgb(128, 0, 128),
     ];
     const colorNames = ['red', 'blue', 'green', 'yellow', 'purple'];
     const levels = [
@@ -113,7 +111,8 @@ function startColorSequencePuzzle(k) {
         let displayIndex = 0;
         const displayInterval = setInterval(() => {
             if (displayIndex < currentSequence.length) {
-                sequenceDisplay.color = colors[colorNames.indexOf(currentSequence[displayIndex])];
+                sequenceDisplay.color =
+                    colors[colorNames.indexOf(currentSequence[displayIndex])];
                 displayIndex++;
                 k.wait(0.5, () => {
                     sequenceDisplay.color = k.rgb(220, 220, 220);
@@ -142,8 +141,6 @@ function startColorSequencePuzzle(k) {
             k.scale(getResponsiveScale()),
         ]);
 
-        
-
         const inputDisplay = k.add([
             k.rect(300 * getResponsiveScale(), 50 * getResponsiveScale()),
             k.pos(k.width() / 2, k.height() / 2 - 100 * getResponsiveScale()),
@@ -162,7 +159,10 @@ function startColorSequencePuzzle(k) {
         });
 
         function updateInputDisplay() {
-            inputDisplay.color = colors[colorNames.indexOf(userSequence[userSequence.length - 1])];
+            inputDisplay.color =
+                colors[
+                    colorNames.indexOf(userSequence[userSequence.length - 1])
+                ];
         }
 
         const repeatButton = k.add([
@@ -242,7 +242,9 @@ function startColorSequencePuzzle(k) {
     function generateColorSequence(length) {
         const sequence = [];
         for (let i = 0; i < length; i++) {
-            sequence.push(colorNames[Math.floor(Math.random() * colorNames.length)]);
+            sequence.push(
+                colorNames[Math.floor(Math.random() * colorNames.length)]
+            );
         }
         return sequence;
     }
@@ -263,8 +265,6 @@ function showCustomPrompt(message, options, callback) {
     const promptElement = document.getElementById('custom-prompt');
     const messageElement = document.getElementById('prompt-message');
     const optionsContainer = document.getElementById('options-container');
-
-    
 
     messageElement.textContent = message;
     optionsContainer.innerHTML = '';
