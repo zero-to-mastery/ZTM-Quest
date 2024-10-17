@@ -1,6 +1,5 @@
 import { displayDialogue } from '../../utils';
 import { interactionHandler } from '../handler.interactions';
-
 import { conversationMisterFu, misterFu } from '../../constants';
 
 export const interactionWithMisterFu = (player, k, map) => {
