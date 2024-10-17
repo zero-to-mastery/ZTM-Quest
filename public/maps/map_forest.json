@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"map_forest.json"
+        }
+    },
  "height":20,
  "infinite":false,
  "layers":[
@@ -359,7 +367,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -758,6 +766,50 @@
                  "width":8,
                  "x":420,
                  "y":244
+                }, 
+                {
+                 "height":16,
+                 "id":134,
+                 "name":"coin",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":416,
+                 "y":208
+                }, 
+                {
+                 "height":16,
+                 "id":135,
+                 "name":"coin",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":64,
+                 "y":64
+                }, 
+                {
+                 "height":28,
+                 "id":136,
+                 "name":"pond",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":40,
+                 "x":68,
+                 "y":84
+                }, 
+                {
+                 "height":108,
+                 "id":137,
+                 "name":"pond",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":88,
+                 "x":68,
+                 "y":112
                 }],
          "opacity":1,
          "properties":[
@@ -767,7 +819,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -871,6 +923,18 @@
                  "width":0,
                  "x":256,
                  "y":128
+                }, 
+                {
+                 "height":0,
+                 "id":127,
+                 "name":"bag",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":295.454545454545,
+                 "y":89.8989898989899
                 }],
          "opacity":1,
          "properties":[
@@ -884,8 +948,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":12,
- "nextobjectid":126,
+ "nextlayerid":13,
+ "nextobjectid":138,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",

@@ -1,5 +1,3 @@
-import { scaleFactor } from '../../constants';
-
 export const computer = (k, map, spawnpoints) => {
     k.loadSprite('computer', './assets/sprites/laptop.png', {
         sliceX: 4,
@@ -15,10 +13,8 @@ export const computer = (k, map, spawnpoints) => {
     return k.make([
         k.sprite('computer', { frame: 2 }),
         k.area(),
-        k.pos(
-            (tableRoom1.pos.x + 3) * scaleFactor,
-            (tableRoom1.pos.y + 30) * scaleFactor
-        ),
+        k.pos(tableRoom1.pos.x + 3, tableRoom1.pos.y + 23),
+        k.scale(0.7),
         k.body({ isStatic: true }),
         k.offscreen({ hide: true, distance: 10 }),
         'computer',

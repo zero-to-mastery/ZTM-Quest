@@ -1,12 +1,15 @@
+import { k } from '../kplayCtx';
+
 import { scaleFactor } from '../constants';
-import { initializeMovementPrompt, setCamScale } from '../utils';
+let uiLoaded = false;
+import { setCamScale } from '../utils';
 
 export const initMap = async (
-    k,
     objectConfig,
     pathToMapPng,
     pathToMapJson,
-    shapeOffset = null
+    shapeOffset = null,
+    mapConfig = { additionalProperties: {} }
 ) => {
     k.loadSprite('map', pathToMapPng);
     k.setBackground(k.Color.fromHex('#311047'));
@@ -17,12 +20,52 @@ export const initMap = async (
 
     shapeOffset = shapeOffset || k.vec2(0, 0);
 
+    // Convert the map name from the file path
+    const mapFileName = pathToMapJson.split('/').pop(); // Extract 'map_start.json'
+    const mapName = mapFileName.replace('map_', '').replace('.json', ''); // Get 'start
+
     const map = k.make([
         k.sprite('map'),
-        k.pos(0),
+        k.pos(mapConfig.mapOffset ? mapConfig.mapOffset : 0),
         k.scale(scaleFactor),
+        k.layer('map'),
         'main_map',
+        mapConfig.additionalProperties,
+        {
+            png: pathToMapPng,
+            name: mapName,
+        },
     ]);
+    k.onLoad(() => {
+        if (!uiLoaded) {
+            const app = document.getElementById('app');
+            app.classList.add('loaded');
+            const matchesMobile = matchMedia(
+                '(max-width: 768px), (max-width: 900px) and (orientation: landscape)'
+            );
+            const controlText = `
+                    <p id="controlNote" class="d-mobile-hide note">
+                        Tap/Click/&uarr;&darr;&larr;&rarr; around to move
+                    </p>
+                    <p class="d-desktop-hide note">Tap to move around</p>
+                    <p id="interaction-info" class='note' style='display: none'>
+                        ${matchesMobile.matches ? 'Tap to Interact' : 'T - Interact with NPC/Object'}
+                    </p>
+                    `;
+            const div = document.createElement('div');
+            div.classList.add('control-text-container');
+            div.innerHTML = controlText;
+
+            if (matchesMobile.matches) {
+                const footer = document.getElementById('text-info');
+                footer.appendChild(div);
+            } else {
+                const leftPanel = document.getElementById('left-panel');
+                leftPanel.appendChild(div);
+            }
+            uiLoaded = true;
+        }
+    });
 
     const spawnpointsCharacters = {};
 
@@ -90,14 +133,15 @@ export const initMap = async (
          */
         if (objectConfig.spawnpoints.includes(layer.name)) {
             for (const entity of layer.objects) {
-                spawnpointsCharacters[entity.name] = k.vec2(
-                    (map.pos.x + entity.x) * scaleFactor,
-                    (map.pos.y + entity.y) * scaleFactor
-                );
+                spawnpointsCharacters[entity.name] = mapConfig.characterOffset
+                    ? mapConfig.characterOffset(entity.x, entity.y)
+                    : k.vec2(
+                          (map.pos.x + entity.x) * scaleFactor,
+                          (map.pos.y + entity.y) * scaleFactor
+                      );
             }
         }
     }
 
-    initializeMovementPrompt(k);
     return [map, spawnpointsCharacters];
 };

@@ -1,5 +1,4 @@
 import { k } from '../kplayCtx';
-import { scaleFactor } from '../constants';
 import { getRandomCharacter } from '../utils/sprites';
 
 export function makeNpc(
@@ -51,7 +50,6 @@ export function makeNpc(
         }),
         k.body({ isStatic: true }),
         k.pos(pos.x, pos.y),
-        k.scale(scaleFactor),
         k.anchor('center'),
         k.state('idle', ['idle', 'move', 'end']),
         npcKey,

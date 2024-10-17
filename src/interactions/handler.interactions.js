@@ -11,22 +11,20 @@ export const interactionHandler = (
     let clickHandler;
 
     player.onCollide(target, (sprite) => {
-        // Builds Interaction prompt in right hand of screen
         buildInteractionPrompt(sprite, k);
 
         function handleOnCollide() {
-            // Tears down interaction prompt in right hand of screen
             tearDownInteractionPrompt(k);
             onCollide();
             clickHandler.cancel();
             keyHandler.cancel();
         }
-        console.log(sprite);
+
         clickHandler = k.onClick(`${sprite.tags[0]}`, () => handleOnCollide());
         keyHandler = k.onKeyPress('t', () => handleOnCollide());
     });
 
-    player.onCollideEnd(target, (sprite) => {
+    player.onCollideEnd(target, () => {
         tearDownInteractionPrompt(k);
 
         clickHandler.cancel();

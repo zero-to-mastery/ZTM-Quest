@@ -1,4 +1,3 @@
-import { scaleFactor } from '../../constants';
 import { displayDialogue } from '../../utils';
 
 export const interactionWithGameMachine6 = (player, k, map) => {
@@ -87,117 +86,338 @@ function closeCustomPrompt() {
 function startChromeDinoGame(k) {
     k.debug.log('Chrome Dino Game started!');
 
+    const scaleConst = 4;
     //variables for different things in the game
-    const FLOOR_HEIGHT = 48;
-    const JUMP_FORCE = 800;
+    const scaleFactor = (k.width() / k.height()) * scaleConst;
+    const JUMP_FORCE = 280 * scaleConst;
     const SPEED = 480;
     const GRAVITY = 1600;
 
+    k.go('startScreen', { title: 'Dino game', gameSceneName: 'dinoGame' });
+
     // Set up the game scene
-    k.scene('dinoGame', () => {
-        //gravity for dino
-        k.setGravity(GRAVITY);
-
-        //load a sprite name dino with run animation
-        k.loadSprite('dino', './assets/sprites/doux.png', {
-            sliceX: 24,
-            sliceY: 1,
-            anims: {
-                run: { from: 17, to: 23, loop: true, speed: 10 },
-            },
-        });
-
-        //add the dino to screen
-        const dino = k.add([
-            k.sprite('dino', { anim: 'run' }),
-            k.pos(80, 200),
-            k.area(),
-            k.body(),
-            k.scale(scaleFactor),
-        ]);
-
-        //pressing the spacebar lets the dino jump
-        k.onKeyPress('space', () => {
-            if (dino.isGrounded()) {
-                dino.jump(JUMP_FORCE);
+    k.scene(
+        'dinoGame',
+        (
+            data = {
+                score: 0,
+                lastDinoPosition: { x: 40, y: k.height() - 350 },
+                activeTrees: [],
             }
-        });
+        ) => {
+            let score = data.score;
+            //gravity for dino
+            k.setGravity(GRAVITY);
+            let isPaused = false;
+            let lastDinoPosition = data.lastDinoPosition;
+            let activeTrees = data.activeTrees;
 
-        //add platform
-        k.add([
-            k.rect(k.width(), FLOOR_HEIGHT),
-            k.pos(0, k.height() - 250),
-            k.anchor('botleft'),
-            k.outline(4),
-            k.area(),
-            k.body({ isStatic: true }),
-            k.color(127, 200, 255),
-        ]);
+            //load a sprite name dino with run animation
+            k.loadSprite('dino', './assets/sprites/doux.png', {
+                sliceX: 24,
+                sliceY: 1,
+                anims: {
+                    run: { from: 17, to: 23, loop: true, speed: 10 },
+                },
+            });
 
-        //spawn trees with different heights at different intervals
-        function spawnTree() {
-            k.add([
-                k.rect(48, k.rand(48, 72)),
+            k.loadSprite('tree1', './assets/sprites/tree001.png');
+            k.loadSprite('tree2', './assets/sprites/tree002.png');
+            k.loadSprite('tree3', './assets/sprites/tree003.png');
+            k.loadSprite('tree4', './assets/sprites/tree004.png');
+            k.loadSprite('floor_sprite', './assets/sprites/dino_floor.png');
+            // Set up the parallax background
+            const { cloud1, cloud2, cloud3 } = setupParallaxBackground(k);
+
+            //add the dino to screen
+            const dino = k.add([
+                k.sprite('dino', { anim: 'run' }),
+                k.pos(lastDinoPosition.x, lastDinoPosition.y),
                 k.area(),
-                k.outline(4),
-                k.pos(k.width() - 10, k.height() - 500),
-                k.anchor('botleft'),
                 k.body(),
-                k.color(255, 180, 255),
-                k.move(k.LEFT, SPEED),
-                'tree',
+                k.scale(scaleFactor),
             ]);
 
-            k.wait(k.rand(1.5, 3), () => {
-                spawnTree();
+            //pressing the spacebar lets the dino jump
+            k.onKeyPress('space', () => {
+                if (dino.isGrounded()) {
+                    dino.jump(JUMP_FORCE);
+                }
+            });
+
+            //click screening will let dino jump
+            k.onClick(() => {
+                if (dino.isGrounded()) {
+                    dino.jump(JUMP_FORCE);
+                }
+            });
+
+            //pressing the esc lets player leave game
+            k.onKeyPress('escape', () => {
+                k.go('lose', {
+                    title: 'Dino game',
+                    gameRestartSceneName: 'dinoGame',
+                    gameExitSceneName: 'arcade',
+                    score,
+                });
+            });
+
+            //add platform
+            const floor = k.add([
+                k.sprite('floor_sprite'),
+                k.area(),
+                k.pos(0, k.height()),
+                k.anchor('botleft'),
+                k.body({ isStatic: true }),
+            ]);
+            const floorHeight = k.height() - floor.height; // Calculate the height of the floor
+
+            const treeSprites = ['tree1', 'tree2', 'tree3', 'tree4'];
+            //spawn trees with different heights at different intervals
+
+            function spawnActiveTrees() {
+                activeTrees.forEach(
+                    ({
+                        sprite,
+                        position,
+                        height,
+                        scaleFactor,
+                        score,
+                        SPEED,
+                    }) => {
+                        k.add([
+                            k.sprite(sprite),
+                            k.area(),
+                            k.pos(position.x, position.y),
+                            k.anchor('botleft'),
+                            k.body(),
+                            k.move(k.LEFT, SPEED * scaleFactor + score / 10),
+                            k.offscreen({ destroy: true }),
+                            k.scale(scaleFactor * 3, scaleFactor * height), // Use the previously saved height
+                            'tree',
+                        ]);
+                    }
+                );
+            }
+
+            spawnActiveTrees();
+
+            function spawnTree() {
+                const scaleFactor = k.width() / k.height();
+                const randomHeight = k.rand(1, 5); // Random height for trees
+                // Randomly choose a tree sprite
+                const randomTreeSprite =
+                    treeSprites[Math.floor(Math.random() * treeSprites.length)];
+
+                const treeYPosition =
+                    floorHeight - (floor.height * randomHeight) / 3; // Adjust height based on tree scaling
+
+                const rand = k.rand(1.5, 3);
+                k.wait(rand, () => {
+                    k.add([
+                        k.sprite(randomTreeSprite),
+                        k.area(),
+                        k.pos(k.width(), treeYPosition),
+                        k.anchor('botleft'),
+                        k.body(),
+                        k.move(k.LEFT, SPEED * scaleFactor + score / 10),
+                        k.offscreen({ destroy: true }),
+                        k.scale(scaleFactor * 3, scaleFactor * randomHeight), // Scale height randomly
+                        'tree',
+                    ]);
+                    // Store the tree's data
+                    activeTrees.push({
+                        sprite: randomTreeSprite,
+                        position: { x: k.width(), y: treeYPosition },
+                        height: randomHeight,
+                        scaleFactor: scaleFactor,
+                        score: score,
+                        SPEED: SPEED,
+                    });
+                    spawnTree(k, SPEED, score);
+                });
+            }
+
+            spawnTree(k, SPEED, score);
+
+            //on hit show an animation and change scenes
+            dino.onCollide('tree', () => {
+                k.addKaboom(dino.pos);
+                k.shake();
+                k.go('lose', {
+                    title: 'Dino game',
+                    gameRestartSceneName: 'dinoGame',
+                    gameExitSceneName: 'arcade',
+                    score,
+                });
+            });
+
+            const SPEEDS = {
+                mid: 0.03, // Speed for the mid background
+                near: 0.04, // Speed for the near background
+            };
+
+            // Variables to track direction
+            const direction = {
+                cloud2: 1,
+                cloud3: 1,
+            };
+
+            // Function to move backgrounds back and forth
+            function updateBackgrounds(cloud1, cloud2, cloud3) {
+                // Move backgrounds based on direction
+                cloud2.pos.x -= SPEEDS.mid * direction.cloud2;
+                cloud3.pos.x -= SPEEDS.near * direction.cloud3;
+
+                if (cloud2.pos.x <= -10 || cloud2.pos.x >= 10) {
+                    direction.cloud2 *= -1; // Reverse direction
+                }
+                if (cloud3.pos.x <= -10 || cloud3.pos.x >= 10) {
+                    direction.cloud3 *= -1; // Reverse direction
+                }
+            }
+
+            // keep track of score
+            const scoreLabel = k.add([k.text(score), k.pos(68, 100)]);
+            // increment score every frame
+            k.onUpdate(() => {
+                score++;
+                scoreLabel.text = score;
+                updateBackgrounds(cloud1, cloud2, cloud3);
+                floor.width = k.width() + 100;
+                floor.pos.y = k.height();
+                const scaleFactor = k.width() / k.height();
+                if (scaleFactor < 1) {
+                    dino.scaleTo(1);
+                } else {
+                    dino.scaleTo(scaleFactor * 2);
+                }
+                lastDinoPosition = dino.pos; // Save dino position
+            });
+
+            // Pause handling
+            k.onKeyPress('p', () => {
+                if (!isPaused) {
+                    isPaused = true;
+                    setupPauseScene(k, {
+                        score,
+                        lastDinoPosition,
+                        activeTrees,
+                    }); // Call the pause scene setup function
+                    k.go('pause');
+                }
             });
         }
-        spawnTree();
+    );
+}
 
-        //on hit show an animation and change scenes
-        dino.onCollide('tree', () => {
-            k.addKaboom(dino.pos);
-            k.shake();
-            k.go('lose', score); // go to "lose" scene here
-        });
+// Function to set up the parallax background
+function setupParallaxBackground(k) {
+    k.loadSprite('cloud1', './assets/sprites/cloud1.png'); // Background layer 1
+    k.loadSprite('cloud2', './assets/sprites/cloud2.png'); // Background layer 2
+    k.loadSprite('cloud3', './assets/sprites/cloud3.png'); // Background layer 3
 
-        // keep track of score
-        let score = 0;
-        const scoreLabel = k.add([k.text(score), k.pos(68, 100)]);
-        // increment score every frame
-        k.onUpdate(() => {
-            score++;
-            scoreLabel.text = score;
-        });
+    // Far background (slowest)
+    const cloud1 = k.add([
+        k.sprite('cloud1'),
+        k.pos(0, -0), // Adjust the Y position as necessary
+        k.layer('bg'), // Optional: add to a specific layer
+    ]);
+
+    // Mid background (medium speed)
+    const cloud2 = k.add([k.sprite('cloud2'), k.pos(0, 0), k.layer('bg')]);
+
+    // Near background (fastest)
+    const cloud3 = k.add([k.sprite('cloud3'), k.pos(0, 0), k.layer('bg')]);
+
+    k.onUpdate(() => {
+        cloud1.width = k.width();
+        cloud1.height = k.height();
+        cloud2.width = k.width();
+        cloud2.height = k.height();
+        cloud3.width = k.width();
+        cloud3.height = k.height();
     });
 
-    //set up lose screen
-    k.scene('lose', (score) => {
-        k.setGravity(0);
-        //add "game over" text
-        k.add([k.text('Game Over'), k.pos(k.center()), k.anchor('center')]);
-        // display score
+    return { cloud1, cloud2, cloud3 };
+}
+
+function setupPauseScene(k, data) {
+    const center = k.center();
+
+    k.scene('pause', () => {
+        // Create the pause menu background
         k.add([
-            k.text(score),
-            k.pos(k.width() / 2, k.height() / 2 + 80),
-            k.scale(2),
-            k.anchor('center'),
+            k.rect(k.width(), k.height()),
+            k.color(0, 0, 0, 0.5),
+            k.layer('ui'),
         ]);
 
-        // go back to game with space is pressed
-        k.onKeyPress('space', () =>
-            import('../../scenes/arcade').then((_) => {
-                k.go('arcade');
-            })
-        );
-        k.onClick(() =>
-            import('../../scenes/arcade').then((_) => {
-                k.go('arcade');
-            })
-        );
-        k.setGravity(0);
-    });
+        // Pause text
+        k.add([
+            k.text('Paused', { size: 48 }),
+            k.pos(k.width() / 2, k.height() / 2 - 50),
+            k.anchor('center'),
+            k.layer('ui'),
+        ]);
 
-    // Start the game scene
-    k.go('dinoGame');
+        // Resume button
+        const resumeButtonTxt = k.make([
+            k.text('Resume', { size: 32, font: 'pixelFont' }),
+            k.anchor('center'),
+            k.color(0, 0, 0),
+        ]);
+
+        // Quit button
+        const quitButtonTxt = k.make([
+            k.text('Quit to Main Menu', { size: 32, font: 'pixelFont' }),
+            k.anchor('center'),
+            k.color(0, 0, 0),
+        ]);
+
+        const resumeButton = k.add([
+            k.rect(resumeButtonTxt.width + 20, 80),
+            k.pos(center.x, center.y + 100),
+            k.anchor('center'),
+            k.color(0, 255, 0),
+            k.area(),
+            'resumeButton',
+        ]);
+
+        const quitButton = k.add([
+            k.rect(quitButtonTxt.width + 20, 80),
+            k.pos(center.x, center.y + 200),
+            k.anchor('center'),
+            k.color(0, 255, 0),
+            k.area(),
+            'quitButton',
+        ]);
+
+        resumeButton.add(resumeButtonTxt);
+        quitButton.add(quitButtonTxt);
+
+        // Resume functionality
+        resumeButton.onClick(() => {
+            k.go('dinoGame', {
+                score: data.score,
+                lastDinoPosition: data.lastDinoPosition,
+                activeTrees: data.activeTrees,
+            }); // Pass back state
+        });
+
+        // Quit functionality
+        quitButton.onClick(() => {
+            k.setGravity(0);
+            k.go('arcade');
+        });
+
+        // Keyboard event to resume game
+        k.onKeyPress('escape', () => {
+            k.go('dinoGame', {
+                score: data.score,
+                lastDinoPosition: data.lastDinoPosition,
+                activeTrees: data.activeTrees,
+            }); // Pass back state
+        });
+    });
 }

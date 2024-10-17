@@ -7,7 +7,6 @@
             href="./favicon-32x32.png?v=d0a70af7f35f5943c7e28883adbbb7fd"
             type="image/png"
         />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>ZTM-Quest</title>
         <style>
@@ -25,6 +24,7 @@
             body {
                 font-family: pixelifysans, monospace;
                 font-size: 2rem;
+                user-select: none;
             }
 
             #app {
@@ -33,132 +33,33 @@
                 position: relative;
             }
 
-            #custom-prompt {
-                display: none;
+            .game-window {
                 position: absolute;
-                left: 15%;
-                right: 15%;
-                bottom: 2vh;
-                background: #fff;
-                border-radius: 10px;
-                border: 2px solid #007bff;
-                padding: 1rem;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-                flex-direction: column;
-                align-items: flex-start;
-                word-spacing: 0.2rem;
-                z-index: 10; /* Ensure it's above other UI elements */
+                top: var(--header-height);
+                left: 140px;
+                width: calc(100% - 280px);
+                height: calc(
+                    100% - calc(var(--header-height) + var(--footer-height))
+                );
             }
 
-            #textbox {
-                position: absolute;
-                left: 15%;
-                right: 15%;
-                bottom: 2vh;
-                min-height: 8vh;
-                background: #fff;
-                border-radius: 10px;
-                border: 2px solid #007bff;
-                outline: none;
-                padding: 1.5rem;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-                word-spacing: 0.2rem;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-                transition:
-                    box-shadow 0.3s ease,
-                    transform 0.3s ease,
-                    opacity 0.5s ease;
-                opacity: 0;
-                animation: fadeIn 0.8s forwards;
-                font-size: 1.2rem;
+            .full-screen {
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1000;
             }
 
-            #textbox:hover {
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-                transform: translateY(-2px);
-            }
-
-            .btn-container {
-                align-self: flex-end;
-                margin-top: 1rem;
-                display: flex;
-                gap: 0.6rem;
-                opacity: 0;
-                animation: fadeIn 1s forwards 0.6s;
-            }
-
-            #note,
-            #note-mobile {
-                position: absolute;
-                left: 5%;
-                top: 2vh;
-                /* display: flex; */
-                flex-direction: column;
-                color: #fff;
-                text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
-                font-size: 1.25rem;
-                line-height: 1.6;
-                background-color: black;
-                border-radius: 15px;
-                padding: 0.5rem 1rem;
-                opacity: 0;
-                animation: fadeIn 1s forwards 0.7s;
-            }
-
-            #note-mobile {
-                top: auto;
-                bottom: 2vh;
-                font-size: 1rem;
-            }
-
-            #interaction-note,
-            #interaction-note-mobile {
-                position: absolute;
-                right: 5%;
-                top: 2vh;
-                display: flex;
-                text-align: center;
-                align-items: center;
-                gap: 1rem;
-                color: #fff;
-                text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
-                font-size: 1.25rem;
-                line-height: 1.6;
-                background-color: black;
-                border-radius: 15px;
-                padding: 0.5rem 1rem;
-                opacity: 0;
-                animation: fadeIn 0.5s forwards;
-            }
-
-            #interaction-note-mobile {
-                bottom: 2vh;
-                top: auto;
-                font-size: 1rem;
-            }
-
-            @keyframes fadeIn {
-                0% {
-                    opacity: 0;
+            @media (max-width: 900px) {
+                .game-window {
+                    left: 0;
+                    width: 100%;
+                    height: 72%;
                 }
 
-                100% {
-                    opacity: 1;
-                }
-            }
-
-            @keyframes slideIn {
-                0% {
-                    opacity: 0;
-                    transform: translateY(20px);
-                }
-
-                100% {
-                    opacity: 1;
-                    transform: translateY(0);
+                .full-screen {
+                    height: 100%;
                 }
             }
         </style>
@@ -166,53 +67,125 @@
 
     <body>
         <div id="app">
-            <div>
-                <p id="note" style="display: none">
-                    Tap/Click/&uarr;&darr;&larr;&rarr; around to move
-                </p>
-                <p id="interaction-note" style="display: none">
-                    T - Interact with NPC/Object
-                </p>
-                <p id="note-mobile" style="display: none">Tap to move around</p>
-                <p id="interaction-note-mobile" style="display: none">
-                    Tap to Interact
-                </p>
+            <div class="game-window">
+                <canvas id="game"></canvas>
+            </div>
 
-                <p id="dialog-text"></p>
-                <div id="custom-prompt" class="custom-prompt">
-                    <div class="prompt-content">
-                        <p id="prompt-message"></p>
-                        <div
-                            id="options-container"
-                            class="options-container"
-                        ></div>
+            <div class="alert-window">
+                <div class="alert new-game-alert">
+                    <p class="alert-text">
+                        Do you want to start a new game? (This clears the saved
+                        game data.)
+                    </p>
+                    <div class="alert-options">
+                        <button id="new-game-no-button" class="option-btn">
+                            No
+                        </button>
+                        <button id="new-game-yes-button" class="option-btn">
+                            Yes
+                        </button>
                     </div>
                 </div>
-                <div id="textbox-container" style="display: none">
-                    <div id="textbox">
-                        <p id="dialog" class="ui-text"></p>
-                        <div class="btn-container">
-                            <button
-                                id="dialog-close-btn"
-                                class="ui-close-btn"
-                                aria-label="Close dialog"
-                            >
-                                Close
-                            </button>
-                            <button
-                                id="dialog-next-btn"
-                                class="ui-next-btn"
-                                aria-label="Next dialog"
-                            >
-                                Next
-                            </button>
+                <div class="alert stats-alert">
+                    <p id="coins-collected" class="alert-text"></p>
+                    <p id="coins-spent" class="alert-text"></p>
+                    <p id="time-spent" class="alert-text"></p>
+                    <div class="alert-options">
+                        <button id="stats-close-button" class="option-btn">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="menu-button">
+                <div class="menu-bar"></div>
+                <div class="menu-bar"></div>
+                <div class="menu-bar"></div>
+            </div>
+
+            <div id="header" class="top">ZTM Quest</div>
+            <div id="left-panel" class="left">
+                <div class="control-btns d-mobile-hide">
+                    <div class="control-btn y">Y</div>
+                    <div class="control-btn z">Z</div>
+                    <div class="control-btn a">A</div>
+                    <div class="control-btn b">B</div>
+                </div>
+            </div>
+            <div id="right-panel" class="right">
+                <button id="close-btn">X</button>
+                <button id="new-game-button" class="setting-btn">
+                    New Game
+                </button>
+                <button id="stats-button" class="setting-btn">Stats</button>
+                <button id="debug-button" class="setting-btn">
+                    Debug Mode
+                </button>
+                <button id="audio-button" class="setting-btn">Audio</button>
+            </div>
+            <div id="footer" class="bottom">
+                <div class="footer-head-info">
+                    <div class="control-btns d-desktop-hide">
+                        <div class="control-btn y">Y</div>
+                        <div class="control-btn z">Z</div>
+                        <div class="control-btn a">A</div>
+                        <div class="control-btn b">B</div>
+                    </div>
+                    <div id="text-info"></div>
+                </div>
+
+                <div class="dialogs-wrapper">
+                    <p id="dialog-text"></p>
+                    <div id="custom-prompt" class="custom-prompt">
+                        <div class="prompt-content">
+                            <p id="prompt-message"></p>
+                            <div
+                                id="options-container"
+                                class="options-container"
+                            ></div>
                         </div>
+                    </div>
+                    <div id="textbox-container" style="display: none">
+                        <div id="textbox">
+                            <p id="dialog" class="ui-text"></p>
+                            <div class="btn-container">
+                                <button
+                                    id="dialog-close-btn"
+                                    class="ui-close-btn"
+                                    aria-label="Close dialog"
+                                >
+                                    Close
+                                </button>
+                                <button
+                                    id="dialog-next-btn"
+                                    class="ui-next-btn"
+                                    aria-label="Next dialog"
+                                >
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="energy-container">
+                        <p id="energy-title">Energy:</p>
+                        <div id="energy-bar-total">
+                            <div id="energy-bar-remain"></div>
+                        </div>
+                        <div id="minimap-button-container">
+                            <span>"M"</span>
+                            <button id="minimap-button">Map</button>
+                        </div>
+                    </div>
+                    <div id="minimap-container">
+                        <div id="minimap-name"></div>
+                        <canvas id="minimap"></canvas>
                     </div>
                 </div>
             </div>
             <canvas id="game"></canvas>
-
         </div>
         <script type="module" src="src/main.js"></script>
+        <script type="module" src="src/utils/settings.js"></script>
     </body>
 </html>

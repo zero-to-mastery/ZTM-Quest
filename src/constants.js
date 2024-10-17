@@ -19,6 +19,9 @@ export const characters = [
     { name: 'jessie', frames: [180, 184, 182, 188, 181, 186] },
 ];
 
+// ./assets/sprites/fish.png sprites
+export const fishSpriteNames = ['fish_1', 'fish_2', 'fish_3', 'fish_4'];
+
 // ./bruno.png sprite
 export const bruno = { name: 'bruno', frames: [0, 3, 2, 7, 1, 5] };
 
@@ -27,9 +30,10 @@ export const conversationBruno = [
     "I'm pretty sure you heard already about me.",
     "This time, I won't give you a assignment. At least not yet *hihihihi*.",
     'You will explore the world of ZTM here!',
-    'As you already see, we have a lot of people in here which are already interested.',
+    'As you already see, we have a lot of people in here who are already interested.',
     'Maybe the one or other will talk to you.',
     "Otherwise if you can't wait to explore the outside world, just go through the door.",
+    'As you explore the world, you will lose your energy overtime. Consume drinks/eatables when you are low on energy.',
     'But, make sure you visit the restroom before you go. It will be a long journey.',
 ];
 
@@ -43,4 +47,19 @@ export const conversationMisterFu = [
     'Some might even share their stories with you.',
     "If you're itching to start your journey, the path lies through that gate.",
     "But don't forget to stock up on supplies before you go. It's a long road ahead.",
+];
+
+export const jessie = {
+    name: 'jessie',
+    frames: [180, 184, 182, 188, 181, 186],
+};
+export const conversationJessie = [
+    'Hey there! Welcome to the arcade! Ready to have some fun?',
+    "Hi! I'm Jessie. Need any tips on the best games here?",
+    "Hello! Have you tried the new racing game? It's awesome!",
+    "Welcome! I'm Jessie. Let's see if you can beat my high score!",
+    'Hey! Looking for a challenge? I can show you the toughest games.',
+    "Hi there! Don't forget to check out the prize counter after playing!",
+    "Hello! Need any help finding a game? I'm your go-to guide!",
+    "Hey! Ready to play? I've got some great game recommendations for you.",
 ];
