@@ -176,7 +176,7 @@ export const addPlayerControls = (player) => {
 
     // Set up the button press event to toggle the minimap
     k.onButtonPress('map', () => {
-        toggleMinimap();
+        toggleMinimap(k);
     });
 
     // Only stop animations if no buttons are pressed
