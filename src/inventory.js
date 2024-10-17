@@ -1,3 +1,62 @@
+// To Execute this file , follow the below steps in main.js
+
+//1. To import from inventory.js
+//import { toggleInventory, onPlayerCollectItems } from './inventory';  // Import from inventory.js
+
+//2. Then copy paste the following code : in main.js
+/*
+const openInventoryButton = document.createElement('button');
+openInventoryButton.id = 'open-inventory';
+openInventoryButton.innerText = 'Inventory';
+openInventoryButton.style.position = 'absolute';
+openInventoryButton.style.bottom = '40px';
+openInventoryButton.style.right = '30px';
+const openButtonStyle = document.createElement('style');
+openButtonStyle.innerHTML = `
+    #open-inventory {
+        background-color: black;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 15px;
+        font-size: 16px;
+    }
+    #open-inventory:hover {
+        background-color: black;
+    }
+`;
+document.head.appendChild(openButtonStyle);
+document.body.appendChild(openInventoryButton);
+
+// Event listener for opening the inventory
+openInventoryButton.addEventListener('click', toggleInventory);
+
+// Simulate collecting items
+const iconUrl = 'https://picsum.photos/id/1/200/300';
+const iconUrl1 = 'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U';
+
+onPlayerCollectItems('Laptop', iconUrl);
+onPlayerCollectItems('Sword', iconUrl1);
+
+
+
+=======
+updateEnergyUI(getGameState().player.energy);
+setInterval(() => {
+    const gameState = getGameState(); // This should be inside setInterval so that gameState variable is updated at every interval.
+    if (gameState.player.energy) {
+        gameState.player.energy -= 1;
+        setGameState(gameState);
+        updateEnergyUI(gameState.player.energy);
+    } else {
+        k.debug.log('I need some energy.');
+    }
+}, 10000);
+
+*/ 
+
+
+
 // Inventory Setup
 export const inventoryDiv = document.createElement('div');
 inventoryDiv.id = 'inventory';
