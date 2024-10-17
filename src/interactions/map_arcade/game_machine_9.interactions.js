@@ -142,16 +142,7 @@ function startColorSequencePuzzle(k) {
             k.scale(getResponsiveScale()),
         ]);
 
-        const colorButtons = colors.map((color, index) => {
-            return k.add([
-                k.circle(50 * getResponsiveScale()),
-                k.pos(k.width() / 2 + (index - 2) * 120 * getResponsiveScale(), k.height() / 2), // Increased spacing
-                k.color(color),
-                k.area(),
-                'colorButton',
-                { colorValue: colorNames[index] },
-            ]);
-        });
+        
 
         const inputDisplay = k.add([
             k.rect(300 * getResponsiveScale(), 50 * getResponsiveScale()),
@@ -273,10 +264,7 @@ function showCustomPrompt(message, options, callback) {
     const messageElement = document.getElementById('prompt-message');
     const optionsContainer = document.getElementById('options-container');
 
-    if (!promptElement || !messageElement || !optionsContainer) {
-        console.error('Required DOM elements for custom prompt not found');
-        return;
-    }
+    
 
     messageElement.textContent = message;
     optionsContainer.innerHTML = '';
