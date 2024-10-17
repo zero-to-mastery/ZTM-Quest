@@ -52,7 +52,8 @@ setInterval(() => {
         gameState.player.energy -= 1;
         setGameState(gameState);
         updateEnergyUI(gameState.player.energy);
-    } else {
+    } else if (Math.floor(k.time()) % 3 == 0) {
+        // This ensures log appears atmost 2 times per minute.
         k.debug.log('I need some energy.');
     }
 }, 10000);
