@@ -1,6 +1,7 @@
 import gameObjects from '../gameObjects/map_city';
-import { initMap } from '../init/map.init';
 import interactions from '../interactions/map_city';
+import sounds from '../sounds/map_city';
+import { initMap } from '../init/map.init';
 
 export async function city() {
     const objectConfig = {
@@ -19,5 +20,5 @@ export async function city() {
         './maps/map_city.json'
     );
 
-    return [map, spawnpoint, gameObjects, interactions];
+    return [map, spawnpoint, gameObjects, interactions, sounds];
 }
