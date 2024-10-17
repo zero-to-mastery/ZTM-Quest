@@ -4,6 +4,7 @@
     --side-panels-width: 10%;
 }
 
+/* General Screen Layout */
 #screen {
     width: 100%;
     height: 100%;
@@ -17,7 +18,6 @@
     text-align: center;
     font-size: 2em;
 }
-
 #menu-button {
     position: fixed;
     top: 15px;
@@ -140,6 +140,84 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+#new-game-button {
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    padding: 3px 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    margin: 10px auto;
+}
+
+#new-game-img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition:
+        transform 0.2s ease-in-out,
+        opacity 0.3s ease;
+}
+
+.setting-btn {
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: transparent;
+    font-family: pixelifysans, monospace;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 250px;
+    margin: 10px auto;
+}
+
+.setting-btn img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 600px) {
+    #new-game-button,
+    .setting-btn {
+        max-width: 200px;
+    }
+
+    .setting-btn {
+        font-size: 1rem;
+    }
+}
+
+.setting-btn:hover #new-game-img {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+#audio-button {
+    border: none;
+    border-radius: 10px;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+}
+
+#audio-icon {
+    width: 100%;
+    height: auto;
 }
 
 #energy-container {
