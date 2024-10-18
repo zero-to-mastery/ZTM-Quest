@@ -1,5 +1,3 @@
-import { scaleFactor } from '../../constants';
-
 export const cat = (k, map, spawnpoints) => {
     k.loadSprite('cat', './assets/sprites/cat.png', {
         sliceX: 4,
