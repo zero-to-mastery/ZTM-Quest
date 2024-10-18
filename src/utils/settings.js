@@ -107,26 +107,16 @@ const debugButton = document.getElementById('debug-button');
 debugButton.addEventListener('click', toggleDebugMode);
 
 // Audio related
-const audioButton = document.getElementById('audio-button');
+const toggleAudio = () => {
+    if (k.audioCtx.state.includes('running')) {
+        k.audioCtx.suspend();
+        audioIcon.src = 'assets/sprites/mute.png';
+    } else {
+        k.audioCtx.resume();
+        audioIcon.src = 'assets/sprites/audio-on.png';
+    }
+};
 const audioIcon = document.getElementById('audio-icon');
 
-// Initial state
-let isAudioOn = true; // Assuming audio is on initially
-
-// Event listener to toggle audio state
-audioButton.addEventListener('click', function () {
-    const audio = document.getElementById('background-music');
-
-    if (isAudioOn) {
-        audio.pause(); // Pause the audio
-        audioIcon.src = 'assets/sprites/mute.png'; // Switch to mute image
-        audioIcon.alt = 'Mute'; // Update alt text
-    } else {
-        audio.play(); // Play the audio
-        audioIcon.src = 'assets/sprites/audio-on.png'; // Switch to audio on image
-        audioIcon.alt = 'Audio On'; // Update alt text
-    }
-
-    // Toggle the audio state
-    isAudioOn = !isAudioOn;
-});
+const audioButton = document.getElementById('audio-button');
+audioButton.addEventListener('click', toggleAudio);
