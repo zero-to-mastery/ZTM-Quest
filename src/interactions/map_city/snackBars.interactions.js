@@ -3,16 +3,12 @@ import { updateEnergyState } from '../../utils/energyUpdate';
 
 export const snackBarGreenInteraction = (player, k) => {
     player.onCollide('snack_bar_green', async () => {
-        player.isInDialog = true;
         let ztmSnackDecision = await displayPermissionBox({
             k,
             player,
             text: [
                 'Welcome to Snack Bar Green! Ready to go from zero to snack mastery?',
             ],
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
 
         if (ztmSnackDecision) {
@@ -27,9 +23,6 @@ export const snackBarGreenInteraction = (player, k) => {
                 text: [
                     'Are you sure? The path to snack mastery is only one bite away...',
                 ],
-                onDisplayEnd: () => {
-                    player.isInDialog = false;
-                },
             });
 
             if (secondSnackChance) {
@@ -48,16 +41,12 @@ export const snackBarGreenInteraction = (player, k) => {
 
 export const snackBarRedInteraction = (player, k) => {
     player.onCollide('snack_bar_red', async () => {
-        player.isInDialog = true;
         let snackOffer = await displayPermissionBox({
             k,
             player,
             text: [
                 'Welcome to Snack Bar Red! The *real* masters of snacking... Unlike *ahem* some green wannabes across the street. Ready for the best snack experience?',
             ],
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
 
         if (snackOffer) {
@@ -72,9 +61,6 @@ export const snackBarRedInteraction = (player, k) => {
                 text: [
                     'Are you sure? Don’t tell me you’re thinking of going to *that* green place... Their snacks are... well, let’s just say "unimpressive."',
                 ],
-                onDisplayEnd: () => {
-                    player.isInDialog = false;
-                },
             });
 
             if (changeMind) {
@@ -93,16 +79,12 @@ export const snackBarRedInteraction = (player, k) => {
 
 export const snackBarStreetInteraction = (player, k) => {
     player.onCollide('snack_bar_street', async () => {
-        player.isInDialog = true;
         let snackDecision = await displayPermissionBox({
             k,
             player,
             text: [
                 'Psst! You look hungry! How about a snack? It’s a secret recipe!',
             ],
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
 
         if (snackDecision) {
@@ -117,9 +99,6 @@ export const snackBarStreetInteraction = (player, k) => {
                 text: [
                     'Are you sure? It’s low calorie and totally NOT haunted! Still no?',
                 ],
-                onDisplayEnd: () => {
-                    player.isInDialog = false;
-                },
             });
 
             if (secondChance) {

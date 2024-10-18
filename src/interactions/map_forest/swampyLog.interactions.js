@@ -7,15 +7,11 @@ const swampyLogDialogue = [
 
 export const interactionWithSwampyLog = (player, k, map) => {
     interactionHandler(player, 'swampy_log', k, () => {
-        player.isInDialog = true;
         displayDialogue({
             k,
             player,
             characterName: 'swampy_log',
             text: swampyLogDialogue,
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
     });
 };

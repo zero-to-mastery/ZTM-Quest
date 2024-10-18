@@ -2,7 +2,6 @@ import { displayDialogue } from '../../utils';
 
 export const interactionWithGameMachine12 = (player, k, map) => {
     player.onCollide('game_machine_12', () => {
-        player.isInDialog = true;
         showCustomPrompt(
             'Do you want to play "Pattern Memory Challenge"?',
             ['Yes', 'No'],
@@ -15,7 +14,6 @@ export const interactionWithGameMachine12 = (player, k, map) => {
                             'Starting Pattern Memory Challenge... Get ready!',
                         ],
                         onDisplayEnd: () => {
-                            player.isInDialog = false;
                             startPatternMemoryGame(k);
                         },
                     });
@@ -24,9 +22,6 @@ export const interactionWithGameMachine12 = (player, k, map) => {
                         k,
                         player,
                         text: ['Maybe next time!'],
-                        onDisplayEnd: () => {
-                            player.isInDialog = false;
-                        },
                     });
                 }
             }

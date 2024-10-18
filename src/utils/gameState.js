@@ -1,3 +1,5 @@
+import { speedByScaleFactor } from '../constants';
+
 const LOCAL_STORAGE_GAME_STATE_KEY = 'gameState';
 
 const initialState = () => ({
@@ -6,6 +8,11 @@ const initialState = () => ({
         wasInRestroom: false,
         hasHandsWashed: false,
         energy: 100,
+        speed: speedByScaleFactor,
+        direction: 'down',
+        isInDialog: false,
+        collectedCoins: 0,
+        score: 0,
     },
 });
 

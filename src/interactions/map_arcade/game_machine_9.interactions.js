@@ -2,7 +2,6 @@ import { displayDialogue } from '../../utils';
 
 export const interactionWithGameMachine9 = (player, k, map) => {
     player.onCollide('game_machine_9', () => {
-        player.isInDialog = true;
         showCustomPrompt(
             'Do you want to play "Color Sequence Puzzle"?',
             ['Yes', 'No'],
@@ -13,7 +12,6 @@ export const interactionWithGameMachine9 = (player, k, map) => {
                         player,
                         text: ['Starting Color Sequence Puzzle... Get ready!'],
                         onDisplayEnd: () => {
-                            player.isInDialog = false;
                             startColorSequencePuzzle(k);
                         },
                     });
@@ -22,9 +20,6 @@ export const interactionWithGameMachine9 = (player, k, map) => {
                         k,
                         player,
                         text: ['Maybe next time!'],
-                        onDisplayEnd: () => {
-                            player.isInDialog = false;
-                        },
                     });
                 }
             }

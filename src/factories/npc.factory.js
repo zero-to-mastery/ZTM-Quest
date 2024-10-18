@@ -5,7 +5,8 @@ export function makeNpc(
     targetDestination,
     pos,
     startAnimation = 'idle-down',
-    additionalTag = 'npc'
+    additionalTag = 'npc',
+    areaConfig = { shape: new k.Rect(k.vec2(0), 16, 16) }
 ) {
     const randomCharacter = getRandomCharacter();
     const npcKey = `npc_${randomCharacter.name}`;
@@ -45,9 +46,7 @@ export function makeNpc(
 
     return k.make([
         k.sprite(npcKey, { anim: startAnimation }),
-        k.area({
-            shape: new k.Rect(k.vec2(0), 16, 16),
-        }),
+        k.area(areaConfig),
         k.body({ isStatic: true }),
         k.pos(pos.x, pos.y),
         k.anchor('center'),

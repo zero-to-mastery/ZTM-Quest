@@ -1,11 +1,10 @@
 import { characters } from '../../constants';
+import { changePlayerSprite } from '../../utils/changePlayer';
 
 const slightPause = () => new Promise((res) => setTimeout(res, 500));
 
 export const interactionWithLocker = (player, k, map) => {
     player.onCollide('cabin_edge_room_1', () => {
-        player.isInDialog = true;
-
         const characterOptions = characters.map(
             (character) =>
                 character.name.charAt(0).toUpperCase() + character.name.slice(1)
@@ -21,8 +20,12 @@ export const interactionWithLocker = (player, k, map) => {
                         character.name.toLowerCase() ===
                         selectedOption.toLowerCase()
                 );
-                player.changePlayer(selectedCharacter.name);
-                player.isInDialog = false;
+                changePlayerSprite(
+                    selectedCharacter.name,
+                    player.curAnim(),
+                    k,
+                    player
+                );
                 k.canvas.focus();
             }
         );

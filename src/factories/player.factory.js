@@ -1,8 +1,6 @@
 import { k } from '../kplayCtx';
-import { characters, scaleFactor, speedByScaleFactor } from '../constants';
+import { scaleFactor } from '../constants';
 import { getGameState, setGameState } from '../utils/gameState';
-import { triggerFishingAnimations } from './utils/triggerFishingAnimations';
-import { triggerNormalAnimations } from './utils/triggerNormalAnimations';
 
 export function makePlayer(playerProps = {}, customScale = scaleFactor) {
     if (!k.getSprite('player')) {
@@ -37,44 +35,6 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
         );
     }
 
-    const changePlayer = (name, startAnimation = 'idle-down') => {
-        const chosenCharacter = characters.find(
-            (character) => character.name === name
-        );
-        const [idleDown, walkDown, idleSide, walkSide, idleUp, walkUp] =
-            chosenCharacter.frames;
-
-        k.loadSprite('player', './assets/sprites/characters.png', {
-            sliceX: 10,
-            sliceY: 20,
-            anims: {
-                'idle-down': idleDown,
-                'walk-down': {
-                    from: walkDown,
-                    to: walkDown + 1,
-                    loop: true,
-                    speed: 6,
-                },
-                'idle-side': idleSide,
-                'walk-side': {
-                    from: walkSide,
-                    to: walkSide + 1,
-                    loop: true,
-                    speed: 6,
-                },
-                'idle-up': idleUp,
-                'walk-up': {
-                    from: walkUp,
-                    to: walkUp + 1,
-                    loop: true,
-                    speed: 6,
-                },
-            },
-        });
-        // Update the player's sprite to use the new character
-        player.use(k.sprite('player', { anim: startAnimation }));
-    };
-
     const playerState = {
         set: function (target, key, value) {
             const gameState = getGameState();
@@ -103,19 +63,11 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
         k.anchor('center'),
         k.pos(),
         k.scale(customScale),
-        {
-            speed: speedByScaleFactor,
-            direction: 'down',
-            isInDialog: false,
-            collectedCoins: 0,
-            score: 0,
-            state: state,
-            changePlayer,
-            triggerFishingAnimations,
-            triggerNormalAnimations,
-        },
         k.layer('player'),
         'player',
+        {
+            state,
+        },
     ]);
 
     return player;

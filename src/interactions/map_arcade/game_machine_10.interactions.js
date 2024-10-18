@@ -2,7 +2,6 @@ import { displayDialogue } from '../../utils';
 
 export const interactionWithGameMachine10 = (player, k, map) => {
     player.onCollide('game_machine_10', () => {
-        player.isInDialog = true;
         showCustomPrompt(
             'Do you want to play "Catch the Moon"? Join the adventure and see how many moons you can catch before time runs out!',
             ['Yes', 'No'],
@@ -15,7 +14,6 @@ export const interactionWithGameMachine10 = (player, k, map) => {
                             'Get ready for "Catch the Moon"! Aim to gather as many moons as possible. Good luck!',
                         ],
                         onDisplayEnd: () => {
-                            player.isInDialog = false;
                             startCatchTheMoon(k);
                         },
                     });
@@ -24,9 +22,6 @@ export const interactionWithGameMachine10 = (player, k, map) => {
                         k,
                         player,
                         text: ['Maybe next time!'],
-                        onDisplayEnd: () => {
-                            player.isInDialog = false;
-                        },
                     });
                 }
             }

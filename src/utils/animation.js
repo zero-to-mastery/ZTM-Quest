@@ -6,7 +6,7 @@ export const animations = {
 };
 
 export const stopCharacterAnims = (objectInstance) => {
-    switch (objectInstance.direction) {
+    switch (objectInstance.state.direction) {
         case 'up':
             objectInstance.play('idle-up');
             break;

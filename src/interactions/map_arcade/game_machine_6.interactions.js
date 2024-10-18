@@ -2,7 +2,6 @@ import { displayDialogue } from '../../utils';
 
 export const interactionWithGameMachine6 = (player, k, map) => {
     player.onCollide('game_machine_6', () => {
-        player.isInDialog = true;
         // Trigger the custom prompt when the player collides with the game machine
         showCustomPrompt(
             'Do you want to play the Chrome Dino Game?', // Updated Prompt message
@@ -15,7 +14,6 @@ export const interactionWithGameMachine6 = (player, k, map) => {
                         player,
                         text: ['Starting the Chrome Dino Game... Good luck!'],
                         onDisplayEnd: () => {
-                            player.isInDialog = false;
                             startChromeDinoGame(k); // Pass k to the game start function
                         },
                     });
@@ -24,9 +22,6 @@ export const interactionWithGameMachine6 = (player, k, map) => {
                         k,
                         player,
                         text: ['Maybe next time!'],
-                        onDisplayEnd: () => {
-                            player.isInDialog = false;
-                        },
                     });
                 }
             }

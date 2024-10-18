@@ -17,29 +17,21 @@ const cakeDialogue = [
 
 export const interactionWithCake = (player, k, map) => {
     player.onCollide('cake', () => {
-        player.isInDialog = true;
-        player.speed = speedByScaleFactor * 2.5;
+        player.state.speed = speedByScaleFactor * 2.5;
         displayDialogue({
             k,
             player,
             text: cakeDialogue,
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
     });
 
     player.onCollideEnd('cake', () => {
         setTimeout(() => {
-            player.isInDialog = true;
-            player.speed = speedByScaleFactor; // Reset to default speed
+            player.state.speed = speedByScaleFactor; // Reset to default speed
             displayDialogue({
                 k,
                 player,
                 text: ['SUGAR CRASH'],
-                onDisplayEnd: () => {
-                    player.isInDialog = false;
-                },
             });
         }, 10000);
     });

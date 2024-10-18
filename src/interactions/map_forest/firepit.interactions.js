@@ -7,15 +7,11 @@ const firepitDialogue = [
 
 export const interactionWithFirepit = (player, k, map) => {
     interactionHandler(player, 'firepit', k, () => {
-        player.isInDialog = true;
         displayDialogue({
             k,
             player,
             characterName: 'firepit',
             text: firepitDialogue,
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
     });
 };

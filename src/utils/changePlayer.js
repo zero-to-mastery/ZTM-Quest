@@ -1,6 +1,11 @@
-import { characters } from '../../constants';
+import { characters } from '../constants';
 
-export const changePlayer = (name, startAnimation = 'idle-down', k, player) => {
+export const changePlayerSprite = (
+    name,
+    startAnimation = 'idle-down',
+    k,
+    player
+) => {
     const chosenCharacter = characters.find(
         (character) => character.name === name
     );

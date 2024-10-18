@@ -5,20 +5,14 @@ import { displayPermissionBox } from '../../utils';
 export const interactionWithGameMachine8 = (player, k) => {
     // Check collision with the game machine
     player.onCollide('game_machine_8', async () => {
-        player.isInDialog = true;
         const wantsToPlay = await displayPermissionBox({
             k,
             player,
             text: ['Do you want to play ROBO RUNNER 🏃‍➡️?'],
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
 
         if (wantsToPlay) {
             initGame(k);
-        } else {
-            player.isInDialog = false;
         }
     });
 };

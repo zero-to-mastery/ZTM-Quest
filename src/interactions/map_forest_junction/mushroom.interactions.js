@@ -7,15 +7,11 @@ const mushroomsDialogue = [
 
 export const interactionWithMushroom = (player, k, map) => {
     interactionHandler(player, 'mushrooms', k, () => {
-        player.isInDialog = true;
         displayDialogue({
             k,
             player,
             characterName: 'mushrooms',
             text: mushroomsDialogue,
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
     });
 };

@@ -7,15 +7,11 @@ const flowerDialogue = [
 
 export const interactionWithFlowers = (player, k, map) => {
     interactionHandler(player, 'flowers', k, () => {
-        player.isInDialog = true;
         displayDialogue({
             k,
             player,
             characterName: 'flowers',
             text: flowerDialogue,
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
     });
 };

@@ -47,55 +47,38 @@ export const mageInteractions = async (player, k, map) => {
             mageInteractionCounter++;
 
             if (mageInteractionCounter === 1) {
-                player.isInDialog = true;
                 await displayDialogue({
                     k,
                     player,
                     text: firstText,
                     characterName: 'Mage',
-                    onDisplayEnd: () => {
-                        player.isInDialog = false;
-                    },
                 });
             }
 
             if (mageInteractionCounter >= 2) {
-                player.isInDialog = true;
-
                 let tryChallenge = await displayPermissionBox({
                     k,
                     player,
                     text: questionText,
-                    onDisplayEnd: () => {
-                        player.isInDialog = false;
-                    },
                 });
 
                 if (tryChallenge) {
-                    player.isInDialog = true;
                     await displayDialogue({
                         k,
                         player,
                         text: spell,
                         characterName: 'Mage',
-                        onDisplayEnd: () => {
-                            player.isInDialog = false;
-                        },
                     });
 
                     //TODO: You can add a flickering effect to the dialog box to make it more magical
 
                     player.state.alreadyTalkedToMage = true;
                 } else {
-                    player.isInDialog = true;
                     await displayDialogue({
                         k,
                         player,
                         text: noSpell,
                         characterName: 'Mage',
-                        onDisplayEnd: () => {
-                            player.isInDialog = false;
-                        },
                     });
                 }
             }
@@ -109,45 +92,32 @@ export const mageInteractions = async (player, k, map) => {
                     player,
                     text: butterBeerDialog.ask,
                     characterName: 'Mage',
-                    onDisplayEnd: () => {
-                        player.isInDialog = false;
-                    },
                 });
 
                 if (giveButterBeer) {
-                    player.isInDialog = true;
                     await displayDialogue({
                         k,
                         player,
                         text: butterBeerDialog.thank,
                         characterName: 'Mage',
                         onDisplayEnd: () => {
-                            player.isInDialog = false;
                             player.state.hasButterBeer = false;
                             updateEnergyState(player.state, 99);
                         },
                     });
                 } else {
-                    player.isInDialog = true;
                     await displayDialogue({
                         k,
                         player,
                         text: butterBeerDialog.denied,
                         characterName: 'Mage',
-                        onDisplayEnd: () => {
-                            player.isInDialog = false;
-                        },
                     });
                 }
             } else {
-                player.isInDialog = true;
                 await displayDialogue({
                     k,
                     player,
                     text: alredyUnlockText,
-                    onDisplayEnd: () => {
-                        player.isInDialog = false;
-                    },
                 });
             }
         }

@@ -1,4 +1,4 @@
-export const triggerNormalAnimations = (
+export const triggerNormalPlayerAnimations = (
     k,
     player,
     startAnimation = 'idle-down',

@@ -30,7 +30,6 @@ export const computerInteractions = async (player, k, map) => {
     const [computer] = map.query({ include: 'computer' });
     player.onCollide('computer', async () => {
         if (!player.state.alreadyTalkedToMage) {
-            player.isInDialog = true;
             computer.play('on');
 
             await displayDialogue({
@@ -41,9 +40,6 @@ export const computerInteractions = async (player, k, map) => {
                     'It has some kind of protection spell.',
                     'You should talk to the house mage to unlock it.',
                 ],
-                onDisplayEnd: () => {
-                    player.isInDialog = false;
-                },
             });
 
             computer.play('off');
@@ -53,7 +49,6 @@ export const computerInteractions = async (player, k, map) => {
             const energyUI = document.getElementById('energy-container');
             energyUI.style.display = 'none';
 
-            player.isInDialog = true;
             computer.play('on');
 
             showCustomPrompt(challengeText, options, async (selectedOption) => {
@@ -80,7 +75,6 @@ export const computerInteractions = async (player, k, map) => {
                     player,
                     text: response,
                     onDisplayEnd: () => {
-                        player.isInDialog = false;
                         player.state.alreadyTalkedToMage = false;
                     },
                 });
