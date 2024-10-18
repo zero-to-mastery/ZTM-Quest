@@ -1,4 +1,5 @@
 import { displayDialogue } from '../../utils';
+import { addCoins } from '../../utils/coinsUpdate';
 
 export const interactionWithGameMachine6 = (player, k, map) => {
     player.onCollide('game_machine_6', () => {
@@ -245,6 +246,9 @@ function startChromeDinoGame(k) {
             dino.onCollide('tree', () => {
                 k.addKaboom(dino.pos);
                 k.shake();
+                if (score > 5000) {
+                    addCoins(25);
+                }
                 k.go('lose', {
                     title: 'Dino game',
                     gameRestartSceneName: 'dinoGame',

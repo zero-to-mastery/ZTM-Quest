@@ -1,4 +1,5 @@
 import { displayDialogue } from '../../utils';
+import { addCoins } from '../../utils/coinsUpdate';
 
 export const interactionWithGameMachine1 = (player, k, map) => {
     player.onCollide('game_machine_1', () => {
@@ -70,6 +71,7 @@ function startNumberGuessingGame(k) {
                 attempts++;
                 if (guess === randomNumber) {
                     k.go('win', attempts);
+                    addCoins(15);
                 } else if (attempts >= MAX_ATTEMPTS) {
                     k.go('lose', randomNumber);
                 } else {

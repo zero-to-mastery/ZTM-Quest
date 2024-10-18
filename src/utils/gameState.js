@@ -5,7 +5,10 @@ const initialState = () => ({
         hasTalkedToBruno: false,
         wasInRestroom: false,
         hasHandsWashed: false,
+        hasOpenedChest: false,
         energy: 100,
+        coinsCollected: 0,
+        coinsSpent: 0,
     },
 });
 

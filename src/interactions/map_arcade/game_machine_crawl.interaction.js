@@ -1,4 +1,5 @@
 import { displayDialogue } from '../../utils';
+import { addCoins } from '../../utils/coinsUpdate';
 
 export const interactionWithGameMachineCrawl = (player, k, map) => {
     player.onCollide('game_machine_crawl', () => {
@@ -306,6 +307,9 @@ function startCrawlGame(k) {
 
             const items = k.get('item');
             if (items.length === 0 || timeRemaining <= 0) {
+                if (timeRemaining >= 30000) {
+                    addCoins(10);
+                }
                 k.go('lose', {
                     title: 'Crawl game',
                     gameRestartSceneName: 'crawlGame',

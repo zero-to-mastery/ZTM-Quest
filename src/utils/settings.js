@@ -1,5 +1,5 @@
 import { k } from '../kplayCtx';
-import { clearSavedGame } from './gameState';
+import { getGameState, clearSavedGame } from './gameState';
 
 // Mobile menu related
 
@@ -61,9 +61,9 @@ newGameYesButton.addEventListener('click', clickNewGameYes);
 // Stats related
 
 const showStats = () => {
-    const player = k.get('player')[0];
-    const coinsCollected = player.collectedCoins;
-    const coinsSpent = 0;
+    const player = getGameState().player;
+    const coinsCollected = player.coinsCollected;
+    const coinsSpent = player.coinsSpent;
 
     // Calculation for time spent in game
     const timeSpent = k.time();

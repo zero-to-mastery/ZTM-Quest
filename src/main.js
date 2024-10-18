@@ -1,6 +1,7 @@
 import { k } from './kplayCtx';
 import { getGameState, setGameState } from './utils/gameState';
 import { updateEnergyUI } from './utils/energyUpdate';
+import { updateCoinsUI } from './utils/coinsUpdate';
 
 import './styles/global.css';
 
@@ -46,6 +47,7 @@ k.go('start');
 */
 
 updateEnergyUI(getGameState().player.energy);
+updateCoinsUI();
 setInterval(() => {
     const gameState = getGameState(); // This should be inside setInterval so that gameState variable is updated at every interval.
     if (gameState.player.energy) {
