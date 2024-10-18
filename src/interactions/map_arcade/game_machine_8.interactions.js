@@ -13,7 +13,6 @@ export const interactionWithGameMachine8 = (player, k) => {
 
         if (wantsToPlay) {
             initGame(k);
-        } else {
         }
     });
 };

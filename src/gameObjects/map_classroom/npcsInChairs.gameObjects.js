@@ -10,7 +10,6 @@ export const npcsInChairs = (k, map, spawnpoints) => {
         );
 
     for (const chair of chairs) {
-        console.log(chair.tags);
         if (!chair.tags.includes('interaction_object')) {
             // createa npc for each chair
             const npc = makeNpc(
