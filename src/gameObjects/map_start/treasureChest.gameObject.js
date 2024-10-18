@@ -1,4 +1,5 @@
 import { scaleFactor } from '../../constants';
+import { addCoins } from '../../utils/coinsUpdate';
 
 export const treasureChest = (k, map) => {
     k.loadSprite(
@@ -14,10 +15,14 @@ export const treasureChest = (k, map) => {
 
     const chestPosition = { x: 200, y: 100 };
 
-    let isOpen = false;
+    const player = k.get('player')[0];
 
     const chestObj = k.make([
-        k.sprite('treasureChestClosed'),
+        k.sprite(
+            player.state.hasOpenedChest
+                ? 'treasureChestOpen'
+                : 'treasureChestClosed'
+        ),
         k.area(),
         k.pos(
             map.pos.x + chestPosition.x / scaleFactor,
@@ -28,8 +33,9 @@ export const treasureChest = (k, map) => {
     ]);
 
     chestObj.onCollide('player', () => {
-        if (!isOpen) {
-            isOpen = true;
+        if (!player.state.hasOpenedChest) {
+            player.state.hasOpenedChest = true;
+            addCoins(100);
             k.play('chestOpen');
 
             chestObj.use(k.sprite('treasureChestOpen'));

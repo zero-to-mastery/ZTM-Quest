@@ -5,7 +5,10 @@ const initialState = () => ({
         hasTalkedToBruno: false,
         wasInRestroom: false,
         hasHandsWashed: false,
+        hasOpenedChest: false,
         energy: 100,
+        coinsCollected: 0,
+        coinsSpent: 0,
     },
 });
 
@@ -13,6 +16,7 @@ const initialState = () => ({
 let currentState = undefined;
 
 export const clearSavedGame = () => {
+    currentState = undefined;
     localStorage.removeItem(LOCAL_STORAGE_GAME_STATE_KEY);
 };
 
