@@ -34,7 +34,7 @@ k.scene('fishing', (enter_tag) => miniGameBootstrap(fishing, { enter_tag }));
 k.scene('startScreen', gameStartScreen);
 k.scene('lose', loseScreen);
 
-k.go('classroom');
+k.go('start');
 
 // To test different maps instead of going through each and every scene to get to yours,
 // Import the scene, name the scene, and then name the spawn point as an additional tag
@@ -65,13 +65,12 @@ setInterval(() => {
 const clock = document.getElementById('clock');
 
 setInterval(() => {
-    clock.innerHTML = getTime();
-
+    displayTime();
     if (!time.paused) {
-        time.seconds += k.dt();
+        time.addMinutes(k.dt());
         if (Math.ceil(time.seconds) % 60 === 0) {
             time.seconds = 0;
-            time.minutes += 1;
+            time.addHours(1);
         }
         if (time.minutes % 24 === 0) {
             time.minutes = 0;
@@ -79,8 +78,8 @@ setInterval(() => {
     }
 }, 10);
 
-function getTime() {
+function displayTime() {
     const minutes = Math.ceil(time.minutes);
     const seconds = Math.ceil(time.seconds);
-    return `${minutes < 10 ? `0${minutes}` : `${minutes % 24}`}:${seconds < 10 ? `0${seconds % 60}` : `${seconds % 60}`}`;
+    clock.innerHTML = `${minutes < 10 ? `0${minutes}` : `${minutes % 24}`}:${seconds < 10 ? `0${seconds % 60}` : `${seconds % 60}`}`;
 }

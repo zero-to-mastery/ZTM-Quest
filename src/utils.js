@@ -42,6 +42,7 @@ export async function displayDialogue({
     onDisplayEnd = () => {},
 }) {
     time.paused = true;
+    player.state.isInDialog = true;
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
     const closeBtn = document.getElementById('dialog-close-btn');
@@ -87,6 +88,7 @@ export async function displayDialogue({
         energyUI.style.display = 'flex';
         closeBtn.removeEventListener('click', onCloseBtnClick);
         k.triggerEvent('dialog-closed', { player, characterName, text });
+        player.state.isInDialog = false;
         k.canvas.focus();
     }
     closeBtn.addEventListener('click', onCloseBtnClick);
@@ -109,6 +111,7 @@ export async function displayPermissionBox({
     onDisplayEnd = () => {},
 }) {
     time.paused = true;
+    player.state.isInDialog = true;
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
     const closeBtn = document.getElementById('dialog-close-btn');
@@ -139,6 +142,8 @@ export async function displayPermissionBox({
             nextBtn.removeEventListener('click', onNextBtnClick);
             closeBtn.innerHTML = 'Close';
             nextBtn.innerHTML = 'Next';
+            player.state.isInDialog = false;
+
             k.canvas.focus();
             resolve(false); // Resolve with false when "No" is clicked
         }

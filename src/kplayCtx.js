@@ -16,10 +16,28 @@ export const k = kaplay({
     },
 });
 
+// In the actual game we have hours and minutes adjacent to the player
+// But in real time we have minutes and seconds we can use
 export const time = {
     minutes: 0,
     seconds: 0,
     paused: false,
+    pause() {
+        this.paused = true;
+    },
+    unpause() {
+        this.paused = false;
+    },
+    addHours(hoursToAdd) {
+        this.minutes += hoursToAdd;
+    },
+    addMinutes(minutesToAdd) {
+        this.seconds += minutesToAdd;
+    },
+    reset() {
+        this.minutes = 0;
+        this.seconds = 0;
+    },
 };
 
 k.loadFont('pixelFont', './assets/fonts/PixelifySans-VariableFont_wght.ttf');

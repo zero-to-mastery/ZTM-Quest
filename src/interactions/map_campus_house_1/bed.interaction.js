@@ -4,17 +4,12 @@ import { updateEnergyState } from '../../utils/energyUpdate';
 
 export const bedInteractions = (player, k, map) => {
     player.onCollide('bed', async () => {
-        player.isInDialog = true;
-
         let wantSleep = await displayPermissionBox({
             k,
             player,
             text: [
                 'Are you feeling tired?, Would you like to take a nap? (Time advances 8 hours)',
             ],
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
 
         const dialogue = [];
@@ -33,14 +28,10 @@ export const bedInteractions = (player, k, map) => {
             }
         }
 
-        player.isInDialog = true;
         displayDialogue({
             k,
             player,
             text: [dialogue.join(' ')],
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
     });
 };

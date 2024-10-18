@@ -15,14 +15,10 @@ export const getDummyText = () => {
 
 export const interactionWithMainboxMainArea = (player, k, map) => {
     player.onCollide('mailbox_mainArea', () => {
-        player.isInDialog = true;
         displayDialogue({
             k,
             player,
             text: getDummyText(),
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
     });
 };

@@ -23,15 +23,11 @@ export const interactionWithComputer = (player, k, map) => {
     const [computer] = map.query({ include: 'computer' });
 
     player.onCollide('computer', () => {
-        player.isInDialog = true;
         computer.play('on');
         displayDialogue({
             k,
             player,
             text: careerPathDialogue,
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
     });
 

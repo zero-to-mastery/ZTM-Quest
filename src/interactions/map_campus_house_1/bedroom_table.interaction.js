@@ -5,16 +5,12 @@ import { getRandomQuestion } from '../../utils/randomJSQuestion';
 
 export const bedroomTableInteractions = async (player, k, map) => {
     player.onCollide('bedroom_table', async () => {
-        player.isInDialog = true;
         time.paused = true;
 
         let quizDecision = await displayPermissionBox({
             k,
             player,
             text: ['Do you want to play a quick quiz about JavaScript?'],
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
 
         if (quizDecision) {
@@ -51,7 +47,6 @@ export const bedroomTableInteractions = async (player, k, map) => {
                     player,
                     text: feedbackText,
                     onDisplayEnd: () => {
-                        player.isInDialog = false;
                         time.paused = false;
                     },
                 });
@@ -62,7 +57,6 @@ export const bedroomTableInteractions = async (player, k, map) => {
                 player,
                 text: ['No problem! Feel free to explore the room.'],
                 onDisplayEnd: () => {
-                    player.isInDialog = false;
                     time.paused = false;
                 },
             });

@@ -11,15 +11,11 @@ const dialogue = [
 
 export const skeletonInteractions = (player, k, map) => {
     interactionHandler(player, 'skeleton', k, () => {
-        player.isInDialogue = true;
         displayDialogue({
             k,
             player,
             characterName: 'Skeleton',
             text: dialogue,
-            onDisplayEnd: () => {
-                player.isInDialogue = false;
-            },
         });
     });
 };

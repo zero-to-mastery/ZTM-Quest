@@ -8,15 +8,11 @@ const dialogue = [
 
 export const bobRossInteraction = (player, k, map) => {
     interactionHandler(player, 'bobross', k, async () => {
-        player.isInDialogue = true;
         await displayDialogue({
             k,
             player,
             characterName: 'Your inner thoughts',
             text: dialogue,
-            onDisplayEnd: () => {
-                player.isInDialogue = false;
-            },
         });
     });
 };

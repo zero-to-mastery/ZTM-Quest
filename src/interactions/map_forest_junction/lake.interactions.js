@@ -3,7 +3,6 @@ import { interactionHandler } from '../handler.interactions';
 
 export const interactionWithLake = (player, k, map) => {
     interactionHandler(player, 'lake', k, async () => {
-        player.isInDialog = true;
         const animation = player.curAnim();
         const flipX = player.flipX;
         player.triggerFishingAnimations(k, player, animation, flipX);
@@ -14,15 +13,10 @@ export const interactionWithLake = (player, k, map) => {
                 'You start fishing...',
                 'Would you like to catch some fish?',
             ],
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
 
         if (wantsToPlay) {
             initGame(k);
-        } else {
-            player.isInDialog = false;
         }
     });
 };
