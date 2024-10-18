@@ -257,6 +257,7 @@ function startFlappyBirdGame(k) {
                 gameExitSceneName: 'arcade',
                 score,
             });
+            score = 0;
         }
     });
 }
