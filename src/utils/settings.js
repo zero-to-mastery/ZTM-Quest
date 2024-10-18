@@ -1,5 +1,6 @@
 import { k } from '../kplayCtx';
 import { getGameState, clearSavedGame } from './gameState';
+import { updateCoinsUI } from './coinsUpdate';
 
 // Mobile menu related
 
@@ -47,6 +48,7 @@ const clickNewGameNo = () => {
 
 const clickNewGameYes = () => {
     clearSavedGame();
+    updateCoinsUI();
     clickNewGameNo();
     k.go('start');
 };

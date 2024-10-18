@@ -16,6 +16,7 @@ const initialState = () => ({
 let currentState = undefined;
 
 export const clearSavedGame = () => {
+    currentState = undefined;
     localStorage.removeItem(LOCAL_STORAGE_GAME_STATE_KEY);
 };
 
