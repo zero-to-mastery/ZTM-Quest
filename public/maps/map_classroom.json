@@ -1,12 +1,4 @@
 { "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"public\/maps\/map_classroom.json"
-        }
-    },
  "height":20,
  "infinite":false,
  "layers":[
@@ -565,15 +557,15 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"..\/..\/..\/Tiled\/forest_tiles.tsx"
+         "source":"..\/..\/..\/..\/..\/Tiled\/forest_tiles.tsx"
         }, 
         {
          "firstgid":257,
-         "source":"..\/..\/..\/Tiled\/tilesets\/city_tiles.tsx"
+         "source":"..\/..\/..\/..\/..\/Tiled\/tilesets\/city_tiles.tsx"
         }, 
         {
          "firstgid":743,
-         "source":"..\/..\/..\/Tiled\/tilesets\/bobross.tsx"
+         "source":"..\/..\/..\/..\/..\/Tiled\/tilesets\/bobross.tsx"
         }],
  "tilewidth":16,
  "type":"map",

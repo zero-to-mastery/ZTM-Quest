@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"map_city.json"
+        }
+    },
  "height":40,
  "infinite":false,
  "layers":[
@@ -1973,6 +1981,18 @@
                  "width":0,
                  "x":425.636363636364,
                  "y":409.272727272727
+                }, 
+                {
+                 "height":0,
+                 "id":473,
+                 "name":"spawn_classroom",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":167.549668874172,
+                 "y":99.3377483443709
                 }],
          "opacity":1,
          "properties":[
@@ -1982,7 +2002,7 @@
                  "value":false
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -3045,7 +3065,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -3793,6 +3813,17 @@
                  "width":12.5,
                  "x":560.142004034259,
                  "y":384
+                }, 
+                {
+                 "height":16,
+                 "id":471,
+                 "name":"enter_map_classroom",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":160,
+                 "y":66
                 }],
          "opacity":1,
          "properties":[
@@ -3812,7 +3843,7 @@
          "y":0
         }],
  "nextlayerid":49,
- "nextobjectid":471,
+ "nextobjectid":474,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
