@@ -12,6 +12,8 @@ import { forest } from './scenes/forest';
 import { forestJunction } from './scenes/forest_junction';
 import { campusHouse1 } from './scenes/campus_house_1';
 import { bootstrap } from './scenes/bootstrap';
+import { bootstrap as miniGameBootstrap } from './scenes/fishing_minigame/scene/bootstrap';
+import { fishing } from './scenes/fishing_minigame/scene/fishing';
 import { gameStartScreen } from './scenes/gameMachine/startSceen';
 import { loseScreen } from './scenes/gameMachine/lose';
 
@@ -25,6 +27,7 @@ k.scene('forest_junction', (enter_tag) =>
 k.scene('campus_house_1', (enter_tag) =>
     bootstrap(campusHouse1, { enter_tag })
 );
+k.scene('fishing', (enter_tag) => miniGameBootstrap(fishing, { enter_tag }));
 
 // Game Machine Scenes
 k.scene('startScreen', gameStartScreen);

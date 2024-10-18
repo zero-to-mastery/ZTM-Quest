@@ -106,7 +106,6 @@ function startChromeDinoGame(k) {
                 activeTrees: [],
             }
         ) => {
-            console.log(data);
             let score = data.score;
             //gravity for dino
             k.setGravity(GRAVITY);

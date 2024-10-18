@@ -107,3 +107,17 @@ const toggleDebugMode = () => {
 
 const debugButton = document.getElementById('debug-button');
 debugButton.addEventListener('click', toggleDebugMode);
+
+// Audio related
+const toggleAudio = () => {
+    if (k.audioCtx.state.includes('running')) {
+        k.audioCtx.suspend();
+        audioButton.innerHTML = 'No Audio';
+    } else {
+        k.audioCtx.resume();
+        audioButton.innerHTML = 'Audio';
+    }
+};
+
+const audioButton = document.getElementById('audio-button');
+audioButton.addEventListener('click', toggleAudio);

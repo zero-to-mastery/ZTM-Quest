@@ -2,6 +2,7 @@ import { k } from '../kplayCtx';
 import { initMap } from '../init/map.init';
 import gameObjects from '../gameObjects/map_arcade';
 import interactions from '../interactions/map_arcade';
+import sounds from '../sounds/map_arcade/';
 
 export async function arcade() {
     const objectConfig = {
@@ -21,5 +22,5 @@ export async function arcade() {
         k.vec2(29, 11)
     );
 
-    return [map, spawnpoint, gameObjects, interactions];
+    return [map, spawnpoint, gameObjects, interactions, sounds];
 }

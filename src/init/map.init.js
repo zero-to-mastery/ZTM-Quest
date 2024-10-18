@@ -8,7 +8,8 @@ export const initMap = async (
     objectConfig,
     pathToMapPng,
     pathToMapJson,
-    shapeOffset = null
+    shapeOffset = null,
+    mapConfig = { additionalProperties: {} }
 ) => {
     k.loadSprite('map', pathToMapPng);
     k.setBackground(k.Color.fromHex('#311047'));
@@ -19,14 +20,22 @@ export const initMap = async (
 
     shapeOffset = shapeOffset || k.vec2(0, 0);
 
+    // Convert the map name from the file path
+    const mapFileName = pathToMapJson.split('/').pop(); // Extract 'map_start.json'
+    const mapName = mapFileName.replace('map_', '').replace('.json', ''); // Get 'start
+
     const map = k.make([
         k.sprite('map'),
-        k.pos(0),
+        k.pos(mapConfig.mapOffset ? mapConfig.mapOffset : 0),
         k.scale(scaleFactor),
         k.layer('map'),
         'main_map',
+        mapConfig.additionalProperties,
+        {
+            png: pathToMapPng,
+            name: mapName,
+        },
     ]);
-    map.png = pathToMapPng;
     k.onLoad(() => {
         if (!uiLoaded) {
             const app = document.getElementById('app');
@@ -124,10 +133,12 @@ export const initMap = async (
          */
         if (objectConfig.spawnpoints.includes(layer.name)) {
             for (const entity of layer.objects) {
-                spawnpointsCharacters[entity.name] = k.vec2(
-                    (map.pos.x + entity.x) * scaleFactor,
-                    (map.pos.y + entity.y) * scaleFactor
-                );
+                spawnpointsCharacters[entity.name] = mapConfig.characterOffset
+                    ? mapConfig.characterOffset(entity.x, entity.y)
+                    : k.vec2(
+                          (map.pos.x + entity.x) * scaleFactor,
+                          (map.pos.y + entity.y) * scaleFactor
+                      );
             }
         }
     }

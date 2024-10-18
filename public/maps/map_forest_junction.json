@@ -228,7 +228,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -352,6 +352,28 @@
                  "width":72,
                  "x":76,
                  "y":136
+                }, 
+                {
+                 "height":16,
+                 "id":151,
+                 "name":"lake",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":224,
+                 "x":0,
+                 "y":160
+                }, 
+                {
+                 "height":16,
+                 "id":152,
+                 "name":"lake",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":208,
+                 "x":272,
+                 "y":160
                 }],
          "opacity":1,
          "properties":[
@@ -361,7 +383,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -419,7 +441,7 @@
          "y":0
         }],
  "nextlayerid":14,
- "nextobjectid":151,
+ "nextobjectid":153,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
