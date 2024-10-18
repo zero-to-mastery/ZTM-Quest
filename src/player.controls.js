@@ -117,12 +117,12 @@ export const addPlayerControls = (player) => {
             camY = mapCenterY;
         }
 
-        return [camX, camY];
+        return k.vec2(camX, camY);
     }
 
     k.onUpdate(() => {
         const updPos = updatePos({ k, ...player.pos });
-        k.camPos(...updPos);
+        k.camPos(updPos);
         drawMinimap(k, player); // Update minimap
     });
 

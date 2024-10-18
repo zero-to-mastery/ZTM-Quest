@@ -1,4 +1,4 @@
-import { k } from './kplayCtx';
+import { k, time } from './kplayCtx';
 import { getGameState, setGameState } from './utils/gameState';
 import { updateEnergyUI } from './utils/energyUpdate';
 
@@ -32,7 +32,7 @@ k.scene('fishing', (enter_tag) => miniGameBootstrap(fishing, { enter_tag }));
 k.scene('startScreen', gameStartScreen);
 k.scene('lose', loseScreen);
 
-k.go('start');
+k.go('campus_house_1');
 
 // To test different maps instead of going through each and every scene to get to yours,
 // Import the scene, name the scene, and then name the spawn point as an additional tag
@@ -59,3 +59,26 @@ setInterval(() => {
         k.debug.log('I need some energy.');
     }
 }, 10000);
+
+const clock = document.getElementById('clock');
+
+setInterval(() => {
+    clock.innerHTML = getTime();
+
+    if (!time.paused) {
+        time.seconds += k.dt();
+        if (Math.ceil(time.seconds) % 60 === 0) {
+            time.seconds = 0;
+            time.minutes += 1;
+        }
+        if (time.minutes % 24 === 0) {
+            time.minutes = 0;
+        }
+    }
+}, 10);
+
+function getTime() {
+    const minutes = Math.ceil(time.minutes);
+    const seconds = Math.ceil(time.seconds);
+    return `${minutes < 10 ? `0${minutes}` : `${minutes % 24}`}:${seconds < 10 ? `0${seconds % 60}` : `${seconds % 60}`}`;
+}

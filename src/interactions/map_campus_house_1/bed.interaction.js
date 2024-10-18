@@ -1,3 +1,4 @@
+import { time } from '../../kplayCtx';
 import { displayDialogue, displayPermissionBox } from '../../utils';
 import { updateEnergyState } from '../../utils/energyUpdate';
 
@@ -8,7 +9,9 @@ export const bedInteractions = (player, k, map) => {
         let wantSleep = await displayPermissionBox({
             k,
             player,
-            text: ['Are you feeling tired?, Would you like to take a nap?'],
+            text: [
+                'Are you feeling tired?, Would you like to take a nap? (Time advances 8 hours)',
+            ],
             onDisplayEnd: () => {
                 player.isInDialog = false;
             },
@@ -17,6 +20,7 @@ export const bedInteractions = (player, k, map) => {
         const dialogue = [];
 
         if (wantSleep) {
+            time.minutes += 8;
             dialogue.push('It was a good nap!');
             dialogue.push('You feel refreshed now.');
             updateEnergyState(player.state, 99);

@@ -1,3 +1,5 @@
+import { time } from './kplayCtx';
+
 const processDialogue = async ({
     dialog,
     text,
@@ -39,6 +41,7 @@ export async function displayDialogue({
     text,
     onDisplayEnd = () => {},
 }) {
+    time.paused = true;
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
     const closeBtn = document.getElementById('dialog-close-btn');
@@ -77,6 +80,7 @@ export async function displayDialogue({
 
     function onCloseBtnClick() {
         onDisplayEnd();
+        time.paused = false;
         abort.abort();
         dialogUI.style.display = 'none';
         dialog.innerHTML = '';
@@ -91,7 +95,9 @@ export async function displayDialogue({
         if (key.code === 'Enter') {
             document.activeElement.click();
         }
-        if (key.code === 'Escape') closeBtn.click();
+        if (key.code === 'Escape') {
+            closeBtn.click();
+        }
     });
     k.triggerEvent('dialog-displayed', { player, characterName, text });
 }
@@ -102,6 +108,7 @@ export async function displayPermissionBox({
     text,
     onDisplayEnd = () => {},
 }) {
+    time.paused = true;
     const dialogUI = document.getElementById('textbox-container');
     const dialog = document.getElementById('dialog');
     const closeBtn = document.getElementById('dialog-close-btn');
@@ -123,6 +130,7 @@ export async function displayPermissionBox({
     return new Promise((resolve) => {
         function onCloseBtnClick() {
             onDisplayEnd();
+            time.paused = false;
             abort.abort();
             dialogUI.style.display = 'none';
             dialog.innerHTML = '';

@@ -16,6 +16,12 @@ export const k = kaplay({
     },
 });
 
+export const time = {
+    minutes: 0,
+    seconds: 0,
+    paused: false,
+};
+
 k.loadFont('pixelFont', './assets/fonts/PixelifySans-VariableFont_wght.ttf');
 k.onCustomEvent = (eventName, cb) => {
     k.canvas.addEventListener(eventName, cb.bind(k));
