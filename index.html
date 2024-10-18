@@ -129,6 +129,35 @@
                     <button id="audio-button" class="setting-btn">Audio</button>
                 </div>
                 <div></div>
+                <button id="close-btn">X</button>
+                <button id="new-game-button" class="setting-btn">
+                    <img
+                        src="/assets/sprites/newgame.png"
+                        alt="New Game"
+                        id="new-game-img"
+                    />
+                </button>
+                <button id="stats-button" class="setting-btn">
+                    <img
+                        src="/assets/sprites/stats.png"
+                        alt="stats"
+                        id="new-game-img"
+                    />
+                </button>
+                <button id="debug-button" class="setting-btn">
+                    <img
+                        src="/assets/sprites/debug.png"
+                        alt="debg"
+                        id="new-game-img"
+                    />
+                </button>
+                <button id="audio-button" class="setting-btn">
+                    <img
+                        id="audio-icon"
+                        src="/assets/sprites/mute.png"
+                        alt="Mute"
+                    />
+                </button>
             </div>
             <div id="footer" class="bottom">
                 <div class="footer-head-info">
@@ -189,6 +218,7 @@
                     </div>
                 </div>
             </div>
+            <canvas id="game"></canvas>
         </div>
         <script type="module" src="src/main.js"></script>
         <script type="module" src="src/utils/settings.js"></script>
