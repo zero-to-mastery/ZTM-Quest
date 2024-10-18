@@ -53,9 +53,7 @@ setInterval(() => {
     }
 }, 10000);
 
-*/ 
-
-
+*/
 
 // Inventory Setup
 export const inventoryDiv = document.createElement('div');
@@ -166,7 +164,7 @@ const inventory = {};
 
 // Function to update the inventory display
 export function updateInventoryDisplay(itemName, iconUrl) {
-    const itemsGrid = document.querySelector("#items-grid");
+    const itemsGrid = document.querySelector('#items-grid');
 
     if (inventory[itemName]) {
         inventory[itemName].count += 1;
@@ -207,7 +205,7 @@ export function removeItemFromInventory(itemName) {
         inventory[itemName].count -= 1;
         const itemSlot = document.querySelector(`#slot-${itemName}`);
         const countSpan = itemSlot.querySelector('.item-count');
-        
+
         if (inventory[itemName].count === 0) {
             delete inventory[itemName];
             itemSlot.remove();
