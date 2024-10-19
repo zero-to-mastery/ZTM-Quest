@@ -1,4 +1,4 @@
-import { k } from './kplayCtx';
+import { k, time } from './kplayCtx';
 import { getGameState, setGameState } from './utils/gameState';
 import { updateEnergyUI } from './utils/energyUpdate';
 import { start } from './scenes/start';
@@ -15,6 +15,7 @@ import { bootstrap as miniGameBootstrap } from './scenes/fishing_minigame/scene/
 import { fishing } from './scenes/fishing_minigame/scene/fishing';
 import { gameStartScreen } from './scenes/gameMachine/startSceen';
 import { loseScreen } from './scenes/gameMachine/lose';
+import { classroom } from './scenes/classroom';
 
 k.scene('start', (enter_tag) => bootstrap(start, { enter_tag }));
 k.scene('city', (enter_tag) => bootstrap(city, { enter_tag }));
@@ -26,6 +27,7 @@ k.scene('forest_junction', (enter_tag) =>
 k.scene('campus_house_1', (enter_tag) =>
     bootstrap(campusHouse1, { enter_tag })
 );
+k.scene('classroom', (enter_tag) => bootstrap(classroom, { enter_tag }));
 k.scene('fishing', (enter_tag) => miniGameBootstrap(fishing, { enter_tag }));
 
 // Game Machine Scenes
@@ -59,6 +61,28 @@ setInterval(() => {
         k.debug.log('I need some energy.');
     }
 }, 10000);
+
+const clock = document.getElementById('clock');
+
+setInterval(() => {
+    displayTime();
+    if (!time.paused) {
+        time.addMinutes(k.dt());
+        if (Math.ceil(time.seconds) % 60 === 0) {
+            time.seconds = 0;
+            time.addHours(1);
+        }
+        if (time.minutes % 24 === 0) {
+            time.minutes = 0;
+        }
+    }
+}, 10);
+
+function displayTime() {
+    const minutes = Math.ceil(time.minutes);
+    const seconds = Math.ceil(time.seconds);
+    clock.innerHTML = `${minutes < 10 ? `0${minutes}` : `${minutes % 24}`}:${seconds < 10 ? `0${seconds % 60}` : `${seconds % 60}`}`;
+}
 
 const creditsButton = document.getElementById('credits-button');
 

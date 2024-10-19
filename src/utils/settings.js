@@ -1,4 +1,4 @@
-import { k } from '../kplayCtx';
+import { k, time } from '../kplayCtx';
 import { clearSavedGame } from './gameState';
 
 // Mobile menu related
@@ -34,18 +34,22 @@ const hideAlertWindow = () => {
 
 // New game related
 const clickNewGame = () => {
+    time.pause();
     showAlertWindow();
     const newGameAlert = document.querySelector('.new-game-alert');
     newGameAlert.classList.add('display-block');
 };
 
 const clickNewGameNo = () => {
+    time.unpause();
     const newGameAlert = document.querySelector('.new-game-alert');
     newGameAlert.classList.remove('display-block');
     hideAlertWindow();
 };
 
 const clickNewGameYes = () => {
+    time.unpause();
+    time.reset();
     clearSavedGame();
     clickNewGameNo();
     k.go('start');
@@ -61,6 +65,7 @@ newGameYesButton.addEventListener('click', clickNewGameYes);
 // Stats related
 
 const showStats = () => {
+    time.pause();
     const player = k.get('player')[0];
     const coinsCollected = player.collectedCoins;
     const coinsSpent = 0;
@@ -86,6 +91,7 @@ const showStats = () => {
 };
 
 const hideStats = () => {
+    time.unpause();
     const statsAlert = document.querySelector('.stats-alert');
     statsAlert.classList.remove('display-block');
     hideAlertWindow();

@@ -7,15 +7,11 @@ const shrubDialogue = [
 
 export const interactionWithShrub = (player, k, map) => {
     interactionHandler(player, 'shrub', k, () => {
-        player.isInDialog = true;
         displayDialogue({
             k,
             player,
             characterName: 'shrub',
             text: shrubDialogue,
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
     });
 };

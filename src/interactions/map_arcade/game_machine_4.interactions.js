@@ -2,7 +2,6 @@ import { displayDialogue } from '../../utils';
 
 export const interactionWithGameMachine4 = (player, k, map) => {
     player.onCollide('game_machine_4', () => {
-        player.isInDialog = true;
         showCustomPrompt(
             'Think you can guide the bird through the pipes? Jump in and play Flappy Bird!',
             ['Yes', 'No'],
@@ -15,7 +14,6 @@ export const interactionWithGameMachine4 = (player, k, map) => {
                             'Launching Flappy Bird... Time to spread your wings! Good luck!',
                         ],
                         onDisplayEnd: () => {
-                            player.isInDialog = false;
                             startBirdGame(k);
                         },
                     });
@@ -24,9 +22,6 @@ export const interactionWithGameMachine4 = (player, k, map) => {
                         k,
                         player,
                         text: ['Maybe next time!'],
-                        onDisplayEnd: () => {
-                            player.isInDialog = false;
-                        },
                     });
                 }
             }

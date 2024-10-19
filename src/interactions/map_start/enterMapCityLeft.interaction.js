@@ -10,7 +10,6 @@ export const enterMapCityLeftInteraction = (player, k, map) => {
             k.go('city', 'spawn_office_left');
         } else {
             if (!player.state.hasTalkedToBruno) {
-                player.isInDialog = true;
                 displayDialogue({
                     k,
                     player,
@@ -18,15 +17,11 @@ export const enterMapCityLeftInteraction = (player, k, map) => {
                         'You should talk to Bruno first.',
                         'He is the guy with the beautiful suite to your left side.',
                     ],
-                    onDisplayEnd: () => {
-                        player.isInDialog = false;
-                    },
                 });
 
                 return;
             } else {
                 if (!player.state.wasInRestroom) {
-                    player.isInDialog = true;
                     displayDialogue({
                         k,
                         player,
@@ -35,22 +30,15 @@ export const enterMapCityLeftInteraction = (player, k, map) => {
                             'Remember what bruno said? It will be a long journey.',
                             "Don't forget to wash your hands.",
                         ],
-                        onDisplayEnd: () => {
-                            player.isInDialog = false;
-                        },
                     });
                     return;
                 }
 
                 if (!player.state.hasHandsWashed) {
-                    player.isInDialog = true;
                     displayDialogue({
                         k,
                         player,
                         text: ['You should wash your hands first.'],
-                        onDisplayEnd: () => {
-                            player.isInDialog = false;
-                        },
                     });
                 }
             }
