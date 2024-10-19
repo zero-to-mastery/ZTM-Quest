@@ -88,6 +88,9 @@ const creditsButton = document.getElementById('credits-button');
 
 if (creditsButton) {
     creditsButton.addEventListener('click', () => {
+        const rightPanel = document.getElementById('right-panel');
+        rightPanel.classList.toggle('show-settings');
+
         k.go('gameOver');
     });
 }

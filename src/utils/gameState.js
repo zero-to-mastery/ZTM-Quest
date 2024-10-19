@@ -23,10 +23,28 @@ export const clearSavedGame = () => {
     localStorage.removeItem(LOCAL_STORAGE_GAME_STATE_KEY);
 };
 
+const syncStateProps = (stateToCheck, defaultState) => {
+
+    for (const prop in defaultState) {
+        if (typeof stateToCheck[prop] === 'object') {
+            syncStateProps(stateToCheck[prop], defaultState[prop]);
+            continue;
+        }
+        if (!stateToCheck[prop]) {
+            stateToCheck[prop] = defaultState[prop];
+        }
+    }
+}
+
 export const loadSavedGameState = () => {
+    const defaultState = initialState();
     const stringifiedState =
         localStorage.getItem(LOCAL_STORAGE_GAME_STATE_KEY) || null;
-    const savedState = JSON.parse(stringifiedState) || initialState();
+    const savedState = JSON.parse(stringifiedState) || defaultState;
+
+    syncStateProps(savedState, defaultState);
+    currentState = savedState;
+
     return savedState;
 };
 
