@@ -1,5 +1,6 @@
 import { displayPermissionBox } from '../../utils';
 import { updateEnergyState } from '../../utils/energyUpdate';
+import { interactionHandler } from '../handler.interactions';
 
 export const stall1Interaction = (player, k) => {
     interactionHandler(player, 'stall_1', k, async () => {
