@@ -44,7 +44,7 @@ Thank you for playing!
     ]);
 
     // Add the credit text
-    const center = k.vec2(k.canvas.width / 2, k.canvas.height / 2);
+    // const center = k.vec2(k.canvas.width / 2, k.canvas.height / 2);
     const text = k.add([
         k.text(creditText, {
             size: 15 / camScale,
