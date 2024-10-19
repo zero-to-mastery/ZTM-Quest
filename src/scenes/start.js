@@ -4,6 +4,9 @@ import gameObjects from '../gameObjects/map_start';
 import interactions from '../interactions/map_start';
 import sounds from '../sounds/map_start';
 
+
+
+
 export async function start() {
     const objectConfig = {
         static: [
@@ -22,5 +25,14 @@ export async function start() {
         k.vec2(0, 11)
     );
 
+
+
+
+    k.onKeyPress('o', () => {
+        k.go('gameOver');
+    });
+
+
     return [map, spawnpoint, gameObjects, interactions, sounds];
 }
+

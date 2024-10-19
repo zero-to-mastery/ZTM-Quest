@@ -19,6 +19,10 @@ export async function city() {
         './exports/maps/map_city.png',
         './maps/map_city.json'
     );
+    k.onKeyPress('o', () => {
+        k.go('gameOver');
+    });
 
     return [map, spawnpoint, gameObjects, interactions, sounds];
 }
+
