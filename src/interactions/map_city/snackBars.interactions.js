@@ -1,5 +1,6 @@
 import { displayPermissionBox } from '../../utils';
 import { updateEnergyState } from '../../utils/energyUpdate';
+import { interactionHandler } from '../handler.interactions';
 
 export const snackBarGreenInteraction = (player, k) => {
     interactionHandler(player, 'snack_bar_green', k, async () => {
