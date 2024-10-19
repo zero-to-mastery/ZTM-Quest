@@ -1,4 +1,5 @@
 import { bruno } from './bruno.gameObject';
+import { cat } from './cat.gameObject';
 import { cake } from './cake.gameObject';
 import { npcsOnChairs } from './npcsOnChairs.gameObject';
 import { ztmTrailer } from './ztmTrailer.gameObject';
@@ -23,6 +24,7 @@ export const gameObjects = [
     misterFu,
     tvVideo,
     treasureChest,
+    cat,
 ];
 
 export default gameObjects;
