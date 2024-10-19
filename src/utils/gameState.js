@@ -24,7 +24,6 @@ export const clearSavedGame = () => {
 };
 
 const syncStateProps = (stateToCheck, defaultState) => {
-
     for (const prop in defaultState) {
         if (typeof stateToCheck[prop] === 'object') {
             syncStateProps(stateToCheck[prop], defaultState[prop]);
@@ -34,7 +33,7 @@ const syncStateProps = (stateToCheck, defaultState) => {
             stateToCheck[prop] = defaultState[prop];
         }
     }
-}
+};
 
 export const loadSavedGameState = () => {
     const defaultState = initialState();
