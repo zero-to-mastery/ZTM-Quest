@@ -26,9 +26,5 @@ export async function arcade() {
         k.go('gameOver');
     });
 
-
-
     return [map, spawnpoint, gameObjects, interactions, sounds];
-
 }
-

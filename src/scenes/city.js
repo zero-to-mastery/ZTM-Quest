@@ -25,4 +25,3 @@ export async function city() {
 
     return [map, spawnpoint, gameObjects, interactions, sounds];
 }
-

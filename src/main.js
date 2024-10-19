@@ -60,10 +60,10 @@ setInterval(() => {
     }
 }, 10000);
 
-const creditsButton = document.getElementById("credits-button")
+const creditsButton = document.getElementById('credits-button');
 
-if(creditsButton){
-    creditsButton.addEventListener("click",()=>{
-        k.go('gameOver')
-    })
+if (creditsButton) {
+    creditsButton.addEventListener('click', () => {
+        k.go('gameOver');
+    });
 }
