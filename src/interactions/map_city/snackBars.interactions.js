@@ -2,8 +2,7 @@ import { displayPermissionBox } from '../../utils';
 import { updateEnergyState } from '../../utils/energyUpdate';
 
 export const snackBarGreenInteraction = (player, k) => {
-    player.onCollide('snack_bar_green', async () => {
-        interactionHandler(player, '', k, async () => {
+        interactionHandler(player, 'snack_bar_green', k, async () => {
             let ztmSnackDecision = await displayPermissionBox({
                 k,
                 player,
@@ -38,12 +37,11 @@ export const snackBarGreenInteraction = (player, k) => {
                 }
             }
         });
-    });
 };
 
 export const snackBarRedInteraction = (player, k) => {
-    player.onCollide('snack_bar_red', async () => {
-        interactionHandler(player, '', k, async () => {
+    
+        interactionHandler(player, 'snack_bar_red', k, async () => {
             let snackOffer = await displayPermissionBox({
                 k,
                 player,
@@ -78,12 +76,11 @@ export const snackBarRedInteraction = (player, k) => {
                 }
             }
         });
-    });
+    
 };
 
 export const snackBarStreetInteraction = (player, k) => {
-    player.onCollide('snack_bar_street', async () => {
-        interactionHandler(player, '', k, async () => {
+        interactionHandler(player, 'snack_bar_street', k, async () => {
             let snackDecision = await displayPermissionBox({
                 k,
                 player,
@@ -118,5 +115,4 @@ export const snackBarStreetInteraction = (player, k) => {
                 }
             }
         });
-    });
 };
