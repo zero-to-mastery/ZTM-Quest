@@ -2,10 +2,9 @@ import { initMap } from '../init/map.init';
 import { k } from '../kplayCtx';
 import gameObjects from '../gameObjects/map_start';
 import interactions from '../interactions/map_start';
-<<<<<<< HEAD
 import sounds from '../sounds/map_start';
-=======
->>>>>>> e2f0b73 (removed the feature to hide and show instructions, also added a)
+
+
 
 
 export async function start() {
