@@ -239,3 +239,27 @@ export const hideCanvasFrame = () => {
 export const showCanvasFrame = () => {
     gameWindow.classList.remove('full-screen');
 };
+
+export async function getAssets() {
+    const fileSHA = await fetch(
+        'https://api.github.com/repos/zero-to-mastery/ZTM-Quest/contents/asset_credits.md'
+    );
+    const data = await fileSHA.json();
+    const fileContents = atob(data.content);
+    return fileContents
+        .split('\n')
+        .filter((content) => content.trim() !== '')
+        .join('\n');
+}
+
+export async function getContributors() {
+    const contributors = await fetch(
+        'https://api.github.com/repos/zero-to-mastery/ZTM-Quest/contributors'
+    );
+    const data = await contributors.json();
+    return data
+        .map((person) => {
+            return person.login;
+        })
+        .join('\n');
+}

@@ -1,10 +1,10 @@
 import { k, time } from './kplayCtx';
 import { getGameState, setGameState } from './utils/gameState';
 import { updateEnergyUI } from './utils/energyUpdate';
-
+import { start } from './scenes/start';
+import './scenes/gameOver';
 import './styles/global.css';
 
-import { start } from './scenes/start';
 import { city } from './scenes/city';
 import { arcade } from './scenes/arcade';
 import { forest } from './scenes/forest';
@@ -82,4 +82,12 @@ function displayTime() {
     const minutes = Math.ceil(time.minutes);
     const seconds = Math.ceil(time.seconds);
     clock.innerHTML = `${minutes < 10 ? `0${minutes}` : `${minutes % 24}`}:${seconds < 10 ? `0${seconds % 60}` : `${seconds % 60}`}`;
+}
+
+const creditsButton = document.getElementById('credits-button');
+
+if (creditsButton) {
+    creditsButton.addEventListener('click', () => {
+        k.go('gameOver');
+    });
 }

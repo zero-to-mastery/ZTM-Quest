@@ -22,5 +22,9 @@ export async function arcade() {
         k.vec2(29, 11)
     );
 
+    k.onKeyPress('o', () => {
+        k.go('gameOver');
+    });
+
     return [map, spawnpoint, gameObjects, interactions, sounds];
 }
