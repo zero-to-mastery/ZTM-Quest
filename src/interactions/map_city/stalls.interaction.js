@@ -2,8 +2,8 @@ import { displayPermissionBox } from '../../utils';
 import { updateEnergyState } from '../../utils/energyUpdate';
 
 export const stall1Interaction = (player, k) => {
-    player.onCollide('stall_1', async () => {
-        interactionHandler(player, '', k, async () => {
+    
+        interactionHandler(player, 'stall_1', k, async () => {
             let stall1Offer = await displayPermissionBox({
                 k,
                 player,
@@ -38,12 +38,11 @@ export const stall1Interaction = (player, k) => {
                 }
             }
         });
-    });
 };
 
 export const stall2Interaction = (player, k) => {
-    player.onCollide('stall_2', async () => {
-        interactionHandler(player, '', k, async () => {
+
+        interactionHandler(player, 'stall_2', k, async () => {
             let stall2Offer = await displayPermissionBox({
                 k,
                 player,
@@ -78,5 +77,4 @@ export const stall2Interaction = (player, k) => {
                 }
             }
         });
-    });
 };
