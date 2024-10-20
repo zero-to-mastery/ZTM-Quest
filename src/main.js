@@ -37,11 +37,11 @@ k.scene('startScreen', gameStartScreen);
 k.scene('lose', loseScreen);
 
 // Load saved game state from localStorage (if available)
-const savedGameData = JSON.parse(localStorage.getItem('gameData'));
+const gameState = getGameState();
 
 // Initialize the scenes with position if saved, else go to default position
-if (savedGameData) {
-    k.go(savedGameData.scene); // Transition to the saved scene
+if (gameState ) {
+    k.go(gameState.player.scene, "Player");
 } else {
     k.go('start'); // Go to the default starting scene
 }
