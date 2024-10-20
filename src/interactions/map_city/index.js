@@ -12,6 +12,7 @@ import {
 } from './snackBars.interactions';
 import { stall1Interaction, stall2Interaction } from './stalls.interaction';
 import { enterMapClassroomInteraction } from './enterMapClassroomInteraction.interactions';
+import { enterMapSeasideInteraction } from './enterMapSeasideInteraction.interactions';
 
 const interactions = [
     enterMapArcadeInteraction,
@@ -19,6 +20,7 @@ const interactions = [
     enterMapStartRightInteraction,
     enterMapForestJunctionInteraction,
     enterMapClassroomInteraction,
+    enterMapSeasideInteraction,
     boundaryBurgerBarInteraction,
     boundaryArcadeInteraction,
     snackBarRedInteraction,

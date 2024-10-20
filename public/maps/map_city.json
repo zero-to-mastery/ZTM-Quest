@@ -1,12 +1,4 @@
 { "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"map_city.json"
-        }
-    },
  "height":40,
  "infinite":false,
  "layers":[
@@ -3065,7 +3057,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -3423,7 +3415,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -3657,6 +3649,17 @@
                  "width":140.364,
                  "x":816.151333333333,
                  "y":624.242433333333
+                }, 
+                {
+                 "height":48,
+                 "id":474,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":0,
+                 "y":48
                 }],
          "opacity":1,
          "properties":[
@@ -3666,7 +3669,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -3843,7 +3846,7 @@
          "y":0
         }],
  "nextlayerid":49,
- "nextobjectid":474,
+ "nextobjectid":475,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",

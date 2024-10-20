@@ -1,12 +1,4 @@
 { "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"public\/maps\/map_seaside.json"
-        }
-    },
  "height":20,
  "infinite":false,
  "layers":[
@@ -661,23 +653,23 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"..\/..\/..\/Tiled\/forest_tiles.tsx"
+         "source":"..\/..\/..\/..\/..\/Tiled\/forest_tiles.tsx"
         }, 
         {
          "firstgid":257,
-         "source":"..\/..\/..\/Tiled\/tilesets\/city_tiles.tsx"
+         "source":"..\/..\/..\/..\/..\/Tiled\/tilesets\/city_tiles.tsx"
         }, 
         {
          "firstgid":743,
-         "source":"..\/..\/..\/Tiled\/tilesets\/bobross.tsx"
+         "source":"..\/..\/..\/..\/..\/Tiled\/tilesets\/bobross.tsx"
         }, 
         {
          "firstgid":744,
-         "source":"..\/..\/..\/Tiled\/tilesets\/map_city.tsx"
+         "source":"..\/..\/..\/..\/..\/Tiled\/tilesets\/map_city.tsx"
         }, 
         {
          "firstgid":1780,
-         "source":"..\/..\/..\/Tiled\/tilesets\/map_city_dungeon.tsx"
+         "source":"..\/..\/..\/..\/..\/Tiled\/tilesets\/map_city_dungeon.tsx"
         }],
  "tilewidth":16,
  "type":"map",
