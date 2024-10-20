@@ -16,6 +16,7 @@ import { fishing } from './scenes/fishing_minigame/scene/fishing';
 import { gameStartScreen } from './scenes/gameMachine/startSceen';
 import { loseScreen } from './scenes/gameMachine/lose';
 import { classroom } from './scenes/classroom';
+import { seaside } from './scenes/seaside';
 
 k.scene('start', (enter_tag) => bootstrap(start, { enter_tag }));
 k.scene('city', (enter_tag) => bootstrap(city, { enter_tag }));
@@ -28,6 +29,7 @@ k.scene('campus_house_1', (enter_tag) =>
     bootstrap(campusHouse1, { enter_tag })
 );
 k.scene('classroom', (enter_tag) => bootstrap(classroom, { enter_tag }));
+k.scene('seaside', (enter_tag) => bootstrap(seaside, { enter_tag }));
 k.scene('fishing', (enter_tag) => miniGameBootstrap(fishing, { enter_tag }));
 
 // Game Machine Scenes
