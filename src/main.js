@@ -41,9 +41,9 @@ const savedGameData = JSON.parse(localStorage.getItem('gameData'));
 
 // Initialize the scenes with position if saved, else go to default position
 if (savedGameData) {
-    k.go(savedGameData.scene); // Transition to city with saved position
+    k.go(savedGameData.scene); // Transition to the saved scene
 } else {
-    k.go('start');
+    k.go('start'); // Go to the default starting scene
 }
 
 // To test different maps instead of going through each and every scene to get to yours,
