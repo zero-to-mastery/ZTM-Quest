@@ -36,30 +36,15 @@ k.scene('fishing', (enter_tag) => miniGameBootstrap(fishing, { enter_tag }));
 k.scene('startScreen', gameStartScreen);
 k.scene('lose', loseScreen);
 
+// Load saved game state from localStorage (if available)
+const savedGameData = JSON.parse(localStorage.getItem('gameData'));
 
-// Save the original k.go function
-const originalGo = k.go;
-
-// Override k.go to save the scene name into localStorage
-k.go = (sceneName, ...args) => {
-    // Save the scene name to localStorage
-    localStorage.setItem('currentScene', sceneName);
-
-    // Call the original k.go function with the scene name and any additional arguments
-    originalGo(sceneName, ...args);
-};
-
-// Retrieve the saved scene from localStorage when the game starts
-const savedScene = localStorage.getItem('currentScene');
-if (savedScene) {
-    // Go to the saved scene when the game starts
-    k.go(savedScene);
+// Initialize the scenes with position if saved, else go to default position
+if (savedGameData) {
+    k.go(savedGameData.scene); // Transition to city with saved position
 } else {
-    // If no saved scene, start from the beginning
     k.go('start');
 }
-
-// k.go('start');
 
 // To test different maps instead of going through each and every scene to get to yours,
 // Import the scene, name the scene, and then name the spawn point as an additional tag
