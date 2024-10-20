@@ -158,6 +158,8 @@ export async function displayPermissionBox({
             closeBtn.removeEventListener('click', onCloseBtnClick);
             closeBtn.innerHTML = 'Close';
             nextBtn.innerHTML = 'Next';
+            player.state.isInDialog = false;
+
             k.canvas.focus();
             resolve(true); // Resolve with true when "Yes" is clicked
         }
