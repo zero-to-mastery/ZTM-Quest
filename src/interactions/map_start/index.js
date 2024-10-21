@@ -27,7 +27,7 @@ const interactions = [
     interactionWithTV,
     interactionWithCake,
     interactionWithLocker,
-    interactionWithCat
+    interactionWithCat,
 ];
 
 export default interactions;
