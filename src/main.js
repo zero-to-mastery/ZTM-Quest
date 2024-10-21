@@ -17,8 +17,6 @@ import { gameStartScreen } from './scenes/gameMachine/startSceen';
 import { loseScreen } from './scenes/gameMachine/lose';
 import { classroom } from './scenes/classroom';
 import { seaside } from './scenes/seaside';
-import { makePlayer } from './factories/player.factory';
-import { savePosition, saveScene } from './utils/saveCurrentScene';
 
 k.scene('start', (enter_tag) => bootstrap(start, { enter_tag }));
 k.scene('city', (enter_tag) => bootstrap(city, { enter_tag }));
