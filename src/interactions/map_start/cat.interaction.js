@@ -1,7 +1,7 @@
 import { displayDialogue } from '../../utils';
 import { updateEnergyState } from '../../utils/energyUpdate';
 
-// List of drinks and possible fun surprises
+
 
 export const interactionWithCat = (player, k, map) => {
     player.onCollide('cat', () => {
