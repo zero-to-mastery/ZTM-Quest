@@ -11,6 +11,7 @@ import { interactionWithMisterFu } from './misterFu.interaction';
 import { interactionWithTV } from './tv_main_room.interaction';
 import { interactionWithCake } from './cake.interaction';
 import { interactionWithLocker } from './locker.interaction';
+import { interactionWithCat } from './cat.interaction';
 
 const interactions = [
     restroomInteractions,
@@ -26,6 +27,7 @@ const interactions = [
     interactionWithTV,
     interactionWithCake,
     interactionWithLocker,
+    interactionWithCat
 ];
 
 export default interactions;
