@@ -56,7 +56,6 @@ export const saveGameState = (newState) => {
 };
 
 export const getGameState = () => {
-    console.log(currentState)
     if (currentState) {
         return currentState;
     } else {

@@ -11,4 +11,5 @@ export const attachInteractions = (interactions, gameObjTag) => {
     k.onSceneLeave((currentScene) => {
         saveScene(currentScene);
     });
+
 };

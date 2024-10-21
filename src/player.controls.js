@@ -3,7 +3,6 @@ import { animations, stopCharacterAnims } from './utils/animation';
 import { getCamScale } from './utils';
 import { k } from './kplayCtx';
 import { drawMinimap, toggleMinimap } from './utils/miniMap';
-import { savePosition} from './utils/saveCurrentScene';
 
 // Manage multiple pressed buttons
 const pressed = new Set();
@@ -70,8 +69,8 @@ export const addPlayerControls = (player) => {
                     ? player.state.speed * 1.25
                     : player.state.speed * 1.1
                 : player.state.energy >= 50
-                  ? player.state.speed * 0.707106781188095 * 1.25 // Dot product for diagonal movement 45%
-                  : player.state.speed * 0.707106781188095 * 1.1;
+                    ? player.state.speed * 0.707106781188095 * 1.25 // Dot product for diagonal movement 45%
+                    : player.state.speed * 0.707106781188095 * 1.1;
 
         player.move(moveDir.unit().scale(speed));
     });
@@ -125,7 +124,6 @@ export const addPlayerControls = (player) => {
         const updPos = updatePos({ k, ...player.pos });
         k.camPos(updPos);
         drawMinimap(k, player); // Update minimap
-        savePosition(player)
     });
 
     k.onMouseDown((mouseBtn) => {
