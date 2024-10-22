@@ -17,6 +17,7 @@ export const characters = [
     { name: 'jerry', frames: [160, 164, 162, 168, 161, 166] },
     { name: 'jordan', frames: [170, 174, 172, 178, 171, 176] },
     { name: 'jessie', frames: [180, 184, 182, 188, 181, 186] },
+    { name: 'yash', frames: [100, 100, 100, 100, 100, 100] },
 ];
 
 // ./assets/sprites/fish.png sprites
