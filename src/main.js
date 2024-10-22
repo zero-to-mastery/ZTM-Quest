@@ -36,7 +36,16 @@ k.scene('fishing', (enter_tag) => miniGameBootstrap(fishing, { enter_tag }));
 k.scene('startScreen', gameStartScreen);
 k.scene('lose', loseScreen);
 
-k.go('start');
+// Load saved game state from localStorage (if available)
+const gameState = getGameState();
+
+// Initialize the scenes with position if saved, else go to default position
+if (gameState) {
+    k.go(gameState.player.scene);
+} else {
+    k.go('start'); // Go to the default starting scene
+}
+
 
 // To test different maps instead of going through each and every scene to get to yours,
 // Import the scene, name the scene, and then name the spawn point as an additional tag

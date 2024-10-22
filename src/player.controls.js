@@ -69,8 +69,8 @@ export const addPlayerControls = (player) => {
                     ? player.state.speed * 1.25
                     : player.state.speed * 1.1
                 : player.state.energy >= 50
-                  ? player.state.speed * 0.707106781188095 * 1.25 // Dot product for diagonal movement 45%
-                  : player.state.speed * 0.707106781188095 * 1.1;
+                    ? player.state.speed * 0.707106781188095 * 1.25 // Dot product for diagonal movement 45%
+                    : player.state.speed * 0.707106781188095 * 1.1;
 
         player.move(moveDir.unit().scale(speed));
     });
