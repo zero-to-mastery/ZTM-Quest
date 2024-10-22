@@ -46,7 +46,6 @@ if (gameState) {
     k.go('start'); // Go to the default starting scene
 }
 
-
 // To test different maps instead of going through each and every scene to get to yours,
 // Import the scene, name the scene, and then name the spawn point as an additional tag
 // k.go('insert_scene_name_here', 'insert_spawn_point_here');

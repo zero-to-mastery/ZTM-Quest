@@ -13,8 +13,8 @@ const initialState = () => ({
         isInDialog: false,
         collectedCoins: 0,
         score: 0,
-        scene: "start",
-        position: { x: 32, y: 384 }
+        scene: 'start',
+        position: { x: 32, y: 384 },
     },
 });
 
@@ -23,7 +23,7 @@ let currentState = undefined;
 
 export const clearSavedGame = () => {
     localStorage.removeItem(LOCAL_STORAGE_GAME_STATE_KEY);
-    currentState = undefined
+    currentState = undefined;
 };
 
 const syncStateProps = (stateToCheck, defaultState) => {

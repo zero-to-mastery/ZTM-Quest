@@ -1,4 +1,4 @@
-import { getGameState, setGameState } from "./gameState";
+import { getGameState, setGameState } from './gameState';
 
 // Function to save current scene to local storage
 export const saveScene = (sceneName) => {
@@ -9,10 +9,9 @@ export const saveScene = (sceneName) => {
     // console.log(`Scene ${sceneName} saved to local storage.`);
 
     const gameState = getGameState();
-    gameState.player["scene"] = sceneName;
+    gameState.player['scene'] = sceneName;
     setGameState(gameState);
-
-}
+};
 
 // Function to save player's position to local storage
 export const savePosition = (player) => {
@@ -26,10 +25,9 @@ export const savePosition = (player) => {
     // console.log(`Position (${player.pos.x}, ${player.pos.y}) saved to local storage.`);
 
     const gameState = getGameState();
-    gameState.player["position"] = {
+    gameState.player['position'] = {
         x: player.pos.x,
-        y: player.pos.y
-    }
+        y: player.pos.y,
+    };
     setGameState(gameState);
-}
-
+};
