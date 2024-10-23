@@ -42,12 +42,11 @@ k.scene('lose', loseScreen);
 const gameState = getGameState();
 
 // Initialize the scenes with position if saved, else go to default position
-k.go('seaside', 'spawn_city');
-// if (gameState) {
-//     k.go(gameState.player.scene);
-// } else {
-//     k.go('start'); // Go to the default starting scene
-// }
+if (gameState) {
+    k.go(gameState.player.scene);
+} else {
+    k.go('start'); // Go to the default starting scene
+}
 
 // To test different maps instead of going through each and every scene to get to yours,
 // Import the scene, name the scene, and then name the spawn point as an additional tag
