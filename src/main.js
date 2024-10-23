@@ -17,6 +17,7 @@ import { gameStartScreen } from './scenes/gameMachine/startSceen';
 import { loseScreen } from './scenes/gameMachine/lose';
 import { classroom } from './scenes/classroom';
 import { seaside } from './scenes/seaside';
+import { downtown } from './scenes/downtown';
 
 k.scene('start', (enter_tag) => bootstrap(start, { enter_tag }));
 k.scene('city', (enter_tag) => bootstrap(city, { enter_tag }));
@@ -30,6 +31,7 @@ k.scene('campus_house_1', (enter_tag) =>
 );
 k.scene('classroom', (enter_tag) => bootstrap(classroom, { enter_tag }));
 k.scene('seaside', (enter_tag) => bootstrap(seaside, { enter_tag }));
+k.scene('downtown', (enter_tag) => bootstrap(downtown, { enter_tag }));
 k.scene('fishing', (enter_tag) => miniGameBootstrap(fishing, { enter_tag }));
 
 // Game Machine Scenes
@@ -40,11 +42,12 @@ k.scene('lose', loseScreen);
 const gameState = getGameState();
 
 // Initialize the scenes with position if saved, else go to default position
-if (gameState) {
-    k.go(gameState.player.scene);
-} else {
-    k.go('start'); // Go to the default starting scene
-}
+k.go('seaside', 'spawn_city');
+// if (gameState) {
+//     k.go(gameState.player.scene);
+// } else {
+//     k.go('start'); // Go to the default starting scene
+// }
 
 // To test different maps instead of going through each and every scene to get to yours,
 // Import the scene, name the scene, and then name the spawn point as an additional tag
