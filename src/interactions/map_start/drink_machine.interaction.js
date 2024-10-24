@@ -5,7 +5,6 @@ import { purchaseItem } from '../../utils/coinsUpdate';
 
 export const interactionWithDrinksMachine = (player, k, map) => {
     player.onCollide('drinks_machine', () => {
-        player.isInDialog = true;
         // Trigger the custom prompt when the player collides with the drinks machine
         showCustomPrompt(
             'What would you like to drink?', // Prompt message
@@ -32,7 +31,6 @@ export const interactionWithDrinksMachine = (player, k, map) => {
                     player,
                     text: texts[selectedOption],
                     onDisplayEnd: () => {
-                        player.isInDialog = false;
                         if (selectedOption == 'Water') {
                             purchaseItem(k, 5, 20);
                         } else {

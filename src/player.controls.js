@@ -10,11 +10,11 @@ const pressed = new Set();
 export const addPlayerControls = (player) => {
     k.onButtonPress(
         ['up', 'down', 'left', 'right'],
-        (dir) => player.isInDialog || pressed.add(dir)
+        (dir) => player.state.isInDialog || pressed.add(dir)
     );
     k.onButtonRelease(
         ['up', 'down', 'left', 'right'],
-        (dir) => player.isInDialog || pressed.delete(dir)
+        (dir) => player.state.isInDialog || pressed.delete(dir)
     );
     // Control what happens when a dialog starts
     k.onCustomEvent('dialog-displayed', () => {
@@ -24,13 +24,13 @@ export const addPlayerControls = (player) => {
     });
 
     k.onButtonPress(['up', 'down'], (dir) => {
-        if (player.isInDialog) return;
-        player.direction = dir;
+        if (player.state.isInDialog) return;
+        player.state.direction = dir;
         player.play(animations[dir]);
     });
     k.onButtonPress(['left', 'right'], (dir) => {
-        if (player.isInDialog) return;
-        player.direction = dir;
+        if (player.state.isInDialog) return;
+        player.state.direction = dir;
         player.play(animations[dir]);
         if (dir === 'left' && !player.flipX) player.flipX = true;
         if (dir === 'right' && player.flipX) player.flipX = false;
@@ -41,16 +41,16 @@ export const addPlayerControls = (player) => {
         stopCharacterAnims(player);
         pressed.delete(dir);
         if (!pressed.size) return;
-        if (player.isInDialog) return;
+        if (player.state.isInDialog) return;
 
         const nextDir = [...pressed].at(-1);
-        player.direction = nextDir;
+        player.state.direction = nextDir;
         const a = animations[nextDir];
         if (player.curAnim() !== a) player.play(a);
     });
 
     k.onButtonDown(['up', 'down', 'left', 'right'], (dir) => {
-        if (player.isInDialog) return;
+        if (player.state.isInDialog) return;
         // If three buttons are pressed, the player should not move
         if (pressed.size > 2) return;
         if (pressed.size === 0) return;
@@ -66,11 +66,11 @@ export const addPlayerControls = (player) => {
         const speed =
             pressed.size === 1
                 ? player.state.energy >= 50
-                    ? player.speed * 1.25
-                    : player.speed * 1.1
+                    ? player.state.speed * 1.25
+                    : player.state.speed * 1.1
                 : player.state.energy >= 50
-                  ? player.speed * 0.707106781188095 * 1.25 // Dot product for diagonal movement 45%
-                  : player.speed * 0.707106781188095 * 1.1;
+                  ? player.state.speed * 0.707106781188095 * 1.25 // Dot product for diagonal movement 45%
+                  : player.state.speed * 0.707106781188095 * 1.1;
 
         player.move(moveDir.unit().scale(speed));
     });
@@ -117,23 +117,25 @@ export const addPlayerControls = (player) => {
             camY = mapCenterY;
         }
 
-        return [camX, camY];
+        return k.vec2(camX, camY);
     }
 
     k.onUpdate(() => {
         const updPos = updatePos({ k, ...player.pos });
-        k.camPos(...updPos);
+        k.camPos(updPos);
         drawMinimap(k, player); // Update minimap
     });
 
     k.onMouseDown((mouseBtn) => {
-        if (mouseBtn !== 'left' || player.isInDialog || pressed.size) return;
+        if (mouseBtn !== 'left' || player.state.isInDialog || pressed.size)
+            return;
 
         const worldMousePos = k.toWorld(k.mousePos());
+
         if (player.state.energy >= 50) {
-            player.moveTo(worldMousePos, player.speed * 1.25);
+            player.moveTo(worldMousePos, player.state.speed * 1.25);
         } else {
-            player.moveTo(worldMousePos, player.speed);
+            player.moveTo(worldMousePos, player.state.speed);
         }
 
         const mouseAngle = player.pos.angle(worldMousePos);
@@ -147,7 +149,7 @@ export const addPlayerControls = (player) => {
             player.curAnim() !== animations.up
         ) {
             player.play(animations.up);
-            player.direction = 'up';
+            player.state.direction = 'up';
             return;
         }
 
@@ -157,7 +159,7 @@ export const addPlayerControls = (player) => {
             player.curAnim() !== animations.down
         ) {
             player.play(animations.down);
-            player.direction = 'down';
+            player.state.direction = 'down';
             return;
         }
 
@@ -165,7 +167,7 @@ export const addPlayerControls = (player) => {
             player.flipX = false;
             if (player.curAnim() !== animations.right)
                 player.play(animations.right);
-            player.direction = 'right';
+            player.state.direction = 'right';
             return;
         }
 
@@ -173,7 +175,7 @@ export const addPlayerControls = (player) => {
             player.flipX = true;
             if (player.curAnim() !== animations.left)
                 player.play(animations.left);
-            player.direction = 'left';
+            player.state.direction = 'left';
             return;
         }
     });

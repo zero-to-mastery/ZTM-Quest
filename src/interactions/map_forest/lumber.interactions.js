@@ -7,15 +7,11 @@ const lumberDialogue = [
 
 export const interactionWithLumber = (player, k, map) => {
     interactionHandler(player, 'lumber', k, () => {
-        player.isInDialog = true;
         displayDialogue({
             k,
             player,
             characterName: 'lumber',
             text: lumberDialogue,
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
     });
 };

@@ -7,15 +7,11 @@ const holeDialogue = [
 
 export const interactionWithHole = (player, k, map) => {
     interactionHandler(player, 'hole', k, () => {
-        player.isInDialog = true;
         displayDialogue({
             k,
             player,
             characterName: 'hole',
             text: holeDialogue,
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
     });
 };

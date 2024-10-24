@@ -13,9 +13,14 @@ export async function bootstrap(bootMapCb, mapArgs) {
     const [map, spawnpoint, gameObjects, interactions, sounds] =
         await bootMapCb();
 
-    player.pos =
-        (mapArgs?.enter_tag && spawnpoint[mapArgs?.enter_tag]) ||
-        spawnpoint.player;
+    if (mapArgs?.enter_tag === 'Player') {
+        player.pos.x = gameState.player.position.x;
+        player.pos.y = gameState.player.position.y;
+    } else {
+        player.pos =
+            (mapArgs?.enter_tag && spawnpoint[mapArgs?.enter_tag]) ||
+            spawnpoint.player;
+    }
 
     k.add(map);
     k.add(player);

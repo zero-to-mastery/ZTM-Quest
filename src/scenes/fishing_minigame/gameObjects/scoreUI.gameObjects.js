@@ -7,7 +7,7 @@ export const scoreUI = (k, map) => {
             'score',
         ]);
     }
-    console.log(map.screenPos());
+
     return k.make([
         k.text(`Score: ${map.score}`, {
             size: 10,

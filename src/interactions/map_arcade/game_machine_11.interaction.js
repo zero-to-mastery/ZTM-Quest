@@ -2,8 +2,6 @@ import { displayDialogue, hideCanvasFrame, showCanvasFrame } from '../../utils';
 
 export const interactionWithGameMachine11 = (player, k, map) => {
     player.onCollide('game_machine_11', () => {
-        player.isInDialog = true;
-
         showCustomPrompt(
             'Do you want to play the Sinusoid Formula Game? Collect trophies and overtake formulas!',
             ['Yes', 'No'],
@@ -16,7 +14,6 @@ export const interactionWithGameMachine11 = (player, k, map) => {
                             'Starting the Sinusoid Formula Game... Fasten your belts!',
                         ],
                         onDisplayEnd: () => {
-                            player.isInDialog = false;
                             startChromeFormulaGame(k);
                         },
                     });
@@ -25,9 +22,6 @@ export const interactionWithGameMachine11 = (player, k, map) => {
                         k,
                         player,
                         text: ['Maybe next time!'],
-                        onDisplayEnd: () => {
-                            player.isInDialog = false;
-                        },
                     });
                 }
             }

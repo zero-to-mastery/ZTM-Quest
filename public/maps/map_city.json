@@ -1,12 +1,4 @@
 { "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"map_city.json"
-        }
-    },
  "height":40,
  "infinite":false,
  "layers":[
@@ -192,7 +184,7 @@
          "name":"street_global",
          "opacity":1,
          "type":"group",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -516,7 +508,7 @@
          "name":"parking_lots",
          "opacity":1,
          "type":"group",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -1241,7 +1233,7 @@
          "name":"buildings",
          "opacity":1,
          "type":"group",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -1877,7 +1869,7 @@
          "name":"ztm_building",
          "opacity":1,
          "type":"group",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -1981,6 +1973,18 @@
                  "width":0,
                  "x":425.636363636364,
                  "y":409.272727272727
+                }, 
+                {
+                 "height":0,
+                 "id":473,
+                 "name":"spawn_classroom",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":167.549668874172,
+                 "y":99.3377483443709
                 }],
          "opacity":1,
          "properties":[
@@ -3053,7 +3057,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -3411,7 +3415,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -3560,7 +3564,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -3645,6 +3649,17 @@
                  "width":140.364,
                  "x":816.151333333333,
                  "y":624.242433333333
+                }, 
+                {
+                 "height":48,
+                 "id":474,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":0,
+                 "y":48
                 }],
          "opacity":1,
          "properties":[
@@ -3778,7 +3793,7 @@
                  "visible":true,
                  "width":12.5,
                  "x":403.749885677547,
-                 "y":375.638261404554
+                 "y":384
                 }, 
                 {
                  "height":15.6590909090909,
@@ -3800,7 +3815,18 @@
                  "visible":true,
                  "width":12.5,
                  "x":560.142004034259,
-                 "y":372.317119368606
+                 "y":384
+                }, 
+                {
+                 "height":16,
+                 "id":471,
+                 "name":"enter_map_classroom",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":160,
+                 "y":66
                 }],
          "opacity":1,
          "properties":[
@@ -3820,7 +3846,7 @@
          "y":0
         }],
  "nextlayerid":49,
- "nextobjectid":471,
+ "nextobjectid":475,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",

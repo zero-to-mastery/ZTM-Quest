@@ -1,4 +1,4 @@
-import { k } from '../kplayCtx';
+import { k, time } from '../kplayCtx';
 import { getGameState, clearSavedGame } from './gameState';
 import { updateCoinsUI } from './coinsUpdate';
 
@@ -35,18 +35,22 @@ const hideAlertWindow = () => {
 
 // New game related
 const clickNewGame = () => {
+    time.pause();
     showAlertWindow();
     const newGameAlert = document.querySelector('.new-game-alert');
     newGameAlert.classList.add('display-block');
 };
 
 const clickNewGameNo = () => {
+    time.unpause();
     const newGameAlert = document.querySelector('.new-game-alert');
     newGameAlert.classList.remove('display-block');
     hideAlertWindow();
 };
 
 const clickNewGameYes = () => {
+    time.unpause();
+    time.reset();
     clearSavedGame();
     updateCoinsUI();
     clickNewGameNo();
@@ -63,6 +67,7 @@ newGameYesButton.addEventListener('click', clickNewGameYes);
 // Stats related
 
 const showStats = () => {
+    time.pause();
     const player = getGameState().player;
     const coinsCollected = player.coinsCollected;
     const coinsSpent = player.coinsSpent;
@@ -88,6 +93,7 @@ const showStats = () => {
 };
 
 const hideStats = () => {
+    time.unpause();
     const statsAlert = document.querySelector('.stats-alert');
     statsAlert.classList.remove('display-block');
     hideAlertWindow();
@@ -112,12 +118,13 @@ debugButton.addEventListener('click', toggleDebugMode);
 const toggleAudio = () => {
     if (k.audioCtx.state.includes('running')) {
         k.audioCtx.suspend();
-        audioButton.innerHTML = 'No Audio';
+        audioIcon.src = 'assets/sprites/mute.png';
     } else {
         k.audioCtx.resume();
-        audioButton.innerHTML = 'Audio';
+        audioIcon.src = 'assets/sprites/audio-on.png';
     }
 };
+const audioIcon = document.getElementById('audio-icon');
 
 const audioButton = document.getElementById('audio-button');
 audioButton.addEventListener('click', toggleAudio);

@@ -1,4 +1,4 @@
-export const triggerFishingAnimations = (
+export const triggerPlayerFishingAnimations = (
     k,
     player,
     startAnimation = 'idle-down',

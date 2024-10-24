@@ -7,15 +7,11 @@ const houseDialogue = [
 
 export const interactionWithHouse = (player, k, map) => {
     interactionHandler(player, 'house', k, () => {
-        player.isInDialog = true;
         displayDialogue({
             k,
             player,
             characterName: 'house',
             text: houseDialogue,
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
     });
 };

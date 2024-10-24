@@ -7,15 +7,11 @@ const treeDialogue = [
 
 export const interactionWithTree = (player, k, map) => {
     interactionHandler(player, 'tree', k, () => {
-        player.isInDialog = true;
         displayDialogue({
             k,
             player,
             characterName: 'tree',
             text: treeDialogue,
-            onDisplayEnd: () => {
-                player.isInDialog = false;
-            },
         });
     });
 };

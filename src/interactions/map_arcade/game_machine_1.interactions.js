@@ -3,7 +3,6 @@ import { addCoins } from '../../utils/coinsUpdate';
 
 export const interactionWithGameMachine1 = (player, k, map) => {
     player.onCollide('game_machine_1', () => {
-        player.isInDialog = true;
         showCustomPrompt(
             'Do you want to play the Number Guessing Game?',
             ['Yes', 'No'],
@@ -16,7 +15,6 @@ export const interactionWithGameMachine1 = (player, k, map) => {
                             'Starting the Number Guessing Game... Get ready!',
                         ],
                         onDisplayEnd: () => {
-                            player.isInDialog = false;
                             startNumberGuessingGame(k);
                         },
                     });
@@ -25,9 +23,7 @@ export const interactionWithGameMachine1 = (player, k, map) => {
                         k,
                         player,
                         text: ['Maybe next time!'],
-                        onDisplayEnd: () => {
-                            player.isInDialog = false;
-                        },
+                        onDisplayEnd: () => {},
                     });
                 }
             }
