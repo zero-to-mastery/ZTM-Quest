@@ -131,7 +131,12 @@ export const addPlayerControls = (player) => {
             return;
 
         const worldMousePos = k.toWorld(k.mousePos());
-        player.moveTo(worldMousePos, player.state.speed);
+
+        if (player.state.energy >= 50) {
+            player.moveTo(worldMousePos, player.state.speed * 1.25);
+        } else {
+            player.moveTo(worldMousePos, player.state.speed);
+        }
 
         const mouseAngle = player.pos.angle(worldMousePos);
 

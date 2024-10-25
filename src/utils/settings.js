@@ -1,5 +1,6 @@
 import { k, time } from '../kplayCtx';
-import { clearSavedGame } from './gameState';
+import { getGameState, clearSavedGame } from './gameState';
+import { updateCoinsUI } from './coinsUpdate';
 
 // Mobile menu related
 
@@ -51,6 +52,7 @@ const clickNewGameYes = () => {
     time.unpause();
     time.reset();
     clearSavedGame();
+    updateCoinsUI();
     clickNewGameNo();
     k.go('start');
 };
@@ -66,9 +68,9 @@ newGameYesButton.addEventListener('click', clickNewGameYes);
 
 const showStats = () => {
     time.pause();
-    const player = k.get('player')[0];
-    const coinsCollected = player.collectedCoins;
-    const coinsSpent = 0;
+    const player = getGameState().player;
+    const coinsCollected = player.coinsCollected;
+    const coinsSpent = player.coinsSpent;
 
     // Calculation for time spent in game
     const timeSpent = k.time();
