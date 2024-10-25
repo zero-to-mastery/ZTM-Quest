@@ -78,12 +78,6 @@
             #credits-button:hover {
                 background-color: #45a049;
             }
-            #custom {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-            }
         </style>
     </head>
 
@@ -218,16 +212,21 @@
                             </div>
                         </div>
                     </div>
-                    <div id="custom">
-                        <div id="energy-container">
-                            <p id="energy-title">Energy:</p>
+
+                    <div id="stats-container">
+                        <div class="stat-wrapper">
+                            <p class="stat-title">Energy:</p>
                             <div id="energy-bar-total">
                                 <div id="energy-bar-remain"></div>
                             </div>
+                            <div id="minimap-button-container">
+                                <span>"M"</span>
+                                <button id="minimap-button">Map</button>
+                            </div>
                         </div>
-                        <div id="minimap-button-container">
-                            <span>"M"</span>
-                            <button id="minimap-button">Map</button>
+                        <div class="stat-wrapper">
+                            <p class="stat-title">Coins:</p>
+                            <p id="coins-remain">0</p>
                         </div>
                     </div>
                     <div id="minimap-container">

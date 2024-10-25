@@ -7,7 +7,10 @@ const initialState = () => ({
         hasTalkedToBruno: false,
         wasInRestroom: false,
         hasHandsWashed: false,
+        hasOpenedChest: false,
         energy: 100,
+        coinsCollected: 0,
+        coinsSpent: 0,
         speed: speedByScaleFactor,
         direction: 'down',
         isInDialog: false,
@@ -22,8 +25,8 @@ const initialState = () => ({
 let currentState = undefined;
 
 export const clearSavedGame = () => {
-    localStorage.removeItem(LOCAL_STORAGE_GAME_STATE_KEY);
     currentState = undefined;
+    localStorage.removeItem(LOCAL_STORAGE_GAME_STATE_KEY);
 };
 
 const syncStateProps = (stateToCheck, defaultState) => {
