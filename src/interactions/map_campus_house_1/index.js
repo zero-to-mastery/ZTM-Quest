@@ -6,7 +6,7 @@ import { bedroomVanityInteractions } from './bedroomVanity.interaction';
 import { kitchenFridgeInteractions } from './kitchenFridge.interaction';
 import { bedroomShelfInteractions } from './bedroomShelf.interaction';
 import { livingRoomCouchInteractions } from './livingRoomCouch.interaction';
-// import { bedroomTableInteractions } from './bedroom_table.interaction';
+import { bedroomTableInteractions } from './bedroom_table.interaction';
 import { diningRoomTableInteractions } from './dining_room_table.interaction';
 
 const interactions = [
@@ -19,7 +19,7 @@ const interactions = [
     kitchenFridgeInteractions,
     bedroomShelfInteractions,
     livingRoomCouchInteractions,
-    // bedroomTableInteractions,
+    bedroomTableInteractions,
     diningRoomTableInteractions,
 ];
 
