@@ -12,6 +12,7 @@ const initialState = () => ({
         direction: 'down',
         isInDialog: false,
         collectedCoins: 0,
+        quests: {},
         score: 0,
         scene: 'start',
         position: { x: 32, y: 384 },
@@ -56,6 +57,7 @@ export const saveGameState = (newState) => {
 };
 
 export const getGameState = () => {
+    console.log(currentState);
     if (currentState) {
         return currentState;
     } else {

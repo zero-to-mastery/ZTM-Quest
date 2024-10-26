@@ -2,7 +2,7 @@ import { k } from '../kplayCtx';
 import { scaleFactor } from '../constants';
 import { getGameState, setGameState } from '../utils/gameState';
 
-export function makePlayer(playerProps = {}, customScale = scaleFactor) {
+export function makePlayer(playerState = {}, customScale = scaleFactor) {
     if (!k.getSprite('player')) {
         k.loadSprite('player', './assets/sprites/characters.png', {
             sliceX: 10,
@@ -35,8 +35,9 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
         );
     }
 
-    const playerState = {
+    const playerStateHandler = {
         set: function (target, key, value) {
+            console.log('hit');
             const gameState = getGameState();
             gameState.player[key] = value;
             setGameState(gameState);
@@ -48,10 +49,10 @@ export function makePlayer(playerProps = {}, customScale = scaleFactor) {
         },
     };
     const state = new Proxy(
-        {
-            ...playerProps,
-        },
-        playerState
+        // target
+        playerState,
+        // handler
+        playerStateHandler
     );
 
     const player = k.make([

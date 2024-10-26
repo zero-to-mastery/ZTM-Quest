@@ -1,12 +1,18 @@
 import { displayDialogue } from '../../utils';
+import {
+    completeQuestObjective,
+    retrieveQuestObjectiveStatus,
+} from '../../utils/questHandler';
 
 export const restroomInteractions = (player, k, map) => {
+    const questName = 'Start Interacting!';
     player.onCollide('restroom_toilet', () => {
-        player.state.wasInRestroom = true;
-        player.state.hasHandsWashed = false;
+        completeQuestObjective(player, questName, 'wasInRestroom');
         const dialogue = ['You feel refreshed now.', 'Ready for the ride.'];
 
-        if (!player.state.hasTalkedToBruno) {
+        if (
+            !retrieveQuestObjectiveStatus(player, questName, 'hasTalkedToBruno')
+        ) {
             dialogue.push('You should talk to Bruno first.');
         }
         displayDialogue({
@@ -17,12 +23,13 @@ export const restroomInteractions = (player, k, map) => {
     });
 
     player.onCollide('restroom_sink', () => {
+        const sinkObjective = 'hasWashedHands';
         displayDialogue({
             k,
             player,
             text: ['You washed your hands. Good job!'],
             onDisplayEnd: () => {
-                player.state.hasHandsWashed = true;
+                completeQuestObjective(player, questName, sinkObjective);
             },
         });
     });

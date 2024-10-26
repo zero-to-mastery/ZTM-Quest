@@ -8,7 +8,6 @@ export const enterMapStartRightInteraction = (player, k) => {
                 'You are about to go back to the start. Are you sure you want to proceed?',
             ],
         });
-        // console.log(granted);
         if (granted) {
             k.go('start', 'spawn_right');
         }
