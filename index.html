@@ -2,11 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <link
-            rel="icon"
-            href="./favicon-32x32.png?v=d0a70af7f35f5943c7e28883adbbb7fd"
-            type="image/png"
-        />
+        <link rel="icon" href="./favicon-32x32.png?v=d0a70af7f35f5943c7e28883adbbb7fd" type="image/png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>ZTM-Quest</title>
         <style>
@@ -14,50 +10,43 @@
                 font-family: pixelifysans;
                 src: url(./assets/fonts/PixelifySans-VariableFont_wght.ttf);
             }
-            html,
-            body {
-                overflow: hidden;
+            * {
                 margin: 0;
                 padding: 0;
+                box-sizing: border-box;
             }
-
             body {
                 font-family: pixelifysans, monospace;
                 font-size: 2rem;
+                overflow: hidden;
                 user-select: none;
             }
-
             #app {
                 width: 100%;
                 height: 100%;
                 position: relative;
+                display: flex;
+                flex-direction: column;
             }
-
             .game-window {
                 position: absolute;
-                top: var(--header-height);
-                left: 140px;
-                width: calc(100% - 280px);
-                height: calc(
-                    100% - calc(var(--header-height) + var(--footer-height))
-                );
-            }
-
-            .full-screen {
-                top: 0;
+                width: 100%;
+                height: calc(100% - var(--header-height) - var(--footer-height));
                 left: 0;
+                top: var(--header-height);
+            }
+            .full-screen {
+                position: absolute;
                 width: 100%;
                 height: 100%;
+                top: 0;
+                left: 0;
                 z-index: 1000;
             }
-
             @media (max-width: 900px) {
                 .game-window {
-                    left: 0;
-                    width: 100%;
                     height: 72%;
                 }
-
                 .full-screen {
                     height: 100%;
                 }
@@ -71,55 +60,64 @@
                 font-family: pixelifysans, monospace;
                 font-size: 1.25rem;
                 border-radius: 12px;
-                margin-top: 10px;
-                margin-right: 20px;
+                margin: 10px 20px 0 0;
+                align-self: flex-end;
             }
-
             #credits-button:hover {
                 background-color: #45a049;
             }
+            .alert-window,
+            .alert-options {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .alert-window {
+                flex-direction: column;
+            }
+            .top, .left, .right, .bottom {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            #header { font-size: 1.5rem; }
+            .control-btns { display: flex; gap: 5px; }
+            .stat-wrapper { display: flex; align-items: center; }
+            .setting-btn img { max-width: 30px; }
+            .control-btn, #menu-button, #close-btn, #minimap-button, .ui-close-btn, .ui-next-btn, .option-btn {
+                cursor: pointer;
+            }
+            .dialogs-wrapper, .custom-prompt, .stats-container { display: none; }
+            .custom-prompt, .options-container { display: flex; flex-direction: column; align-items: center; }
         </style>
     </head>
-
     <body>
         <div id="app">
             <div class="game-window">
                 <canvas id="game"></canvas>
             </div>
-
             <div class="alert-window">
                 <div class="alert new-game-alert">
-                    <p class="alert-text">
-                        Do you want to start a new game? (This clears the saved
-                        game data.)
-                    </p>
+                    <p>Do you want to start a new game? (This clears the saved game data.)</p>
                     <div class="alert-options">
-                        <button id="new-game-no-button" class="option-btn">
-                            No
-                        </button>
-                        <button id="new-game-yes-button" class="option-btn">
-                            Yes
-                        </button>
+                        <button id="new-game-no-button" class="option-btn">No</button>
+                        <button id="new-game-yes-button" class="option-btn">Yes</button>
                     </div>
                 </div>
                 <div class="alert stats-alert">
-                    <p id="coins-collected" class="alert-text"></p>
-                    <p id="coins-spent" class="alert-text"></p>
-                    <p id="time-spent" class="alert-text"></p>
+                    <p id="coins-collected"></p>
+                    <p id="coins-spent"></p>
+                    <p id="time-spent"></p>
                     <div class="alert-options">
-                        <button id="stats-close-button" class="option-btn">
-                            Close
-                        </button>
+                        <button id="stats-close-button" class="option-btn">Close</button>
                     </div>
                 </div>
             </div>
-
             <div id="menu-button">
                 <div class="menu-bar"></div>
                 <div class="menu-bar"></div>
                 <div class="menu-bar"></div>
             </div>
-
             <div id="header" class="top">ZTM Quest</div>
             <div id="left-panel" class="left">
                 <div class="control-btns d-mobile-hide">
@@ -135,39 +133,12 @@
                 </div>
                 <div>
                     <button id="close-btn">X</button>
-                    <button id="new-game-button" class="setting-btn">
-                        <img
-                            src="/assets/sprites/newgame.png"
-                            alt="New Game"
-                            id="new-game-img"
-                        />
-                    </button>
-                    <button id="stats-button" class="setting-btn">
-                        <img
-                            src="/assets/sprites/stats.png"
-                            alt="stats"
-                            id="new-game-img"
-                        />
-                    </button>
-                    <button id="debug-button" class="setting-btn">
-                        <img
-                            src="/assets/sprites/debug.png"
-                            alt="debg"
-                            id="new-game-img"
-                        />
-                    </button>
-                    <button id="audio-button" class="setting-btn">
-                        <img
-                            id="audio-icon"
-                            src="/assets/sprites/mute.png"
-                            alt="Mute"
-                        />
-                    </button>
-                    <button id="credits-button" class="setting-btn">
-                        Credits
-                    </button>
+                    <button id="new-game-button" class="setting-btn"><img src="/assets/sprites/newgame.png" alt="New Game" /></button>
+                    <button id="stats-button" class="setting-btn"><img src="/assets/sprites/stats.png" alt="stats" /></button>
+                    <button id="debug-button" class="setting-btn"><img src="/assets/sprites/debug.png" alt="debug" /></button>
+                    <button id="audio-button" class="setting-btn"><img id="audio-icon" src="/assets/sprites/mute.png" alt="Mute" /></button>
+                    <button id="credits-button">Credits</button>
                 </div>
-                <div></div>
             </div>
             <div id="footer" class="bottom">
                 <div class="footer-head-info">
@@ -179,43 +150,24 @@
                     </div>
                     <div id="text-info"></div>
                 </div>
-
                 <div class="dialogs-wrapper">
                     <p id="dialog-text"></p>
                     <div id="custom-prompt" class="custom-prompt">
-                        <div class="prompt-content">
-                            <p id="prompt-message"></p>
-                            <div
-                                id="options-container"
-                                class="options-container"
-                            ></div>
-                        </div>
+                        <p id="prompt-message"></p>
+                        <div id="options-container" class="options-container"></div>
                     </div>
                     <div id="textbox-container" style="display: none">
                         <div id="textbox">
-                            <p id="dialog" class="ui-text"></p>
+                            <p id="dialog"></p>
                             <div class="btn-container">
-                                <button
-                                    id="dialog-close-btn"
-                                    class="ui-close-btn"
-                                    aria-label="Close dialog"
-                                >
-                                    Close
-                                </button>
-                                <button
-                                    id="dialog-next-btn"
-                                    class="ui-next-btn"
-                                    aria-label="Next dialog"
-                                >
-                                    Next
-                                </button>
+                                <button id="dialog-close-btn" class="ui-close-btn">Close</button>
+                                <button id="dialog-next-btn" class="ui-next-btn">Next</button>
                             </div>
                         </div>
                     </div>
-
                     <div id="stats-container">
                         <div class="stat-wrapper">
-                            <p class="stat-title">Energy:</p>
+                            <p>Energy:</p>
                             <div id="energy-bar-total">
                                 <div id="energy-bar-remain"></div>
                             </div>
@@ -225,7 +177,7 @@
                             </div>
                         </div>
                         <div class="stat-wrapper">
-                            <p class="stat-title">Coins:</p>
+                            <p>Coins:</p>
                             <p id="coins-remain">0</p>
                         </div>
                     </div>
