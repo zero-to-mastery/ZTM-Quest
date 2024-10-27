@@ -200,7 +200,8 @@ function startWordGuessingGame(k) {
     let attempts = 0;
     let feedbackText;
 
-    console.log(`The correct answer is: ${randomWord}`); // Log the correct answer
+    // console.log(`The correct answer is: ${randomWord}`); // Log the correct answer
+    // k.debug.log(`The correct answer is: ${randomWord}`); // Log the correct answer again
 
     k.scene('wordGuessing', () => {
         const centerX = k.width() / 2;
