@@ -20,6 +20,7 @@ const interactions = [
     bedroomShelfInteractions,
     livingRoomCouchInteractions,
     bedroomTableInteractions,
+    livingroomcouchInteractions,
     bedroomPlantInteractions,
 ];
 
