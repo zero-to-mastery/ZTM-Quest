@@ -14,6 +14,7 @@ const interactions = [
     enterMapCityInteraction,
     bedInteractions,
     computerInteractions,
+    bedroomPlantInteractions,
     mageInteractions,
     bedroomVanityInteractions,
     kitchenFridgeInteractions,
