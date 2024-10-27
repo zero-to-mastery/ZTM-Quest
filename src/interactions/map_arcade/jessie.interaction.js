@@ -8,7 +8,9 @@ export const interactionWithJessie = (player, k, map) => {
             k,
             player,
             characterName: jessie.name,
-            text: conversationJessie,
+            text: conversationJessie[
+                Math.floor(Math.random() * conversationJessie.length)
+            ],
             onDisplayEnd: () => {
                 player.state.hasTalkedToJessie = true;
             },
