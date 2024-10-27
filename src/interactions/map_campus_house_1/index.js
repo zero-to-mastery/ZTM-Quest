@@ -16,6 +16,7 @@ const interactions = [
     computerInteractions,
     mageInteractions,
     bedroomVanityInteractions,
+    bedroomPlantInteractions,
     kitchenFridgeInteractions,
     bedroomShelfInteractions,
     livingRoomCouchInteractions,
