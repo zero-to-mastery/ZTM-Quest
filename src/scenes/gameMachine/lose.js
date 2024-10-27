@@ -47,7 +47,7 @@ export const loseScreen = ({
         [255, 0, 0]
     );
 
-    exitButton.onClick(exitGame);
+    exitButton.onMouseRelease(exitGame);
     restartButton.onClick(restartGame);
 
     k.onKeyPress('escape', exitGame);
