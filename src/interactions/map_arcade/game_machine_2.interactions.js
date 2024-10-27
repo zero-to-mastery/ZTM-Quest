@@ -309,7 +309,8 @@ function startWordGuessingGame(k) {
             k.anchor('center'),
         ]);
 
-        console.log(`The correct answer is: ${number}`); // Log the correct answer again
+        // console.log(`The correct answer is: ${number}`); // Log the correct answer again
+        k.debug.log(`The correct answer is: ${number}`); // Log the correct answer again
 
         const playAgainButton = k.add([
             k.text('Play Again', { size: 24 }),
