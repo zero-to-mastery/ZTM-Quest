@@ -24,6 +24,7 @@ const interactions = [
     diningTableInteractions,
     livingroomcouchInteractions,
     bedroomPlantInteractions,
+    restroomToiletInteractions,
 ];
 
 export default interactions;
