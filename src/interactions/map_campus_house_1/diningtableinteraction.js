@@ -15,10 +15,10 @@ export const diningTableInteractions = (player, k, map) => {
         const dialogue = [];
 
         if (wantEat) {
-            time.minutes += 60; 
+            time.minutes += 60;
             dialogue.push('You enjoyed a delicious meal!');
             dialogue.push('You feel more energized now.');
-            updateEnergyState(player.state, 75); 
+            updateEnergyState(player.state, 75);
         } else {
             if (player.state.energy < 50) {
                 dialogue.push('You look a bit weak.');
