@@ -2,19 +2,17 @@ import { displayDialogue } from '../../utils';
 
 export const interactionWithGameMachine2 = (player, k, map) => {
     player.onCollide('game_machine_2', () => {
-        // Trigger the custom prompt when the player collides with the game machine
         showCustomPrompt(
-            'Do you want to play the Chrome Dino Game?', // Updated Prompt message
-            ['Yes', 'No'], // Options for the game prompt
+            'Do you want to play the Word Guessing Game?',
+            ['Yes', 'No'],
             (selectedOption) => {
-                // Logic based on the selected option
                 if (selectedOption === 'Yes') {
                     displayDialogue({
                         k,
                         player,
-                        text: ['Starting the Chrome Dino Game... Good luck!'],
+                        text: ['Starting the Word Guessing Game... Good luck!'],
                         onDisplayEnd: () => {
-                            startChromeDinoGame(k); // Pass k to the game start function
+                            startWordGuessingGame(k);
                         },
                     });
                 } else {
@@ -29,66 +27,334 @@ export const interactionWithGameMachine2 = (player, k, map) => {
     });
 };
 
-function showCustomPrompt(message, options, callback) {
-    // Set the prompt message
-    document.getElementById('prompt-message').textContent = message;
+function startWordGuessingGame(k) {
+    const MAX_ATTEMPTS = 8;
+    // const words = [
+    //     'SPIDERMAN', 'IRONMAN', 'CAPTAIN', 'THOR', 'BLACKWIDOW',
+    //     'HULK', 'BLACKPANTHER', 'DOCTORSTRANGE', 'ANTMAN', 'WASP'
+    // ];
 
-    // Clear any existing options in the container
+    // const words = [
+    //     'Spider-Man',
+    //     'Iron Man',
+    //     'Captain America',
+    //     'Thor',
+    //     'Black Widow',
+    //     'Hulk',
+    //     'Black Panther',
+    //     'Doctor Strange',
+    //     'Ant-Man',
+    //     'Wasp',
+    //     'Vision',
+    //     'Scarlet Witch',
+    //     'Hawkeye',
+    //     'Gamora',
+    //     'Star-Lord',
+    //     'Rocket Raccoon',
+    //     'Drax',
+    //     'Nebula',
+    //     'Loki',
+    //     'Thanos',
+    //     'Nick Fury',
+    //     'Maria Hill',
+    //     'Falcon',
+    //     'Winter Soldier',
+    //     'Shuri',
+    //     'Pepper Potts',
+    //     'Gamora',
+    //     'Mantis',
+    //     'Karnak',
+    //     'Groot',
+    //     'Psylocke',
+    //     'Colossus',
+    //     'Storm',
+    //     'Jean Grey',
+    //     'Cyclops',
+    //     'Wolverine',
+    //     'Beast',
+    //     'Rogue',
+    //     'Deadpool',
+    //     'Daredevil',
+    //     'Luke Cage',
+    //     'Jessica Jones',
+    //     'Iron Fist',
+    //     'Blade',
+    //     'Ghost Rider',
+    //     'Ms. Marvel',
+    //     'Captain Marvel',
+    //     'Black Knight',
+    //     'Silver Surfer',
+    //     'Nova',
+    //     'Moon Knight',
+    // ];
+
+    const words = [
+        'SPIDERMAN',
+        'IRONMAN',
+        'CAPTAINAMERICA',
+        'THOR',
+        'BLACKWIDOW',
+        'HULK',
+        'BLACKPANTHER',
+        'DOCTORSTRANGE',
+        'ANTMAN',
+        'WASP',
+        'VISION',
+        'SCARLETWITCH',
+        'HAWKEYE',
+        'GAMORA',
+        'STARLORD',
+        'ROCKETRACCOON',
+        'DRAX',
+        'NEBULA',
+        'LOKI',
+        'THANOS',
+        'NICKFURY',
+        'MARIAHILL',
+        'FALCON',
+        'WINTERSOLDIER',
+        'SHURI',
+        'PEPPERPOTTS',
+        'MANTIS',
+        'KARNAK',
+        'GROOT',
+        'PSYLOCKE',
+        'COLOSSI',
+        'STORM',
+        'JEANGREY',
+        'CYCLOPS',
+        'WOLVERINE',
+        'BEAST',
+        'ROGUE',
+        'DEADPOOL',
+        'DAREDEVIL',
+        'LUKECAGE',
+        'JESSICAJONES',
+        'IRONFIST',
+        'BLADE',
+        'GHOSTRIDER',
+        'MSMARVEL',
+        'CAPTAINMARVEL',
+        'BLACKKNIGHT',
+        'SILVERSURFER',
+        'NOVA',
+        'MOONKNIGHT',
+    ];
+
+    const hintForGuess = [
+        'the web guy.', // Spider-Man
+        'genius billionaire playboy.', // Iron Man
+        'the first avenger.', // Captain America
+        'god of thunder.', // Thor
+        'the deadly spy.', // Black Widow
+        'the strongest Avenger.', // Hulk
+        'king of Wakanda.', // Black Panther
+        'master of the mystic arts.', // Doctor Strange
+        'the shrinking hero.', // Ant-Man
+        'the flying hero.', // Wasp
+        'the synthezoid hero.', // Vision
+        'the chaos witch.', // Scarlet Witch
+        'the sharpshooter.', // Hawkeye
+        'the green assassin.', // Gamora
+        'the charming outlaw.', // Star-Lord
+        'the raccoon with a gun.', // Rocket Raccoon
+        'the destroyer.', // Drax
+        'the daughter of Thanos.', // Nebula
+        'the trickster god.', // Loki
+        'the mad titan.', // Thanos
+        'the spy master.', // Nick Fury
+        'the agent with a plan.', // Maria Hill
+        'the winged warrior.', // Falcon
+        'the soldier in the ice.', // Winter Soldier
+        'the tech genius of Wakanda.', // Shuri
+        'the CEO of Stark Industries.', // Pepper Potts
+        'the empathic hero.', // Mantis
+        'the Inhuman with the powers.', // Karnak
+        'the talking tree.', // Groot
+        'the telepathic mutant.', // Psylocke
+        'the metal giant.', // Colossus
+        'the weather goddess.', // Storm
+        'the telekinetic mutant.', // Jean Grey
+        'the leader of the X-Men.', // Cyclops
+        'the clawed mutant.', // Wolverine
+        'the agile mutant.', // Beast
+        'the southern belle.', // Rogue
+        'the merc with a mouth.', // Deadpool
+        'the blind lawyer.', // Daredevil
+        'the bulletproof hero.', // Luke Cage
+        'the private investigator.', // Jessica Jones
+        'the martial arts master.', // Iron Fist
+        'the vampire hunter.', // Blade
+        'the spirit of vengeance.', // Ghost Rider
+        'the new superhero.', // Ms. Marvel
+        'the cosmic hero.', // Captain Marvel
+        'the noble warrior.', // Black Knight
+        'the herald of Galactus.', // Silver Surfer
+        'the human rocket.', // Nova
+        'the knight of the moon.', // Moon Knight
+    ];
+
+    const randomIndex = Math.floor(Math.random() * words.length);
+    const randomWord = words[randomIndex];
+    const hint = hintForGuess[randomIndex];
+    let attempts = 0;
+    let feedbackText;
+
+    // console.log(`The correct answer is: ${randomWord}`); // Log the correct answer
+    // k.debug.log(`The correct answer is: ${randomWord}`); // Log the correct answer again
+
+    k.scene('wordGuessing', () => {
+        const centerX = k.width() / 2;
+        const centerY = k.height() / 2;
+        const offsetY = -100;
+
+        k.add([
+            k.text(`Guess the word!`, {
+                size: 24,
+            }),
+            k.pos(centerX, centerY - 100 + offsetY),
+            k.anchor('center'),
+        ]);
+
+        const input = k.add([
+            k.text('Enter Guess: ', { size: 32 }),
+            k.pos(centerX, centerY + offsetY),
+            k.anchor('center'),
+        ]);
+
+        feedbackText = k.add([
+            k.text(
+                `Your guess will appear here (${randomWord.length} letters)... hint : ${hint}`,
+                { size: 24 }
+            ),
+            k.pos(centerX, centerY + 100 + offsetY),
+            k.anchor('center'),
+        ]);
+
+        let currentGuess = '';
+
+        k.onKeyPress('enter', () => {
+            if (currentGuess.length > 0) {
+                attempts++;
+                if (currentGuess === randomWord) {
+                    k.go('win', attempts);
+                } else if (attempts >= MAX_ATTEMPTS) {
+                    k.go('lose', randomWord);
+                } else {
+                    feedbackText.text = `Wrong guess! Attempts left: ${MAX_ATTEMPTS - attempts}`;
+                }
+                currentGuess = '';
+            }
+        });
+
+        k.onKeyPress((key) => {
+            if (key === 'backspace') {
+                currentGuess = currentGuess.slice(0, -1);
+            } else if (currentGuess.length < randomWord.length) {
+                currentGuess += key.toUpperCase(); // Convert to uppercase
+            }
+            input.text = `Enter Guess: ${currentGuess}`;
+        });
+
+        k.onKeyPress('escape', () => {
+            k.go('arcade');
+        });
+    });
+
+    k.scene('win', (attempts) => {
+        const centerX = k.width() / 2;
+        const centerY = k.height() / 2;
+        const offsetY = -100;
+
+        k.add([
+            k.text('Congratulations! You guessed the word!', { size: 32 }),
+            k.pos(centerX, centerY - 100 + offsetY),
+            k.anchor('center'),
+        ]);
+        k.add([
+            k.text(`Attempts: ${attempts}`, { size: 32 }),
+            k.pos(centerX, centerY + offsetY),
+            k.anchor('center'),
+        ]);
+
+        const playAgainButton = k.add([
+            k.text('Play Again', { size: 24 }),
+            k.pos(centerX, centerY + 80 + offsetY),
+            k.anchor('center'),
+            k.area(),
+        ]);
+        playAgainButton.onClick(() => startWordGuessingGame(k));
+
+        const exitButton = k.add([
+            k.text('Exit', { size: 24 }),
+            k.pos(centerX, centerY + 140 + offsetY),
+            k.anchor('center'),
+            k.area(),
+        ]);
+        exitButton.onClick(() => k.go('arcade'));
+    });
+
+    k.scene('lose', (number) => {
+        const centerX = k.width() / 2;
+        const centerY = k.height() / 2;
+        const offsetY = -100;
+
+        k.add([
+            k.text('Game Over! You ran out of attempts.', { size: 32 }),
+            k.pos(centerX, centerY - 100 + offsetY),
+            k.anchor('center'),
+        ]);
+        k.add([
+            k.text(`The word was: ${number}`, { size: 32 }),
+            k.pos(centerX, centerY + offsetY),
+            k.anchor('center'),
+        ]);
+
+        // console.log(`The correct answer is: ${number}`); // Log the correct answer again
+        k.debug.log(`The correct answer is: ${number}`); // Log the correct answer again
+
+        const playAgainButton = k.add([
+            k.text('Play Again', { size: 24 }),
+            k.pos(centerX, centerY + 80 + offsetY),
+            k.anchor('center'),
+            k.area(),
+        ]);
+        playAgainButton.onClick(() => startWordGuessingGame(k));
+
+        const exitButton = k.add([
+            k.text('Exit', { size: 24 }),
+            k.pos(centerX, centerY + 140 + offsetY),
+            k.anchor('center'),
+            k.area(),
+        ]);
+        exitButton.onClick(() => k.go('arcade'));
+    });
+
+    k.go('wordGuessing');
+}
+
+function showCustomPrompt(message, options, callback) {
+    document.getElementById('prompt-message').textContent = message;
     const optionsContainer = document.getElementById('options-container');
     optionsContainer.innerHTML = '';
 
-    // Create buttons for each option
     options.forEach((option) => {
         const button = document.createElement('button');
         button.textContent = option;
         button.classList.add('option-btn');
-        button.setAttribute('tabindex', '0'); // Make the button focusable
-
-        // Add click event for mouse interactions
         button.onclick = function () {
             callback(option);
             closeCustomPrompt();
         };
-
-        // Add keyboard event listener for accessibility
-        button.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault(); // Prevent the default behavior
-                callback(option);
-                closeCustomPrompt();
-            }
-        });
-
         optionsContainer.appendChild(button);
     });
 
-    // Display the custom prompt
     document.getElementById('custom-prompt').style.display = 'flex';
-
-    // Set focus on the first button
     if (optionsContainer.children.length > 0) {
         optionsContainer.children[0].focus();
     }
 }
 
-// Function to close the custom prompt
 function closeCustomPrompt() {
-    // Hide the custom prompt
     document.getElementById('custom-prompt').style.display = 'none';
-}
-
-// Function to start the Chrome Dino Game
-function startChromeDinoGame(k) {
-    k.debug.log('Chrome Dino Game started!');
-    // Here you can implement the logic to actually start the game
-
-    /*
-    k.go('startScreen', { title: 'Dino Game', gameSceneName: 'dinoGame' });
-    k.scene('dinoGame', () => {
-
-        // if yu want to exit the game add this code to your callback function
-        // k.go('lose', { title: 'Dine Game', gameRestartSceneName: 'dinoGame', gameExitSceneName: 'arcade', score });
-
-    });
-    */
 }
