@@ -1,6 +1,8 @@
 import { k, time } from './kplayCtx';
 import { getGameState, setGameState } from './utils/gameState';
 import { updateEnergyUI } from './utils/energyUpdate';
+import { updateCoinsUI } from './utils/coinsUpdate';
+
 import { start } from './scenes/start';
 import './scenes/gameOver';
 import './styles/global.css';
@@ -17,6 +19,7 @@ import { gameStartScreen } from './scenes/gameMachine/startSceen';
 import { loseScreen } from './scenes/gameMachine/lose';
 import { classroom } from './scenes/classroom';
 import { seaside } from './scenes/seaside';
+import { downtown } from './scenes/downtown';
 
 k.scene('start', (enter_tag) => bootstrap(start, { enter_tag }));
 k.scene('city', (enter_tag) => bootstrap(city, { enter_tag }));
@@ -30,6 +33,7 @@ k.scene('campus_house_1', (enter_tag) =>
 );
 k.scene('classroom', (enter_tag) => bootstrap(classroom, { enter_tag }));
 k.scene('seaside', (enter_tag) => bootstrap(seaside, { enter_tag }));
+k.scene('downtown', (enter_tag) => bootstrap(downtown, { enter_tag }));
 k.scene('fishing', (enter_tag) => miniGameBootstrap(fishing, { enter_tag }));
 
 // Game Machine Scenes
@@ -61,13 +65,15 @@ if (gameState) {
 */
 
 updateEnergyUI(getGameState().player.energy);
+updateCoinsUI();
 setInterval(() => {
     const gameState = getGameState(); // This should be inside setInterval so that gameState variable is updated at every interval.
     if (gameState.player.energy) {
         gameState.player.energy -= 1;
         setGameState(gameState);
         updateEnergyUI(gameState.player.energy);
-    } else {
+    } else if (Math.floor(k.time()) % 3 == 0) {
+        // This ensures log appears atmost 2 times per minute.
         k.debug.log('I need some energy.');
     }
 }, 10000);

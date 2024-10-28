@@ -1,5 +1,5 @@
 import { displayPermissionBox } from '../../utils';
-import { updateEnergyState } from '../../utils/energyUpdate';
+import { purchaseItem } from '../../utils/coinsUpdate';
 import { interactionHandler } from '../handler.interactions';
 
 export const stall1Interaction = (player, k) => {
@@ -16,7 +16,7 @@ export const stall1Interaction = (player, k) => {
             k.debug.log(
                 '🚀 Awesome choice! Here’s your snack – made with love and just a hint of magic!'
             );
-            updateEnergyState(player.state, 30);
+            purchaseItem(k, 20, 30);
         } else {
             let secondChance = await displayPermissionBox({
                 k,
@@ -30,7 +30,7 @@ export const stall1Interaction = (player, k) => {
                 k.debug.log(
                     '😋 Yass! You’re now part of the snack elite! Enjoy your crispy delight!'
                 );
-                updateEnergyState(player.state, 30);
+                purchaseItem(k, 20, 30);
             } else {
                 k.debug.log(
                     '😢 Your loss! But hey, who am I to judge? Just remember, you’re missing out on epic flavor adventures!'
@@ -54,7 +54,7 @@ export const stall2Interaction = (player, k) => {
             k.debug.log(
                 '🌈 Fantastic! Here’s a snack that might just change your life! Or at least your lunch!'
             );
-            updateEnergyState(player.state, 28);
+            purchaseItem(k, 20, 28);
         } else {
             let secondThoughts = await displayPermissionBox({
                 k,
@@ -68,7 +68,7 @@ export const stall2Interaction = (player, k) => {
                 k.debug.log(
                     '🌟 You’ve made the right call! Enjoy the epic flavors of Stall 2! Snack on, my friend!'
                 );
-                updateEnergyState(player.state, 28);
+                purchaseItem(k, 20, 28);
             } else {
                 k.debug.log(
                     '🤷‍♂️ Suit yourself! But don’t come crying to me when you realize Stall 1’s snacks are just plain!'
