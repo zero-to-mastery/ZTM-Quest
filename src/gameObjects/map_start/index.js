@@ -4,6 +4,8 @@ import { cake } from './cake.gameObject';
 import { npcsOnChairs } from './npcsOnChairs.gameObject';
 import { ztmTrailer } from './ztmTrailer.gameObject';
 import { computer } from './computer.gameObject';
+import { chest } from './chest.gameObject';
+
 
 import { misterFu } from './misterFu.gameObject';
 
@@ -17,6 +19,7 @@ export const gameObjects = [
     npcsOnChairs,
     ztmTrailer,
     computer,
+    chest,
     cake,
     jokeTellerNPC,
     // Add more game objects here
