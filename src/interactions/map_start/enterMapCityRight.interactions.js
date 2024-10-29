@@ -7,22 +7,22 @@ import { map_start_quests } from '../quests/constants.quests';
 
 export const enterMapCityRightInteraction = (player, k, map) => {
     const questName = 'Start Interacting!';
-    const hasTalkedToBruno = retrieveQuestObjectiveStatus(
-        player,
-        questName,
-        'hasTalkedToBruno'
-    );
-    const wasInRestroom = retrieveQuestObjectiveStatus(
-        player,
-        questName,
-        'wasInRestroom'
-    );
-    const hasWashedHands = retrieveQuestObjectiveStatus(
-        player,
-        questName,
-        'hasWashedHands'
-    );
     player.onCollide('enter_map_right', () => {
+        const hasTalkedToBruno = retrieveQuestObjectiveStatus(
+            player,
+            questName,
+            'hasTalkedToBruno'
+        );
+        const wasInRestroom = retrieveQuestObjectiveStatus(
+            player,
+            questName,
+            'wasInRestroom'
+        );
+        const hasWashedHands = retrieveQuestObjectiveStatus(
+            player,
+            questName,
+            'hasWashedHands'
+        );
         // Collision point (Enter map boundary) //! NOT THE SPAWNPOINT
         if (
             hasTalkedToBruno &&
