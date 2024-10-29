@@ -9,6 +9,7 @@ import { livingRoomCouchInteractions } from './livingRoomCouch.interaction';
 import { bedroomTableInteractions } from './bedroom_table.interaction';
 import { bedroomPlantInteractions } from './bedroom_plant.interaction';
 import { diningTableInteractions } from './diningtableinteraction';
+import { KitchencounterInteractions} from './KitchencounterInteractions'
 
 const interactions = [
     // Add more interactions here
@@ -25,7 +26,7 @@ const interactions = [
     livingroomcouchInteractions,
     bedroomPlantInteractions,
     restroomToiletInteractions,
-    kitchencounterInteractions,
+    KitchencounterInteractions,
 ];
 
 export default interactions;

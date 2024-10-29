@@ -2,8 +2,8 @@ import { time } from '../../kplayCtx';
 import { displayDialogue, displayPermissionBox } from '../../utils';
 import { updateEnergyState } from '../../utils/energyUpdate';
 
-export const kitchencounterInteractions = (player, k, map) => {
-    player.onCollide('kitchen_slab', async () => {
+export const KitchencounterInteractions = (player, k, map) => {
+    player.onCollide('kitchen_counter', async () => {
         let wantCook = await displayPermissionBox({
             k,
             player,
