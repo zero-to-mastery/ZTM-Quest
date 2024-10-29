@@ -4,9 +4,6 @@ const LOCAL_STORAGE_GAME_STATE_KEY = 'gameState';
 
 const initialState = () => ({
     player: {
-        hasTalkedToBruno: false,
-        wasInRestroom: false,
-        hasHandsWashed: false,
         energy: 100,
         speed: speedByScaleFactor,
         direction: 'down',
@@ -57,7 +54,6 @@ export const saveGameState = (newState) => {
 };
 
 export const getGameState = () => {
-    console.log(currentState);
     if (currentState) {
         return currentState;
     } else {

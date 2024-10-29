@@ -6,7 +6,6 @@ import { k } from '../kplayCtx';
 import { getGameState } from '../utils/gameState';
 import { addPlayerControls } from './../player.controls';
 import { resetPausingVariables } from '../utils/resetPausingVariables';
-import { addQuests } from '../core/kaplay/quests';
 
 export async function bootstrap(bootMapCb, mapArgs) {
     const gameState = getGameState();
@@ -33,5 +32,4 @@ export async function bootstrap(bootMapCb, mapArgs) {
     addGameObjects(gameObjects, map, spawnpoint).forEach((obj) => map.add(obj));
     attachInteractions(interactions, 'player');
     addSceneSounds(sounds, k, map);
-    addQuests(player, quests);
 }

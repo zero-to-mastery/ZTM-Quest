@@ -31,7 +31,6 @@ export const enterMapCityLeftInteraction = (player, k, map) => {
         ) {
             k.go('city', 'spawn_office_left');
         } else {
-            console.log(map_start_quests);
             recieveQuest(player, map_start_quests['Start Interacting!']);
             if (!hasTalkedToBruno) {
                 displayDialogue({

@@ -37,7 +37,6 @@ export function makePlayer(playerState = {}, customScale = scaleFactor) {
 
     const playerStateHandler = {
         set: function (target, key, value) {
-            console.log('hit');
             const gameState = getGameState();
             gameState.player[key] = value;
             setGameState(gameState);
