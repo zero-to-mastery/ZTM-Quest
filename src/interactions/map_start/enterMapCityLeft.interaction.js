@@ -38,7 +38,7 @@ export const enterMapCityLeftInteraction = (player, k, map) => {
                     player,
                     text: [
                         'You should talk to Bruno first.',
-                        'He is the guy with the beautiful suite to your left side.',
+                        'He is the guy with the beautiful suit at the other entrance.',
                     ],
                 });
 

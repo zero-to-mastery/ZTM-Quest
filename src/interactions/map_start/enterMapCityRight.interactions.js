@@ -39,7 +39,7 @@ export const enterMapCityRightInteraction = (player, k, map) => {
                     player,
                     text: [
                         'You should talk to Bruno first.',
-                        'He is the guy with the beautiful suite to your left side.',
+                        'He is the guy with the beautiful suit to your left side.',
                     ],
                 });
 

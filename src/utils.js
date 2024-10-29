@@ -47,11 +47,11 @@ export async function displayDialogue({
     const dialog = document.getElementById('dialog');
     const closeBtn = document.getElementById('dialog-close-btn');
     const nextBtn = document.getElementById('dialog-next-btn');
-    const energyUI = document.getElementById('energy-container');
+    const statsUI = document.getElementById('stats-container');
     const miniMapUI = document.getElementById('minimap');
     let abort = new AbortController();
 
-    energyUI.style.display = 'none';
+    statsUI.style.display = 'none';
     dialogUI.style.display = 'block';
     miniMapUI.style.display = 'none';
 
@@ -85,7 +85,7 @@ export async function displayDialogue({
         abort.abort();
         dialogUI.style.display = 'none';
         dialog.innerHTML = '';
-        energyUI.style.display = 'flex';
+        statsUI.style.display = 'flex';
         closeBtn.removeEventListener('click', onCloseBtnClick);
         k.triggerEvent('dialog-closed', { player, characterName, text });
         player.state.isInDialog = false;
@@ -116,11 +116,11 @@ export async function displayPermissionBox({
     const dialog = document.getElementById('dialog');
     const closeBtn = document.getElementById('dialog-close-btn');
     const nextBtn = document.getElementById('dialog-next-btn');
-    const energyUI = document.getElementById('energy-container');
+    const statsUI = document.getElementById('stats-container');
     const miniMapUI = document.getElementById('minimap');
     closeBtn.innerHTML = 'No';
     nextBtn.innerHTML = 'Yes';
-    energyUI.style.display = 'none';
+    statsUI.style.display = 'none';
     miniMapUI.style.display = 'none';
     dialogUI.style.display = 'block';
     closeBtn.style.display = 'block';
@@ -137,7 +137,7 @@ export async function displayPermissionBox({
             abort.abort();
             dialogUI.style.display = 'none';
             dialog.innerHTML = '';
-            energyUI.style.display = 'flex';
+            statsUI.style.display = 'flex';
             closeBtn.removeEventListener('click', onCloseBtnClick);
             nextBtn.removeEventListener('click', onNextBtnClick);
             closeBtn.innerHTML = 'Close';
@@ -153,7 +153,7 @@ export async function displayPermissionBox({
             abort.abort();
             dialogUI.style.display = 'none';
             dialog.innerHTML = '';
-            energyUI.style.display = 'flex';
+            statsUI.style.display = 'flex';
             nextBtn.removeEventListener('click', onNextBtnClick);
             closeBtn.removeEventListener('click', onCloseBtnClick);
             closeBtn.innerHTML = 'Close';

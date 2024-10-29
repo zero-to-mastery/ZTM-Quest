@@ -1,5 +1,5 @@
 import { displayDialogue } from '../../utils';
-import { updateEnergyState } from '../../utils/energyUpdate';
+import { purchaseItem } from '../../utils/coinsUpdate';
 
 // List of drinks and possible fun surprises
 
@@ -32,9 +32,9 @@ export const interactionWithDrinksMachine = (player, k, map) => {
                     text: texts[selectedOption],
                     onDisplayEnd: () => {
                         if (selectedOption == 'Water') {
-                            updateEnergyState(player.state, 20);
+                            purchaseItem(k, 5, 20);
                         } else {
-                            updateEnergyState(player.state, 15);
+                            purchaseItem(k, 8, 15);
                         }
                     },
                 });

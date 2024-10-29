@@ -54,12 +54,28 @@ export const jessie = {
     frames: [180, 184, 182, 188, 181, 186],
 };
 export const conversationJessie = [
-    'Hey there! Welcome to the arcade! Ready to have some fun?',
-    "Hi! I'm Jessie. Need any tips on the best games here?",
-    "Hello! Have you tried the new racing game? It's awesome!",
-    "Welcome! I'm Jessie. Let's see if you can beat my high score!",
-    'Hey! Looking for a challenge? I can show you the toughest games.',
-    "Hi there! Don't forget to check out the prize counter after playing!",
-    "Hello! Need any help finding a game? I'm your go-to guide!",
-    "Hey! Ready to play? I've got some great game recommendations for you.",
+    [
+        'Hey there! Welcome to the arcade! Ready to have some fun?',
+        'You can even earn some coins while having fun.',
+    ],
+    [
+        "Hi! I'm Jessie. Need any tips on the best games here?",
+        'Few games even gift you some coins when you reach difficult milestone in that game.',
+        'Like Chrome Dino Game and Flappy Bird Game.',
+    ],
+    ["Hello! Have you tried the new racing game? It's awesome!"],
+    ["Welcome! I'm Jessie. Let's see if you can beat my high score!"],
+    ['Hey! Looking for a challenge? I can show you the toughest games.'],
+    ["Hi there! Don't forget to check out the prize counter after playing!"],
+    [
+        "Hello! Need any help finding a game? I'm your go-to guide!",
+        'I can even tell you games that can give you some coins.',
+        'Hint: Something to do with numbers. Can you guess it?',
+        "Ok. If you didn't get the previous one, I will give you another.",
+        'Hint: A crawling machine that picks stuff up.',
+    ],
+    [
+        "Hey! Ready to play? I've got some great game recommendations for you.",
+        'Checkout the Chrome Dino Game for some coins.',
+    ],
 ];
