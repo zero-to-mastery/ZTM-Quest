@@ -7,22 +7,22 @@ import { map_start_quests } from '../quests/constants.quests';
 
 export const enterMapCityLeftInteraction = (player, k, map) => {
     const questName = 'Start Interacting!';
-    const hasTalkedToBruno = retrieveQuestObjectiveStatus(
-        player,
-        questName,
-        'hasTalkedToBruno'
-    );
-    const wasInRestroom = retrieveQuestObjectiveStatus(
-        player,
-        questName,
-        'wasInRestroom'
-    );
-    const hasWashedHands = retrieveQuestObjectiveStatus(
-        player,
-        questName,
-        'hasWashedHands'
-    );
     player.onCollide('enter_map_left', () => {
+        const hasTalkedToBruno = retrieveQuestObjectiveStatus(
+            player,
+            questName,
+            'hasTalkedToBruno'
+        );
+        const wasInRestroom = retrieveQuestObjectiveStatus(
+            player,
+            questName,
+            'wasInRestroom'
+        );
+        const hasWashedHands = retrieveQuestObjectiveStatus(
+            player,
+            questName,
+            'hasWashedHands'
+        );
         if (
             hasTalkedToBruno &&
             wasInRestroom &&
