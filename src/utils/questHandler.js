@@ -23,7 +23,7 @@ export const completeQuest = (player, questName) => {
         // Triggers set handler in Proxy state object
         newObj[questName] = { ...player.state.quests[questName], done: true };
         player.state.quests = { ...player.state.quests, ...newObj };
-        alert(`Completed "${questName}"`);
+        alert(`Completed the quest: "${questName}"`);
     }
 };
 
@@ -44,7 +44,7 @@ export const completeQuestObjective = (player, questName, objective) => {
     player.state.quests[questName].objectives[objective] = true;
     // Triggers set handler in Proxy state object
     player.state.quests = { ...player.state.quests };
-    alert(`Completed quest "${objective}"`);
+    alert(`Completed quest objective: "${objective}"`);
 };
 
 export const retrieveQuestObjectiveStatus = (player, questName, objective) => {
@@ -64,6 +64,7 @@ export const recieveQuest = (player, quest) => {
     if (!playerHasQuest(player, Object.keys(quest)[0])) {
         // Triggers set handler in Proxy state object
         player.state.quests = { ...player.state.quests, ...quest };
+        alert(`You have started the quest: "${Object.keys(quest)[0]}"`);
     }
 };
 

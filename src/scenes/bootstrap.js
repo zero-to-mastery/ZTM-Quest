@@ -11,7 +11,7 @@ export async function bootstrap(bootMapCb, mapArgs) {
     const gameState = getGameState();
     const player = makePlayer(gameState.player);
 
-    const [map, spawnpoint, gameObjects, interactions, sounds, quests] =
+    const [map, spawnpoint, gameObjects, interactions, sounds] =
         await bootMapCb();
 
     if (mapArgs?.enter_tag === 'Player') {
