@@ -25,6 +25,7 @@ export const gameObjects = [
     // Add more game objects here
     randNpcsOnRestroomSinkCounch,
     misterFu,
+    chest,
     tvVideo,
     treasureChest,
     cat,
