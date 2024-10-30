@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-export const chest = (k, map, spawnpoints) => {
-    k.loadSprite('chest', './assets/sprites/chest.png');
-  
-    return k.add([
-      k.sprite('chest'),
-      k.pos(map.pos.x + spawnpoints.chest.x, map.pos.y + spawnpoints.chest.y),
-      k.area(),
-      k.body({ isStatic: true }),
-      'chest',
-    ]);
-=======
 // src/gameObjects/map_start/chest.gameObject.js
 export const chest = (k, map) => {
     // Load the closed and open chest images as animations
@@ -39,6 +27,4 @@ export const chest = (k, map) => {
     });
   
     return chestObj;
->>>>>>> 60c3144 (added a new chest interactive feature for extra points)
-  };
-  
+};
