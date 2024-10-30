@@ -20,6 +20,7 @@ import { loseScreen } from './scenes/gameMachine/lose';
 import { classroom } from './scenes/classroom';
 import { seaside } from './scenes/seaside';
 import { downtown } from './scenes/downtown';
+import { realtor } from './scenes/realtor';
 
 k.scene('start', (enter_tag) => bootstrap(start, { enter_tag }));
 k.scene('city', (enter_tag) => bootstrap(city, { enter_tag }));
@@ -34,6 +35,7 @@ k.scene('campus_house_1', (enter_tag) =>
 k.scene('classroom', (enter_tag) => bootstrap(classroom, { enter_tag }));
 k.scene('seaside', (enter_tag) => bootstrap(seaside, { enter_tag }));
 k.scene('downtown', (enter_tag) => bootstrap(downtown, { enter_tag }));
+k.scene('realtor', (enter_tag) => bootstrap(realtor, { enter_tag }));
 k.scene('fishing', (enter_tag) => miniGameBootstrap(fishing, { enter_tag }));
 
 // Game Machine Scenes
