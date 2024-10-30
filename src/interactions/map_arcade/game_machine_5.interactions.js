@@ -86,7 +86,10 @@ export function startBreakBrickGame(k) {
     let totalBricks = 0;
     let bricks = [];
 
-    k.go('startScreen', { title: 'Break Brick Game', gameSceneName: 'breakBrickGame' });
+    k.go('startScreen', {
+        title: 'Break Brick Game',
+        gameSceneName: 'breakBrickGame',
+    });
 
     k.scene('breakBrickGame', () => {
         // Load and add paddle
@@ -97,7 +100,7 @@ export function startBreakBrickGame(k) {
             k.area(),
             k.anchor('center'),
             k.scale(1.1),
-            "paddle"
+            'paddle',
         ]);
 
         function updatePaddleSize() {
@@ -108,7 +111,10 @@ export function startBreakBrickGame(k) {
 
         // Paddle movement
         k.onUpdate(() => {
-            paddle.pos.x = Math.max(paddle.width / 2, Math.min(k.mousePos().x, k.width() - paddle.width / 2));
+            paddle.pos.x = Math.max(
+                paddle.width / 2,
+                Math.min(k.mousePos().x, k.width() - paddle.width / 2)
+            );
         });
 
         // Load and add ball
@@ -118,17 +124,16 @@ export function startBreakBrickGame(k) {
             k.pos(k.width() / 2, k.height() * 0.6),
             k.area(),
             k.scale(scaleFactor),
-            { vel: k.vec2(20, -20).unit().scale(constantSpeed) }
+            { vel: k.vec2(20, -20).unit().scale(constantSpeed) },
         ]);
 
         // Ball and paddle collision handling
-        ball.onCollide("paddle", (p) => {
-           // Calculate offset as a fraction of the paddle width
-           const offset = (ball.pos.x - paddle.pos.x) / (paddle.width / 2);
+        ball.onCollide('paddle', (p) => {
+            // Calculate offset as a fraction of the paddle width
+            const offset = (ball.pos.x - paddle.pos.x) / (paddle.width / 2);
 
-           ball.vel.x = offset * constantSpeed;  // Horizontal speed varies based on offset
-           ball.vel.y = -Math.abs(constantSpeed); // Fixed upward speed const offset = ball.pos.x - paddle.pos.x;
-    
+            ball.vel.x = offset * constantSpeed; // Horizontal speed varies based on offset
+            ball.vel.y = -Math.abs(constantSpeed); // Fixed upward speed const offset = ball.pos.x - paddle.pos.x;
         });
 
         function resetBall() {
@@ -138,19 +143,32 @@ export function startBreakBrickGame(k) {
 
         // Load and setup bricks
         const brickColors = ['red', 'yellow', 'green', 'blue'];
-        brickColors.forEach(color => k.loadSprite(color, `./assets/sprites/element_${color}_rectangle_glossy.png`));
+        brickColors.forEach((color) =>
+            k.loadSprite(
+                color,
+                `./assets/sprites/element_${color}_rectangle_glossy.png`
+            )
+        );
 
         function setupBricks() {
-            bricks.forEach(brick => k.destroy(brick));
+            bricks.forEach((brick) => k.destroy(brick));
             bricks = [];
 
-            const sideMargin = k.width() < 800 ? k.width() * 0.07 : k.width() * 0.05;
+            const sideMargin =
+                k.width() < 800 ? k.width() * 0.07 : k.width() * 0.05;
             const availableWidth = k.width() - 2 * sideMargin;
-            const brickWidth = k.width() < 800 ? availableWidth / 6 : Math.min(availableWidth / 10, 100);
+            const brickWidth =
+                k.width() < 800
+                    ? availableWidth / 6
+                    : Math.min(availableWidth / 10, 100);
             const brickHeight = brickWidth * 0.6;
-            const numBricksPerRow = Math.floor(availableWidth / (brickWidth * 1.1));
+            const numBricksPerRow = Math.floor(
+                availableWidth / (brickWidth * 1.1)
+            );
             const numRows = 4;
-            const horizontalOffset = sideMargin + (availableWidth - numBricksPerRow * brickWidth * 1.1) / 2;
+            const horizontalOffset =
+                sideMargin +
+                (availableWidth - numBricksPerRow * brickWidth * 1.1) / 2;
 
             for (let row = 0; row < numRows; row++) {
                 for (let col = 0; col < numBricksPerRow; col++) {
@@ -161,7 +179,7 @@ export function startBreakBrickGame(k) {
                         k.pos(x, y),
                         k.scale(brickWidth / 100),
                         k.area(),
-                        "brick"
+                        'brick',
                     ]);
                     bricks.push(brick);
                 }
@@ -175,19 +193,27 @@ export function startBreakBrickGame(k) {
         const scoreText = k.add([
             k.text(`Score: ${score}`, { size: 35 }),
             k.pos(k.width() / 2, 10),
-            { update() { this.text = `Score: ${score}`; } }
+            {
+                update() {
+                    this.text = `Score: ${score}`;
+                },
+            },
         ]);
 
         const livesText = k.add([
             k.text(`Lives: ${lives}`, { size: 35 }),
             k.pos(k.width() / 2, 50),
-            { update() { this.text = `Lives: ${lives}`; } }
+            {
+                update() {
+                    this.text = `Lives: ${lives}`;
+                },
+            },
         ]);
 
         // Ball and brick collision handling
-        ball.onCollide("brick", (brick) => {
+        ball.onCollide('brick', (brick) => {
             k.destroy(brick);
-            bricks = bricks.filter(b => b !== brick);
+            bricks = bricks.filter((b) => b !== brick);
             score += 1;
 
             // Bounce vertically after hitting a brick
@@ -195,7 +221,7 @@ export function startBreakBrickGame(k) {
 
             if (score >= totalBricks) {
                 k.wait(0.1, () => {
-                    k.go("win");
+                    k.go('win');
                 });
             }
         });
@@ -205,7 +231,8 @@ export function startBreakBrickGame(k) {
             ball.vel = ball.vel.unit().scale(constantSpeed);
             ball.move(ball.vel);
 
-            if (ball.pos.x < 0 || ball.pos.x > k.width()) ball.vel.x = -ball.vel.x;
+            if (ball.pos.x < 0 || ball.pos.x > k.width())
+                ball.vel.x = -ball.vel.x;
             if (ball.pos.y < 0) ball.vel.y = -ball.vel.y;
 
             if (ball.pos.y > k.height()) {
@@ -213,7 +240,12 @@ export function startBreakBrickGame(k) {
                     resetBall();
                     lives -= 1;
                 } else {
-                    k.go("lose", { title: 'Break Brick Game', gameRestartSceneName: 'breakBrickGame', gameExitSceneName: 'arcade', score });
+                    k.go('lose', {
+                        title: 'Break Brick Game',
+                        gameRestartSceneName: 'breakBrickGame',
+                        gameExitSceneName: 'arcade',
+                        score,
+                    });
                     score = 0;
                     lives = 4;
                 }
@@ -238,21 +270,24 @@ export function startBreakBrickGame(k) {
             updatePaddleSize();
         }
 
-        window.addEventListener("resize", debounceResize(resizeGameElements, 300));
+        window.addEventListener(
+            'resize',
+            debounceResize(resizeGameElements, 300)
+        );
 
         k.scene('win', () => {
             k.add([
-                k.text(`Congratulations! You Won!\nScore: ${score}`,),
+                k.text(`Congratulations! You Won!\nScore: ${score}`),
                 k.pos(k.width() / 2, k.height() / 2),
-                k.anchor('center')
+                k.anchor('center'),
             ]);
-        
+
             k.add([
                 k.text('Press Space to Play Again', { size: 24 }),
                 k.pos(k.width() / 2, k.height() / 2 + 60),
-                k.anchor('center')
+                k.anchor('center'),
             ]);
-        
+
             // Restart game on pressing Enter
             k.onKeyPress('space', () => {
                 k.go('breakBrickGame');
@@ -261,7 +296,4 @@ export function startBreakBrickGame(k) {
             lives = 4;
         });
     });
-      
 }
-
-
