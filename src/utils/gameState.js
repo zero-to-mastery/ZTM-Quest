@@ -4,14 +4,14 @@ const LOCAL_STORAGE_GAME_STATE_KEY = 'gameState';
 
 const initialState = () => ({
     player: {
-        hasTalkedToBruno: false,
-        wasInRestroom: false,
-        hasHandsWashed: false,
         energy: 100,
+        coinsCollected: 0,
+        coinsSpent: 0,
         speed: speedByScaleFactor,
         direction: 'down',
         isInDialog: false,
         collectedCoins: 0,
+        quests: {},
         score: 0,
         scene: 'start',
         position: { x: 32, y: 384 },
@@ -22,8 +22,8 @@ const initialState = () => ({
 let currentState = undefined;
 
 export const clearSavedGame = () => {
-    localStorage.removeItem(LOCAL_STORAGE_GAME_STATE_KEY);
     currentState = undefined;
+    localStorage.removeItem(LOCAL_STORAGE_GAME_STATE_KEY);
 };
 
 const syncStateProps = (stateToCheck, defaultState) => {

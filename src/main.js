@@ -1,6 +1,8 @@
 import { k, time } from './kplayCtx';
 import { getGameState, setGameState } from './utils/gameState';
 import { updateEnergyUI } from './utils/energyUpdate';
+import { updateCoinsUI } from './utils/coinsUpdate';
+
 import { start } from './scenes/start';
 import './scenes/gameOver';
 import './styles/global.css';
@@ -63,13 +65,15 @@ if (gameState) {
 */
 
 updateEnergyUI(getGameState().player.energy);
+updateCoinsUI();
 setInterval(() => {
     const gameState = getGameState(); // This should be inside setInterval so that gameState variable is updated at every interval.
     if (gameState.player.energy) {
         gameState.player.energy -= 1;
         setGameState(gameState);
         updateEnergyUI(gameState.player.energy);
-    } else {
+    } else if (Math.floor(k.time()) % 3 == 0) {
+        // This ensures log appears atmost 2 times per minute.
         k.debug.log('I need some energy.');
     }
 }, 10000);
