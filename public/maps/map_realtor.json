@@ -724,7 +724,7 @@
                  "y":0
                 }, 
                 {
-                 "height":16,
+                 "height":24,
                  "id":48,
                  "name":"",
                  "rotation":0,
@@ -895,7 +895,7 @@
                  "y":240
                 }, 
                 {
-                 "height":8,
+                 "height":16,
                  "id":68,
                  "name":"",
                  "rotation":0,
@@ -906,7 +906,7 @@
                  "y":240
                 }, 
                 {
-                 "height":8,
+                 "height":16,
                  "id":69,
                  "name":"",
                  "rotation":0,

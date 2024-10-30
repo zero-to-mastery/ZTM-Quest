@@ -1985,6 +1985,18 @@
                  "width":0,
                  "x":167.549668874172,
                  "y":99.3377483443709
+                }, 
+                {
+                 "height":0,
+                 "id":476,
+                 "name":"spawn_extended_campus",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":928,
+                 "y":560
                 }],
          "opacity":1,
          "properties":[
@@ -1994,7 +2006,7 @@
                  "value":false
                 }],
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -3669,7 +3681,7 @@
                  "value":true
                 }],
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -3827,6 +3839,17 @@
                  "width":16,
                  "x":160,
                  "y":66
+                }, 
+                {
+                 "height":64,
+                 "id":475,
+                 "name":"enter_map_extended_campus",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":944,
+                 "y":544
                 }],
          "opacity":1,
          "properties":[
@@ -3841,12 +3864,12 @@
                  "value":false
                 }],
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],
  "nextlayerid":49,
- "nextobjectid":475,
+ "nextobjectid":477,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",

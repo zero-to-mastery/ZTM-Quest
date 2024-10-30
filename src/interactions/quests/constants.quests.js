@@ -21,3 +21,14 @@ export const map_start_quests = {
         }
     ),
 };
+
+export const map_realtor = {
+    'Buy a house!': makeQuest(
+        'Buy a house!',
+        "Go to the realtor's office in the extended campus to buy a house!",
+        {
+            hasTalkedToRealtorClerk: false,
+            hasBoughtHouse: false,
+        }
+    ),
+};
