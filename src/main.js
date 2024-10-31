@@ -22,6 +22,8 @@ import { seaside } from './scenes/seaside';
 import { downtown } from './scenes/downtown';
 import { realtor } from './scenes/realtor';
 import { extendedCampus } from './scenes/extended_campus';
+import { orangeHouse } from './scenes/orange_house';
+import { redHouse } from './scenes/red_house';
 
 k.scene('start', (enter_tag) => bootstrap(start, { enter_tag }));
 k.scene('city', (enter_tag) => bootstrap(city, { enter_tag }));
@@ -40,6 +42,8 @@ k.scene('fishing', (enter_tag) => miniGameBootstrap(fishing, { enter_tag }));
 k.scene('extended_campus', (enter_tag) =>
     bootstrap(extendedCampus, { enter_tag })
 );
+k.scene('orange_house', (enter_tag) => bootstrap(orangeHouse, { enter_tag }));
+k.scene('red_house', (enter_tag) => bootstrap(redHouse, { enter_tag }));
 k.scene('realtor', (enter_tag) => bootstrap(realtor, { enter_tag }));
 
 // Game Machine Scenes
