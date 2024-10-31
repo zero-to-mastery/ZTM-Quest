@@ -10,11 +10,9 @@ export const interactionWithGameMachine7 = (player, k, map) => {
                     displayDialogue({
                         k,
                         player,
-                        text: [
-                            'Starting the Jumper Game... Get ready!!',
-                        ],
+                        text: ['Starting the Jumper Game... Get ready!!'],
                         onDisplayEnd: () => {
-                            startJumpQuest(k)
+                            startJumpQuest(k);
                         },
                     });
                 } else {
@@ -74,8 +72,10 @@ function startJumpQuest(k) {
     });
 
     k.scene('jumpQuest', () => {
-
-        k.loadSprite('backgroundCity', './assets/sprites/runner-quest-background.png');
+        k.loadSprite(
+            'backgroundCity',
+            './assets/sprites/runner-quest-background.png'
+        );
         k.loadSprite('barrier', './assets/sprites/runner-quest-barrier.png');
 
         k.loadSprite('runner', './assets/sprites/runner-quest-player.png', {
@@ -87,7 +87,10 @@ function startJumpQuest(k) {
         });
 
         k.add([
-            k.sprite('backgroundCity', { width: k.width(), height: k.height() }),
+            k.sprite('backgroundCity', {
+                width: k.width(),
+                height: k.height(),
+            }),
             k.pos(0, 0),
             k.fixed(),
         ]);
@@ -108,14 +111,13 @@ function startJumpQuest(k) {
         ]);
 
         const player = k.add([
-            k.sprite('runner', {anim: 'run'}),
-            k.pos(20, k.height()/2),
+            k.sprite('runner', { anim: 'run' }),
+            k.pos(20, k.height() / 2),
             k.area(),
             k.body(),
             k.opacity(1),
             k.scale(2),
         ]);
-
 
         const scoreLabel = k.add([
             k.text(score),
@@ -127,7 +129,7 @@ function startJumpQuest(k) {
         ]);
 
         function increaseScore(scoreIncrement) {
-            score+=scoreIncrement;
+            score += scoreIncrement;
             scoreLabel.text = score;
         }
 
@@ -148,52 +150,60 @@ function startJumpQuest(k) {
         spawnObstacle();
 
         function spawnObstacle() {
-            k.wait(k.rand(SPAWN_DELAY_MIN, SPAWN_DELAY_MAX - (obstacleSpeed/OBSTACLE_SPEED_START)), () => {
-                if(Math.random() < 0.2){
-                    k.add([
-                        k.rect(30, 30),
-                        k.pos(k.width(), k.rand(k.height() * 0.4, k.height() * 0.8)),
-                        k.color(255, 255, 0),
-                        k.outline(5),
-                        k.area(),
-                        k.move(k.LEFT, obstacleSpeed),
-                        k.offscreen({destroy: true}),
-                        "immunityToken",
-                    ])
-                }
-                else {
-                    k.add([
-                        k.sprite('barrier', {width: 120, height: 120}),
-                        k.pos(k.width(), k.height() - 120 - floor.height),
-                        k.area(),
-                        k.body(),
-                        k.move(k.LEFT, obstacleSpeed),
-                        k.offscreen({destroy: true}),
-                        "obstacle",
-                        {speed: 200},
-                    ]);
-                }
+            k.wait(
+                k.rand(
+                    SPAWN_DELAY_MIN,
+                    SPAWN_DELAY_MAX - obstacleSpeed / OBSTACLE_SPEED_START
+                ),
+                () => {
+                    if (Math.random() < 0.2) {
+                        k.add([
+                            k.rect(30, 30),
+                            k.pos(
+                                k.width(),
+                                k.rand(k.height() * 0.4, k.height() * 0.8)
+                            ),
+                            k.color(255, 255, 0),
+                            k.outline(5),
+                            k.area(),
+                            k.move(k.LEFT, obstacleSpeed),
+                            k.offscreen({ destroy: true }),
+                            'immunityToken',
+                        ]);
+                    } else {
+                        k.add([
+                            k.sprite('barrier', { width: 120, height: 120 }),
+                            k.pos(k.width(), k.height() - 120 - floor.height),
+                            k.area(),
+                            k.body(),
+                            k.move(k.LEFT, obstacleSpeed),
+                            k.offscreen({ destroy: true }),
+                            'obstacle',
+                            { speed: 200 },
+                        ]);
+                    }
 
-                spawnObstacle();
-            });
+                    spawnObstacle();
+                }
+            );
         }
 
-        k.loop(0.4, () =>{
+        k.loop(0.4, () => {
             increaseScore(3);
             increaseSpeed();
         });
 
-        k.onKeyPress("space", () => {
+        k.onKeyPress('space', () => {
             if (player.isGrounded()) {
                 player.jump(JUMP_FORCE);
             }
         });
 
         player.onCollide('obstacle', (obj) => {
-            if(isImmune){
+            if (isImmune) {
                 increaseScore(20);
                 k.destroy(obj);
-            } else{
+            } else {
                 k.go('lose', {
                     title: 'Jump Quest',
                     gameRestartSceneName: 'jumpQuest',
