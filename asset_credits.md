@@ -51,3 +51,5 @@ https://pop-shop-packs.itch.io/cats-pixel-asset-pack
 https://kenney.nl/assets/puzzle-pack - sprites for Break Brick Game on Machine #5
 
 https://www.freepik.com/free-vector/dessert-icons-pixel-art_29012360.htm#fromView=search&page=6&position=19&uuid=bc602f54-b53e-4d17-aa10-b3fa525a67d5 dessert sprites for Eat All Cake Game on Machine #13
+
+https://totuslotus.itch.io/characterpack - man sprite for Eat All Cake Game on Machine #13 (@lotus_totus)
