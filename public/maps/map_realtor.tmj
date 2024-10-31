@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"map_extended_campus.json"
+        }
+    },
  "height":20,
  "infinite":false,
  "layers":[
@@ -757,6 +765,30 @@
                 }, 
                 {
                  "height":0,
+                 "id":57,
+                 "name":"spawn_orange_house",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":136,
+                 "y":80
+                }, 
+                {
+                 "height":0,
+                 "id":58,
+                 "name":"spawn_red_house",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":184,
+                 "y":80
+                }, 
+                {
+                 "height":0,
                  "id":68,
                  "name":"spawn_extended_campus_top",
                  "point":true,
@@ -766,42 +798,6 @@
                  "width":0,
                  "x":72,
                  "y":48
-                }, 
-                {
-                 "height":0,
-                 "id":69,
-                 "name":"doorOpenRed",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":184,
-                 "y":56
-                }, 
-                {
-                 "height":0,
-                 "id":70,
-                 "name":"doorOpenOrange",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":136,
-                 "y":56
-                }, 
-                {
-                 "height":0,
-                 "id":71,
-                 "name":"spawn_house",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":160,
-                 "y":80
                 }],
          "opacity":1,
          "properties":[
@@ -811,7 +807,7 @@
                  "value":false
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 

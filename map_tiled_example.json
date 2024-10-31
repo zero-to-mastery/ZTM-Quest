@@ -191,6 +191,17 @@
                  "width":64,
                  "x":80,
                  "y":0
+                }, 
+                {
+                 "height":0,
+                 "id":234,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":480,
+                 "y":208
                 }],
          "opacity":1,
          "properties":[
@@ -205,7 +216,7 @@
                  "value":false
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -639,6 +650,30 @@
                  "width":0,
                  "x":448,
                  "y":208
+                }, 
+                {
+                 "height":0,
+                 "id":235,
+                 "name":"spawn_city",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":432,
+                 "y":208
+                }, 
+                {
+                 "height":0,
+                 "id":236,
+                 "name":"spawn_downtown",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":112,
+                 "y":32
                 }],
          "opacity":1,
          "properties":[
@@ -648,12 +683,12 @@
                  "value":false
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],
  "nextlayerid":27,
- "nextobjectid":234,
+ "nextobjectid":237,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
