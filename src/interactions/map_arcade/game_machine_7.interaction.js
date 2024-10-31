@@ -193,8 +193,7 @@ function startJumpQuest(k) {
             if(isImmune){
                 increaseScore(20);
                 k.destroy(obj);
-            }
-            else{
+            } else{
                 k.go('lose', {
                     title: 'Jump Quest',
                     gameRestartSceneName: 'jumpQuest',
@@ -208,7 +207,7 @@ function startJumpQuest(k) {
             grantImmunity();
             increaseScore(100);
             k.destroy(token);
-        })
+        });
 
         k.onKeyPress('escape', () => {
             k.go('lose', {
