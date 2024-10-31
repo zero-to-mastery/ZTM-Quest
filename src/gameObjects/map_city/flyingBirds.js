@@ -9,11 +9,7 @@ export const flyingBirds = (k, map) => {
     });
 
     function spawnBird() {
-        const bird = k.add([
-            k.sprite('bird'),
-            k.pos(k.vec2(0, 780)),
-            k.area(),
-        ]);
+        const bird = k.add([k.sprite('bird'), k.pos(k.vec2(0, 780)), k.area()]);
 
         bird.play('fly');
 
@@ -27,7 +23,7 @@ export const flyingBirds = (k, map) => {
         });
 
         return bird;
-   }
+    }
 
     const birds = [];
 
@@ -37,5 +33,4 @@ export const flyingBirds = (k, map) => {
     });
 
     return birds;
-
- };
+};
