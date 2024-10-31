@@ -49,3 +49,6 @@ https://openart.ai/ - sprites for Sinusoid Formula Game on Machine #11 (formula 
 https://pop-shop-packs.itch.io/cats-pixel-asset-pack
 
 https://kenney.nl/assets/puzzle-pack - sprites for Break Brick Game on Machine #5
+
+https://craftpix.net/freebies/city-man-pixel-art-character-sprite-sheets/ - sprite for Runner Quest Game on Machine 7(runner)
+https://openart.ai/ - other sprites for Runner Quest Game on Machine 7
