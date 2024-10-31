@@ -5,6 +5,7 @@ import {
     completeQuestObjective,
     recieveQuest,
 } from '../../utils/questHandler';
+import { takeAwayCoins } from '../../utils/coinsUpdate';
 import { map_realtor } from '../quests/constants.quests';
 
 export const counterClerkInteraction = (player, k) => {
@@ -26,11 +27,19 @@ export const counterClerkInteraction = (player, k) => {
         );
         const answer = await displayPermissionBox({ k, player, text: [''] });
         if (answer) {
+            const possibleHouses = ['Orange House', 'Red House'];
+            const choices = [
+                ...possibleHouses.filter(
+                    (el) => !player.state.housesOwned.includes(el.split(' ')[0])
+                ),
+                "Neither, I've changed my mind",
+            ];
             showCustomPrompt(
                 'Which house would you like to buy?',
-                ['Orange House', 'Red House', "Neither, I've changed my mind"],
+                choices,
                 (selectedOption) => {
-                    if (!selectedOption.split(' ').includes('House')) {
+                    const selectedOptionArr = selectedOption.split(' ');
+                    if (!selectedOptionArr.includes('House')) {
                         displayDialogue({
                             k,
                             player,
@@ -51,6 +60,12 @@ export const counterClerkInteraction = (player, k) => {
                                 `You now own the ${selectedOption}!`,
                             ],
                             onDisplayEnd: () => {
+                                player.state.housesOwned = [
+                                    ...player.state.housesOwned,
+                                    selectedOptionArr[0],
+                                ];
+                                takeAwayCoins(100);
+
                                 completeQuestObjective(
                                     player,
                                     'Buy a house!',

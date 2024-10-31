@@ -12,6 +12,7 @@ const initialState = () => ({
         isInDialog: false,
         collectedCoins: 0,
         quests: {},
+        housesOwned: [],
         score: 0,
         scene: 'start',
         position: { x: 32, y: 384 },

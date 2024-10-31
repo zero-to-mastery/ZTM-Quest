@@ -133,7 +133,6 @@ export async function displayPermissionBox({
     return new Promise((resolve) => {
         function onCloseBtnClick() {
             onDisplayEnd();
-            time.paused = false;
             abort.abort();
             dialogUI.style.display = 'none';
             dialog.innerHTML = '';
@@ -143,6 +142,7 @@ export async function displayPermissionBox({
             closeBtn.innerHTML = 'Close';
             nextBtn.innerHTML = 'Next';
             player.state.isInDialog = false;
+            time.paused = false;
 
             k.canvas.focus();
             resolve(false); // Resolve with false when "No" is clicked
@@ -159,6 +159,7 @@ export async function displayPermissionBox({
             closeBtn.innerHTML = 'Close';
             nextBtn.innerHTML = 'Next';
             player.state.isInDialog = false;
+            time.paused = false;
 
             k.canvas.focus();
             resolve(true); // Resolve with true when "Yes" is clicked
