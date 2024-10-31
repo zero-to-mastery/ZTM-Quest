@@ -49,3 +49,5 @@ https://openart.ai/ - sprites for Sinusoid Formula Game on Machine #11 (formula 
 https://pop-shop-packs.itch.io/cats-pixel-asset-pack
 
 https://kenney.nl/assets/puzzle-pack - sprites for Break Brick Game on Machine #5
+
+https://free-game-assets.itch.io/free-street-animal-pixel-art-asset-pack - crow sprite for city map
