@@ -47,3 +47,5 @@ https://elevenlabs.io/ - sounds for Sinusoid Formula Game on Machine #11
 https://openart.ai/ - sprites for Sinusoid Formula Game on Machine #11 (formula sprite animation by @purifiedlight)
 
 https://pop-shop-packs.itch.io/cats-pixel-asset-pack
+
+https://kenney.nl/assets/puzzle-pack - sprites for Break Brick Game on Machine #5

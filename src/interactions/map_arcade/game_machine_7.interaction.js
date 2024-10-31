@@ -80,11 +80,10 @@ function startJumpQuest(k) {
 
         k.setGravity(GRAVITY);
 
-        // Vytvorenie hráča
         const player = k.add([
-            k.rect(30, 30),    // veľkosť postavičky
-            k.pos(80, k.height() - 30),  // počiatočná pozícia hráča
-            k.color(0, 0, 255),  // modrá farba
+            k.rect(30, 30),
+            k.pos(80, k.height() - 30),
+            k.color(0, 0, 255),
             k.area(),
             k.body(),
         ]);
@@ -98,7 +97,6 @@ function startJumpQuest(k) {
             k.body({ isStatic: true }),
         ]);
 
-        // Zaznamenávanie skóre na obrazovke
         const scoreLabel = k.add([
             k.text(score),
             k.pos(24, 24),
@@ -108,7 +106,6 @@ function startJumpQuest(k) {
             },
         ]);
 
-        // Aktualizácia skóre
         function increaseScore() {
             score+=3;
             scoreLabel.text = score;
@@ -120,7 +117,6 @@ function startJumpQuest(k) {
 
         spawnObstacle();
 
-        // Generovanie prekážok
         function spawnObstacle() {
             const spawnDelay = k.rand(SPAWN_DELAY_MIN, SPAWN_DELAY_MAX);
             k.wait(spawnDelay, () => {
@@ -132,7 +128,7 @@ function startJumpQuest(k) {
                     k.body(),
                     k.move(k.LEFT, obstacleSpeed),
                     k.offscreen({destroy: true}),
-                    "obstacle", // označenie pre detekciu kolízie
+                    "obstacle",
                     {speed: 200},
                 ]);
 
@@ -145,14 +141,12 @@ function startJumpQuest(k) {
             increaseSpeed();
         });
 
-        // Skákanie po stlačení "space"
         k.onKeyPress("space", () => {
             if (player.isGrounded()) {
                 player.jump(JUMP_FORCE);
             }
         });
 
-        // Detekcia kolízie hráča s prekážkou
         player.onCollide('obstacle', () => {
             k.go('lose', {
                 title: 'Jump Quest',
@@ -162,7 +156,6 @@ function startJumpQuest(k) {
             });
         });
 
-        // Ukončenie hry pomocou "escape"
         k.onKeyPress('escape', () => {
             k.go('lose', {
                 title: 'Jump Quest',
