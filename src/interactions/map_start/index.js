@@ -12,6 +12,7 @@ import { interactionWithTV } from './tv_main_room.interaction';
 import { interactionWithCake } from './cake.interaction';
 import { interactionWithLocker } from './locker.interaction';
 import { interactionWithCat } from './cat.interaction';
+import { interactionWithAkashi } from './akashi.interaction';
 
 const interactions = [
     restroomInteractions,
@@ -28,6 +29,7 @@ const interactions = [
     interactionWithCake,
     interactionWithLocker,
     interactionWithCat,
+    interactionWithAkashi
 ];
 
 export default interactions;
