@@ -54,3 +54,9 @@ https://free-game-assets.itch.io/free-street-animal-pixel-art-asset-pack - crow 
 
 https://craftpix.net/freebies/city-man-pixel-art-character-sprite-sheets/ - sprite for Runner Quest Game on Machine 7(runner)
 https://openart.ai/ - other sprites for Runner Quest Game on Machine 7
+
+https://www.freepik.com/free-vector/dessert-icons-pixel-art_29012360.htm#fromView=search&page=6&position=19&uuid=bc602f54-b53e-4d17-aa10-b3fa525a67d5 dessert sprites for Eat All Cake Game on Machine #13
+
+https://totuslotus.itch.io/characterpack - man sprite for Eat All Cake Game on Machine #13 (@lotus_totus)
+
+
