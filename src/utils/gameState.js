@@ -1,6 +1,6 @@
 import { speedByScaleFactor } from '../constants';
 
-const LOCAL_STORAGE_GAME_STATE_KEY = 'gameState';
+const LOCAL_STORAGE_GAME_STATE_KEY = 'gameStateZtmQuest';
 
 const initialState = () => ({
     player: {
