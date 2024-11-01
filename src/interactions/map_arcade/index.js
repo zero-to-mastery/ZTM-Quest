@@ -13,6 +13,7 @@ import { interactionWithGameMachine3 } from './game_machine_3.interactions';
 import { interactionWithGameMachineCrawl } from './game_machine_crawl.interaction';
 import { interactionWithGameMachine9 } from './game_machine_9.interactions';
 import { interactionWithGameMachine5 } from './game_machine_5.interactions';
+import { interactionWithGameMachine7 } from './game_machine_7.interaction';
 import { interactionWithGameMachine13 } from './game_machine_13.interactions';
 
 const interactions = [
@@ -30,6 +31,7 @@ const interactions = [
     interactionWithGameMachine2,
     interactionWithGameMachine4,
     interactionWithGameMachine6,
+    interactionWithGameMachine7,
     interactionWithGameMachine8,
     interactionWithGameMachine9,
     interactionWithGameMachine10,

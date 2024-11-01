@@ -20,6 +20,13 @@ export const addCoins = (val) => {
     updateCoinsUI();
 };
 
+export const takeAwayCoins = (val) => {
+    const gameState = getGameState();
+    gameState.player.coinsCollected -= val;
+    setGameState(gameState);
+    updateCoinsUI();
+};
+
 export const updateCoinsUI = () => {
     const gameState = getGameState();
     const coinsRemain = document.getElementById('coins-remain');
