@@ -21,10 +21,17 @@ export const interactionHandler = (
         }
 
         try {
-            clickHandler = k.onClick(`${sprite.tags[1]}`, () => handleOnCollide());
+            clickHandler = k.onClick(`${sprite.tags[1]}`, () =>
+                handleOnCollide()
+            );
             keyHandler = k.onKeyPress('t', () => handleOnCollide());
         } catch (e) {
-            console.error("Error setting up interaction handlers:", e, target, sprite);
+            console.error(
+                'Error setting up interaction handlers:',
+                e,
+                target,
+                sprite
+            );
             tearDownInteractionPrompt(k);
         }
     });
