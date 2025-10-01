@@ -97,3 +97,55 @@ With each added map, you will also find object screenshots to identify objects w
     <img src="./map_campus_house_1/map_campus_house_1.png" height="300" width="400">
     <figcaption>Interactive Objects</figcaption>
 </figure>
+
+## Classroom (map_classroom)
+<figure>
+    <img src="./map_classroom/interaction_objects.png" height="300" width="400">
+    <figcaption>Interactive Objects</figcaption>
+</figure>
+<figure>
+    <img src="./map_classroom/spawnpoints.png" height="300" width="400">
+    <figcaption>Spawnpoints</figcaption>
+</figure>
+
+## Downtown (map_downtown)
+<figure>
+    <img src="./map_downtown/interaction_objects.png" height="300" width="400">
+    <figcaption>Interactive Objects</figcaption>
+</figure>
+<figure>
+    <img src="./map_downtown/spawnpoints.png" height="300" width="400">
+    <figcaption>Spawnpoints</figcaption>
+</figure>
+<figure>
+    <img src="./map_downtown/objects_enter_new_map.png" height="300" width="400">
+    <figcaption>Spawnpoints</figcaption>
+</figure>
+
+## Extended Campus (map_campus)
+<figure>
+    <img src="./map_extended_campus/interaction_objects_enter_map_points.png" height="300" width="400">
+    <figcaption>Interactive Objects</figcaption>
+</figure>
+<figure>
+    <img src="./map_extended_campus/spawnpoints.png" height="300" width="400">
+    <figcaption>Spawnpoints</figcaption>
+</figure>
+
+## Orange House (map_orange_house)
+<figure>
+    <img src="./map_orange_house/interaction_objects_spawnpoints_enter_new_map_points.png" height="300" width="400">
+    <figcaption>Interactive Objects</figcaption>
+</figure>
+
+## Realtor (map_realtor)
+<figure>
+    <img src="./map_realtor/interaction_objects_spawnpoints_enter_new_map_points.png" height="300" width="400">
+    <figcaption>Interactive Objects</figcaption>
+</figure>
+
+## Seaside (map_seaside)
+<figure>
+    <img src="./map_seaside/interaction_objects_spawnpoints_enter_new_maps.png" height="300" width="400">
+    <figcaption>Interactive Objects</figcaption>
+</figure>
