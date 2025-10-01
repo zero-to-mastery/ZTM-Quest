@@ -20,8 +20,13 @@ export const interactionHandler = (
             keyHandler.cancel();
         }
 
-        clickHandler = k.onClick(`${sprite.tags[0]}`, () => handleOnCollide());
-        keyHandler = k.onKeyPress('t', () => handleOnCollide());
+        try {
+            clickHandler = k.onClick(`${sprite.tags[1]}`, () => handleOnCollide());
+            keyHandler = k.onKeyPress('t', () => handleOnCollide());
+        } catch (e) {
+            console.error("Error setting up interaction handlers:", e, target, sprite);
+            tearDownInteractionPrompt(k);
+        }
     });
 
     player.onCollideEnd(target, () => {
