@@ -31,28 +31,21 @@
 
 .option-btn {
     padding: 0.8rem 1.5rem;
-    background-color: transparent !important;
     background: transparent !important;
-    border: none !important;
-    border-radius: 0 !important;
+    border: 2px solid transparent;
+    border-radius: 0;
     outline: none !important;
     box-shadow: none !important;
     color: #414141;
     font-family: pixelifysans, sans-serif;
     font-size: 1.5rem;
     cursor: pointer;
-    transition: none;
+    transition: border-radius 0.3s ease, border-color 0.3s ease;
 }
 
-.option-btn:hover,
-.option-btn:focus,
-.option-btn:active {
-    background-color: transparent !important;
-    background: transparent !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    transform: none;
+.option-btn:hover {
+    border-color: lightgreen;
+    border-radius: 8px;
 }
 
 .ui-text {
@@ -70,41 +63,44 @@
 .ui-close-btn,
 .ui-next-btn {
     font-family: pixelifysans, sans-serif;
-    border-radius: 0 !important;
     padding: 0.6rem 1.5rem;
-    background-color: transparent !important;
     background: transparent !important;
+    border: 2px solid transparent;
+    border-radius: 0;
+    outline: none !important;
+    box-shadow: none !important;
     color: #414141;
-    cursor: pointer;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
     font-size: 1.5rem;
+    cursor: pointer;
     animation: fadeIn 1s forwards 0.5s;
-}
-.ui-close-btn:hover,
-.ui-next-btn:hover,
-.ui-close-btn:focus,
-.ui-next-btn:focus,
-.ui-close-btn:active,
-.ui-next-btn:active {
-    background-color: transparent !important;
-    background: transparent !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    transform: none;
+    transition: border-radius 0.3s ease, border-color 0.3s ease;
 }
 
-/* Override global button:focus styles for dialog buttons */
-button.ui-close-btn:focus,
-button.ui-next-btn:focus,
-button.option-btn:focus {
-    box-shadow: none !important;
-    outline: none !important;
-    border: none !important;
+.ui-close-btn:hover,
+.ui-next-btn:hover {
+    border-color: #007bff;
+    border-radius: 6px;
+}
+
+/* Reset focus states to prevent unwanted styling */
+.option-btn:focus,
+.option-btn:active,
+.ui-close-btn:focus,
+.ui-close-btn:active,
+.ui-next-btn:focus,
+.ui-next-btn:active {
     background: transparent !important;
-    background-color: transparent !important;
+    border-color: transparent;
+    border-radius: 0;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Ensure hover effects work with high specificity */
+#dialog-close-btn:hover,
+#dialog-next-btn:hover {
+    border: 2px solid #007bff !important;
+    border-radius: 6px !important;
 }
 
 @media (max-width: 768px) {
