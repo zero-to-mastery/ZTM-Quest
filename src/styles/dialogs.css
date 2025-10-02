@@ -31,20 +31,28 @@
 
 .option-btn {
     padding: 0.8rem 1.5rem;
-    background-color: #007bff;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-size: 1rem;
+    background-color: transparent !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    color: #414141;
+    font-family: pixelifysans, sans-serif;
+    font-size: 1.5rem;
     cursor: pointer;
-    transition:
-        background-color 0.3s ease,
-        transform 0.2s ease;
+    transition: none;
 }
 
-.option-btn:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
+.option-btn:hover,
+.option-btn:focus,
+.option-btn:active {
+    background-color: transparent !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    transform: none;
 }
 
 .ui-text {
@@ -61,27 +69,42 @@
 }
 .ui-close-btn,
 .ui-next-btn {
-    font-family: 'Courier New', monospace;
-    border: 2px solid #007bff;
-    border-radius: 6px;
+    font-family: pixelifysans, sans-serif;
+    border-radius: 0 !important;
     padding: 0.6rem 1.5rem;
-    background-color: #007bff;
-    color: white;
+    background-color: transparent !important;
+    background: transparent !important;
+    color: #414141;
     cursor: pointer;
-    font-size: 1.1rem;
-    transition:
-        background-color 0.3s ease,
-        transform 0.2s ease,
-        border-color 0.3s ease;
-    opacity: 0;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    font-size: 1.5rem;
     animation: fadeIn 1s forwards 0.5s;
 }
-
 .ui-close-btn:hover,
-.ui-next-btn:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
-    transform: translateY(-2px);
+.ui-next-btn:hover,
+.ui-close-btn:focus,
+.ui-next-btn:focus,
+.ui-close-btn:active,
+.ui-next-btn:active {
+    background-color: transparent !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    transform: none;
+}
+
+/* Override global button:focus styles for dialog buttons */
+button.ui-close-btn:focus,
+button.ui-next-btn:focus,
+button.option-btn:focus {
+    box-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
 }
 
 @media (max-width: 768px) {
