@@ -30,7 +30,8 @@ export const makeFish = (map) => {
 
     const verticalOffset = map.get('grass')[0].pos.y + 50;
     const maxVerticalPosition = 275;
-    const randomY = Math.random() * (maxVerticalPosition - verticalOffset) + verticalOffset;
+    const randomY =
+        Math.random() * (maxVerticalPosition - verticalOffset) + verticalOffset;
 
     return k.make([
         k.sprite(fishTag),

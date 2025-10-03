@@ -95,13 +95,10 @@ export const initMap = async (
                     width: staticBodyObj.width,
                     height: staticBodyObj.height,
                     type: staticBodyObj.type,
-                    ...staticBodyObj?.properties?.reduce(
-                        (acc, prop) => {
-                            acc[prop.name] = prop.value;
-                            return acc;
-                        },
-                        {}
-                    ),
+                    ...staticBodyObj?.properties?.reduce((acc, prop) => {
+                        acc[prop.name] = prop.value;
+                        return acc;
+                    }, {}),
                 };
 
                 const components = [

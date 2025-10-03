@@ -15,8 +15,8 @@ export const quitGameText = (k, map) => {
                     if (map.width) {
                         this.pos.x = map.width / 2 - 30;
                     }
-                }
-            }
+                },
+            },
         ]);
         return quitText;
     }

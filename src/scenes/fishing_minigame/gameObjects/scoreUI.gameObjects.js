@@ -10,8 +10,8 @@ export const scoreUI = (k, map) => {
                     if (map.height) {
                         this.pos.y = map.height / 2 - 135;
                     }
-                }
-            }
+                },
+            },
         ]);
         return scoreText;
     }
