@@ -87,19 +87,6 @@ export const initMap = async (
                  * Setup hidden boundaries for the player to collide with on the map
                  * The data gets loaded from mapData which in fact got created by Tiled
                  */
-                const tiledPropsObj = {
-                    id: staticBodyObj.id,
-                    name: staticBodyObj.name,
-                    x: staticBodyObj.x,
-                    y: staticBodyObj.y,
-                    width: staticBodyObj.width,
-                    height: staticBodyObj.height,
-                    type: staticBodyObj.type,
-                    ...staticBodyObj?.properties?.reduce((acc, prop) => {
-                        acc[prop.name] = prop.value;
-                        return acc;
-                    }, {}),
-                };
 
                 const components = [
                     k.area({
@@ -116,7 +103,15 @@ export const initMap = async (
                     k.pos(staticBodyObj.x, staticBodyObj.y),
                     staticBodyObj.name,
                     {
-                        tiledProps: JSON.stringify(tiledPropsObj, null, 2),
+                        tiledProps: {
+                            ...staticBodyObj?.properties?.reduce(
+                                (acc, prop) => {
+                                    acc[prop.name] = prop.value;
+                                    return acc;
+                                },
+                                {}
+                            ),
+                        },
                     },
                 ];
 
