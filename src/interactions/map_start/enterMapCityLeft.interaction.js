@@ -7,7 +7,7 @@ import { map_start_quests } from '../quests/constants.quests';
 
 export const enterMapCityLeftInteraction = (player, k, map) => {
     const questName = 'Start Interacting!';
-    player.onCollide('enter_map_left', () => {
+    player.onCollide('enter_map_left', async () => {
         const hasTalkedToBruno = retrieveQuestObjectiveStatus(
             player,
             questName,
@@ -31,7 +31,7 @@ export const enterMapCityLeftInteraction = (player, k, map) => {
         ) {
             k.go('city', 'spawn_office_left');
         } else {
-            recieveQuest(player, map_start_quests['Start Interacting!']);
+            await recieveQuest(player, map_start_quests['Start Interacting!']);
             if (!hasTalkedToBruno) {
                 displayDialogue({
                     k,

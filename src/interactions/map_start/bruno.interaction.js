@@ -16,20 +16,20 @@ export const interactionWithBruno = (player, k, map) => {
             player,
             characterName: bruno.name,
             text: conversationBruno,
-            onDisplayEnd: () => {
+            onDisplayEnd: async () => {
                 if (!playerHasQuest(player, 'Start Interacting!')) {
-                    recieveQuest(
+                    await recieveQuest(
                         player,
                         map_start_quests['Start Interacting!']
                     );
                 }
-                completeQuestObjective(
+                await completeQuestObjective(
                     player,
                     'Start Interacting!',
                     'hasTalkedToBruno'
                 );
                 // Internally checks if all objectives are complete
-                completeQuest(player, 'Start Interacting!');
+                await completeQuest(player, 'Start Interacting!');
             },
         });
     });
