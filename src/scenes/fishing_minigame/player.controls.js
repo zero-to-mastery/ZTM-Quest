@@ -1,7 +1,7 @@
 import { k } from '../../kplayCtx';
 import { makeFish } from '../../factories/fish.factory';
 
-export const addPlayerControls = (player, hook, map) => {
+export const addPlayerControls = (player, hook, map, fishingRod = null) => {
     k.onKeyDown('left', () => {
         if (player.vel.x < 0) {
             return;
@@ -66,6 +66,8 @@ export const addPlayerControls = (player, hook, map) => {
         col.source.pos.x += 1;
     });
 
+    const maxHookDepth = 275; // Maximum Y position for hook to prevent going off-screen
+
     hook.onCollide((gameObj, col) => {
         if (gameObj.tags.includes('grass')) {
             hook.vel.y = 0;
@@ -73,7 +75,7 @@ export const addPlayerControls = (player, hook, map) => {
             map.pressed = false;
             map.pressedTwice = false;
         } else if (gameObj.tags.includes('sea')) {
-            hook.vel.y = -300;
+            hook.vel.y = -400;
             map.pressed = true;
             map.pressedTwice = true;
         }
@@ -81,7 +83,21 @@ export const addPlayerControls = (player, hook, map) => {
 
     hook.onUpdate(() => {
         hook.pos.x = player.pos.x;
+
+        // Limit hook depth to prevent going off-screen
+        if (hook.pos.y > maxHookDepth && hook.vel.y > 0) {
+            hook.vel.y = -400;
+            map.pressed = true;
+            map.pressedTwice = true;
+        }
     });
+
+    // Make fishing rod follow the player
+    if (fishingRod) {
+        k.onUpdate(() => {
+            fishingRod.pos = k.vec2(player.pos.x - 2, player.pos.y + 34);
+        });
+    }
 
     // Game Configuration that spawns fish randomly
     k.onUpdate(() => {

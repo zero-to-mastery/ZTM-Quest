@@ -1,11 +1,19 @@
 export const scoreUI = (k, map) => {
     if (!k.isTouchscreen()) {
-        return k.make([
-            k.text(`Score: ${map.score}`, { size: 10 }),
-            k.pos(16, 24),
+        const scoreText = k.make([
+            k.text(`Score: ${map.score}`, { size: 8 }),
+            k.pos(15, 25),
             k.z(10),
             'score',
+            {
+                update() {
+                    if (map.height) {
+                        this.pos.y = map.height / 2 - 135;
+                    }
+                }
+            }
         ]);
+        return scoreText;
     }
 
     return k.make([
