@@ -10,7 +10,7 @@ const createCelebrationEffect = () => {
     for (let i = 0; i < 50; i++) {
         const particle = document.createElement('div');
         const isConfetti = Math.random() > 0.5;
-        
+
         if (isConfetti) {
             // Confetti piece
             particle.className = 'confetti-particle';
@@ -31,7 +31,7 @@ const createCelebrationEffect = () => {
                 top: ${Math.random() * 100}%;
             `;
         }
-        
+
         celebrationContainer.appendChild(particle);
     }
 
@@ -59,7 +59,7 @@ export const completeQuest = async (player, questName) => {
                 await displayDialogue({
                     k,
                     player,
-                    characterName: "Quest System",
+                    characterName: 'Quest System',
                     text: [`You have not finished: "${objective}"`],
                 });
                 hasFoundIncompleteObjective = true;
@@ -77,7 +77,7 @@ export const completeQuest = async (player, questName) => {
         await displayDialogue({
             k,
             player,
-            characterName: "Quest System",
+            characterName: 'Quest System',
             text: [`🎉 Quest Completed! 🎉`, `"${questName}"`],
         });
     }
@@ -104,7 +104,7 @@ export const completeQuestObjective = async (player, questName, objective) => {
     await displayDialogue({
         k,
         player,
-        characterName: "Quest System",
+        characterName: 'Quest System',
         text: [`✅ Objective Completed!`, `"${objective}"`],
     });
 };
@@ -130,7 +130,7 @@ export const recieveQuest = async (player, quest) => {
         await displayDialogue({
             k,
             player,
-            characterName: "Quest System",
+            characterName: 'Quest System',
             text: [`🆕 New Quest Started!`, `"${Object.keys(quest)[0]}"`],
         });
     }
