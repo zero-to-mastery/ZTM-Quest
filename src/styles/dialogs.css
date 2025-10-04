@@ -1,19 +1,19 @@
 /* Custom Properties for Accessibility */
 :root {
-    --primary-color: #0056b3;           /* Darker blue for better contrast */
-    --secondary-color: #2d2d2d;         /* Darker gray for better contrast */
-    --success-color: #1e7e34;           /* Darker green for better contrast */
+    --primary-color: #0056b3; /* Darker blue for better contrast */
+    --secondary-color: #2d2d2d; /* Darker gray for better contrast */
+    --success-color: #1e7e34; /* Darker green for better contrast */
     --background-color: #ffffff;
-    --text-color: #222222;              /* Darker text for better contrast */
-    --focus-color: #0056b3;             /* Color for focus indicators */
+    --text-color: #222222; /* Darker text for better contrast */
+    --focus-color: #0056b3; /* Color for focus indicators */
     --focus-ring-color: rgba(0, 86, 179, 0.5);
-    
+
     /* Typography */
     --font-family: pixelifysans, system-ui, sans-serif;
     --font-size-normal: clamp(1rem, 2vw, 1.2rem);
     --font-size-large: clamp(1.25rem, 2.5vw, 1.5rem);
     --line-height: 1.5;
-    
+
     /* Interactive States */
     --focus-ring-width: 3px;
     --focus-outline-offset: 3px;
@@ -71,12 +71,12 @@
     font-family: var(--font-family);
     font-size: var(--font-size-large);
     cursor: pointer;
-    transition: 
+    transition:
         border-color var(--transition-speed) ease,
         background-color var(--transition-speed) ease,
         transform var(--transition-speed) ease;
     position: relative;
-    min-width: 44px;  /* Minimum touch target size */
+    min-width: 44px; /* Minimum touch target size */
     min-height: 44px; /* Minimum touch target size */
 }
 
@@ -136,10 +136,10 @@
     color: var(--secondary-color);
     font-size: var(--font-size-large);
     cursor: pointer;
-    min-width: 44px;  /* Minimum touch target size */
+    min-width: 44px; /* Minimum touch target size */
     min-height: 44px; /* Minimum touch target size */
     animation: fadeIn 1s forwards 0.5s;
-    transition: 
+    transition:
         border-color var(--transition-speed) ease,
         background-color var(--transition-speed) ease,
         transform var(--transition-speed) ease;
@@ -149,7 +149,12 @@
 .ui-close-btn:hover,
 .ui-next-btn:hover {
     border-color: var(--primary-color);
-    background-color: rgba(0, 86, 179, 0.15); /* Using darker blue for better contrast */
+    background-color: rgba(
+        0,
+        86,
+        179,
+        0.15
+    ); /* Using darker blue for better contrast */
     transform: translateY(-2px);
 }
 
