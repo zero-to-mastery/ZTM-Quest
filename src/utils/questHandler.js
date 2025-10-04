@@ -4,16 +4,7 @@ import { k } from '../kplayCtx.js';
 // Create celebration effect with confetti/stars
 const createCelebrationEffect = () => {
     const celebrationContainer = document.createElement('div');
-    celebrationContainer.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        pointer-events: none;
-        z-index: 10000;
-        overflow: hidden;
-    `;
+    celebrationContainer.className = 'celebration-container';
     document.body.appendChild(celebrationContainer);
 
     for (let i = 0; i < 50; i++) {
@@ -22,50 +13,26 @@ const createCelebrationEffect = () => {
         
         if (isConfetti) {
             // Confetti piece
+            particle.className = 'confetti-particle';
             particle.style.cssText = `
-                position: absolute;
-                width: 8px;
-                height: 8px;
                 background: hsl(${Math.random() * 360}, 70%, 60%);
                 animation: confetti-fall ${2 + Math.random() * 3}s linear forwards;
                 left: ${Math.random() * 100}%;
-                top: -20px;
                 transform: rotate(${Math.random() * 360}deg);
             `;
         } else {
             // Star particle
             particle.innerHTML = '✨';
+            particle.className = 'star-particle';
             particle.style.cssText = `
-                position: absolute;
                 font-size: ${12 + Math.random() * 8}px;
                 animation: star-twinkle ${1.5 + Math.random() * 2}s ease-out forwards;
                 left: ${Math.random() * 100}%;
                 top: ${Math.random() * 100}%;
-                color: gold;
             `;
         }
         
         celebrationContainer.appendChild(particle);
-    }
-
-    // Add animation keyframes if they don't exist
-    if (!document.querySelector('#celebration-styles')) {
-        const style = document.createElement('style');
-        style.id = 'celebration-styles';
-        style.textContent = `
-            @keyframes confetti-fall {
-                to {
-                    transform: translateY(100vh) rotate(720deg);
-                    opacity: 0;
-                }
-            }
-            @keyframes star-twinkle {
-                0% { transform: scale(0) rotate(0deg); opacity: 1; }
-                50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
-                100% { transform: scale(0) rotate(360deg); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
     }
 
     // Clean up after animation
