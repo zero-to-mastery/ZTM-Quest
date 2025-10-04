@@ -87,6 +87,7 @@ export const initMap = async (
                  * Setup hidden boundaries for the player to collide with on the map
                  * The data gets loaded from mapData which in fact got created by Tiled
                  */
+
                 const components = [
                     k.area({
                         /**
