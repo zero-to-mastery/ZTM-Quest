@@ -1,6 +1,38 @@
 @import url(./dialogs.css);
 @import url(./screen.css);
 
+
+/* Global variables */
+:root {
+    /* Color variables */
+    --primary-color: #007bff;
+    --secondary-color: #414141;
+    --success-color: #28a745;
+    --background-color: #fff;
+    --text-color: #333;
+    
+    /* Typography */
+    --font-family: pixelifysans, sans-serif;
+    --font-size-normal: 1rem;
+    --font-size-large: 1.5rem;
+    
+    /* Spacing */
+    --spacing-sm: 0.6rem;
+    --spacing-md: 0.8rem;
+    --spacing-lg: 1rem;
+    --spacing-xl: 1.5rem;
+    
+    /* Border */
+    --border-radius-sm: 6px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 10px;
+    --border-width: 2px;
+    
+    /* Animation */
+    --transition-speed: 0.3s;
+}
+/* Global variables */
+
 button:focus {
     box-shadow: 2px 3px 5px #8383af;
     outline: 2px solid blue;
