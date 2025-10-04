@@ -1,5 +1,6 @@
 export const quitGameText = (k, map) => {
     if (!k.getSprite('ztm_logo')) {
+        k.anchor('center'),
         k.loadSprite('ztm_logo', './assets/sprites/ztm_logo_64x64.png');
     }
 
