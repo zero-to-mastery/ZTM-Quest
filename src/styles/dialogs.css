@@ -1,17 +1,50 @@
+/* Custom Properties for Accessibility */
+:root {
+    --primary-color: #0056b3; /* Darker blue for better contrast */
+    --secondary-color: #2d2d2d; /* Darker gray for better contrast */
+    --success-color: #1e7e34; /* Darker green for better contrast */
+    --background-color: #ffffff;
+    --text-color: #222222; /* Darker text for better contrast */
+    --focus-color: #0056b3; /* Color for focus indicators */
+    --focus-ring-color: rgba(0, 86, 179, 0.5);
+
+    /* Typography */
+    --font-family: pixelifysans, system-ui, sans-serif;
+    --font-size-normal: clamp(1rem, 2vw, 1.2rem);
+    --font-size-large: clamp(1.25rem, 2.5vw, 1.5rem);
+    --line-height: 1.5;
+
+    /* Interactive States */
+    --focus-ring-width: 3px;
+    --focus-outline-offset: 3px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 #custom-prompt {
     display: none;
     width: 100%;
     height: 100%;
     overflow-y: auto;
-    background: #fff;
-    border-radius: 10px;
-    border: 2px solid #007bff;
-    padding: 1rem;
+    background: var(--background-color);
+    border-radius: var(--border-radius-lg);
+    border: var(--border-width) solid var(--primary-color);
+    padding: var(--spacing-lg);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     flex-direction: column;
     align-items: flex-start;
     word-spacing: 0.2rem;
-    z-index: 10; /* Ensure it's above other UI elements */
+    z-index: 10;
+    color: var(--text-color);
+    line-height: var(--line-height);
 }
 
 .prompt-content {
@@ -30,58 +63,134 @@
 }
 
 .option-btn {
-    padding: 0.8rem 1.5rem;
-    background-color: #007bff;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-size: 1rem;
+    padding: var(--spacing-md) var(--spacing-xl);
+    background: transparent;
+    border: var(--border-width) solid var(--secondary-color);
+    border-radius: var(--border-radius-sm);
+    color: var(--secondary-color);
+    font-family: var(--font-family);
+    font-size: var(--font-size-large);
     cursor: pointer;
     transition:
-        background-color 0.3s ease,
-        transform 0.2s ease;
+        border-color var(--transition-speed) ease,
+        background-color var(--transition-speed) ease,
+        transform var(--transition-speed) ease;
+    position: relative;
+    min-width: 44px; /* Minimum touch target size */
+    min-height: 44px; /* Minimum touch target size */
 }
 
+/* Improved hover state with better contrast */
 .option-btn:hover {
-    background-color: #0056b3;
+    border-color: var(--success-color);
+    background-color: rgba(30, 126, 52, 0.15);
     transform: translateY(-2px);
+}
+
+/* Enhanced focus state for better visibility */
+.option-btn:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-color);
+    outline-offset: var(--focus-outline-offset);
+    border-color: var(--focus-color);
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+    .option-btn {
+        border: var(--border-width) solid ButtonText;
+        color: ButtonText;
+    }
+    .option-btn:focus-visible {
+        outline: var(--focus-ring-width) solid ButtonText;
+    }
 }
 
 .ui-text {
     margin: 0;
-    font-family: pixelifysans, sans-serif;
-
-    color: #333;
-    user-select: none;
+    font-family: var(--font-family);
+    color: var(--text-color);
+    line-height: var(--line-height);
+    font-size: var(--font-size-normal);
+    /* Allow text selection for better accessibility */
+    user-select: text;
     opacity: 0;
     animation: slideIn 1s forwards 0.3s;
     transition:
         transform 0.5s ease,
         opacity 0.5s ease;
 }
+
+/* High contrast support for text */
+@media (forced-colors: active) {
+    .ui-text {
+        color: CanvasText;
+    }
+}
 .ui-close-btn,
 .ui-next-btn {
-    font-family: 'Courier New', monospace;
-    border: 2px solid #007bff;
-    border-radius: 6px;
-    padding: 0.6rem 1.5rem;
-    background-color: #007bff;
-    color: white;
+    font-family: var(--font-family);
+    padding: var(--spacing-sm) var(--spacing-xl);
+    background: transparent;
+    border: var(--border-width) solid var(--secondary-color);
+    border-radius: var(--border-radius-sm);
+    color: var(--secondary-color);
+    font-size: var(--font-size-large);
     cursor: pointer;
-    font-size: 1.1rem;
-    transition:
-        background-color 0.3s ease,
-        transform 0.2s ease,
-        border-color 0.3s ease;
-    opacity: 0;
+    min-width: 44px; /* Minimum touch target size */
+    min-height: 44px; /* Minimum touch target size */
     animation: fadeIn 1s forwards 0.5s;
+    transition:
+        border-color var(--transition-speed) ease,
+        background-color var(--transition-speed) ease,
+        transform var(--transition-speed) ease;
+    position: relative;
 }
 
 .ui-close-btn:hover,
 .ui-next-btn:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    border-color: var(--primary-color);
+    background-color: rgba(
+        0,
+        86,
+        179,
+        0.15
+    ); /* Using darker blue for better contrast */
     transform: translateY(-2px);
+}
+
+/* Enhanced focus states for accessibility */
+.ui-close-btn:focus-visible,
+.ui-next-btn:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-color);
+    outline-offset: var(--focus-outline-offset);
+    border-color: var(--focus-color);
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+    .ui-close-btn,
+    .ui-next-btn {
+        border: var(--border-width) solid ButtonText;
+        color: ButtonText;
+    }
+    .ui-close-btn:focus-visible,
+    .ui-next-btn:focus-visible {
+        outline: var(--focus-ring-width) solid ButtonText;
+    }
+}
+
+/* Active state for better interaction feedback */
+.option-btn:active,
+.ui-close-btn:active,
+.ui-next-btn:active {
+    transform: translateY(1px);
+}
+
+/* Ensure hover effects work with high specificity */
+#dialog-close-btn:hover,
+#dialog-next-btn:hover {
+    border: 2px solid #007bff !important;
+    border-radius: 6px !important;
 }
 
 @media (max-width: 768px) {
