@@ -152,7 +152,7 @@ With each added map, you will also find object screenshots to identify objects w
 
 ## Company Interior (map_interior)
 <figure>
-    <img src="./map_company_interior/map_company_interior.png" height="300" width="400">
+    <img src="./map_company_interior/interaction_objects.png" height="300" width="400">
     <figcaption>Interactive Objects</figcaption>
 </figure>
 <figure>
