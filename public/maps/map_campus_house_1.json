@@ -663,6 +663,17 @@
                  "width":27.5,
                  "x":3,
                  "y":129
+                }, 
+                {
+                 "height":0,
+                 "id":78,
+                 "name":"backpack_area",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":336.842105263158,
+                 "y":200.891417733523
                 }],
          "opacity":1,
          "properties":[
@@ -706,10 +717,10 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":78,
+ "nextobjectid":79,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.11.0",
+ "tiledversion":"1.11.2",
  "tileheight":16,
  "tilesets":[
         {
