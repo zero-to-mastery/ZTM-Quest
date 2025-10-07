@@ -23,7 +23,7 @@ export const backpackInteractions = (player, k, map) => {
         displayDialogue({
             k,
             player,
-            text: [dialogue.join(' ')],
+            text: [dialog.join(' ')],
         });
     });
 };

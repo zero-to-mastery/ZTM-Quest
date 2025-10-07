@@ -270,9 +270,9 @@ export async function getContributors() {
 export const objectToBackpackInteraction = (tag) => (player, k, map) => {
     let text;
     let pressE;
-    if (!player.state.backpack) return;
 
     player.onCollide(tag, (obj) => {
+        if (!player.state.backpack) return;
         text = obj.add([
             k.pos(obj.width / 2 - 2, -5),
             k.text('E', { size: 12 }),
@@ -288,6 +288,7 @@ export const objectToBackpackInteraction = (tag) => (player, k, map) => {
     });
 
     player.onCollideEnd(tag, (obj) => {
+        if (!pressE) return;
         pressE.cancel();
         obj.remove(text);
     });
