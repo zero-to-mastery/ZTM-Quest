@@ -47,7 +47,9 @@ export const computerInteractions = async (player, k, map) => {
 
         if (player.state.alreadyTalkedToMage) {
             const energyUI = document.getElementById('energy-container');
-            energyUI.style.display = 'none';
+            if (energyUI) {
+                energyUI.style.display = 'none';
+            }
 
             computer.play('on');
 
@@ -56,6 +58,7 @@ export const computerInteractions = async (player, k, map) => {
 
                 if (selectedOption == 'C') {
                     updateEnergyState(player.state, -10);
+                    player.state.completedMageChallenge = true;
                     response.push("Correct!, you're a genius!");
                     response.push('It was a tough one!, You look tired');
                 } else {
@@ -75,7 +78,11 @@ export const computerInteractions = async (player, k, map) => {
                     player,
                     text: response,
                     onDisplayEnd: () => {
-                        player.state.alreadyTalkedToMage = false;
+                        // Only reset if player didn't complete the challenge successfully
+                        // Keep alreadyTalkedToMage true so they can return to Mage for reward
+                        if (!player.state.completedMageChallenge) {
+                            player.state.alreadyTalkedToMage = false;
+                        }
                     },
                 });
             });
@@ -84,7 +91,9 @@ export const computerInteractions = async (player, k, map) => {
 
     player.onCollideEnd('computer', () => {
         const energyUI = document.getElementById('energy-container');
-        energyUI.style.display = 'flex';
+        if (energyUI) {
+            energyUI.style.display = 'flex';
+        }
         computer.play('off');
     });
 };
@@ -92,7 +101,9 @@ export const computerInteractions = async (player, k, map) => {
 function showCustomPrompt(message, options, callback) {
     // Set the prompt message
     const energyUI = document.getElementById('energy-container');
-    energyUI.style.display = 'none';
+    if (energyUI) {
+        energyUI.style.display = 'none';
+    }
 
     let promotMessage = document.getElementById('prompt-message');
     promotMessage.innerHTML = message;
