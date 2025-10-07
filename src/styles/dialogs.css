@@ -333,3 +333,48 @@
         opacity: 0;
     }
 }
+
+/* Magical Flickering Effect for Mage Dialog */
+@keyframes magical-flicker {
+    0%,
+    100% {
+        opacity: 1;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    10% {
+        opacity: 0.8;
+        box-shadow:
+            0 0 20px rgba(255, 0, 0, 0.9),
+            0 0 40px rgba(255, 0, 0, 0.7);
+    }
+    20% {
+        opacity: 1;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    35% {
+        opacity: 0.7;
+        box-shadow:
+            0 0 30px rgba(255, 0, 0, 0.9),
+            0 0 60px rgba(255, 0, 0, 0.7);
+    }
+    50% {
+        opacity: 1;
+        box-shadow:
+            0 0 40px rgba(255, 0, 0, 1),
+            0 0 80px rgba(255, 0, 0, 0.8);
+    }
+    65% {
+        opacity: 0.85;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    80% {
+        opacity: 0.9;
+        box-shadow:
+            0 0 20px rgba(255, 0, 0, 0.8),
+            0 0 40px rgba(255, 0, 0, 0.6);
+    }
+}
+
+.magical-flicker {
+    animation: magical-flicker 2s ease-in-out;
+}

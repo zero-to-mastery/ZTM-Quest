@@ -1,6 +1,7 @@
 import { displayDialogue, displayPermissionBox } from '../../utils';
 import { updateEnergyState } from '../../utils/energyUpdate';
 import { addCoins } from '../../utils/coinsUpdate';
+import { createCelebrationEffect } from '../../utils/questHandler';
 
 const alredyUnlockText = ['The challenge is waiting for you!'];
 
@@ -49,10 +50,20 @@ export const mageInteractions = async (player, k, map) => {
     player.onCollide('mage', async () => {
         computer.play('on');
 
+        // console.log('[MAGE] Player state:', {
+        //     alreadyTalkedToMage: player.state.alreadyTalkedToMage,
+        //     completedMageChallenge: player.state.completedMageChallenge,
+        //     receivedMageReward: player.state.receivedMageReward,
+        //     mageInteractionCounter: mageInteractionCounter,
+        // });
+
         if (!player.state.alreadyTalkedToMage) {
+            // console.log('[MAGE] Player has not talked to mage yet');
             mageInteractionCounter++;
+            // console.log('[MAGE] mageInteractionCounter:', mageInteractionCounter);
 
             if (mageInteractionCounter === 1) {
+                // console.log('[MAGE] First interaction - showing intro text');
                 await displayDialogue({
                     k,
                     player,
@@ -62,6 +73,7 @@ export const mageInteractions = async (player, k, map) => {
             }
 
             if (mageInteractionCounter >= 2) {
+                // console.log('[MAGE] Second+ interaction - asking permission for challenge');
                 let tryChallenge = await displayPermissionBox({
                     k,
                     player,
@@ -69,15 +81,16 @@ export const mageInteractions = async (player, k, map) => {
                 });
 
                 if (tryChallenge) {
+                    // console.log('[MAGE] Player accepted challenge - casting spell');
                     await displayDialogue({
                         k,
                         player,
                         text: spell,
                         characterName: 'Mage',
+                        addFlickerEffect: true,
                     });
 
-                    //TODO: You can add a flickering effect to the dialog box to make it more magical
-
+                    // console.log('[MAGE] Setting alreadyTalkedToMage = true');
                     player.state.alreadyTalkedToMage = true;
                 } else {
                     await displayDialogue({
@@ -89,6 +102,7 @@ export const mageInteractions = async (player, k, map) => {
                 }
             }
         } else {
+            // console.log('[MAGE] Player already talked to mage (alreadyTalkedToMage = true)');
             computer.play('on');
 
             // Check if player completed the challenge and hasn't received reward yet
@@ -96,18 +110,34 @@ export const mageInteractions = async (player, k, map) => {
                 player?.state?.completedMageChallenge &&
                 !player?.state?.receivedMageReward
             ) {
+                // console.log('[MAGE] Player completed challenge! Giving reward...');
+                // Add coins and update state BEFORE showing dialog
+                addCoins(15);
+                player.state.receivedMageReward = true;
+                player.state.completedMageChallenge = false;
+
+                createCelebrationEffect();
                 await displayDialogue({
                     k,
                     player,
                     text: challengeRewardDialog,
                     characterName: 'Mage',
-                    onDisplayEnd: () => {
-                        addCoins(15);
-                        player.state.receivedMageReward = true;
-                        player.state.completedMageChallenge = false;
-                    },
+                });
+            } else if (player?.state?.receivedMageReward) {
+                // console.log('[MAGE] Player already received reward - no more rewards');
+                // Player has already completed and received reward once
+                // They can try again but won't get more coins
+                await displayDialogue({
+                    k,
+                    player,
+                    text: [
+                        'Thou hast already proven thy worth and claimed thy reward!',
+                        'The challenge remains for thee to test thy skills, but I have no more coins to offer.',
+                    ],
+                    characterName: 'Mage',
                 });
             } else if (player?.state?.hasButterBeer) {
+                // console.log('[MAGE] Player has butterbeer');
                 // Mage asks if he can have the butterbeer
                 let giveButterBeer = await displayPermissionBox({
                     k,
@@ -136,6 +166,7 @@ export const mageInteractions = async (player, k, map) => {
                     });
                 }
             } else {
+                // console.log('[MAGE] Default message - challenge is waiting');
                 await displayDialogue({
                     k,
                     player,

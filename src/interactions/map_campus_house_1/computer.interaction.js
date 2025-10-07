@@ -29,7 +29,14 @@ const options = [
 export const computerInteractions = async (player, k, map) => {
     const [computer] = map.query({ include: 'computer' });
     player.onCollide('computer', async () => {
+        // console.log('[COMPUTER] Player state:', {
+        //     alreadyTalkedToMage: player.state.alreadyTalkedToMage,
+        //     completedMageChallenge: player.state.completedMageChallenge,
+        //     receivedMageReward: player.state.receivedMageReward,
+        // });
+
         if (!player.state.alreadyTalkedToMage) {
+            // console.log('[COMPUTER] Computer is locked');
             computer.play('on');
 
             await displayDialogue({
@@ -53,15 +60,18 @@ export const computerInteractions = async (player, k, map) => {
 
             computer.play('on');
 
+            // console.log('[COMPUTER] Showing challenge');
             showCustomPrompt(challengeText, options, async (selectedOption) => {
                 const response = [];
 
                 if (selectedOption == 'C') {
+                    // console.log('[COMPUTER] Correct answer! Setting completedMageChallenge = true');
                     updateEnergyState(player.state, -10);
                     player.state.completedMageChallenge = true;
                     response.push("Correct!, you're a genius!");
                     response.push('It was a tough one!, You look tired');
                 } else {
+                    // console.log('[COMPUTER] Wrong answer! Will reset alreadyTalkedToMage');
                     updateEnergyState(player.state, -30);
                     response.push('Incorrect! Try again next time!');
                     response.push(
