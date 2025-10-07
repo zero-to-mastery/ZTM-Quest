@@ -28,7 +28,7 @@ export async function fishing() {
         additionalProperties: {
             pressed: false,
             pressedTwice: false,
-            fishSpawnTimer: Math.random() * 5,
+            fishSpawnTimer: Math.random() * 4 + 1,
             score: 0,
         },
         characterOffset(entityX, entityY) {

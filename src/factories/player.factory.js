@@ -67,6 +67,10 @@ export function makePlayer(playerState = {}, customScale = scaleFactor) {
         'player',
         {
             state,
+            inspect() {
+                const gameState = getGameState();
+                return JSON.stringify(gameState.player, null, 2);
+            },
         },
     ]);
 

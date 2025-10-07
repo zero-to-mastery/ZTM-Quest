@@ -12,9 +12,9 @@ export const restroomInteractions = (player, k, map) => {
         questName,
         'hasTalkedToBruno'
     );
-    player.onCollide('restroom_toilet', () => {
-        completeQuestObjective(player, questName, 'wasInRestroom');
-        completeQuest(player, questName);
+    player.onCollide('restroom_toilet', async () => {
+        await completeQuestObjective(player, questName, 'wasInRestroom');
+        await completeQuest(player, questName);
         const dialogue = ['You feel refreshed now.', 'Ready for the ride.'];
 
         if (!hasTalkedToBruno) {
@@ -33,9 +33,9 @@ export const restroomInteractions = (player, k, map) => {
             k,
             player,
             text: ['You washed your hands. Good job!'],
-            onDisplayEnd: () => {
-                completeQuestObjective(player, questName, sinkObjective);
-                completeQuest(player, questName);
+            onDisplayEnd: async () => {
+                await completeQuestObjective(player, questName, sinkObjective);
+                await completeQuest(player, questName);
             },
         });
     });

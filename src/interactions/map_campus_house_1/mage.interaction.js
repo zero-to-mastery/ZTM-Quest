@@ -1,5 +1,6 @@
 import { displayDialogue, displayPermissionBox } from '../../utils';
 import { updateEnergyState } from '../../utils/energyUpdate';
+import { addCoins } from '../../utils/coinsUpdate';
 
 const alredyUnlockText = ['The challenge is waiting for you!'];
 
@@ -34,12 +35,17 @@ const butterBeerDialog = {
     denied: ['Oh, ok. I understand...'],
 };
 
+const challengeRewardDialog = [
+    'Ah, thou hast returned! I sense the magic of success upon thee!',
+    'Thou hast conquered the challenge with great skill and wisdom!',
+    'As promised, accept this reward for thy triumph - 15 golden coins!',
+    'May they serve thee well on thy journey through the realm of ZTM!',
+];
+
 export const mageInteractions = async (player, k, map) => {
     const [computer] = map.query({ include: 'computer' });
     let mageInteractionCounter = 0;
-    player.state.alreadyTalkedToMage = false;
 
-    //TODO: You can add some prize for the player if they solve the challenge and get back to the mage
     player.onCollide('mage', async () => {
         computer.play('on');
 
@@ -85,7 +91,23 @@ export const mageInteractions = async (player, k, map) => {
         } else {
             computer.play('on');
 
-            if (player?.state?.hasButterBeer) {
+            // Check if player completed the challenge and hasn't received reward yet
+            if (
+                player?.state?.completedMageChallenge &&
+                !player?.state?.receivedMageReward
+            ) {
+                await displayDialogue({
+                    k,
+                    player,
+                    text: challengeRewardDialog,
+                    characterName: 'Mage',
+                    onDisplayEnd: () => {
+                        addCoins(15);
+                        player.state.receivedMageReward = true;
+                        player.state.completedMageChallenge = false;
+                    },
+                });
+            } else if (player?.state?.hasButterBeer) {
                 // Mage asks if he can have the butterbeer
                 let giveButterBeer = await displayPermissionBox({
                     k,

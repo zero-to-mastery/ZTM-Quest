@@ -19,8 +19,8 @@ export const counterClerkInteraction = (player, k) => {
                 'Would you like to purchase a house?',
             ],
         });
-        recieveQuest(player, map_realtor['Buy a house!']);
-        completeQuestObjective(
+        await recieveQuest(player, map_realtor['Buy a house!']);
+        await completeQuestObjective(
             player,
             'Buy a house!',
             'hasTalkedToRealtorClerk'
@@ -59,19 +59,19 @@ export const counterClerkInteraction = (player, k) => {
                                 'Congratulations!',
                                 `You now own the ${selectedOption}!`,
                             ],
-                            onDisplayEnd: () => {
+                            onDisplayEnd: async () => {
                                 player.state.housesOwned = [
                                     ...player.state.housesOwned,
                                     selectedOptionArr[0],
                                 ];
                                 takeAwayCoins(100);
 
-                                completeQuestObjective(
+                                await completeQuestObjective(
                                     player,
                                     'Buy a house!',
                                     'hasBoughtHouse'
                                 );
-                                completeQuest(player, 'Buy a house!');
+                                await completeQuest(player, 'Buy a house!');
                             },
                         });
                     } else {
