@@ -29,7 +29,7 @@ const interactions = [
     interactionWithCake,
     interactionWithLocker,
     interactionWithCat,
-    interactionWithTrashBin
+    interactionWithTrashBin,
 ];
 
 export default interactions;
