@@ -53,6 +53,14 @@ const clickNewGameYes = () => {
     time.reset();
     clearSavedGame();
     updateCoinsUI();
+
+    // --- Reset audio state on new game ---
+    console.log('[AUDIO] Resetting audio state for new game');
+    localStorage.setItem(AUDIO_MUTED_KEY, 'false');
+    applyAudioState(false);
+    if (audioIcon) {
+        audioIcon.src = 'assets/sprites/audio-on.png';
+    }
     clickNewGameNo();
     k.go('start');
 };
@@ -115,16 +123,84 @@ const debugButton = document.getElementById('debug-button');
 debugButton.addEventListener('click', toggleDebugMode);
 
 // Audio related
-const toggleAudio = () => {
-    if (k.audioCtx.state.includes('running')) {
-        k.audioCtx.suspend();
-        audioIcon.src = 'assets/sprites/mute.png';
-    } else {
-        k.audioCtx.resume();
-        audioIcon.src = 'assets/sprites/audio-on.png';
+// --- AUDIO STATE MANAGEMENT ---
+// Keeps the mute/unmute state consistent across scene changes in Kaboom
+// and safely handles invalid or outdated values in localStorage.
+
+const AUDIO_MUTED_KEY = 'ztm-audio-muted';
+
+// --- Apply the current audio state (mute or unmute) ---
+const applyAudioState = (isMuted) => {
+    try {
+        if (isMuted) {
+            console.log('[AUDIO] Muting (applyAudioState)');
+            k.setVolume?.(0) ?? k.volume(0); // new API fallback
+            k.audioCtx
+                ?.suspend?.()
+                .catch((e) => console.warn('[AUDIO] Suspend error:', e));
+        } else {
+            console.log('[AUDIO] Unmuting (applyAudioState)');
+            k.setVolume?.(1) ?? k.volume(1);
+            k.audioCtx
+                ?.resume?.()
+                .catch((e) => console.warn('[AUDIO] Resume error:', e));
+        }
+    } catch (err) {
+        console.warn('[AUDIO] Failed to apply audio state:', err);
+        // Reset only the corrupted value instead of clearing all localStorage
+        localStorage.removeItem(AUDIO_MUTED_KEY);
     }
 };
-const audioIcon = document.getElementById('audio-icon');
 
+// --- Initialize the audio state from localStorage ---
+const initAudioState = () => {
+    const savedValue = localStorage.getItem(AUDIO_MUTED_KEY);
+
+    // Validate the saved value and default to false if invalid
+    const isMuted = savedValue === 'true' ? true : false;
+
+    console.log('[AUDIO] Initializing audio state. isMuted:', isMuted);
+    applyAudioState(isMuted);
+
+    if (audioIcon) {
+        audioIcon.src = isMuted
+            ? 'assets/sprites/mute.png'
+            : 'assets/sprites/audio-on.png';
+    }
+};
+
+// --- Toggle the audio state when user clicks the button ---
+const toggleAudio = () => {
+    const isRunning = k.audioCtx?.state?.includes('running');
+    const willMute = isRunning;
+
+    localStorage.setItem(AUDIO_MUTED_KEY, willMute ? 'true' : 'false');
+    applyAudioState(willMute);
+
+    if (audioIcon) {
+        audioIcon.src = willMute
+            ? 'assets/sprites/mute.png'
+            : 'assets/sprites/audio-on.png';
+    }
+};
+
+// --- DOM references ---
+const audioIcon = document.getElementById('audio-icon');
 const audioButton = document.getElementById('audio-button');
 audioButton.addEventListener('click', toggleAudio);
+
+// --- Initialize audio state when settings panel loads ---
+initAudioState();
+
+// --- Override k.go() to reapply audio state after every scene change ---
+const originalGo = k.go.bind(k);
+k.go = (sceneName, ...args) => {
+    console.log(`[SCENE] Changing to: ${sceneName}`);
+    originalGo(sceneName, ...args);
+
+    // Reapply the audio state after new scene initialization
+    setTimeout(() => {
+        console.log('[AUDIO] Reapplying state after scene change');
+        initAudioState();
+    }, 100);
+};
