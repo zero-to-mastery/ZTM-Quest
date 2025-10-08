@@ -42,7 +42,7 @@ export const formatNewsDate = (dateString) => {
             month: 'long',
             day: 'numeric',
         });
-    } catch (error) {
+    } catch {
         return dateString;
     }
 };
