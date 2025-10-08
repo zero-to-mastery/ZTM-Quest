@@ -40,6 +40,7 @@ export async function displayDialogue({
     characterName,
     text,
     onDisplayEnd = () => {},
+    addFlickerEffect = false,
 }) {
     time.paused = true;
     player.state.isInDialog = true;
@@ -54,6 +55,11 @@ export async function displayDialogue({
     statsUI.style.display = 'none';
     dialogUI.style.display = 'block';
     miniMapUI.style.display = 'none';
+
+    // Add magical flicker effect if requested
+    if (addFlickerEffect) {
+        dialogUI.classList.add('magical-flicker');
+    }
 
     if (text.length > 1) {
         nextBtn.style.display = 'block';
@@ -87,6 +93,12 @@ export async function displayDialogue({
         dialog.innerHTML = '';
         statsUI.style.display = 'flex';
         closeBtn.removeEventListener('click', onCloseBtnClick);
+
+        // Remove magical flicker effect if it was added
+        if (addFlickerEffect) {
+            dialogUI.classList.remove('magical-flicker');
+        }
+
         k.triggerEvent('dialog-closed', { player, characterName, text });
         player.state.isInDialog = false;
         k.canvas.focus();
@@ -266,3 +278,30 @@ export async function getContributors() {
         })
         .join('\n');
 }
+
+export const objectToBackpackInteraction = (tag) => (player, k, map) => {
+    let text;
+    let pressE;
+
+    player.onCollide(tag, (obj) => {
+        if (!player.state.backpack) return;
+        text = obj.add([
+            k.pos(obj.width / 2 - 2, -5),
+            k.text('E', { size: 12 }),
+        ]);
+
+        pressE = k.onKeyPress((key) => {
+            if (key === 'e') {
+                // move it to backpack
+                player.state.backpack.push(tag);
+                obj.destroy();
+            }
+        });
+    });
+
+    player.onCollideEnd(tag, (obj) => {
+        if (!pressE) return;
+        pressE.cancel();
+        obj.remove(text);
+    });
+};
