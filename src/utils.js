@@ -266,3 +266,30 @@ export async function getContributors() {
         })
         .join('\n');
 }
+
+export const objectToBackpackInteraction = (tag) => (player, k, map) => {
+    let text;
+    let pressE;
+
+    player.onCollide(tag, (obj) => {
+        if (!player.state.backpack) return;
+        text = obj.add([
+            k.pos(obj.width / 2 - 2, -5),
+            k.text('E', { size: 12 }),
+        ]);
+
+        pressE = k.onKeyPress((key) => {
+            if (key === 'e') {
+                // move it to backpack
+                player.state.backpack.push(tag);
+                obj.destroy();
+            }
+        });
+    });
+
+    player.onCollideEnd(tag, (obj) => {
+        if (!pressE) return;
+        pressE.cancel();
+        obj.remove(text);
+    });
+};
