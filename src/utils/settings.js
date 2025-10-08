@@ -55,7 +55,6 @@ const clickNewGameYes = () => {
     updateCoinsUI();
 
     // --- Reset audio state on new game ---
-    console.log('[AUDIO] Resetting audio state for new game');
     localStorage.setItem(AUDIO_MUTED_KEY, 'false');
     applyAudioState(false);
     if (audioIcon) {
@@ -133,13 +132,11 @@ const AUDIO_MUTED_KEY = 'ztm-audio-muted';
 const applyAudioState = (isMuted) => {
     try {
         if (isMuted) {
-            console.log('[AUDIO] Muting (applyAudioState)');
             k.setVolume?.(0) ?? k.volume(0); // new API fallback
             k.audioCtx
                 ?.suspend?.()
                 .catch((e) => console.warn('[AUDIO] Suspend error:', e));
         } else {
-            console.log('[AUDIO] Unmuting (applyAudioState)');
             k.setVolume?.(1) ?? k.volume(1);
             k.audioCtx
                 ?.resume?.()
@@ -159,7 +156,6 @@ const initAudioState = () => {
     // Validate the saved value and default to false if invalid
     const isMuted = savedValue === 'true' ? true : false;
 
-    console.log('[AUDIO] Initializing audio state. isMuted:', isMuted);
     applyAudioState(isMuted);
 
     if (audioIcon) {
@@ -195,12 +191,10 @@ initAudioState();
 // --- Override k.go() to reapply audio state after every scene change ---
 const originalGo = k.go.bind(k);
 k.go = (sceneName, ...args) => {
-    console.log(`[SCENE] Changing to: ${sceneName}`);
     originalGo(sceneName, ...args);
 
     // Reapply the audio state after new scene initialization
     setTimeout(() => {
-        console.log('[AUDIO] Reapplying state after scene change');
         initAudioState();
     }, 100);
 };
