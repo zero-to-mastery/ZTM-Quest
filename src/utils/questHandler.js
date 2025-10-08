@@ -2,7 +2,7 @@ import { displayDialogue } from '../utils.js';
 import { k } from '../kplayCtx.js';
 
 // Create celebration effect with confetti/stars
-const createCelebrationEffect = () => {
+export const createCelebrationEffect = () => {
     const celebrationContainer = document.createElement('div');
     celebrationContainer.className = 'celebration-container';
     document.body.appendChild(celebrationContainer);
