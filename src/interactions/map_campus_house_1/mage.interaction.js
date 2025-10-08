@@ -1,6 +1,7 @@
 import { displayDialogue, displayPermissionBox } from '../../utils';
 import { updateEnergyState } from '../../utils/energyUpdate';
 import { addCoins } from '../../utils/coinsUpdate';
+import { createCelebrationEffect } from '../../utils/questHandler';
 
 const alredyUnlockText = ['The challenge is waiting for you!'];
 
@@ -74,9 +75,8 @@ export const mageInteractions = async (player, k, map) => {
                         player,
                         text: spell,
                         characterName: 'Mage',
+                        addFlickerEffect: true,
                     });
-
-                    //TODO: You can add a flickering effect to the dialog box to make it more magical
 
                     player.state.alreadyTalkedToMage = true;
                 } else {
@@ -96,16 +96,29 @@ export const mageInteractions = async (player, k, map) => {
                 player?.state?.completedMageChallenge &&
                 !player?.state?.receivedMageReward
             ) {
+                // Add coins and update state BEFORE showing dialog
+                addCoins(15);
+                player.state.receivedMageReward = true;
+                player.state.completedMageChallenge = false;
+
+                createCelebrationEffect();
                 await displayDialogue({
                     k,
                     player,
                     text: challengeRewardDialog,
                     characterName: 'Mage',
-                    onDisplayEnd: () => {
-                        addCoins(15);
-                        player.state.receivedMageReward = true;
-                        player.state.completedMageChallenge = false;
-                    },
+                });
+            } else if (player?.state?.receivedMageReward) {
+                // Player has already completed and received reward once
+                // They can try again but won't get more coins
+                await displayDialogue({
+                    k,
+                    player,
+                    text: [
+                        'Thou hast already proven thy worth and claimed thy reward!',
+                        'The challenge remains for thee to test thy skills, but I have no more coins to offer.',
+                    ],
+                    characterName: 'Mage',
                 });
             } else if (player?.state?.hasButterBeer) {
                 // Mage asks if he can have the butterbeer

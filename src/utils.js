@@ -40,6 +40,7 @@ export async function displayDialogue({
     characterName,
     text,
     onDisplayEnd = () => {},
+    addFlickerEffect = false,
 }) {
     time.paused = true;
     player.state.isInDialog = true;
@@ -54,6 +55,11 @@ export async function displayDialogue({
     statsUI.style.display = 'none';
     dialogUI.style.display = 'block';
     miniMapUI.style.display = 'none';
+
+    // Add magical flicker effect if requested
+    if (addFlickerEffect) {
+        dialogUI.classList.add('magical-flicker');
+    }
 
     if (text.length > 1) {
         nextBtn.style.display = 'block';
@@ -87,6 +93,12 @@ export async function displayDialogue({
         dialog.innerHTML = '';
         statsUI.style.display = 'flex';
         closeBtn.removeEventListener('click', onCloseBtnClick);
+
+        // Remove magical flicker effect if it was added
+        if (addFlickerEffect) {
+            dialogUI.classList.remove('magical-flicker');
+        }
+
         k.triggerEvent('dialog-closed', { player, characterName, text });
         player.state.isInDialog = false;
         k.canvas.focus();
