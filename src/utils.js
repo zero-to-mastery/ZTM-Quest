@@ -41,6 +41,7 @@ export async function displayDialogue({
     text,
     onDisplayEnd = () => {},
     addFlickerEffect = false,
+    onNext = () => {},
 }) {
     time.paused = true;
     player.state.isInDialog = true;
@@ -67,8 +68,14 @@ export async function displayDialogue({
     }
     closeBtn.style.display = 'none';
 
+    let dialogIndex = 0;
+    
     for await (const t of text) {
         abort = new AbortController();
+        
+        // Call onNext for current dialog (before showing it)
+        onNext(dialogIndex);
+        
         await new Promise((res) => {
             if (t === text[text.length - 1]) res(); // resolve on last text
 
@@ -79,6 +86,8 @@ export async function displayDialogue({
                 res();
             });
         });
+        
+        dialogIndex++;
     }
 
     nextBtn.style.display = 'none';
