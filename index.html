@@ -88,6 +88,51 @@
             </div>
 
             <div class="alert-window">
+                <div class="alert help-alert">
+                    <div>
+                        <p class="alert-heading">Controls</p>
+                        <div class="control-btns">
+                            <div class="control-btn y">Y</div>
+                            <div class="control-btn z">Z</div>
+                            <div class="control-btn a">A</div>
+                            <div class="control-btn b">B</div>
+                        </div>
+                        <ul>
+                            <li class="alert-text">Tap/Click/&uarr;&darr;&larr;&rarr; around to move</li>
+                            <li class="alert-text">"T"/Tap/Click - Interact with NPC/Object</li>
+                            <li class="alert-text">"M"/Map Button - Toggle Map</li>
+                            <li class="alert-text">"O"/Credits Button - Open Credits</li>
+                        </ul>
+                        <p class="alert-heading">Main Mechanics</p>
+                        <ul>
+                            <li class="alert-text">Eating burger gives 40 energy but costs 25 coins.</li>
+                            <li class="alert-text">Eating from snack stall 1 gives 30 energy but costs 20 coins.</li>
+                            <li class="alert-text">Eating from snack stall 2 gives 28 energy but costs 20 coins.</li>
+                            <li class="alert-text">Eating snack bar from green stall gives 25 energy but costs 15 coins.</li>
+                            <li class="alert-text">Eating snack bar from red stall gives 24 energy but costs 15 coins.</li>
+                            <li class="alert-text">Eating snack bar from street stall gives 24 energy but costs 15 coins.</li>
+                            <li class="alert-text">Drinking water gives 20 energy but costs 5 coins.</li>
+                            <li class="alert-text">Drinking other drinks give 15 energy but cost 8 coins each.</li>
+                            <li class="alert-text">Game machine 1 (Number guessing game) gives 15 coins when player wins.</li>
+                            <li class="alert-text">Game machine 3 (Flappy bird game) gives 10 coins when the final score is greater than 1500.</li>
+                            <li class="alert-text">Game machine 6 (Chrome dino game) gives 25 coins when the final score is greater than 5000.</li>
+                            <li class="alert-text">Game machine crawl gives 10 coins if the final time remaining is greater than 30 seconds.</li>
+                        </ul>
+                        <p class="alert-heading">Hidden Mechanics</p>
+                        <ul>
+                            <li class="alert-text">Tressure chest interaction.</li>
+                            <li class="alert-text">Locker interaction.</li>
+                            <li class="alert-text">Cake interaction.</li>
+                            <li class="alert-text">Cat interaction.</li>
+                            <li class="alert-text">Trash bin interaction.</li>
+                        </ul>
+                    </div>
+                    <div class="alert-options">
+                        <button id="help-close-button" class="option-btn">
+                            Close
+                        </button>
+                    </div>
+                </div>
                 <div class="alert new-game-alert">
                     <p class="alert-text">
                         Do you want to start a new game? (This clears the saved
@@ -114,7 +159,9 @@
                 </div>
             </div>
 
-            <div id="menu-button">
+            <div id="misc-menu-button">MISC</div>
+
+            <div id="settings-menu-button">
                 <div class="menu-bar"></div>
                 <div class="menu-bar"></div>
                 <div class="menu-bar"></div>
@@ -122,11 +169,9 @@
 
             <div id="header" class="top">ZTM Quest</div>
             <div id="left-panel" class="left">
-                <div class="control-btns d-mobile-hide">
-                    <div class="control-btn y">Y</div>
-                    <div class="control-btn z">Z</div>
-                    <div class="control-btn a">A</div>
-                    <div class="control-btn b">B</div>
+                <div>
+                    <button class="close-btn">X</button>
+                    <button id="help-button" class="misc-btn">Help</button>
                 </div>
             </div>
             <div id="right-panel" class="right">
@@ -134,7 +179,7 @@
                     <p id="clock">{placeholderText}</p>
                 </div>
                 <div>
-                    <button id="close-btn">X</button>
+                    <button class="close-btn">X</button>
                     <button id="new-game-button" class="setting-btn">
                         <img
                             src="/assets/sprites/newgame.png"
@@ -170,16 +215,6 @@
                 <div></div>
             </div>
             <div id="footer" class="bottom">
-                <div class="footer-head-info">
-                    <div class="control-btns d-desktop-hide">
-                        <div class="control-btn y">Y</div>
-                        <div class="control-btn z">Z</div>
-                        <div class="control-btn a">A</div>
-                        <div class="control-btn b">B</div>
-                    </div>
-                    <div id="text-info"></div>
-                </div>
-
                 <div class="dialogs-wrapper">
                     <p id="dialog-text"></p>
                     <div id="custom-prompt" class="custom-prompt">
@@ -239,5 +274,6 @@
         </div>
         <script type="module" src="src/main.js"></script>
         <script type="module" src="src/utils/settings.js"></script>
+        <script type="module" src="src/utils/miscellaneous.js"></script>
     </body>
 </html>
