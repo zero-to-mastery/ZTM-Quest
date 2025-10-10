@@ -2,8 +2,36 @@ import { displayPermissionBox } from '../../utils';
 import { purchaseItem } from '../../utils/coinsUpdate';
 import { interactionHandler } from '../handler.interactions';
 
+// Load audio files for food vendors
+const stall1Audio = new Audio('/assets/sounds/FoodVendors_voice/Welcome to Stall1.mp3');
+stall1Audio.volume = 0.7;
+
+let currentAudio = null;
+
+function playAudio(audio) {
+    // Stop any currently playing audio
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+    }
+    currentAudio = audio;
+    audio.currentTime = 0;
+    audio.play().catch(err => console.log('Audio playback failed:', err));
+}
+
+function stopAudio() {
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentAudio = null;
+    }
+}
+
 export const stall1Interaction = (player, k) => {
     interactionHandler(player, 'stall_1', k, async () => {
+        // Play welcome audio
+        playAudio(stall1Audio);
+        
         let stall1Offer = await displayPermissionBox({
             k,
             player,
@@ -17,6 +45,7 @@ export const stall1Interaction = (player, k) => {
                 '🚀 Awesome choice! Here’s your snack – made with love and just a hint of magic!'
             );
             purchaseItem(k, 20, 30);
+            stopAudio();
         } else {
             let secondChance = await displayPermissionBox({
                 k,
@@ -36,6 +65,7 @@ export const stall1Interaction = (player, k) => {
                     '😢 Your loss! But hey, who am I to judge? Just remember, you’re missing out on epic flavor adventures!'
                 );
             }
+            stopAudio();
         }
     });
 };

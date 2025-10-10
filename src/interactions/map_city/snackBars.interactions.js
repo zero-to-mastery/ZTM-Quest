@@ -2,6 +2,34 @@ import { displayPermissionBox } from '../../utils';
 import { purchaseItem } from '../../utils/coinsUpdate';
 import { interactionHandler } from '../handler.interactions';
 
+// Load audio files for snack bars
+const snackBarRedAudio = new Audio('/assets/sounds/FoodVendors_voice/Welcome to snackbar red.mp3');
+snackBarRedAudio.volume = 0.7;
+
+const snackBarStreetAudio = new Audio('/assets/sounds/FoodVendors_voice/psst, you look hungry.mp3');
+snackBarStreetAudio.volume = 0.7;
+
+let currentAudio = null;
+
+function playAudio(audio) {
+    // Stop any currently playing audio
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+    }
+    currentAudio = audio;
+    audio.currentTime = 0;
+    audio.play().catch(err => console.log('Audio playback failed:', err));
+}
+
+function stopAudio() {
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentAudio = null;
+    }
+}
+
 export const snackBarGreenInteraction = (player, k) => {
     interactionHandler(player, 'snack_bar_green', k, async () => {
         let ztmSnackDecision = await displayPermissionBox({
@@ -42,6 +70,9 @@ export const snackBarGreenInteraction = (player, k) => {
 
 export const snackBarRedInteraction = (player, k) => {
     interactionHandler(player, 'snack_bar_red', k, async () => {
+        // Play welcome audio
+        playAudio(snackBarRedAudio);
+        
         let snackOffer = await displayPermissionBox({
             k,
             player,
@@ -55,6 +86,7 @@ export const snackBarRedInteraction = (player, k) => {
                 'Excellent choice! You clearly have superior taste. Snack Bar Green can’t compete!'
             );
             purchaseItem(k, 15, 24);
+            stopAudio();
         } else {
             let changeMind = await displayPermissionBox({
                 k,
@@ -74,12 +106,16 @@ export const snackBarRedInteraction = (player, k) => {
                     'Suit yourself! But don’t say I didn’t warn you... Snack Bar Green’s snacks are basically "Zero to Mediocrity."'
                 );
             }
+            stopAudio();
         }
     });
 };
 
 export const snackBarStreetInteraction = (player, k) => {
     interactionHandler(player, 'snack_bar_street', k, async () => {
+        // Play welcome audio
+        playAudio(snackBarStreetAudio);
+        
         let snackDecision = await displayPermissionBox({
             k,
             player,
@@ -93,6 +129,7 @@ export const snackBarStreetInteraction = (player, k) => {
                 'Yum! You just ate the best mystery snack of your life!'
             );
             purchaseItem(k, 15, 24);
+            stopAudio();
         } else {
             let secondChance = await displayPermissionBox({
                 k,
