@@ -205,9 +205,6 @@ export function setCamScale(k) {
 
 // NOTE: sprite must be an npc not an object like mailbox
 export const buildInteractionPrompt = (sprite, k) => {
-    const info = document.getElementById('interaction-info');
-    info.style.display = 'flex';
-
     k.loadSprite('question-bubble', './assets/sprites/question-bubble.png', {
         sliceX: 8,
         sliceY: 1,
@@ -233,9 +230,6 @@ export const buildInteractionPrompt = (sprite, k) => {
 };
 
 export const tearDownInteractionPrompt = (k) => {
-    const info = document.getElementById('interaction-info');
-    info.style.display = 'none';
-
     const questionBubbles = k.get('question-bubble', { recursive: true });
 
     if (questionBubbles.length > 0) {

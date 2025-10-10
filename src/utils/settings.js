@@ -3,21 +3,20 @@ import { getGameState, clearSavedGame } from './gameState';
 import { updateCoinsUI } from './coinsUpdate';
 
 // Mobile menu related
+const rightPanel = document.getElementById('right-panel');
 
 const showSettings = () => {
-    const rightPanel = document.getElementById('right-panel');
     rightPanel.classList.add('show-settings');
 };
 
 const hideSettings = () => {
-    const rightPanel = document.getElementById('right-panel');
     rightPanel.classList.remove('show-settings');
     k.canvas.focus(); // This ensures every time settings is closed then the canvas get back the focus.
 };
 
-const menuButton = document.getElementById('menu-button');
-const closeBtn = document.getElementById('close-btn');
-menuButton.addEventListener('click', showSettings);
+const settingsMenuButton = document.getElementById('settings-menu-button');
+const closeBtn = rightPanel.getElementsByClassName('close-btn')[0];
+settingsMenuButton.addEventListener('click', showSettings);
 closeBtn.addEventListener('click', hideSettings);
 
 // Alert window
