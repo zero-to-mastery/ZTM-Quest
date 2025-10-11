@@ -149,3 +149,13 @@ With each added map, you will also find object screenshots to identify objects w
     <img src="./map_seaside/interaction_objects_spawnpoints_enter_new_maps.png" height="300" width="400">
     <figcaption>Interactive Objects</figcaption>
 </figure>
+
+## Company Interior (map_interior)
+<figure>
+    <img src="./map_company_interior/interaction_objects.png" height="300" width="400">
+    <figcaption>Interactive Objects</figcaption>
+</figure>
+<figure>
+    <img src="./map_company_interior/spawnpoints.png" height="300" width="400">
+    <figcaption>Spawnpoints</figcaption>
+</figure>
