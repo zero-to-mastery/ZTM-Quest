@@ -46,7 +46,9 @@ k.scene('extended_campus', (enter_tag) =>
 k.scene('orange_house', (enter_tag) => bootstrap(orangeHouse, { enter_tag }));
 k.scene('red_house', (enter_tag) => bootstrap(redHouse, { enter_tag }));
 k.scene('realtor', (enter_tag) => bootstrap(realtor, { enter_tag }));
-k.scene('company_interior', (enter_tag) => bootstrap(companyInterior, { enter_tag }));
+k.scene('company_interior', (enter_tag) =>
+    bootstrap(companyInterior, { enter_tag })
+);
 
 // Game Machine Scenes
 k.scene('startScreen', gameStartScreen);
