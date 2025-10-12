@@ -13,6 +13,7 @@ import { interactionWithCake } from './cake.interaction';
 import { interactionWithLocker } from './locker.interaction';
 import { interactionWithCat } from './cat.interaction';
 import { interactionWithTrashBin } from './trashBinLobby.interactions';
+import { interactionWithPuff } from './puff.interaction';
 
 const interactions = [
     restroomInteractions,
@@ -30,6 +31,7 @@ const interactions = [
     interactionWithLocker,
     interactionWithCat,
     interactionWithTrashBin,
+    interactionWithPuff,
 ];
 
 export default interactions;
