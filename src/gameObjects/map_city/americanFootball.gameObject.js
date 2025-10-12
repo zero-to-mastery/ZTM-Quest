@@ -11,7 +11,10 @@ export const americanFootball = (k, map, spawnpoints) => {
         }),
         k.body({ isStatic: true }),
         k.anchor('center'),
-        k.pos(map.pos.x + americanFootballSpawnX, map.pos.y + americanFootballSpawnY),
+        k.pos(
+            map.pos.x + americanFootballSpawnX,
+            map.pos.y + americanFootballSpawnY
+        ),
         k.scale(0.006),
         k.offscreen({ hide: true, distance: 10 }),
         'americanFootball',
