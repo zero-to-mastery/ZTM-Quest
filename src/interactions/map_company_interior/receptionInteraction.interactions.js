@@ -60,7 +60,7 @@ export const receptionInteraction = (player, k, map) => {
                     player,
                     characterName: 'reception',
                     text: [
-                        'Hmm… It seems we don\'t have a suitable position for you at the moment.',
+                        "Hmm… It seems we don't have a suitable position for you at the moment.",
                         'Check back another time — something might open up soon.',
                     ],
                 });
