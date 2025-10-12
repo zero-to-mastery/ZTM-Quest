@@ -18,10 +18,10 @@
     text-align: center;
     font-size: 2em;
 }
-#menu-button {
+#misc-menu-button,
+#settings-menu-button {
     position: fixed;
     top: 15px;
-    right: 15px;
     padding: 3px 5px;
     width: 30px;
     height: 30px;
@@ -33,6 +33,15 @@
     border: 2px solid white;
     border-radius: 10px;
     z-index: 100;
+}
+#misc-menu-button {
+    left: 15px;
+    padding: 3px;
+    color: white;
+    font-size: xx-small;
+}
+#settings-menu-button {
+    right: 15px;
 }
 
 .menu-bar {
@@ -58,6 +67,11 @@
     border-radius: 10px;
 }
 
+.help-alert div {
+    max-height: 375px;
+    overflow: auto;
+}
+
 .new-game-alert {
     width: 50%;
 }
@@ -66,8 +80,14 @@
     width: 400px;
 }
 
+.alert-heading {
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
 .alert-text {
-    margin: 0;
+    font-size: 1.5rem;
 }
 
 .alert-options {
@@ -77,7 +97,7 @@
     gap: 5px;
 }
 
-#close-btn {
+.close-btn {
     display: none;
     background-color: red;
     color: white;
@@ -166,6 +186,7 @@
         opacity 0.3s ease;
 }
 
+.misc-btn,
 .setting-btn {
     border: none;
     border-radius: 10px;
@@ -182,6 +203,12 @@
     margin: 10px auto;
 }
 
+.misc-btn {
+    margin: 10px;
+    background-color: yellowgreen;
+}
+
+.misc-btn img,
 .setting-btn img {
     width: 100%;
     height: auto;
@@ -335,6 +362,11 @@
     width: var(--side-panels-width);
     min-width: 140px;
     color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
 }
 
 .left {
@@ -343,11 +375,6 @@
 
 .right {
     right: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    gap: 5px;
 }
 
 .note {
@@ -443,11 +470,12 @@
         --footer-height: auto;
     }
 
-    #menu-button {
+    #misc-menu-button,
+    #settings-menu-button {
         display: flex;
     }
 
-    #close-btn {
+    .close-btn {
         display: block;
     }
 
@@ -457,6 +485,7 @@
         display: none;
     }
 
+    .show-misc-menu,
     .show-settings {
         top: 0;
         bottom: 0;

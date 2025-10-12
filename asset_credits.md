@@ -59,4 +59,5 @@ https://www.freepik.com/free-vector/dessert-icons-pixel-art_29012360.htm#fromVie
 
 https://totuslotus.itch.io/characterpack - man sprite for Eat All Cake Game on Machine #13 (@lotus_totus)
 
-
+https://www.vecteezy.com/free-vector/icons - Icons Vectors by Vecteezy - Free license, but require attribution
+(https://www.vecteezy.com/vector-art/35600471-pixel-art-illustration-backpack-pixelated-backpack-survival-camping-backpack-pixelated-for-the-pixel-art-game-and-icon-for-website-and-video-game-old-school-retro) - backpack picture

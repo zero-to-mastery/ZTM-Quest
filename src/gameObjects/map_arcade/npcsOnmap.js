@@ -63,6 +63,26 @@ export const npcsInArcadeMap = (k, map, spawnpoints) => {
             adjustments: { xAdjust: 35, yAdjust: 25 },
             direction: 'idle-up',
         },
+        {
+            patterns: [/restroom_sinks/],
+            adjustments: { xAdjust: 50, yAdjust: 25 },
+            direction: 'idle-up',
+        },
+        {
+            patterns: [/table_right/],
+            adjustments: { xAdjust: 15, yAdjust: 20 },
+            direction: 'idle-down',
+        },
+        {
+            patterns: [/tv_near_game_machine_/],
+            adjustments: { xAdjust: 25, yAdjust: 30 },
+            direction: 'idle-up',
+        },
+        {
+            patterns: [/plush_shelf_/],
+            adjustments: { xAdjust: 50, yAdjust: 25 },
+            direction: 'idle-up',
+        },
     ];
 
     // Generate NPCs
