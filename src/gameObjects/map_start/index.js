@@ -12,6 +12,8 @@ import { tvVideo } from './tv_main_room_video.gameObject';
 import { randNpcsOnRestroomSinkCounch } from './randNpcsOnRestroomSinkCounch.gameObject';
 import { treasureChest } from './treasureChest.gameObject';
 
+import { puff } from './puff.gameObject';
+
 export const gameObjects = [
     bruno,
     npcsOnChairs,
@@ -25,6 +27,7 @@ export const gameObjects = [
     tvVideo,
     treasureChest,
     cat,
+    puff,
 ];
 
 export default gameObjects;
