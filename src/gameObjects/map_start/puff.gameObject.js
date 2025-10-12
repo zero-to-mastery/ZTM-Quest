@@ -2,7 +2,7 @@ export const puff = (k, map, spawnpoints) => {
     k.loadSprite('puff', './assets/sprites/puff-purple.png');
 
     const puffSpawnX = 240;
-	const puffSpawnYUp = 115;
+    const puffSpawnYUp = 115;
     const puffSpawnYDown = 55;
 
     const puffObjUp = k.make([
@@ -18,7 +18,7 @@ export const puff = (k, map, spawnpoints) => {
         'puff',
     ]);
 
-	const puffObjDown = k.make([
+    const puffObjDown = k.make([
         k.sprite('puff'),
         k.area({
             shape: new k.Rect(k.vec2(0), 16, 16),
