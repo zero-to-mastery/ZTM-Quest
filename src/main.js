@@ -57,11 +57,9 @@ const gameState = getGameState();
 
 // Initialize the scenes with position if saved, else go to default position
 if (gameState) {
-    k.go('downtown');
-    // k.go(gameState.player.scene);
+    k.go(gameState.player.scene);
 } else {
-    k.go('downtown');
-    // k.go('start'); // Go to the default starting scene
+    k.go('start'); // Go to the default starting scene
 }
 
 // To test different maps instead of going through each and every scene to get to yours,
