@@ -18,7 +18,8 @@
     text-align: center;
     font-size: 2em;
 }
-#misc-menu-button,#settings-menu-button {
+#misc-menu-button,
+#settings-menu-button {
     position: fixed;
     top: 15px;
     padding: 3px 5px;
@@ -185,7 +186,8 @@
         opacity 0.3s ease;
 }
 
-.misc-btn,.setting-btn {
+.misc-btn,
+.setting-btn {
     border: none;
     border-radius: 10px;
     color: white;
@@ -206,7 +208,8 @@
     background-color: yellowgreen;
 }
 
-.misc-btn img,.setting-btn img {
+.misc-btn img,
+.setting-btn img {
     width: 100%;
     height: auto;
     display: block;
@@ -467,7 +470,8 @@
         --footer-height: auto;
     }
 
-    #misc-menu-button,#settings-menu-button {
+    #misc-menu-button,
+    #settings-menu-button {
         display: flex;
     }
 
@@ -481,7 +485,8 @@
         display: none;
     }
 
-    .show-misc-menu,.show-settings {
+    .show-misc-menu,
+    .show-settings {
         top: 0;
         bottom: 0;
         width: 100%;
