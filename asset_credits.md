@@ -61,3 +61,5 @@ https://totuslotus.itch.io/characterpack - man sprite for Eat All Cake Game on M
 
 https://www.vecteezy.com/free-vector/icons - Icons Vectors by Vecteezy - Free license, but require attribution
 (https://www.vecteezy.com/vector-art/35600471-pixel-art-illustration-backpack-pixelated-backpack-survival-camping-backpack-pixelated-for-the-pixel-art-game-and-icon-for-website-and-video-game-old-school-retro) - backpack picture
+
+https://rmazanek.itch.io/dog - dog sprite in map_start (Academy)

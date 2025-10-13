@@ -11,6 +11,7 @@ import { jokeTellerNPC } from './jokeTellerNPC.gameObject';
 import { tvVideo } from './tv_main_room_video.gameObject';
 import { randNpcsOnRestroomSinkCounch } from './randNpcsOnRestroomSinkCounch.gameObject';
 import { treasureChest } from './treasureChest.gameObject';
+import { dog } from './dog.gameObject';
 
 export const gameObjects = [
     bruno,
@@ -25,6 +26,7 @@ export const gameObjects = [
     tvVideo,
     treasureChest,
     cat,
+    dog,
 ];
 
 export default gameObjects;
