@@ -78,8 +78,9 @@ function closeCustomPrompt() {
 }
 
 function startCatchTheMoon(k) {
-    const WIDTH = k.width();
-    const HEIGHT = k.height();
+    const WIDTH = window.innerWidth;
+    const HEIGHT = window.innerHeight;
+
     let collectedMoons = 0;
     let moonCount = 1;
     let tkeyCount = 10;
