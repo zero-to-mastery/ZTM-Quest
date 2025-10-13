@@ -35,7 +35,7 @@ const interactions = [
     interactionWithTrashBin,
     interactionWithLibrary,
     interactionWithPuff,
-    interactionWithDog
+    interactionWithDog,
 ];
 
 export default interactions;
