@@ -1,4 +1,5 @@
 import { displayDialogue } from '../../utils';
+import { updateAchievements } from '../../utils/achievementsUpdate';
 import { addCoins } from '../../utils/coinsUpdate';
 
 export const interactionWithGameMachine1 = (player, k, map) => {
@@ -16,6 +17,7 @@ export const interactionWithGameMachine1 = (player, k, map) => {
                         ],
                         onDisplayEnd: () => {
                             startNumberGuessingGame(k);
+                            updateAchievements("Arcade gamer", "Game machine 1");
                         },
                     });
                 } else {

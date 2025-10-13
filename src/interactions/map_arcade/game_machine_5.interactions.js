@@ -1,4 +1,5 @@
 import { displayDialogue } from '../../utils';
+import { updateAchievements } from '../../utils/achievementsUpdate';
 
 export const interactionWithGameMachine5 = (player, k, map) => {
     player.onCollide('game_machine_5', () => {
@@ -15,6 +16,7 @@ export const interactionWithGameMachine5 = (player, k, map) => {
                         text: ['Starting the Break Brick Game... Good luck!'],
                         onDisplayEnd: () => {
                             startBreakBrickGame(k); // Pass k to the game start function
+                            updateAchievements("Arcade gamer", "Game machine 5");
                         },
                     });
                 } else {

@@ -1,4 +1,5 @@
 import { displayDialogue } from '../../utils';
+import { updateAchievements } from '../../utils/achievementsUpdate';
 
 export const interactionWithGameMachine2 = (player, k, map) => {
     player.onCollide('game_machine_2', () => {
@@ -13,6 +14,7 @@ export const interactionWithGameMachine2 = (player, k, map) => {
                         text: ['Starting the Word Guessing Game... Good luck!'],
                         onDisplayEnd: () => {
                             startWordGuessingGame(k);
+                            updateAchievements("Arcade gamer", "Game machine 2");
                         },
                     });
                 } else {

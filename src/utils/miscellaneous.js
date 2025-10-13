@@ -89,3 +89,121 @@ const statsButton = document.getElementById('stats-button');
 statsButton.addEventListener('click', showStats);
 const statsCloseButton = document.getElementById('stats-close-button');
 statsCloseButton.addEventListener('click', hideStats);
+
+// Achievements related
+
+const showAchievements = () => {
+    showAlertWindow();
+    const achievementsAlert = document.querySelector('.achievements-alert');
+    achievementsAlert.classList.add('display-block');
+
+    const achievementsList = document.getElementById('achievements-list');
+    achievementsList.innerHTML = "";
+
+    const achievements = getGameState().player.achievements;
+    const completed = [];
+    const inProgress = [];
+    for (const name in achievements) {
+        if (name === "Food enthusiast") {
+            if (achievements[name].length === 6) {
+                completed.push(name);
+            } else {
+                inProgress.push(name);
+            }
+        } else if (name === "Stay hydrated and healthy") {
+            if (achievements[name] === 5) {
+                completed.push(name);
+            } else {
+                inProgress.push(name);
+            }
+        } else if (name === "Arcade gamer") {
+            if (achievements[name].length === 5) {
+                completed.push(name);
+            } else {
+                inProgress.push(name);
+            }
+        } else if (name === "Let's go fishing!") {
+            if (achievements[name]) {
+                completed.push(name);
+            } else {
+                inProgress.push(name);
+            }
+        }
+    }
+
+    for (const name of completed) {
+        // Create alert item
+        const alertItem = document.createElement("div");
+        alertItem.classList.add("alert-item");
+        alertItem.classList.add("active-item");
+        // Create text for alert item
+        const alertItemText = document.createElement("p");
+        alertItemText.classList.add("alert-item-text");
+        alertItemText.innerHTML = name;
+        // Create description for alert item
+        const alertItemDesc = document.createElement("p");
+        alertItemDesc.classList.add("alert-item-desc");
+        // Create status of alert item
+        const alertItemStatus = document.createElement("p");
+        alertItemStatus.classList.add("alert-item-status");
+        alertItemStatus.innerHTML = "Completed"
+        if (name === "Food enthusiast") {
+            alertItemDesc.innerHTML = "Try out all the food in stalls of city."
+        } else if (name === "Stay hydrated and healthy") {
+            alertItemDesc.innerHTML = "Drink water 5 times."
+        } else if (name === "Arcade gamer") {
+            alertItemDesc.innerHTML = "Play atleast 5 games in arcade store."
+        } else if (name === "Let's go fishing!") {
+            alertItemDesc.innerHTML = "Go for fishing one time."
+        }
+        // Append all child items to alert item
+        alertItem.appendChild(alertItemText);
+        alertItem.appendChild(alertItemDesc);
+        alertItem.appendChild(alertItemStatus);
+
+        achievementsList.appendChild(alertItem);
+    }
+
+    for (const name of inProgress) {
+        // Create alert item
+        const alertItem = document.createElement("div");
+        alertItem.classList.add("alert-item");
+        // Create text for alert item
+        const alertItemText = document.createElement("p");
+        alertItemText.classList.add("alert-item-text");
+        alertItemText.innerHTML = name;
+        // Create description for alert item
+        const alertItemDesc = document.createElement("p");
+        alertItemDesc.classList.add("alert-item-desc");
+        // Create status of alert item
+        const alertItemStatus = document.createElement("p");
+        alertItemStatus.classList.add("alert-item-status");
+        alertItemStatus.innerHTML = "In Progress"
+        if (name === "Food enthusiast") {
+            alertItemDesc.innerHTML = "Try out all the food in stalls of city."
+        } else if (name === "Stay hydrated and healthy") {
+            alertItemDesc.innerHTML = "Drink water 5 times."
+        } else if (name === "Arcade gamer") {
+            alertItemDesc.innerHTML = "Play atleast 5 games in arcade store."
+        } else if (name === "Let's go fishing!") {
+            alertItemDesc.innerHTML = "Go for fishing one time."
+        }
+        // Append all child items to alert item
+        alertItem.appendChild(alertItemText);
+        alertItem.appendChild(alertItemDesc);
+        alertItem.appendChild(alertItemStatus);
+
+        achievementsList.appendChild(alertItem);
+    }
+};
+
+const hideAchievements = () => {
+    const achievementsAlert = document.querySelector('.achievements-alert');
+    achievementsAlert.classList.remove('display-block');
+    hideAlertWindow();
+};
+
+const achievementsButton = document.getElementById('achievements-button');
+achievementsButton.addEventListener('click', showAchievements);
+const achievementsCloseButton = document.getElementById('achievements-close-button');
+achievementsCloseButton.addEventListener('click', hideAchievements);
