@@ -67,3 +67,6 @@ https://gamedeveloperstudio.itch.io/balls
 https://iryna-gural.itch.io/office-set
 
 https://yprimo01.itch.io/metroidvania-library-asset-pack
+
+
+https://rmazanek.itch.io/dog - dog sprite in map_start (Academy)

@@ -79,3 +79,34 @@ export const conversationJessie = [
         'Checkout the Chrome Dino Game for some coins.',
     ],
 ];
+
+export const rico = {
+    name: 'Rico',
+    frames: [],
+};
+export const conversationRico = [
+    [
+        "Welcome to Rico's Arcade — the heartbeat of this town!",
+        'Every machine here has a story... and maybe a few hidden coins.',
+    ],
+    [
+        'I’ve been running this place since the first pixel dropped.',
+        'Old school, new school — if it’s got a high score, I’ve played it.',
+    ],
+    [
+        'Think you’ve got what it takes to beat the top scores?',
+        'Jessie holds the crown on Flappy Bird... but not for long, I hope.',
+    ],
+    [
+        'Win coins. Trade ‘em. Flex ‘em. That’s the arcade way!',
+        'Oh, and don’t forget to visit the prize counter. I hand-picked the rewards myself.',
+    ],
+    [
+        'See that dusty cabinet in the back? Legend says no one’s beaten that game in years.',
+        'You up for the challenge? Or just here for the candy machine?',
+    ],
+    [
+        'Remember: it’s not just about winning... it’s about style.',
+        'So go in there, have fun — and make it epic!',
+    ],
+];
