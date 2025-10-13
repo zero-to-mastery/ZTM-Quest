@@ -65,3 +65,5 @@ https://www.vecteezy.com/free-vector/icons - Icons Vectors by Vecteezy - Free li
 https://gamedeveloperstudio.itch.io/balls
 
 https://iryna-gural.itch.io/office-set
+
+https://yprimo01.itch.io/metroidvania-library-asset-pack
