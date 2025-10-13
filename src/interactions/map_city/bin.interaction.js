@@ -16,7 +16,9 @@ const trash = [
     ['Used tissues...'],
     ['Plastic wrapper...'],
     ['Apple cores...'],
-    ['A dog poop... in the bin! Seriously, the neighbors and their clean grass!'],
+    [
+        'A dog poop... in the bin! Seriously, the neighbors and their clean grass!',
+    ],
 ];
 
 // player can find funny item in trash bin

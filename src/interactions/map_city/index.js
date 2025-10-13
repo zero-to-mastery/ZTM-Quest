@@ -15,7 +15,7 @@ import { enterMapClassroomInteraction } from './enterMapClassroomInteraction.int
 import { enterMapSeasideInteraction } from './enterMapSeasideInteraction.interactions';
 import { enterMapExtendedCampus } from './enterMapExtendedCampus.interactions';
 import { enterMapExtendedCampusTop } from './enterMapExtendCampusTop.interactions';
-import { interactionWithBin } from './bin.interaction'
+import { interactionWithBin } from './bin.interaction';
 
 const interactions = [
     enterMapArcadeInteraction,
