@@ -59,8 +59,7 @@ const gameState = getGameState();
 
 // Initialize the scenes with position if saved, else go to default position
 if (gameState) {
-    k.go('arcade');
-    // k.go(gameState.player.scene);
+    k.go(gameState.player.scene);
 } else {
     k.go('start'); // Go to the default starting scene
 }
