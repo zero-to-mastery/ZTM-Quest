@@ -6,6 +6,8 @@ import {
 import { map_start_quests } from '../quests/constants.quests';
 
 export const enterMapCityLeftInteraction = (player, k, map) => {
+    document.getElementById('custom-prompt').style.display = 'none';
+
     const questName = 'Start Interacting!';
     player.onCollide('enter_map_left', async () => {
         const hasTalkedToBruno = retrieveQuestObjectiveStatus(
