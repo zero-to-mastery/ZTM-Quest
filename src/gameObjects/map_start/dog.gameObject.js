@@ -3,7 +3,7 @@ export const dog = (k, map, spawnpoints) => {
         sliceX: 4,
         sliceY: 1,
         anims: {
-            "bark": { from: 1, to: 2, loop: true, speed: 1 },
+            bark: { from: 1, to: 2, loop: true, speed: 1 },
         },
     });
 
