@@ -15,6 +15,7 @@ import { interactionWithCat } from './cat.interaction';
 import { interactionWithTrashBin } from './trashBinLobby.interactions';
 import { interactionWithLibrary } from './library.interaction';
 import { interactionWithPuff } from './puff.interaction';
+import { interactionWithDog } from './dog.interaction';
 
 const interactions = [
     restroomInteractions,
@@ -34,6 +35,7 @@ const interactions = [
     interactionWithTrashBin,
     interactionWithLibrary,
     interactionWithPuff,
+    interactionWithDog
 ];
 
 export default interactions;

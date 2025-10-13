@@ -14,6 +14,7 @@ import { treasureChest } from './treasureChest.gameObject';
 
 import { puff } from './puff.gameObject';
 import { library } from './library.gameObject';
+import { dog } from './dog.gameObject';
 
 export const gameObjects = [
     bruno,
@@ -30,6 +31,7 @@ export const gameObjects = [
     cat,
     puff,
     library,
+    dog,
 ];
 
 export default gameObjects;
