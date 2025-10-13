@@ -1,7 +1,7 @@
 import { displayDialogue } from '../../utils';
 
 const careerPathDialogue = [
-	`
+    `
 	<div>
         <h2>Zero To Mastery Resources</h2>
         <p>
@@ -20,11 +20,11 @@ const careerPathDialogue = [
 ];
 
 export const interactionWithLibrary = (player, k, map) => {
-	player.onCollide('library', () => {
-		displayDialogue({
-			k,
-			player,
-			text: careerPathDialogue,
-		});
-	});
+    player.onCollide('library', () => {
+        displayDialogue({
+            k,
+            player,
+            text: careerPathDialogue,
+        });
+    });
 };

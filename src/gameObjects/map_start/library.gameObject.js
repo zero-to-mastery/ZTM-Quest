@@ -1,8 +1,8 @@
 export const library = (k, map, spawnpoints) => {
     k.loadSprite('library', './assets/sprites/bookcase.png');
 
-	const librarySpawnX = 320;
-	const librarySpawnY = 100;
+    const librarySpawnX = 320;
+    const librarySpawnY = 100;
 
     const libraryObj = k.make([
         k.sprite('library', { frame: 0, anim: 'laying' }),
