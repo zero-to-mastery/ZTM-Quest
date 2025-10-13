@@ -13,6 +13,7 @@ import { randNpcsOnRestroomSinkCounch } from './randNpcsOnRestroomSinkCounch.gam
 import { treasureChest } from './treasureChest.gameObject';
 
 import { puff } from './puff.gameObject';
+import { library } from './library.gameObject';
 
 export const gameObjects = [
     bruno,
@@ -28,6 +29,7 @@ export const gameObjects = [
     treasureChest,
     cat,
     puff,
+    library,
 ];
 
 export default gameObjects;

@@ -13,6 +13,7 @@ import { interactionWithCake } from './cake.interaction';
 import { interactionWithLocker } from './locker.interaction';
 import { interactionWithCat } from './cat.interaction';
 import { interactionWithTrashBin } from './trashBinLobby.interactions';
+import { interactionWithLibrary } from './library.interaction';
 import { interactionWithPuff } from './puff.interaction';
 
 const interactions = [
@@ -31,6 +32,7 @@ const interactions = [
     interactionWithLocker,
     interactionWithCat,
     interactionWithTrashBin,
+    interactionWithLibrary,
     interactionWithPuff,
 ];
 
