@@ -42,6 +42,7 @@ export async function displayDialogue({
     onDisplayEnd = () => {},
     addFlickerEffect = false,
 }) {
+    document.getElementById('custom-prompt').style.display = 'none';
     time.paused = true;
     player.state.isInDialog = true;
     const dialogUI = document.getElementById('textbox-container');
