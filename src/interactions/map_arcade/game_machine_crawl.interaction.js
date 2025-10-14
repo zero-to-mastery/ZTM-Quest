@@ -1,4 +1,5 @@
 import { displayDialogue } from '../../utils';
+import { updateAchievements } from '../../utils/achievementsUpdate';
 import { addCoins } from '../../utils/coinsUpdate';
 
 export const interactionWithGameMachineCrawl = (player, k, map) => {
@@ -16,6 +17,10 @@ export const interactionWithGameMachineCrawl = (player, k, map) => {
                         text: ['Starting the Crawl Game... Good luck!'],
                         onDisplayEnd: () => {
                             startCrawlGame(k); // Pass k to the game start function
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine crawl'
+                            );
                         },
                     });
                 } else {

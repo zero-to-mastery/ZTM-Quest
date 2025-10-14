@@ -8,8 +8,10 @@ export const purchaseItem = (k, cost, energy) => {
         state.coinsSpent += cost;
         updateCoinsUI();
         updateEnergyState(state, energy);
+        return 'purchased';
     } else {
         k.debug.log("I don't have enough coins.");
+        return 'cannot purchase';
     }
 };
 

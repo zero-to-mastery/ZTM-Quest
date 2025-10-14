@@ -1,4 +1,5 @@
 import { displayDialogue } from '../../utils';
+import { updateAchievements } from '../../utils/achievementsUpdate';
 
 export const interactionWithGameMachine10 = (player, k, map) => {
     player.onCollide('game_machine_10', () => {
@@ -15,6 +16,10 @@ export const interactionWithGameMachine10 = (player, k, map) => {
                         ],
                         onDisplayEnd: () => {
                             startCatchTheMoon(k);
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine 10'
+                            );
                         },
                     });
                 } else {
