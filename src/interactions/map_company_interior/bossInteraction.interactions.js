@@ -1,6 +1,7 @@
 import { interactionHandler } from '../handler.interactions';
 import { displayDialogue, displayPermissionBox } from '../../utils';
 import { playerHasJob } from '../../utils/jobHandler';
+import { addCoins } from '../../utils/coinsUpdate';
 
 export const bossInteraction = (player, k, map) => {
     const pay = 100;
@@ -9,14 +10,11 @@ export const bossInteraction = (player, k, map) => {
             const playerChoice = await displayPermissionBox({
                 k,
                 player,
-                text: ['Ah, good to see you. What can I do for you today?'],
-                yesText: 'Start Work',
-                noText: 'Ask About Pay',
-                cancelText: 'Nothing',
+                text: ['Ah, good to see you. Do you want to start work?'],
             });
 
-            if (playerChoice === 'yes') {
-                player.money += pay;
+            if (playerChoice === true) {
+                addCoins(pay);
 
                 await displayDialogue({
                     k,
@@ -27,11 +25,7 @@ export const bossInteraction = (player, k, map) => {
                         `You completed your shift and earned $${pay}.`,
                     ],
                 });
-
-                return;
-            }
-
-            if (playerChoice === 'no') {
+            } else {
                 await displayDialogue({
                     k,
                     player,
@@ -41,16 +35,8 @@ export const bossInteraction = (player, k, map) => {
                         `Keep performing well, and we might increase that!`,
                     ],
                 });
-
-                return;
             }
 
-            await displayDialogue({
-                k,
-                player,
-                characterName: 'boss',
-                text: ['Alright, carry on with your day.'],
-            });
             return;
         }
 

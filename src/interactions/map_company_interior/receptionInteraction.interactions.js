@@ -38,8 +38,7 @@ export const receptionInteraction = (player, k, map) => {
                 text: ["Great! Let's take a quick look at your application..."],
             });
 
-            // const isSuccessful = Math.random() < 0.7;
-            const isSuccessful = false;
+            const isSuccessful = Math.random() < 0.7;
 
             if (isSuccessful) {
                 await startJobQuest(player);
