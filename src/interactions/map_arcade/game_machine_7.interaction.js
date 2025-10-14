@@ -1,4 +1,5 @@
 import { displayDialogue } from '../../utils';
+import { updateAchievements } from '../../utils/achievementsUpdate';
 
 export const interactionWithGameMachine7 = (player, k, map) => {
     player.onCollide('game_machine_7', () => {
@@ -13,6 +14,10 @@ export const interactionWithGameMachine7 = (player, k, map) => {
                         text: ['Starting the Jumper Game... Get ready!!'],
                         onDisplayEnd: () => {
                             startJumpQuest(k);
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine 7'
+                            );
                         },
                     });
                 } else {

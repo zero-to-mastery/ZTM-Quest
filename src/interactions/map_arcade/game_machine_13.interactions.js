@@ -1,4 +1,5 @@
 import { displayDialogue } from '../../utils';
+import { updateAchievements } from '../../utils/achievementsUpdate';
 
 export const interactionWithGameMachine13 = (player, k, map) => {
     player.onCollide('game_machine_13', () => {
@@ -15,6 +16,10 @@ export const interactionWithGameMachine13 = (player, k, map) => {
                         text: ['Starting Eat All Cake Game... Good luck!'],
                         onDisplayEnd: () => {
                             startEatAllCakeGame(k); // Pass k to the game start function
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine 13'
+                            );
                         },
                     });
                 } else {

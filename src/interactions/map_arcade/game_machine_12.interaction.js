@@ -1,4 +1,5 @@
 import { displayDialogue } from '../../utils';
+import { updateAchievements } from '../../utils/achievementsUpdate';
 
 export const interactionWithGameMachine12 = (player, k, map) => {
     player.onCollide('game_machine_12', () => {
@@ -15,6 +16,10 @@ export const interactionWithGameMachine12 = (player, k, map) => {
                         ],
                         onDisplayEnd: () => {
                             startPatternMemoryGame(k);
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine 12'
+                            );
                         },
                     });
                 } else {

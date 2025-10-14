@@ -1,4 +1,5 @@
 import { displayDialogue, hideCanvasFrame, showCanvasFrame } from '../../utils';
+import { updateAchievements } from '../../utils/achievementsUpdate';
 
 export const interactionWithGameMachine11 = (player, k, map) => {
     player.onCollide('game_machine_11', () => {
@@ -15,6 +16,10 @@ export const interactionWithGameMachine11 = (player, k, map) => {
                         ],
                         onDisplayEnd: () => {
                             startChromeFormulaGame(k);
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine 11'
+                            );
                         },
                     });
                 } else {

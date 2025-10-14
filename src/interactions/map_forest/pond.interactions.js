@@ -1,4 +1,5 @@
 import { displayPermissionBox } from '../../utils';
+import { updateAchievements } from '../../utils/achievementsUpdate';
 import { triggerPlayerFishingAnimations } from '../../utils/triggerFishingAnimations';
 import { triggerNormalPlayerAnimations } from '../../utils/triggerNormalAnimations';
 import { interactionHandler } from '../handler.interactions';
@@ -19,6 +20,7 @@ export const interactionWithPond = (player, k, map) => {
 
         if (wantsToPlay) {
             initGame(k);
+            updateAchievements("Let's go fishing!", null);
         } else {
             triggerNormalPlayerAnimations(k, player, animation, flipX);
         }
