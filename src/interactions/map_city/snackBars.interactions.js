@@ -18,8 +18,8 @@ export const snackBarGreenInteraction = (player, k) => {
                 'Congratulations! You’ve mastered the art of snacking, ZTM style!'
             );
             const purchaseStatus = purchaseItem(k, 15, 25);
-            if (purchaseStatus === "purchased") {
-                updateAchievements("Food enthusiast", "Snack Bar Green");
+            if (purchaseStatus === 'purchased') {
+                updateAchievements('Food enthusiast', 'Snack Bar Green');
             }
         } else {
             let secondSnackChance = await displayPermissionBox({
@@ -35,8 +35,8 @@ export const snackBarGreenInteraction = (player, k) => {
                     'Great choice! You’re on your way to becoming a Snack Sensei!'
                 );
                 const purchaseStatus = purchaseItem(k, 15, 25);
-                if (purchaseStatus === "purchased") {
-                    updateAchievements("Food enthusiast", "Snack Bar Green");
+                if (purchaseStatus === 'purchased') {
+                    updateAchievements('Food enthusiast', 'Snack Bar Green');
                 }
             } else {
                 k.debug.log(
@@ -62,8 +62,8 @@ export const snackBarRedInteraction = (player, k) => {
                 'Excellent choice! You clearly have superior taste. Snack Bar Green can’t compete!'
             );
             const purchaseStatus = purchaseItem(k, 15, 24);
-            if (purchaseStatus === "purchased") {
-                updateAchievements("Food enthusiast", "Snack Bar Red");
+            if (purchaseStatus === 'purchased') {
+                updateAchievements('Food enthusiast', 'Snack Bar Red');
             }
         } else {
             let changeMind = await displayPermissionBox({
@@ -79,8 +79,8 @@ export const snackBarRedInteraction = (player, k) => {
                     'Wise move! Snack Bar Red – where the real snack mastery happens!'
                 );
                 const purchaseStatus = purchaseItem(k, 15, 24);
-                if (purchaseStatus === "purchased") {
-                    updateAchievements("Food enthusiast", "Snack Bar Red");
+                if (purchaseStatus === 'purchased') {
+                    updateAchievements('Food enthusiast', 'Snack Bar Red');
                 }
             } else {
                 k.debug.log(
@@ -106,8 +106,8 @@ export const snackBarStreetInteraction = (player, k) => {
                 'Yum! You just ate the best mystery snack of your life!'
             );
             const purchaseStatus = purchaseItem(k, 15, 24);
-            if (purchaseStatus === "purchased") {
-                updateAchievements("Food enthusiast", "Snack Bar Street");
+            if (purchaseStatus === 'purchased') {
+                updateAchievements('Food enthusiast', 'Snack Bar Street');
             }
         } else {
             let secondChance = await displayPermissionBox({
@@ -123,8 +123,8 @@ export const snackBarStreetInteraction = (player, k) => {
                     'Ah, there we go! Enjoy your... totally normal snack.'
                 );
                 const purchaseStatus = purchaseItem(k, 15, 24);
-                if (purchaseStatus === "purchased") {
-                    updateAchievements("Food enthusiast", "Snack Bar Street");
+                if (purchaseStatus === 'purchased') {
+                    updateAchievements('Food enthusiast', 'Snack Bar Street');
                 }
             } else {
                 k.debug.log(

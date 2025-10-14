@@ -16,7 +16,10 @@ export const interactionWithGameMachine10 = (player, k, map) => {
                         ],
                         onDisplayEnd: () => {
                             startCatchTheMoon(k);
-                            updateAchievements("Arcade gamer", "Game machine 10");
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine 10'
+                            );
                         },
                     });
                 } else {

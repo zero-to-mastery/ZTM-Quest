@@ -14,7 +14,10 @@ export const interactionWithGameMachine9 = (player, k, map) => {
                         text: ['Starting Color Sequence Puzzle... Get ready!'],
                         onDisplayEnd: () => {
                             startColorSequencePuzzle(k);
-                            updateAchievements("Arcade gamer", "Game machine 9");
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine 9'
+                            );
                         },
                     });
                 } else {

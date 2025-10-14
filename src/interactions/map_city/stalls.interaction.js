@@ -18,8 +18,8 @@ export const stall1Interaction = (player, k) => {
                 '🚀 Awesome choice! Here’s your snack – made with love and just a hint of magic!'
             );
             const purchaseStatus = purchaseItem(k, 20, 30);
-            if (purchaseStatus === "purchased") {
-                updateAchievements("Food enthusiast", "Snack Stall 1");
+            if (purchaseStatus === 'purchased') {
+                updateAchievements('Food enthusiast', 'Snack Stall 1');
             }
         } else {
             let secondChance = await displayPermissionBox({
@@ -35,8 +35,8 @@ export const stall1Interaction = (player, k) => {
                     '😋 Yass! You’re now part of the snack elite! Enjoy your crispy delight!'
                 );
                 const purchaseStatus = purchaseItem(k, 20, 30);
-                if (purchaseStatus === "purchased") {
-                    updateAchievements("Food enthusiast", "Snack Stall 1");
+                if (purchaseStatus === 'purchased') {
+                    updateAchievements('Food enthusiast', 'Snack Stall 1');
                 }
             } else {
                 k.debug.log(
@@ -62,8 +62,8 @@ export const stall2Interaction = (player, k) => {
                 '🌈 Fantastic! Here’s a snack that might just change your life! Or at least your lunch!'
             );
             const purchaseStatus = purchaseItem(k, 20, 28);
-            if (purchaseStatus === "purchased") {
-                updateAchievements("Food enthusiast", "Snack Stall 2");
+            if (purchaseStatus === 'purchased') {
+                updateAchievements('Food enthusiast', 'Snack Stall 2');
             }
         } else {
             let secondThoughts = await displayPermissionBox({
@@ -79,8 +79,8 @@ export const stall2Interaction = (player, k) => {
                     '🌟 You’ve made the right call! Enjoy the epic flavors of Stall 2! Snack on, my friend!'
                 );
                 const purchaseStatus = purchaseItem(k, 20, 28);
-                if (purchaseStatus === "purchased") {
-                    updateAchievements("Food enthusiast", "Snack Stall 2");
+                if (purchaseStatus === 'purchased') {
+                    updateAchievements('Food enthusiast', 'Snack Stall 2');
                 }
             } else {
                 k.debug.log(

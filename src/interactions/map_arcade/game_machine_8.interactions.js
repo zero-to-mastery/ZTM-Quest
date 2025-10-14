@@ -17,7 +17,10 @@ export const interactionWithGameMachine8 = (player, k) => {
                         text: ['Mini-Game started!'],
                         onDisplayEnd: () => {
                             initGame(k);
-                            updateAchievements("Arcade gamer", "Game machine 8");
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine 8'
+                            );
                         },
                     });
                 } else {

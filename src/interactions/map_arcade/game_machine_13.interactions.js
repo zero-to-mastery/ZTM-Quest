@@ -16,7 +16,10 @@ export const interactionWithGameMachine13 = (player, k, map) => {
                         text: ['Starting Eat All Cake Game... Good luck!'],
                         onDisplayEnd: () => {
                             startEatAllCakeGame(k); // Pass k to the game start function
-                            updateAchievements("Arcade gamer", "Game machine 13");
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine 13'
+                            );
                         },
                     });
                 } else {

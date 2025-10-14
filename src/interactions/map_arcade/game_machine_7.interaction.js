@@ -14,7 +14,10 @@ export const interactionWithGameMachine7 = (player, k, map) => {
                         text: ['Starting the Jumper Game... Get ready!!'],
                         onDisplayEnd: () => {
                             startJumpQuest(k);
-                            updateAchievements("Arcade gamer", "Game machine 7");
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine 7'
+                            );
                         },
                     });
                 } else {

@@ -16,7 +16,10 @@ export const interactionWithGameMachine12 = (player, k, map) => {
                         ],
                         onDisplayEnd: () => {
                             startPatternMemoryGame(k);
-                            updateAchievements("Arcade gamer", "Game machine 12");
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine 12'
+                            );
                         },
                     });
                 } else {

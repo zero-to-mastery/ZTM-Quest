@@ -16,7 +16,10 @@ export const interactionWithGameMachine11 = (player, k, map) => {
                         ],
                         onDisplayEnd: () => {
                             startChromeFormulaGame(k);
-                            updateAchievements("Arcade gamer", "Game machine 11");
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine 11'
+                            );
                         },
                     });
                 } else {

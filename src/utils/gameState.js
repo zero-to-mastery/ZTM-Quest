@@ -17,9 +17,9 @@ const initialState = () => ({
         position: { x: 32, y: 384 },
         backpack: false,
         achievements: {
-            "Food enthusiast": [],
-            "Stay hydrated and healthy": 0,
-            "Arcade gamer": [],
+            'Food enthusiast': [],
+            'Stay hydrated and healthy': 0,
+            'Arcade gamer': [],
             "Let's go fishing!": false,
         },
     },

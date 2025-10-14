@@ -17,7 +17,10 @@ export const interactionWithGameMachine1 = (player, k, map) => {
                         ],
                         onDisplayEnd: () => {
                             startNumberGuessingGame(k);
-                            updateAchievements("Arcade gamer", "Game machine 1");
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine 1'
+                            );
                         },
                     });
                 } else {

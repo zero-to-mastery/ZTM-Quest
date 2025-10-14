@@ -17,7 +17,10 @@ export const interactionWithGameMachineCrawl = (player, k, map) => {
                         text: ['Starting the Crawl Game... Good luck!'],
                         onDisplayEnd: () => {
                             startCrawlGame(k); // Pass k to the game start function
-                            updateAchievements("Arcade gamer", "Game machine crawl");
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine crawl'
+                            );
                         },
                     });
                 } else {

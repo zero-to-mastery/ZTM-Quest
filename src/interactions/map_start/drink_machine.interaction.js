@@ -34,8 +34,11 @@ export const interactionWithDrinksMachine = (player, k, map) => {
                     onDisplayEnd: () => {
                         if (selectedOption == 'Water') {
                             const purchaseStatus = purchaseItem(k, 5, 20);
-                            if (purchaseStatus === "purchased") {
-                                updateAchievements("Stay hydrated and healthy", null);
+                            if (purchaseStatus === 'purchased') {
+                                updateAchievements(
+                                    'Stay hydrated and healthy',
+                                    null
+                                );
                             }
                         } else {
                             purchaseItem(k, 8, 15);

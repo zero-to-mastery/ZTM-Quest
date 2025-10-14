@@ -17,7 +17,10 @@ export const interactionWithGameMachine6 = (player, k, map) => {
                         text: ['Starting the Chrome Dino Game... Good luck!'],
                         onDisplayEnd: () => {
                             startChromeDinoGame(k); // Pass k to the game start function
-                            updateAchievements("Arcade gamer", "Game machine 6");
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine 6'
+                            );
                         },
                     });
                 } else {

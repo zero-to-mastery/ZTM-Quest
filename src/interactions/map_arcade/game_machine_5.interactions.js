@@ -16,7 +16,10 @@ export const interactionWithGameMachine5 = (player, k, map) => {
                         text: ['Starting the Break Brick Game... Good luck!'],
                         onDisplayEnd: () => {
                             startBreakBrickGame(k); // Pass k to the game start function
-                            updateAchievements("Arcade gamer", "Game machine 5");
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine 5'
+                            );
                         },
                     });
                 } else {

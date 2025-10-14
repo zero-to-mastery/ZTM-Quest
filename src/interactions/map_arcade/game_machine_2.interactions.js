@@ -14,7 +14,10 @@ export const interactionWithGameMachine2 = (player, k, map) => {
                         text: ['Starting the Word Guessing Game... Good luck!'],
                         onDisplayEnd: () => {
                             startWordGuessingGame(k);
-                            updateAchievements("Arcade gamer", "Game machine 2");
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine 2'
+                            );
                         },
                     });
                 } else {

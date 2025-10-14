@@ -16,7 +16,10 @@ export const interactionWithGameMachine4 = (player, k, map) => {
                         ],
                         onDisplayEnd: () => {
                             startBirdGame(k);
-                            updateAchievements("Arcade gamer", "Game machine 4");
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine 4'
+                            );
                         },
                     });
                 } else {

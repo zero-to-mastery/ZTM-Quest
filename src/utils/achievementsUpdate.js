@@ -4,22 +4,22 @@ export const updateAchievements = (name, option) => {
     const gameState = getGameState();
     const achievements = gameState.player.achievements;
 
-    if (name === "Food enthusiast") {
+    if (name === 'Food enthusiast') {
         let present = false;
         for (const stall of achievements[name]) {
             if (stall === option) {
                 present = true;
-                break
+                break;
             }
         }
         if (!present) {
             achievements[name].push(option);
         }
-    } else if (name === "Stay hydrated and healthy") {
+    } else if (name === 'Stay hydrated and healthy') {
         if (achievements[name] < 5) {
-            achievements[name] += 1
+            achievements[name] += 1;
         }
-    } else if (name === "Arcade gamer") {
+    } else if (name === 'Arcade gamer') {
         if (achievements[name].length >= 5) {
             return;
         }
@@ -27,7 +27,7 @@ export const updateAchievements = (name, option) => {
         for (const machine of achievements[name]) {
             if (machine === option) {
                 present = true;
-                break
+                break;
             }
         }
         if (!present) {
@@ -40,4 +40,4 @@ export const updateAchievements = (name, option) => {
     }
 
     setGameState(gameState);
-}
+};

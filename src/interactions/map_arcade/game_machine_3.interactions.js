@@ -17,7 +17,10 @@ export const interactionWithGameMachine3 = (player, k, map) => {
                         text: ['Starting the Flappy Bird Game... Good luck!'],
                         onDisplayEnd: () => {
                             startFlappyBirdGame(k); // Pass k to the game start function
-                            updateAchievements("Arcade gamer", "Game machine 3");
+                            updateAchievements(
+                                'Arcade gamer',
+                                'Game machine 3'
+                            );
                         },
                     });
                 } else {
