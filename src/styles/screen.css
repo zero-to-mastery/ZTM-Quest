@@ -72,13 +72,23 @@
     overflow: auto;
 }
 
+.stats-alert {
+    width: 400px;
+}
+
+.achievements-alert {
+    width: 400px;
+}
+
+#achievements-list {
+    max-height: 375px;
+    overflow: auto;
+}
+
 .new-game-alert {
     width: 50%;
 }
 
-.stats-alert {
-    width: 400px;
-}
 
 .alert-heading {
     font-size: 2.5rem;
@@ -88,6 +98,49 @@
 
 .alert-text {
     font-size: 1.5rem;
+}
+
+.alert-item {
+    margin: 10px 5px;
+    padding: 5px;
+    border: #8e8e8e 2px solid;
+    border-radius: 15px;
+}
+
+.active-item {
+    border-color: darkblue;
+}
+
+.alert-item-text {
+    font-size: 1.5rem;
+    color: #8e8e8e;
+}
+
+.active-item .alert-item-text {
+    color: darkblue;
+}
+
+.alert-item-desc {
+    font-size: 0.8rem;
+    color: #8e8e8e;
+}
+
+.active-item .alert-item-desc {
+    color: black;
+}
+
+.alert-item-status {
+    margin-left: auto;
+    padding: 1px 3px;
+    width: fit-content;
+    background-color: #8e8e8e;
+    font-size: 0.5rem;
+    color: white;
+    border-radius: 5px;
+}
+
+.active-item .alert-item-status {
+    background-color: darkblue;
 }
 
 .alert-options {
@@ -204,8 +257,12 @@
 }
 
 .misc-btn {
-    margin: 10px;
     background-color: yellowgreen;
+}
+
+#achievements-button {
+    padding: 5px 1px;
+    font-size: 1rem;
 }
 
 .misc-btn img,

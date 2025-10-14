@@ -1,4 +1,5 @@
 import { displayDialogue } from '../../utils';
+import { updateAchievements } from '../../utils/achievementsUpdate';
 import { purchaseItem } from '../../utils/coinsUpdate';
 
 // List of drinks and possible fun surprises
@@ -32,7 +33,10 @@ export const interactionWithDrinksMachine = (player, k, map) => {
                     text: texts[selectedOption],
                     onDisplayEnd: () => {
                         if (selectedOption == 'Water') {
-                            purchaseItem(k, 5, 20);
+                            const purchaseStatus = purchaseItem(k, 5, 20);
+                            if (purchaseStatus === "purchased") {
+                                updateAchievements("Stay hydrated and healthy", null);
+                            }
                         } else {
                             purchaseItem(k, 8, 15);
                         }

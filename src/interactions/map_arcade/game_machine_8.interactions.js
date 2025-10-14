@@ -1,6 +1,7 @@
 import { scaleFactor } from '../../constants';
 // Arcade machine interaction
 import { displayDialogue } from '../../utils';
+import { updateAchievements } from '../../utils/achievementsUpdate';
 
 export const interactionWithGameMachine8 = (player, k) => {
     // Check collision with the game machine
@@ -16,6 +17,7 @@ export const interactionWithGameMachine8 = (player, k) => {
                         text: ['Mini-Game started!'],
                         onDisplayEnd: () => {
                             initGame(k);
+                            updateAchievements("Arcade gamer", "Game machine 8");
                         },
                     });
                 } else {

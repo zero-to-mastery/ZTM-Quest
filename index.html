@@ -99,8 +99,8 @@
                         </div>
                         <ul>
                             <li class="alert-text">
-                                Tap/Click/&uarr;&darr;&larr;&rarr; around to
-                                move
+                                Tap/Click/&uarr;&darr;&larr;&rarr;/WASD to
+                                move around
                             </li>
                             <li class="alert-text">
                                 "T"/Tap/Click - Interact with NPC/Object
@@ -181,6 +181,26 @@
                         </button>
                     </div>
                 </div>
+                <div class="alert stats-alert">
+                    <p id="coins-collected" class="alert-text"></p>
+                    <p id="coins-spent" class="alert-text"></p>
+                    <p id="time-spent" class="alert-text"></p>
+                    <div class="alert-options">
+                        <button id="stats-close-button" class="option-btn">
+                            Close
+                        </button>
+                    </div>
+                </div>
+                <div class="alert achievements-alert">
+                    <div id="achievements-list">
+                        <p class="alert-text">No achievements available!!</p>
+                    </div>
+                    <div class="alert-options">
+                        <button id="achievements-close-button" class="option-btn">
+                            Close
+                        </button>
+                    </div>
+                </div>
                 <div class="alert new-game-alert">
                     <p class="alert-text">
                         Do you want to start a new game? (This clears the saved
@@ -192,16 +212,6 @@
                         </button>
                         <button id="new-game-yes-button" class="option-btn">
                             Yes
-                        </button>
-                    </div>
-                </div>
-                <div class="alert stats-alert">
-                    <p id="coins-collected" class="alert-text"></p>
-                    <p id="coins-spent" class="alert-text"></p>
-                    <p id="time-spent" class="alert-text"></p>
-                    <div class="alert-options">
-                        <button id="stats-close-button" class="option-btn">
-                            Close
                         </button>
                     </div>
                 </div>
@@ -220,6 +230,20 @@
                 <div>
                     <button class="close-btn">X</button>
                     <button id="help-button" class="misc-btn">Help</button>
+                    <button id="stats-button" class="misc-btn">
+                        Stats
+                        <!-- <img
+                            src="/assets/sprites/stats.png"
+                            alt="stats"
+                            id="new-game-img"
+                        /> -->
+                    </button>
+                    <button id="achievements-button" class="misc-btn">
+                        Achievements
+                    </button>
+                    <button id="credits-button" class="misc-btn">
+                        Credits
+                    </button>
                 </div>
             </div>
             <div id="right-panel" class="right">
@@ -232,13 +256,6 @@
                         <img
                             src="/assets/sprites/newgame.png"
                             alt="New Game"
-                            id="new-game-img"
-                        />
-                    </button>
-                    <button id="stats-button" class="setting-btn">
-                        <img
-                            src="/assets/sprites/stats.png"
-                            alt="stats"
                             id="new-game-img"
                         />
                     </button>
@@ -255,9 +272,6 @@
                             src="/assets/sprites/mute.png"
                             alt="Mute"
                         />
-                    </button>
-                    <button id="credits-button" class="setting-btn">
-                        Credits
                     </button>
                 </div>
                 <div></div>

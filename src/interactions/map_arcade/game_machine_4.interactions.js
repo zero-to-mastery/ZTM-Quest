@@ -1,4 +1,5 @@
 import { displayDialogue } from '../../utils';
+import { updateAchievements } from '../../utils/achievementsUpdate';
 
 export const interactionWithGameMachine4 = (player, k, map) => {
     player.onCollide('game_machine_4', () => {
@@ -15,6 +16,7 @@ export const interactionWithGameMachine4 = (player, k, map) => {
                         ],
                         onDisplayEnd: () => {
                             startBirdGame(k);
+                            updateAchievements("Arcade gamer", "Game machine 4");
                         },
                     });
                 } else {
