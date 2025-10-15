@@ -44,7 +44,7 @@ export const npcsInCityMap = (k, map, spawnpoints) => {
             direction: 'idle-down',
         },
         {
-            patterns: [/snack_bar_/],
+            patterns: [/snack_bar_green_1/],
             adjustments: { xAdjust: 12, yAdjust: 18 },
             direction: 'idle-down',
         },

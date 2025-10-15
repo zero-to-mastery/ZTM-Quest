@@ -2819,7 +2819,7 @@
                 {
                  "height":21.1875,
                  "id":405,
-                 "name":"snack_bar_green",
+                 "name":"snack_bar_green_1",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2841,7 +2841,7 @@
                 {
                  "height":25,
                  "id":407,
-                 "name":"snack_bar_green",
+                 "name":"snack_bar_green_2",
                  "rotation":0,
                  "type":"",
                  "visible":true,

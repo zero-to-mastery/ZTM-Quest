@@ -4,7 +4,7 @@ import { purchaseItem } from '../../utils/coinsUpdate';
 import { interactionHandler } from '../handler.interactions';
 
 export const snackBarGreenInteraction = (player, k) => {
-    interactionHandler(player, 'snack_bar_green', k, async () => {
+    interactionHandler(player, 'snack_bar_green_1', k, async () => {
         let ztmSnackDecision = await displayPermissionBox({
             k,
             player,
