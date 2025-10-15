@@ -14,11 +14,11 @@ export const snackBarGreenInteraction = (player, k) => {
         });
 
         if (ztmSnackDecision) {
-            k.debug.log(
-                'Congratulations! You’ve mastered the art of snacking, ZTM style!'
-            );
             const purchaseStatus = purchaseItem(k, 15, 25);
             if (purchaseStatus === 'purchased') {
+                k.debug.log(
+                    'Congratulations! You’ve mastered the art of snacking, ZTM style!'
+                );
                 updateAchievements('Food enthusiast', 'Snack Bar Green');
             }
         } else {
@@ -31,11 +31,11 @@ export const snackBarGreenInteraction = (player, k) => {
             });
 
             if (secondSnackChance) {
-                k.debug.log(
-                    'Great choice! You’re on your way to becoming a Snack Sensei!'
-                );
                 const purchaseStatus = purchaseItem(k, 15, 25);
                 if (purchaseStatus === 'purchased') {
+                    k.debug.log(
+                        'Great choice! You’re on your way to becoming a Snack Sensei!'
+                    );
                     updateAchievements('Food enthusiast', 'Snack Bar Green');
                 }
             } else {
@@ -58,11 +58,11 @@ export const snackBarRedInteraction = (player, k) => {
         });
 
         if (snackOffer) {
-            k.debug.log(
-                'Excellent choice! You clearly have superior taste. Snack Bar Green can’t compete!'
-            );
             const purchaseStatus = purchaseItem(k, 15, 24);
             if (purchaseStatus === 'purchased') {
+                k.debug.log(
+                    'Excellent choice! You clearly have superior taste. Snack Bar Green can’t compete!'
+                );
                 updateAchievements('Food enthusiast', 'Snack Bar Red');
             }
         } else {
@@ -75,11 +75,11 @@ export const snackBarRedInteraction = (player, k) => {
             });
 
             if (changeMind) {
-                k.debug.log(
-                    'Wise move! Snack Bar Red – where the real snack mastery happens!'
-                );
                 const purchaseStatus = purchaseItem(k, 15, 24);
                 if (purchaseStatus === 'purchased') {
+                    k.debug.log(
+                        'Wise move! Snack Bar Red – where the real snack mastery happens!'
+                    );
                     updateAchievements('Food enthusiast', 'Snack Bar Red');
                 }
             } else {
@@ -102,11 +102,11 @@ export const snackBarStreetInteraction = (player, k) => {
         });
 
         if (snackDecision) {
-            k.debug.log(
-                'Yum! You just ate the best mystery snack of your life!'
-            );
             const purchaseStatus = purchaseItem(k, 15, 24);
             if (purchaseStatus === 'purchased') {
+                k.debug.log(
+                    'Yum! You just ate the best mystery snack of your life!'
+                );
                 updateAchievements('Food enthusiast', 'Snack Bar Street');
             }
         } else {
@@ -119,11 +119,11 @@ export const snackBarStreetInteraction = (player, k) => {
             });
 
             if (secondChance) {
-                k.debug.log(
-                    'Ah, there we go! Enjoy your... totally normal snack.'
-                );
                 const purchaseStatus = purchaseItem(k, 15, 24);
                 if (purchaseStatus === 'purchased') {
+                    k.debug.log(
+                        'Ah, there we go! Enjoy your... totally normal snack.'
+                    );
                     updateAchievements('Food enthusiast', 'Snack Bar Street');
                 }
             } else {
