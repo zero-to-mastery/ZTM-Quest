@@ -11,6 +11,7 @@ export const snackBarGreenInteraction = (player, k) => {
             text: [
                 'Welcome to Snack Bar Green! Ready to go from zero to snack mastery?',
             ],
+            purchaseCost: 15,
         });
 
         if (ztmSnackDecision) {
@@ -28,6 +29,7 @@ export const snackBarGreenInteraction = (player, k) => {
                 text: [
                     'Are you sure? The path to snack mastery is only one bite away...',
                 ],
+                purchaseCost: 15,
             });
 
             if (secondSnackChance) {
@@ -55,6 +57,7 @@ export const snackBarRedInteraction = (player, k) => {
             text: [
                 'Welcome to Snack Bar Red! The *real* masters of snacking... Unlike *ahem* some green wannabes across the street. Ready for the best snack experience?',
             ],
+            purchaseCost: 15,
         });
 
         if (snackOffer) {
@@ -72,6 +75,7 @@ export const snackBarRedInteraction = (player, k) => {
                 text: [
                     'Are you sure? Don’t tell me you’re thinking of going to *that* green place... Their snacks are... well, let’s just say "unimpressive."',
                 ],
+                purchaseCost: 15,
             });
 
             if (changeMind) {
@@ -99,6 +103,7 @@ export const snackBarStreetInteraction = (player, k) => {
             text: [
                 'Psst! You look hungry! How about a snack? It’s a secret recipe!',
             ],
+            purchaseCost: 15,
         });
 
         if (snackDecision) {
@@ -116,6 +121,7 @@ export const snackBarStreetInteraction = (player, k) => {
                 text: [
                     'Are you sure? It’s low calorie and totally NOT haunted! Still no?',
                 ],
+                purchaseCost: 15,
             });
 
             if (secondChance) {

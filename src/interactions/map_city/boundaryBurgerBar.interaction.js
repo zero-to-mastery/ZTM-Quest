@@ -8,6 +8,7 @@ export const boundaryBurgerBarInteraction = (player, k) => {
             k,
             player,
             text: ['Hello! Would you like a burger?'],
+            purchaseCost: 25,
         });
 
         if (wantBurger) {

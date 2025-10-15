@@ -11,6 +11,7 @@ export const stall1Interaction = (player, k) => {
             text: [
                 '🎉 Welcome to Stall 1! Our secret ingredient is... a sprinkle of **joy**! Ready to snack like a champ?',
             ],
+            purchaseCost: 20,
         });
 
         if (stall1Offer) {
@@ -28,6 +29,7 @@ export const stall1Interaction = (player, k) => {
                 text: [
                     '🤔 Are you absolutely sure? Our snacks are scientifically proven to elevate your happiness levels! Or do you prefer sadness-flavored snacks?',
                 ],
+                purchaseCost: 20,
             });
 
             if (secondChance) {
@@ -55,6 +57,7 @@ export const stall2Interaction = (player, k) => {
             text: [
                 '🎊 Ahoy! Welcome to Stall 2! We don’t just sell snacks; we sell **memories**! Care to join the flavor revolution?',
             ],
+            purchaseCost: 20,
         });
 
         if (stall2Offer) {
@@ -72,6 +75,7 @@ export const stall2Interaction = (player, k) => {
                 text: [
                     '🚫 Wait a minute! Are you really about to miss the chance to munch on greatness? Don’t you want to be a snack legend?',
                 ],
+                purchaseCost: 20,
             });
 
             if (secondThoughts) {
