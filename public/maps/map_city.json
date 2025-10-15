@@ -3478,28 +3478,6 @@
                  "y":295.466
                 }, 
                 {
-                 "height":24.1818,
-                 "id":434,
-                 "name":"boundary_park_bench",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":3.81818,
-                 "x":594.432,
-                 "y":215.534
-                }, 
-                {
-                 "height":23.6364,
-                 "id":435,
-                 "name":"boundary_park_bench",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":3.27273,
-                 "x":634.614,
-                 "y":215.898
-                }, 
-                {
                  "height":14.25,
                  "id":436,
                  "name":"boundary_park_bench",
