@@ -8,12 +8,13 @@ export const boundaryBurgerBarInteraction = (player, k) => {
             k,
             player,
             text: ['Hello! Would you like a burger?'],
+            purchaseCost: 25,
         });
 
         if (wantBurger) {
-            k.debug.log('Enjoy your burger!'); //testing purposes you may uncomment it or add displayPermission box your wish
             const purchaseStatus = purchaseItem(k, 25, 40);
             if (purchaseStatus === 'purchased') {
+                k.debug.log('Enjoy your burger!'); //testing purposes you may uncomment it or add displayPermission box your wish
                 updateAchievements('Food enthusiast', 'Burger Store');
             }
         } else {

@@ -11,14 +11,15 @@ export const stall1Interaction = (player, k) => {
             text: [
                 '🎉 Welcome to Stall 1! Our secret ingredient is... a sprinkle of **joy**! Ready to snack like a champ?',
             ],
+            purchaseCost: 20,
         });
 
         if (stall1Offer) {
-            k.debug.log(
-                '🚀 Awesome choice! Here’s your snack – made with love and just a hint of magic!'
-            );
             const purchaseStatus = purchaseItem(k, 20, 30);
             if (purchaseStatus === 'purchased') {
+                k.debug.log(
+                    '🚀 Awesome choice! Here’s your snack – made with love and just a hint of magic!'
+                );
                 updateAchievements('Food enthusiast', 'Snack Stall 1');
             }
         } else {
@@ -28,14 +29,15 @@ export const stall1Interaction = (player, k) => {
                 text: [
                     '🤔 Are you absolutely sure? Our snacks are scientifically proven to elevate your happiness levels! Or do you prefer sadness-flavored snacks?',
                 ],
+                purchaseCost: 20,
             });
 
             if (secondChance) {
-                k.debug.log(
-                    '😋 Yass! You’re now part of the snack elite! Enjoy your crispy delight!'
-                );
                 const purchaseStatus = purchaseItem(k, 20, 30);
                 if (purchaseStatus === 'purchased') {
+                    k.debug.log(
+                        '😋 Yass! You’re now part of the snack elite! Enjoy your crispy delight!'
+                    );
                     updateAchievements('Food enthusiast', 'Snack Stall 1');
                 }
             } else {
@@ -55,14 +57,15 @@ export const stall2Interaction = (player, k) => {
             text: [
                 '🎊 Ahoy! Welcome to Stall 2! We don’t just sell snacks; we sell **memories**! Care to join the flavor revolution?',
             ],
+            purchaseCost: 20,
         });
 
         if (stall2Offer) {
-            k.debug.log(
-                '🌈 Fantastic! Here’s a snack that might just change your life! Or at least your lunch!'
-            );
             const purchaseStatus = purchaseItem(k, 20, 28);
             if (purchaseStatus === 'purchased') {
+                k.debug.log(
+                    '🌈 Fantastic! Here’s a snack that might just change your life! Or at least your lunch!'
+                );
                 updateAchievements('Food enthusiast', 'Snack Stall 2');
             }
         } else {
@@ -72,14 +75,15 @@ export const stall2Interaction = (player, k) => {
                 text: [
                     '🚫 Wait a minute! Are you really about to miss the chance to munch on greatness? Don’t you want to be a snack legend?',
                 ],
+                purchaseCost: 20,
             });
 
             if (secondThoughts) {
-                k.debug.log(
-                    '🌟 You’ve made the right call! Enjoy the epic flavors of Stall 2! Snack on, my friend!'
-                );
                 const purchaseStatus = purchaseItem(k, 20, 28);
                 if (purchaseStatus === 'purchased') {
+                    k.debug.log(
+                        '🌟 You’ve made the right call! Enjoy the epic flavors of Stall 2! Snack on, my friend!'
+                    );
                     updateAchievements('Food enthusiast', 'Snack Stall 2');
                 }
             } else {
