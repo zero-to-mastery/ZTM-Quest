@@ -133,7 +133,10 @@ export async function displayPermissionBox({
     const statsUI = document.getElementById('stats-container');
     const miniMapUI = document.getElementById('minimap');
     closeBtn.innerHTML = 'No';
-    nextBtn.innerHTML = purchaseCost !== undefined ? `Yes (${purchaseCost} coin${purchaseCost !== 1 ? "s" : ""})` : 'Yes';
+    nextBtn.innerHTML =
+        purchaseCost !== undefined
+            ? `Yes (${purchaseCost} coin${purchaseCost !== 1 ? 's' : ''})`
+            : 'Yes';
     statsUI.style.display = 'none';
     miniMapUI.style.display = 'none';
     dialogUI.style.display = 'block';

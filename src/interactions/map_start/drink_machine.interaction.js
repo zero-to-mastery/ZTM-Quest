@@ -9,7 +9,12 @@ export const interactionWithDrinksMachine = (player, k, map) => {
         // Trigger the custom prompt when the player collides with the drinks machine
         showCustomPrompt(
             'What would you like to drink?', // Prompt message
-            ['Coke (8 coins)', 'Soda (8 coins)', 'Water (5 coins)', 'Sprite (8 coins)'], // Options
+            [
+                'Coke (8 coins)',
+                'Soda (8 coins)',
+                'Water (5 coins)',
+                'Sprite (8 coins)',
+            ], // Options
             (selectedOption) => {
                 // Callback when an option is selected
                 // Logic based on the selected option
