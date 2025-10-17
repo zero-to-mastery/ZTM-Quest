@@ -16,6 +16,7 @@ import { enterMapSeasideInteraction } from './enterMapSeasideInteraction.interac
 import { enterMapExtendedCampus } from './enterMapExtendedCampus.interactions';
 import { enterMapExtendedCampusTop } from './enterMapExtendCampusTop.interactions';
 import { interactionWithBin } from './bin.interaction';
+import { jessicaInteraction } from './jessica.interation';
 import { interactionWithSoccerBall } from './soccerBall.interaction';
 
 const interactions = [
@@ -37,6 +38,7 @@ const interactions = [
     // Add more interactions here
     enterMapCampusHouse1Interaction,
     interactionWithBin,
+    jessicaInteraction,
     interactionWithSoccerBall,
 ];
 
