@@ -8,6 +8,7 @@ import { interactionWithHole } from './hole.interactions';
 import { interactionWithFlower } from './flower.interactions';
 import { interactionWithFirepit } from './firepit.interactions';
 import { interactionWithPond } from './pond.interactions';
+import { interactionWithFlashDrive } from './flashDrive.interactions';
 
 const interactions = [
     enterMapForestJunctionInteraction,
@@ -20,6 +21,7 @@ const interactions = [
     interactionWithFlower,
     interactionWithFirepit,
     interactionWithPond,
+    interactionWithFlashDrive,
 ];
 
 export default interactions;
