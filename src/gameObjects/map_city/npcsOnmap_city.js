@@ -39,12 +39,17 @@ export const npcsInCityMap = (k, map, spawnpoints) => {
     // Define patterns and their corresponding adjustments
     const npcPatterns = [
         {
-            patterns: [/stall_/],
+            patterns: [/stall_1/],
             adjustments: { xAdjust: 12, yAdjust: 18 },
             direction: 'idle-down',
         },
         {
-            patterns: [/snack_bar_/],
+            patterns: [/stall_2/],
+            adjustments: { xAdjust: 12, yAdjust: 18 },
+            direction: 'idle-down',
+        },
+        {
+            patterns: [/snack_bar_green_1/],
             adjustments: { xAdjust: 12, yAdjust: 18 },
             direction: 'idle-down',
         },
