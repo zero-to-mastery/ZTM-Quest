@@ -12,7 +12,7 @@ const gameObjects = [
     flyingBirds,
     soccerBall,
     americanFootball,
-    jessica,
+    jessica
 ];
 
 export default gameObjects;
