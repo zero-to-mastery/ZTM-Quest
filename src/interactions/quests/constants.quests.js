@@ -34,13 +34,13 @@ export const map_realtor = {
 };
 
 export const findFlashDriveQuest = {
-    "Find the Flash Drive": makeQuest(
-        "Find the Flash Drive",
-        "Find the flash drive that Jessica has lost.",
+    'Find the Flash Drive': makeQuest(
+        'Find the Flash Drive',
+        'Find the flash drive that Jessica has lost.',
         {
-            "Has Talked to Jessica": false,
-            "Found the Flash Drive": false,
-            "Returned the Flash Drive": false,
+            'Has Talked to Jessica': false,
+            'Found the Flash Drive': false,
+            'Returned the Flash Drive': false,
         }
-    )
-}
+    ),
+};
