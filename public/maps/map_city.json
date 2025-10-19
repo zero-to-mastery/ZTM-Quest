@@ -2762,7 +2762,7 @@
                  "y":591.594703333333
                 }, 
                 {
-                 "height":6.47251215874179,
+                 "height":9.14406044557266,
                  "id":400,
                  "name":"campus_house_door_1",
                  "rotation":0,
@@ -2819,7 +2819,7 @@
                 {
                  "height":21.1875,
                  "id":405,
-                 "name":"snack_bar_green",
+                 "name":"snack_bar_green_1",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2841,7 +2841,7 @@
                 {
                  "height":25,
                  "id":407,
-                 "name":"snack_bar_green",
+                 "name":"snack_bar_green_2",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -3476,28 +3476,6 @@
                  "width":2.25,
                  "x":923,
                  "y":295.466
-                }, 
-                {
-                 "height":24.1818,
-                 "id":434,
-                 "name":"boundary_park_bench",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":3.81818,
-                 "x":594.432,
-                 "y":215.534
-                }, 
-                {
-                 "height":23.6364,
-                 "id":435,
-                 "name":"boundary_park_bench",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":3.27273,
-                 "x":634.614,
-                 "y":215.898
                 }, 
                 {
                  "height":14.25,

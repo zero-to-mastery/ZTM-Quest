@@ -3,6 +3,7 @@ import { flyingBirds } from './flyingBirds';
 import { npcsInCityMap } from './npcsOnmap_city';
 import { soccerBall } from './soccerBall.gameObject';
 import { americanFootball } from './americanFootball.gameObject';
+import { jessica } from './jessica.gameObject';
 
 const gameObjects = [
     npcsInCityMap,
@@ -11,6 +12,7 @@ const gameObjects = [
     flyingBirds,
     soccerBall,
     americanFootball,
+    jessica,
 ];
 
 export default gameObjects;
