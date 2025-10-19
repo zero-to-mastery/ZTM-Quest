@@ -1,7 +1,7 @@
 export function loadingScreen(k) {
     const startTime = Date.now();
     const LOADING_DURATION = 15000;
-    
+
     const characters = [
         { name: 'stuart', frames: [0, 4, 2, 8, 1, 6] },
         { name: 'frank', frames: [10, 14, 12, 18, 11, 16] },
@@ -18,23 +18,24 @@ export function loadingScreen(k) {
         { name: 'jordan', frames: [170, 174, 172, 178, 171, 176] },
         { name: 'jessie', frames: [180, 184, 182, 188, 181, 186] },
     ];
-    
+
     const walkingNPCs = [];
     for (let i = 0; i < 3; i++) {
-        const randomChar = characters[Math.floor(Math.random() * characters.length)];
+        const randomChar =
+            characters[Math.floor(Math.random() * characters.length)];
         walkingNPCs.push({
             character: randomChar,
-            startX: -100 - (i * 150),
+            startX: -100 - i * 150,
             speed: 60 + Math.random() * 40,
             scale: 2.5 + Math.random() * 1,
         });
     }
-    
+
     k.loadSprite('characters', './assets/sprites/characters.png', {
         sliceX: 10,
         sliceY: 20,
     });
-    
+
     const clouds = [];
     for (let i = 0; i < 5; i++) {
         clouds.push({
@@ -44,7 +45,7 @@ export function loadingScreen(k) {
             width: 60 + Math.random() * 40,
         });
     }
-    
+
     const stars = [];
     for (let i = 0; i < 30; i++) {
         stars.push({
@@ -53,15 +54,14 @@ export function loadingScreen(k) {
             phase: Math.random() * Math.PI * 2,
         });
     }
-    
+
     k.onDraw(() => {
         const elapsed = Date.now() - startTime;
         const progress = Math.min(elapsed / LOADING_DURATION, 1);
         const time = elapsed / 1000;
-        
+
         const centerX = k.width() / 2;
-        const centerY = k.height() / 2;
-        
+
         const dayNightCycle = Math.abs(Math.sin(time * 0.3));
         const skyColor1 = {
             r: 15 + dayNightCycle * 50,
@@ -73,7 +73,7 @@ export function loadingScreen(k) {
             g: 50 + dayNightCycle * 120,
             b: 120 + dayNightCycle * 135,
         };
-        
+
         for (let i = 0; i < 10; i++) {
             const ratio = i / 10;
             k.drawRect({
@@ -87,8 +87,8 @@ export function loadingScreen(k) {
                 ),
             });
         }
-        
-        stars.forEach(star => {
+
+        stars.forEach((star) => {
             const twinkle = Math.sin(time * 2 + star.phase) * 0.5 + 0.5;
             k.drawCircle({
                 pos: k.vec2(star.x, star.y),
@@ -97,13 +97,13 @@ export function loadingScreen(k) {
                 opacity: 0.6 + twinkle * 0.4,
             });
         });
-        
-        clouds.forEach(cloud => {
+
+        clouds.forEach((cloud) => {
             cloud.x += cloud.speed;
             if (cloud.x > k.width() + cloud.width) {
                 cloud.x = -cloud.width;
             }
-            
+
             for (let j = 0; j < 3; j++) {
                 k.drawCircle({
                     pos: k.vec2(cloud.x + j * 20, cloud.y + Math.sin(j) * 5),
@@ -113,7 +113,7 @@ export function loadingScreen(k) {
                 });
             }
         });
-        
+
         for (let x = 0; x < k.width(); x += 40) {
             const hillHeight = Math.sin((x + time * 20) * 0.02) * 40 + 80;
             k.drawRect({
@@ -123,7 +123,7 @@ export function loadingScreen(k) {
                 color: k.rgb(60, 80, 120),
             });
         }
-        
+
         for (let x = 0; x < k.width(); x += 30) {
             const hillHeight = Math.sin((x + time * 30) * 0.03) * 50 + 100;
             k.drawRect({
@@ -133,14 +133,14 @@ export function loadingScreen(k) {
                 color: k.rgb(80, 120, 100),
             });
         }
-        
+
         k.drawRect({
             pos: k.vec2(0, k.height() - 180),
             width: k.width(),
             height: 180,
             color: k.rgb(90, 140, 80),
         });
-        
+
         for (let i = 0; i < k.width(); i += 8) {
             const grassHeight = 3 + Math.sin((i + time * 50) * 0.5) * 2;
             k.drawRect({
@@ -150,7 +150,7 @@ export function loadingScreen(k) {
                 color: k.rgb(70, 160, 70),
             });
         }
-        
+
         const pathY = k.height() - 140;
         k.drawRect({
             pos: k.vec2(0, pathY),
@@ -158,7 +158,7 @@ export function loadingScreen(k) {
             height: 30,
             color: k.rgb(160, 130, 100),
         });
-        
+
         for (let i = 0; i < k.width(); i += 40) {
             k.drawCircle({
                 pos: k.vec2(i + ((time * 50) % 40), pathY + 15),
@@ -166,18 +166,18 @@ export function loadingScreen(k) {
                 color: k.rgb(140, 110, 80),
             });
         }
-        
-        walkingNPCs.forEach(npc => {
-            const charX = npc.startX + (time * npc.speed);
+
+        walkingNPCs.forEach((npc) => {
+            const charX = npc.startX + time * npc.speed;
             const charY = pathY - 5;
-            
+
             if (charX > k.width() + 100) {
                 npc.startX = -100;
             }
-            
+
             const walkCycle = Math.floor((time * 4) % 2);
             const frameIndex = npc.character.frames[walkCycle === 0 ? 1 : 0];
-            
+
             k.drawSprite({
                 sprite: 'characters',
                 frame: frameIndex,
@@ -185,7 +185,7 @@ export function loadingScreen(k) {
                 anchor: 'center',
                 scale: npc.scale,
             });
-            
+
             k.drawText({
                 text: npc.character.name.toUpperCase(),
                 size: 10,
@@ -196,7 +196,7 @@ export function loadingScreen(k) {
                 opacity: 0.8,
             });
         });
-        
+
         const logoScale = 2 + Math.sin(time * 2) * 0.2;
         k.drawSprite({
             sprite: 'ztmLogo',
@@ -205,14 +205,14 @@ export function loadingScreen(k) {
             scale: logoScale,
             opacity: 0.85,
         });
-        
+
         k.drawCircle({
             pos: k.vec2(88, 60),
             radius: 40 + Math.sin(time * 3) * 10,
             color: k.rgb(100, 200, 255),
             opacity: 0.2,
         });
-        
+
         const titleY = 120;
         k.drawText({
             text: 'ZTM QUEST',
@@ -240,35 +240,36 @@ export function loadingScreen(k) {
             color: k.rgb(200, 200, 255),
             opacity: Math.sin(time * 2) * 0.3 + 0.7,
         });
-        
+
         const barY = k.height() - 100;
         const barWidth = Math.min(500, k.width() * 0.6);
         const barHeight = 30;
-        
+
         k.drawRect({
-            pos: k.vec2(centerX - barWidth/2 - 4, barY - 4),
+            pos: k.vec2(centerX - barWidth / 2 - 4, barY - 4),
             width: barWidth + 8,
             height: barHeight + 8,
             color: k.rgb(80, 60, 40),
         });
-        
+
         k.drawRect({
-            pos: k.vec2(centerX - barWidth/2, barY),
+            pos: k.vec2(centerX - barWidth / 2, barY),
             width: barWidth,
             height: barHeight,
             color: k.rgb(40, 30, 20),
         });
-        
+
         k.drawRect({
-            pos: k.vec2(centerX - barWidth/2 + 2, barY + 2),
+            pos: k.vec2(centerX - barWidth / 2 + 2, barY + 2),
             width: (barWidth - 4) * progress,
             height: barHeight - 4,
             color: k.rgb(255, 215, 0),
         });
-        
+
         if (progress > 0.1) {
             for (let i = 0; i < 3; i++) {
-                const sparkleX = centerX - barWidth/2 + (barWidth * progress) - 20 + i * 10;
+                const sparkleX =
+                    centerX - barWidth / 2 + barWidth * progress - 20 + i * 10;
                 const sparkleSize = 2 + Math.sin(time * 5 + i) * 2;
                 k.drawCircle({
                     pos: k.vec2(sparkleX, barY + 15),
@@ -277,16 +278,16 @@ export function loadingScreen(k) {
                 });
             }
         }
-        
-        const dots = '.'.repeat((Math.floor(time * 2) % 4));
+
+        const dots = '.'.repeat(Math.floor(time * 2) % 4);
         k.drawText({
             text: `LOADING${dots}`,
             size: 20,
             font: 'pixelFont',
-            pos: k.vec2(centerX - barWidth/2, barY - 25),
+            pos: k.vec2(centerX - barWidth / 2, barY - 25),
             color: k.rgb(255, 255, 255),
         });
-        
+
         k.drawText({
             text: `${Math.floor(progress * 100)}%`,
             size: 28,
@@ -295,7 +296,7 @@ export function loadingScreen(k) {
             anchor: 'center',
             color: k.rgb(255, 215, 0),
         });
-        
+
         const tips = [
             '💡 TIP: Explore every corner to find secrets!',
             '⚔️ TIP: Talk to NPCs for quests and rewards',
@@ -304,7 +305,7 @@ export function loadingScreen(k) {
             '🎮 TIP: Use WASD or Arrow keys to move',
         ];
         const tipIndex = Math.floor(elapsed / 3000) % tips.length;
-        
+
         k.drawRect({
             pos: k.vec2(centerX - 250, k.height() - 45),
             width: 500,
@@ -312,7 +313,7 @@ export function loadingScreen(k) {
             color: k.rgb(20, 20, 40),
             opacity: 0.8,
         });
-        
+
         k.drawText({
             text: tips[tipIndex],
             size: 14,
@@ -321,7 +322,7 @@ export function loadingScreen(k) {
             anchor: 'center',
             color: k.rgb(200, 255, 200),
         });
-        
+
         if (elapsed >= LOADING_DURATION) {
             k.go('start');
         }

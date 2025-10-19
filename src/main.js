@@ -56,14 +56,13 @@ k.scene('company_interior', (enter_tag) =>
 k.scene('startScreen', gameStartScreen);
 k.scene('lose', loseScreen);
 
-// Load saved game state
-const gameState = getGameState();
+
 
 // Wait for assets to load, THEN show 30-second loading screen
 k.onLoad(() => {
     // Start with loading screen scene
     k.go('loadingScreen');
-    
+
     // After loading screen finishes (30s), it will automatically go to 'start'
     // The loadingScreen scene handles the transition
 });
