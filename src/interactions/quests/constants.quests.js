@@ -33,8 +33,8 @@ export const map_realtor = {
     ),
 };
 
-export const findFlashDriveQuest = {
-    'Find the Flash Drive': makeQuest(
+export const jessicaQuests = {
+    findTheFlashDriveQuest: makeQuest(
         'Find the Flash Drive',
         'Find the flash drive that Jessica has lost.',
         {

@@ -107,6 +107,7 @@ export const completeQuestObjective = async (player, questName, objective) => {
         characterName: 'Quest System',
         text: [`✅ Objective Completed!`, `"${objective}"`],
     });
+    return true;
 };
 
 export const retrieveQuestObjectiveStatus = (player, questName, objective) => {
@@ -143,6 +144,13 @@ export const playerHasQuest = (player, questName) => {
 const playerHasObjective = (player, questName, objective) => {
     return objective in player.state.quests[questName].objectives;
 };
+
+export const isObjectiveComplete = (player, questName, objective) => {
+    if (!playerHasQuest(player, questName) || !playerHasObjective(player, questName, objective)) {
+        return false;
+    }
+    return player.state.quests[questName].objectives[objective];
+}
 
 // If you want to add quests, you can recieve them through interactions.
 // Use recieveQuest to get the quest via the player's state object.
