@@ -9,5 +9,6 @@ export const banana = (k, map) => {
         k.scale(0.6),
         k.offscreen({ hide: true, distance: 10 }),
         'banana',
+        { assetUrl: './assets/sprites/banana.png' },
     ]);
 };

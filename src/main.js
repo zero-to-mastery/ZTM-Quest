@@ -26,6 +26,8 @@ import { orangeHouse } from './scenes/orange_house';
 import { redHouse } from './scenes/red_house';
 import { companyInterior } from './scenes/company_interior';
 
+import { Backpack } from './backpack';
+
 k.scene('start', (enter_tag) => bootstrap(start, { enter_tag }));
 k.scene('city', (enter_tag) => bootstrap(city, { enter_tag }));
 k.scene('arcade', (enter_tag) => bootstrap(arcade, { enter_tag }));
@@ -124,3 +126,5 @@ if (creditsButton) {
         k.go('gameOver');
     });
 }
+
+Backpack.init();

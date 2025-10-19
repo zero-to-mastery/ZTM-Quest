@@ -1,6 +1,7 @@
 import { k, time } from '../kplayCtx';
 import { clearSavedGame } from './gameState';
 import { updateCoinsUI } from './coinsUpdate';
+import { Backpack } from '../backpack';
 
 // Mobile menu related
 const rightPanel = document.getElementById('right-panel');
@@ -52,6 +53,7 @@ const clickNewGameYes = () => {
     time.reset();
     clearSavedGame();
     updateCoinsUI();
+    Backpack.removeButton();
 
     // --- Reset audio state on new game ---
     localStorage.setItem(AUDIO_MUTED_KEY, 'false');
