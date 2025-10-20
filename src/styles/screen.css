@@ -214,21 +214,6 @@
     }
 }
 
-#new-game-button {
-    background-color: transparent;
-    border: none;
-    border-radius: 10px;
-    padding: 3px 5px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 250px;
-    height: auto;
-    margin: 10px auto;
-}
-
 #new-game-img {
     width: 100%;
     height: auto;
@@ -253,6 +238,29 @@
     width: 100%;
     max-width: 250px;
     margin: 10px auto;
+}
+
+#new-game-button {
+    background-color: #d13434;
+    padding: 3px 5px;
+    transition:
+        transform 0.2s ease-in-out,
+        opacity 0.3s ease;
+}
+
+#debug-button {
+    background-color: #dcdcdc;
+    color: black;
+    padding: 3px 5px;
+    transition:
+        transform 0.2s ease-in-out,
+        opacity 0.3s ease;
+}
+
+#new-game-button:hover,
+#debug-button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
 }
 
 .misc-btn {
