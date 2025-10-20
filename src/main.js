@@ -25,9 +25,11 @@ import { extendedCampus } from './scenes/extended_campus';
 import { orangeHouse } from './scenes/orange_house';
 import { redHouse } from './scenes/red_house';
 import { companyInterior } from './scenes/company_interior';
+import { loadingScreen } from './scenes/loadingScreen';
 
 import { Backpack } from './backpack';
 
+k.scene('loadingScreen', () => loadingScreen(k));
 k.scene('start', (enter_tag) => bootstrap(start, { enter_tag }));
 k.scene('city', (enter_tag) => bootstrap(city, { enter_tag }));
 k.scene('arcade', (enter_tag) => bootstrap(arcade, { enter_tag }));
@@ -56,15 +58,14 @@ k.scene('company_interior', (enter_tag) =>
 k.scene('startScreen', gameStartScreen);
 k.scene('lose', loseScreen);
 
-// Load saved game state from localStorage (if available)
-const gameState = getGameState();
+// Wait for assets to load, THEN show 30-second loading screen
+k.onLoad(() => {
+    // Start with loading screen scene
+    k.go('loadingScreen');
 
-// Initialize the scenes with position if saved, else go to default position
-if (gameState) {
-    k.go(gameState.player.scene);
-} else {
-    k.go('start'); // Go to the default starting scene
-}
+    // After loading screen finishes (30s), it will automatically go to 'start'
+    // The loadingScreen scene handles the transition
+});
 
 // To test different maps instead of going through each and every scene to get to yours,
 // Import the scene, name the scene, and then name the spawn point as an additional tag
@@ -83,13 +84,12 @@ if (gameState) {
 updateEnergyUI(getGameState().player.energy);
 updateCoinsUI();
 setInterval(() => {
-    const gameState = getGameState(); // This should be inside setInterval so that gameState variable is updated at every interval.
+    const gameState = getGameState();
     if (gameState.player.energy) {
         gameState.player.energy -= 1;
         setGameState(gameState);
         updateEnergyUI(gameState.player.energy);
     } else if (Math.floor(k.time()) % 3 == 0) {
-        // This ensures log appears atmost 2 times per minute.
         k.debug.log('I need some energy.');
     }
 }, 10000);

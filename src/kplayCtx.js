@@ -11,14 +11,15 @@ export const k = kaplay({
         down: { keyboard: ['s', 'down'], gamepad: 'south' },
         left: { keyboard: ['a', 'left'], gamepad: 'west' },
         right: { keyboard: ['d', 'right'], gamepad: 'east' },
-        // Configure map key to be bound to m
         map: { keyboard: ['m'] },
         backpack: { keyboard: ['i'] },
     },
+    loadingScreen: false,
+    background: [15, 15, 35],
 });
 
-// In the actual game we have hours and minutes adjacent to the player
-// But in real time we have minutes and seconds we can use
+k.loadSprite('ztmLogo', './assets/sprites/favicon-32x32.png');
+
 export const time = {
     minutes: 0,
     seconds: 0,
@@ -42,9 +43,11 @@ export const time = {
 };
 
 k.loadFont('pixelFont', './assets/fonts/PixelifySans-VariableFont_wght.ttf');
+
 k.onCustomEvent = (eventName, cb) => {
     k.canvas.addEventListener(eventName, cb.bind(k));
 };
+
 k.triggerEvent = (eventName, detail) => {
     k.canvas.dispatchEvent(new CustomEvent(eventName, { detail }));
 };
