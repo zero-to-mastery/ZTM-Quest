@@ -56,8 +56,6 @@ k.scene('company_interior', (enter_tag) =>
 k.scene('startScreen', gameStartScreen);
 k.scene('lose', loseScreen);
 
-
-
 // Wait for assets to load, THEN show 30-second loading screen
 k.onLoad(() => {
     // Start with loading screen scene
