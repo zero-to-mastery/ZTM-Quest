@@ -12,6 +12,7 @@ export const k = kaplay({
         left: { keyboard: ['a', 'left'], gamepad: 'west' },
         right: { keyboard: ['d', 'right'], gamepad: 'east' },
         map: { keyboard: ['m'] },
+        backpack: { keyboard: ['i'] },
     },
     loadingScreen: false,
     background: [15, 15, 35],
