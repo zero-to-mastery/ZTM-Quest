@@ -1,3 +1,10 @@
+#backpack-btn {
+    margin-left: auto;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
 #backpack-content {
     font-family: 'Courier New', monospace;
     background: rgba(0, 0, 0, 0.2);
