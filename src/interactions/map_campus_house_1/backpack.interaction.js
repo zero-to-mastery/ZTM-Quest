@@ -1,3 +1,4 @@
+import { Backpack } from '../../backpack';
 import { displayPermissionBox, displayDialogue } from '../../utils';
 
 export const backpackInteractions = (player, k, map) => {
@@ -13,8 +14,11 @@ export const backpackInteractions = (player, k, map) => {
         const dialog = [];
 
         if (wantBackpack) {
-            player.state.backpack = [];
+            Backpack.initState();
             k.destroy(backpack);
+            // show backpack on side right panel
+            Backpack.showButton();
+
             dialog.push('Aye, a trusty pack for a worthy traveler.');
         } else {
             dialog.push('Oh, going minimalist this time? Bold choice.');

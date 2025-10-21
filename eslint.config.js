@@ -8,7 +8,7 @@ export default [
     {
         languageOptions: {
             globals: globals.browser,
-            ecmaVersion: 2021,
+            ecmaVersion: 'latest',
             sourceType: 'module',
         },
         files: ['src/**/*.js'],
