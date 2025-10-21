@@ -146,11 +146,14 @@ const playerHasObjective = (player, questName, objective) => {
 };
 
 export const isObjectiveComplete = (player, questName, objective) => {
-    if (!playerHasQuest(player, questName) || !playerHasObjective(player, questName, objective)) {
+    if (
+        !playerHasQuest(player, questName) ||
+        !playerHasObjective(player, questName, objective)
+    ) {
         return false;
     }
     return player.state.quests[questName].objectives[objective];
-}
+};
 
 // If you want to add quests, you can recieve them through interactions.
 // Use recieveQuest to get the quest via the player's state object.
