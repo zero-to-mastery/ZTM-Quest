@@ -79,7 +79,7 @@
                 background-color: #45a049;
             }
         </style>
-        <link rel="stylesheet" href="./src/styles/backpack.css">
+        <link rel="stylesheet" href="./src/styles/backpack.css" />
     </head>
 
     <body>
@@ -252,8 +252,17 @@
             </div>
             <div id="right-panel" class="right">
                 <div class="backpack">
-                    <button class="setting-btn" id="backpack-btn" style="display: none;">
-                        <img src="/assets/sprites/backpack.png" width="100" height="100" alt="">
+                    <button
+                        class="setting-btn"
+                        id="backpack-btn"
+                        style="display: none"
+                    >
+                        <img
+                            src="/assets/sprites/backpack.png"
+                            width="100"
+                            height="100"
+                            alt=""
+                        />
                     </button>
                 </div>
                 <div>
@@ -343,7 +352,7 @@
             </div>
             <canvas id="game"></canvas>
         </div>
-        <div id="backpack-content" style="display: none;">
+        <div id="backpack-content" style="display: none">
             <div class="backpack-frame">
                 <div class="title-bar">
                     <h1>BACKPACK</h1>
@@ -351,20 +360,21 @@
                 <div class="backpack-container">
                     <div class="backpack-graphic">
                         <div class="backpack-flap"></div>
-                        
-                        <div id="inventory-grid" class="inventory-grid">
 
-                        </div>
-                        
+                        <div id="inventory-grid" class="inventory-grid"></div>
+
                         <div class="stats-section">
                             <div class="stat-row">
                                 <span class="stat-label">SLOTS:</span>
-                                <span id="stat-slots" style="margin-left: auto;"></span>
+                                <span
+                                    id="stat-slots"
+                                    style="margin-left: auto"
+                                ></span>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="footer">
                     <p>Press [I] to close inventory</p>
                 </div>

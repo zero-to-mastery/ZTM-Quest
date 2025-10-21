@@ -68,7 +68,7 @@ export class Backpack {
         inventory.innerHTML = slots.join(' ');
 
         const statSlots = document.getElementById('stat-slots');
-        statSlots.innerHTML = `${this.inventory.length} / ${this.maxSlots}`
+        statSlots.innerHTML = `${this.inventory.length} / ${this.maxSlots}`;
     }
 
     hide() {
