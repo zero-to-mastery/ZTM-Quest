@@ -111,12 +111,16 @@ export class Backpack {
     openBackpack() {
         this.render();
         document.addEventListener('keypress', this.handleCloseBackpack);
+        const inventoryCloseBtn = document.getElementById('inventory-close-btn');
+        inventoryCloseBtn.addEventListener('click', this.handleCloseBackpack);
         isOpened = true;
     }
 
     hideBackpack() {
         this.hide();
         document.removeEventListener('keypress', this.handleCloseBackpack);
+        const inventoryCloseBtn = document.getElementById('inventory-close-btn');
+        inventoryCloseBtn.removeEventListener('click', this.handleCloseBackpack);
         isOpened = false;
     }
 

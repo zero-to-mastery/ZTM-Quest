@@ -33,7 +33,7 @@
 
 .backpack-frame .title-bar h1 {
     color: #fbbf24;
-    font-size: 28px;
+    font-size: 20px;
     font-weight: bold;
     letter-spacing: 4px;
 }
@@ -177,18 +177,22 @@
 }
 
 .backpack-frame .footer {
-    background: #442a80;
-    border: 4px solid #6b46c1;
     margin: 16px;
-    padding: 16px;
     text-align: center;
     border-radius: 4px;
 }
 
-.backpack-frame .footer p {
+.backpack-frame .footer button {
+    margin: 5px;
+    padding: 10px;
+    background: #442a80;
+    border: 4px solid #6b46c1;
+    border-radius: 4px;
     color: #c4b5fd;
+    font-family: inherit;
     font-size: 14px;
     letter-spacing: 2px;
+    cursor: pointer;
 }
 
 @media (max-width: 600px) {
@@ -198,11 +202,20 @@
     }
 
     .backpack-frame .title-bar h1 {
-        font-size: 20px;
+        font-size: 16px;
         letter-spacing: 2px;
+    }
+
+    .backpack-frame .backpack-container {
+        max-height: 180px;
     }
 
     .backpack-frame .inventory-slot {
         font-size: 24px;
+    }
+
+
+    .backpack-frame .footer button {
+        font-size: 10px;
     }
 }
