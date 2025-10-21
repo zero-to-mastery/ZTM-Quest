@@ -1,6 +1,6 @@
 #backpack-content {
     font-family: 'Courier New', monospace;
-    background: rgba(0,0,0,0.2);
+    background: rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -194,12 +194,12 @@
         grid-template-columns: repeat(4, 1fr);
         gap: 8px;
     }
-    
+
     .backpack-frame .title-bar h1 {
         font-size: 20px;
         letter-spacing: 2px;
     }
-    
+
     .backpack-frame .inventory-slot {
         font-size: 24px;
     }
