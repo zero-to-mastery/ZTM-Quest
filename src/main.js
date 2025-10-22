@@ -26,6 +26,9 @@ import { orangeHouse } from './scenes/orange_house';
 import { redHouse } from './scenes/red_house';
 import { companyInterior } from './scenes/company_interior';
 import { loadingScreen } from './scenes/loadingScreen';
+import { mainMenuScene } from './scenes/mainMenuScene';
+import { setupPauseMenu } from './utils/pauseMenu';
+import { setupMenuModals } from './utils/menuModals';
 
 import { Backpack } from './backpack';
 
@@ -58,13 +61,17 @@ k.scene('company_interior', (enter_tag) =>
 k.scene('startScreen', gameStartScreen);
 k.scene('lose', loseScreen);
 
-// Wait for assets to load, THEN show 30-second loading screen
-k.onLoad(() => {
-    // Start with loading screen scene
-    k.go('loadingScreen');
+// Initialize menu modals (settings, achievements, stats, credits)
+setupMenuModals();
 
-    // After loading screen finishes (30s), it will automatically go to 'start'
-    // The loadingScreen scene handles the transition
+// Load saved game state from localStorage (if available)
+const gameState = getGameState();
+
+// Wait for assets to load, THEN show main menu
+// In main.js
+k.onLoad(() => {
+    setupPauseMenu();
+    mainMenuScene();
 });
 
 // To test different maps instead of going through each and every scene to get to yours,
@@ -83,13 +90,15 @@ k.onLoad(() => {
 
 updateEnergyUI(getGameState().player.energy);
 updateCoinsUI();
+
 setInterval(() => {
-    const gameState = getGameState();
+    const gameState = getGameState(); // This should be inside setInterval so that gameState variable is updated at every interval.
     if (gameState.player.energy) {
         gameState.player.energy -= 1;
         setGameState(gameState);
         updateEnergyUI(gameState.player.energy);
     } else if (Math.floor(k.time()) % 3 == 0) {
+        // This ensures log appears atmost 2 times per minute.
         k.debug.log('I need some energy.');
     }
 }, 10000);
