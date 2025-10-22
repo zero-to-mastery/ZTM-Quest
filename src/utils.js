@@ -40,7 +40,7 @@ export async function displayDialogue({
     player,
     characterName,
     text,
-    onDisplayEnd = () => {},
+    onDisplayEnd = () => { },
     addFlickerEffect = false,
 }) {
     document.getElementById('custom-prompt').style.display = 'none';
@@ -72,9 +72,12 @@ export async function displayDialogue({
     for await (const t of text) {
         abort = new AbortController();
         await new Promise((res) => {
-            if (t === text[text.length - 1]) res(); // resolve on last text
+            const dialoguePromise = processDialogue({ dialog, text: t, characterName, abort });
 
-            processDialogue({ dialog, text: t, characterName, abort });
+            // Wait for dialogue to complete or user to click next
+            dialoguePromise.then(() => {
+                if (t === text[text.length - 1]) res(); // resolve on last text
+            });
 
             nextBtn.addEventListener('click', () => {
                 abort.abort();
@@ -87,42 +90,49 @@ export async function displayDialogue({
     closeBtn.style.display = 'block';
     closeBtn.focus();
 
-    function onCloseBtnClick() {
-        onDisplayEnd();
-        time.paused = false;
-        abort.abort();
-        dialogUI.style.display = 'none';
-        dialog.innerHTML = '';
-        statsUI.style.display = 'flex';
-        closeBtn.removeEventListener('click', onCloseBtnClick);
+    // Return a Promise that resolves when the dialogue is closed
+    return new Promise((resolve) => {
+        async function onCloseBtnClick() {
+            await onDisplayEnd();
+            time.paused = false;
+            abort.abort();
+            dialogUI.style.display = 'none';
+            dialog.innerHTML = '';
+            statsUI.style.display = 'flex';
+            closeBtn.removeEventListener('click', onCloseBtnClick);
+            window.removeEventListener('keydown', onKeyDown);
 
-        // Remove magical flicker effect if it was added
-        if (addFlickerEffect) {
-            dialogUI.classList.remove('magical-flicker');
+            // Remove magical flicker effect if it was added
+            if (addFlickerEffect) {
+                dialogUI.classList.remove('magical-flicker');
+            }
+
+            k.triggerEvent('dialog-closed', { player, characterName, text });
+            player.state.isInDialog = false;
+            k.canvas.focus();
+            resolve(); // Resolve the Promise when dialogue is closed
         }
 
-        k.triggerEvent('dialog-closed', { player, characterName, text });
-        player.state.isInDialog = false;
-        k.canvas.focus();
-    }
-    closeBtn.addEventListener('click', onCloseBtnClick);
+        function onKeyDown(key) {
+            if (key.code === 'Enter') {
+                document.activeElement.click();
+            }
+            if (key.code === 'Escape') {
+                closeBtn.click();
+            }
+        }
 
-    addEventListener('keydown', (key) => {
-        if (key.code === 'Enter') {
-            document.activeElement.click();
-        }
-        if (key.code === 'Escape') {
-            closeBtn.click();
-        }
+        closeBtn.addEventListener('click', onCloseBtnClick);
+        window.addEventListener('keydown', onKeyDown);
+        k.triggerEvent('dialog-displayed', { player, characterName, text });
     });
-    k.triggerEvent('dialog-displayed', { player, characterName, text });
 }
 
 export async function displayPermissionBox({
     k,
     player,
     text,
-    onDisplayEnd = () => {},
+    onDisplayEnd = () => { },
     purchaseCost,
 }) {
     time.paused = true;
@@ -149,14 +159,15 @@ export async function displayPermissionBox({
     processDialogue({ dialog, text: text.join(' '), abort });
 
     return new Promise((resolve) => {
-        function onCloseBtnClick() {
-            onDisplayEnd();
+        async function onCloseBtnClick() {
+            await onDisplayEnd();
             abort.abort();
             dialogUI.style.display = 'none';
             dialog.innerHTML = '';
             statsUI.style.display = 'flex';
             closeBtn.removeEventListener('click', onCloseBtnClick);
             nextBtn.removeEventListener('click', onNextBtnClick);
+            window.removeEventListener('keydown', onKeyDown);
             closeBtn.innerHTML = 'Close';
             nextBtn.innerHTML = 'Next';
             player.state.isInDialog = false;
@@ -166,14 +177,15 @@ export async function displayPermissionBox({
             resolve(false); // Resolve with false when "No" is clicked
         }
 
-        function onNextBtnClick() {
-            onDisplayEnd();
+        async function onNextBtnClick() {
+            await onDisplayEnd();
             abort.abort();
             dialogUI.style.display = 'none';
             dialog.innerHTML = '';
             statsUI.style.display = 'flex';
             nextBtn.removeEventListener('click', onNextBtnClick);
             closeBtn.removeEventListener('click', onCloseBtnClick);
+            window.removeEventListener('keydown', onKeyDown);
             closeBtn.innerHTML = 'Close';
             nextBtn.innerHTML = 'Next';
             player.state.isInDialog = false;
@@ -183,14 +195,18 @@ export async function displayPermissionBox({
             resolve(true); // Resolve with true when "Yes" is clicked
         }
 
-        nextBtn.addEventListener('click', onNextBtnClick);
-        closeBtn.addEventListener('click', onCloseBtnClick);
-        addEventListener('keydown', (key) => {
+        function onKeyDown(key) {
             if (key.code === 'Enter') {
                 document.activeElement.click();
             }
-            if (key.code === 'Escape') closeBtn.click();
-        });
+            if (key.code === 'Escape') {
+                closeBtn.click();
+            }
+        }
+
+        nextBtn.addEventListener('click', onNextBtnClick);
+        closeBtn.addEventListener('click', onCloseBtnClick);
+        window.addEventListener('keydown', onKeyDown);
         k.triggerEvent('dialog-displayed', { player, text });
     });
 }
@@ -281,32 +297,32 @@ export async function getContributors() {
 
 export const objectToBackpackInteraction =
     ({ tag, title }) =>
-    (player, k, map) => {
-        let text;
-        let pressE;
+        (player, k, map) => {
+            let text;
+            let pressE;
 
-        player.onCollide(tag, (obj) => {
-            if (!player.state.backpack) return;
-            text = obj.add([
-                k.pos(obj.width / 2 - 2, -5),
-                k.text('E', { size: 12 }),
-            ]);
+            player.onCollide(tag, (obj) => {
+                if (!player.state.backpack) return;
+                text = obj.add([
+                    k.pos(obj.width / 2 - 2, -5),
+                    k.text('E', { size: 12 }),
+                ]);
 
-            pressE = k.onKeyPress((key) => {
-                if (key === 'e') {
-                    // move it to backpack
-                    Backpack.addItem({
-                        title: title || tag,
-                        assetUrl: obj.assetUrl,
-                    });
-                    obj.destroy();
-                }
+                pressE = k.onKeyPress((key) => {
+                    if (key === 'e') {
+                        // move it to backpack
+                        Backpack.addItem({
+                            title: title || tag,
+                            assetUrl: obj.assetUrl,
+                        });
+                        obj.destroy();
+                    }
+                });
             });
-        });
 
-        player.onCollideEnd(tag, (obj) => {
-            if (!pressE) return;
-            pressE.cancel();
-            obj.remove(text);
-        });
-    };
+            player.onCollideEnd(tag, (obj) => {
+                if (!pressE) return;
+                pressE.cancel();
+                obj.remove(text);
+            });
+        };
