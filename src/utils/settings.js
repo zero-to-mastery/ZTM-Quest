@@ -1,7 +1,4 @@
 import { k, time } from '../kplayCtx';
-import { clearSavedGame } from './gameState';
-import { updateCoinsUI } from './coinsUpdate';
-import { Backpack } from '../backpack';
 
 const rightPanel = document.getElementById('right-panel');
 
@@ -59,7 +56,7 @@ const clickNewGameYes = () => {
   if (musicVolume) localStorage.setItem('ztm-music-volume', musicVolume);
   
   // Hard refresh to clear everything including memory cache
-  window.location.href = window.location.href;
+  window.location.reload();
 };
 
 const newGameButton = document.getElementById('new-game-button');

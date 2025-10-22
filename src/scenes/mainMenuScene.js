@@ -1,12 +1,11 @@
 import { k } from '../kplayCtx';
 import { openSettingsModal } from '../utils/menuModals';
 import { showCharacterSelectModal } from '../utils/characterSelect';
-import { getGameState, setGameState } from '../utils/gameState';
+import { getGameState } from '../utils/gameState';
 
 export function mainMenuScene() {
   const mainMenuElement = document.getElementById('main-menu');
   if (!mainMenuElement) {
-    console.error('Main menu element not found in DOM');
     return;
   }
 

@@ -28,8 +28,6 @@ export async function start() {
     const gs = getGameState();
     const charName = gs.player?.character?.name || 'junior';
     
-    console.log('Loading with character:', charName);
-    console.log('Full character data:', gs.player?.character);
 
     // Create player with temp sprite
     const player = k.add([

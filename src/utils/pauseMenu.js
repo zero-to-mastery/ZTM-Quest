@@ -4,7 +4,6 @@ export function setupPauseMenu() {
   const pauseMenuElement = document.getElementById('pause-menu');
   
   if (!pauseMenuElement) {
-    console.error('Pause menu element not found');
     return;
   }
 

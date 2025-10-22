@@ -65,7 +65,6 @@ k.scene('lose', loseScreen);
 setupMenuModals();
 
 // Load saved game state from localStorage (if available)
-const gameState = getGameState();
 
 // Wait for assets to load, THEN show main menu
 // In main.js

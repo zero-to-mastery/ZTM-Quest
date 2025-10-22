@@ -62,7 +62,7 @@ export function openSettingsModal() {
           if (musicVolume) localStorage.setItem('ztm-music-volume', musicVolume);
           
           // Reload page
-          window.location.href = window.location.href;
+          window.location.reload();
         };
       };
     }
