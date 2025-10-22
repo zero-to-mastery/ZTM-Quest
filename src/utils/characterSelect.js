@@ -3,12 +3,15 @@ import { getGameState, setGameState } from './gameState';
 import { changePlayerSprite } from '../utils/changePlayer';
 import { k } from '../kplayCtx';
 
+
 export async function showCharacterSelectModal(player) {
   const settingsModal = document.getElementById('settings-modal');
   if (settingsModal) settingsModal.style.display = 'flex';
 
+
   const modalContent = document.querySelector('#settings-modal .modal-content');
   const originalContent = modalContent.innerHTML;
+
 
   let characterHTML = `
     <style>
@@ -48,6 +51,7 @@ export async function showCharacterSelectModal(player) {
   `;
   modalContent.innerHTML = characterHTML;
 
+
   setTimeout(() => {
     document.querySelectorAll('.char-option').forEach(div => {
       div.onclick = () => {
@@ -58,11 +62,16 @@ export async function showCharacterSelectModal(player) {
           frame: CHARACTERS.find(char => char.name === div.dataset.name).frames[0]
         };
         setGameState(gs);
+        
         if (player) {
           changePlayerSprite(div.dataset.name, 'idle-down', k, player);
         }
         closeModal('settings-modal');
-        k.go('loadingScreen');
+        
+        // Add delay to ensure gameState is written to localStorage
+        setTimeout(() => {
+          k.go('loadingScreen');
+        }, 100);
       };
       div.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -73,8 +82,10 @@ export async function showCharacterSelectModal(player) {
     });
     document.getElementById('cancel-charselect-btn').onclick = () => {
       modalContent.innerHTML = originalContent;
+      closeModal('settings-modal');
     };
   }, 0);
+
 
   function closeModal(modalId) {
     const modal = document.getElementById(modalId);

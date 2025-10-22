@@ -1,6 +1,6 @@
 import { k } from '../kplayCtx';
 import { openSettingsModal } from '../utils/menuModals';
-import { showCharacterSelectModal } from '../utils/characterSelect'; 
+import { showCharacterSelectModal } from '../utils/characterSelect';
 import { getGameState, setGameState } from '../utils/gameState';
 
 export function mainMenuScene() {
@@ -18,7 +18,8 @@ export function mainMenuScene() {
   const creditsBtn = document.getElementById('main-menu-credits-btn');
 
   const gameState = getGameState();
-  const hasSaveData = gameState && gameState.player && gameState.player.scene;
+  // Check if localStorage has REAL save data (not just initialized state)
+  const hasSaveData = localStorage.getItem('gameStateZtmQuest') !== null;
 
   if (continueGameBtn) {
     continueGameBtn.style.display = hasSaveData ? 'block' : 'none';
@@ -67,7 +68,7 @@ export function mainMenuScene() {
     isStarting = true;
 
     closeAllMenus();
-    showCharacterSelectModal(); 
+    showCharacterSelectModal();
   });
 
 

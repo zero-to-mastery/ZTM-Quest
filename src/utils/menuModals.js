@@ -50,13 +50,19 @@ export function openSettingsModal() {
           wireSettingsButtons();
         };
         document.getElementById('reset-confirm-btn').onclick = () => {
-          localStorage.removeItem('gameState');
-          modalContent.innerHTML = `<p>Game progress has been reset.<br>Please refresh the page.</p>
-            <button id="reset-done-btn">OK</button>`;
-          document.getElementById('reset-done-btn').onclick = () => {
-            modalContent.innerHTML = originalContent;
-            wireSettingsButtons();
-          };
+          // Save audio settings before clearing
+          const audioMuted = localStorage.getItem('ztm-audio-muted');
+          const musicVolume = localStorage.getItem('ztm-music-volume');
+          
+          // Clear ALL localStorage
+          localStorage.clear();
+          
+          // Restore audio settings
+          if (audioMuted) localStorage.setItem('ztm-audio-muted', audioMuted);
+          if (musicVolume) localStorage.setItem('ztm-music-volume', musicVolume);
+          
+          // Reload page
+          window.location.href = window.location.href;
         };
       };
     }
@@ -69,18 +75,17 @@ export function openSettingsModal() {
   }, 0);
 
   const toggleFullscreenBtn = document.getElementById('toggle-fullscreen-btn');
-if (toggleFullscreenBtn) {
-  toggleFullscreenBtn.onclick = () => {
-    if (k.isFullscreen?.() ?? false) {
-      k.setFullscreen?.(false) ?? k.fullscreen(false);
-      toggleFullscreenBtn.classList.remove('active');
-    } else {
-      k.setFullscreen?.(true) ?? k.fullscreen(true);
-      toggleFullscreenBtn.classList.add('active');
-    }
-  };
-}
-
+  if (toggleFullscreenBtn) {
+    toggleFullscreenBtn.onclick = () => {
+      if (k.isFullscreen?.() ?? false) {
+        k.setFullscreen?.(false) ?? k.fullscreen(false);
+        toggleFullscreenBtn.classList.remove('active');
+      } else {
+        k.setFullscreen?.(true) ?? k.fullscreen(true);
+        toggleFullscreenBtn.classList.add('active');
+      }
+    };
+  }
 
   // Rewire listeners after restoring
   function wireSettingsButtons() {

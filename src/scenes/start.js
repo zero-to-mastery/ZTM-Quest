@@ -24,18 +24,22 @@ export async function start() {
         k.vec2(0, 11)
     );
 
+    // Get selected character BEFORE creating player
+    const gs = getGameState();
+    const charName = gs.player?.character?.name || 'junior';
+    
+    console.log('Loading with character:', charName);
+    console.log('Full character data:', gs.player?.character);
+
+    // Create player with temp sprite
     const player = k.add([
-        k.sprite('characters', { frame: 0 }), 
+        k.sprite('characters', { frame: 0 }),
         k.pos(spawnpoint.pos),
         k.area(),
     ]);
 
-    const gs = getGameState();
-    const charName = gs.player?.character?.name || 'stuart';
+    // Immediately apply the selected character
     changePlayerSprite(charName, 'idle-down', k, player);
-
-    console.log('Chosen character:', gs.player?.character);
-    console.log('Player created with:', charName);
 
     k.onKeyPress('o', () => {
         k.go('gameOver');

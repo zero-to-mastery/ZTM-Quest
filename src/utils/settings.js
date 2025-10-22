@@ -44,19 +44,22 @@ const clickNewGameNo = () => {
   hideAlertWindow();
 };
 
+const AUDIO_MUTED_KEY = 'ztm-audio-muted';
+
 const clickNewGameYes = () => {
-  time.unpause();
-  time.reset();
-  clearSavedGame();
-  updateCoinsUI();
-  Backpack.removeButton();
-  localStorage.setItem(AUDIO_MUTED_KEY, 'false');
-  applyAudioState(false);
-  if (audioIcon) {
-    audioIcon.src = 'assets/sprites/audio-on.png';
-  }
-  clickNewGameNo();
-  k.go('start');
+  // Save audio settings before clearing
+  const audioMuted = localStorage.getItem(AUDIO_MUTED_KEY);
+  const musicVolume = localStorage.getItem('ztm-music-volume');
+  
+  // Clear ALL localStorage completely
+  localStorage.clear();
+  
+  // Restore only audio settings
+  if (audioMuted) localStorage.setItem(AUDIO_MUTED_KEY, audioMuted);
+  if (musicVolume) localStorage.setItem('ztm-music-volume', musicVolume);
+  
+  // Hard refresh to clear everything including memory cache
+  window.location.href = window.location.href;
 };
 
 const newGameButton = document.getElementById('new-game-button');
@@ -73,8 +76,6 @@ const toggleDebugMode = () => {
 
 const debugButton = document.getElementById('debug-button');
 debugButton.addEventListener('click', toggleDebugMode);
-
-const AUDIO_MUTED_KEY = 'ztm-audio-muted';
 
 const applyAudioState = (isMuted) => {
   try {
