@@ -112,6 +112,9 @@
                             <li class="alert-text">
                                 "O"/Credits Button - Open Credits
                             </li>
+                            <li class="alert-text">
+                                "I"/Bagpack Icon - Toggle Inventory
+                            </li>
                         </ul>
                         <p class="alert-heading">Main Mechanics</p>
                         <ul>
@@ -251,20 +254,6 @@
                 </div>
             </div>
             <div id="right-panel" class="right">
-                <div class="backpack">
-                    <button
-                        class="setting-btn"
-                        id="backpack-btn"
-                        style="display: none"
-                    >
-                        <img
-                            src="/assets/sprites/backpack.png"
-                            width="100"
-                            height="100"
-                            alt=""
-                        />
-                    </button>
-                </div>
                 <div>
                     <p id="clock">{placeholderText}</p>
                 </div>
@@ -332,6 +321,17 @@
                         <div class="stat-wrapper">
                             <p class="stat-title">Coins:</p>
                             <p id="coins-remain">0</p>
+                            <button
+                                id="backpack-btn"
+                                style="display: none"
+                            >
+                                <img
+                                    src="/assets/sprites/backpack.png"
+                                    width="40"
+                                    height="40"
+                                    alt=""
+                                />
+                            </button>
                         </div>
                     </div>
                     <div id="minimap-container">
@@ -366,7 +366,9 @@
                 </div>
 
                 <div class="footer">
-                    <p>Press [I] to close inventory</p>
+                    <button id="item-use-btn">Use (enter)</button>
+                    <button id="item-unequip-btn">Unequip (delete)</button>
+                    <button id="inventory-close-btn">Close (I)</button>
                 </div>
             </div>
         </div>
