@@ -1,7 +1,9 @@
 import { time } from '../../kplayCtx';
-import { displayDialogue, displayPermissionBox } from '../../utils';
+import { displayDialogue, displayPermissionBox, showCustomPrompt } from '../../utils';
 import { updateEnergyState } from '../../utils/energyUpdate';
 import { getRandomQuestion } from '../../utils/randomJSQuestion';
+
+let abort;
 
 export const bedroomTableInteractions = async (player, k, map) => {
     player.onCollide('bedroom_table', async () => {
@@ -24,6 +26,8 @@ export const bedroomTableInteractions = async (player, k, map) => {
                 })
             );
 
+            player.state.isInDialog = true;
+            abort = new AbortController();
             showCustomPrompt(questionText, options, async (selectedOption) => {
                 let feedbackText = [];
 
@@ -50,7 +54,7 @@ export const bedroomTableInteractions = async (player, k, map) => {
                         time.paused = false;
                     },
                 });
-            });
+            }, player, k, abort);
         } else {
             await displayDialogue({
                 k,
@@ -63,46 +67,3 @@ export const bedroomTableInteractions = async (player, k, map) => {
         }
     });
 };
-
-function showCustomPrompt(message, options, callback) {
-    const energyUI = document.getElementById('energy-container');
-    energyUI.style.display = 'none';
-
-    let promptMessage = document.getElementById('prompt-message');
-    promptMessage.innerHTML = message;
-
-    const optionsContainer = document.getElementById('options-container');
-    optionsContainer.innerHTML = '';
-
-    options.forEach((option) => {
-        const button = document.createElement('button');
-        button.innerHTML = option.text;
-        button.classList.add('option-btn');
-        button.setAttribute('tabindex', '0');
-
-        button.onclick = function () {
-            callback(option.value);
-            closeCustomPrompt();
-        };
-
-        button.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                callback(option.value);
-                closeCustomPrompt();
-            }
-        });
-
-        optionsContainer.appendChild(button);
-    });
-
-    document.getElementById('custom-prompt').style.display = 'flex';
-
-    if (optionsContainer.children.length > 0) {
-        optionsContainer.children[0].focus();
-    }
-}
-
-function closeCustomPrompt() {
-    document.getElementById('custom-prompt').style.display = 'none';
-}

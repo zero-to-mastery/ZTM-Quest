@@ -1,65 +1,10 @@
 import { time } from '../../kplayCtx';
-import { displayDialogue } from '../../utils';
+import { displayDialogue, showCustomPrompt } from '../../utils';
 import { fetchNews, formatNewsDate } from '../../utils/newsApi';
 
 // Cache for news to avoid fetching multiple times
 let newsCache = null;
 let abort;
-
-/**
- * Show custom prompt with clickable options
- */
-function showCustomPrompt(message, options, callback, player, k) {
-    const statsUI = document.getElementById('stats-container');
-    const miniMapUI = document.getElementById('minimap');
-    statsUI.style.display = 'none';
-    miniMapUI.style.display = 'none';
-
-    let promptMessage = document.getElementById('prompt-message');
-    promptMessage.innerHTML = message;
-
-    const optionsContainer = document.getElementById('options-container');
-    optionsContainer.innerHTML = '';
-
-    // Create buttons for each option
-    options.forEach((option) => {
-        const button = document.createElement('button');
-        button.innerHTML = option.text;
-        button.classList.add('option-btn');
-        button.setAttribute('tabindex', '0');
-
-        button.onclick = function () {
-            callback(option.value);
-            closeCustomPrompt(player, k);
-        };
-
-        button.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                callback(option.value);
-                closeCustomPrompt(player, k);
-            }
-        });
-
-        optionsContainer.appendChild(button);
-    });
-
-    document.getElementById('custom-prompt').style.display = 'flex';
-
-    if (optionsContainer.children.length > 0) {
-        optionsContainer.children[0].focus();
-    }
-}
-
-function closeCustomPrompt(player, k) {
-    document.getElementById('custom-prompt').style.display = 'none';
-    const statsUI = document.getElementById('stats-container');
-    statsUI.style.display = 'flex';
-    time.paused = false;
-    abort.abort();
-    player.state.isInDialog = false;
-    k.canvas.focus();
-}
 
 /**
  * Show detailed view of a specific news article with back button
@@ -89,7 +34,7 @@ const showNewsDetail = async (player, k, newsItem, returnPage = 0) => {
                 await showNewsList(player, k, returnPage);
             }
         }, 50);
-    }, player, k);
+    }, player, k, abort);
 };
 
 /**
@@ -169,7 +114,7 @@ const showNewsList = async (player, k, page = 0) => {
                 await showNewsDetail(player, k, selectedNews, page);
             }
         }, 50);
-    }, player, k);
+    }, player, k, abort);
 };
 
 export const interactionWithMainboxMainArea = (player, k, map) => {

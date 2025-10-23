@@ -1,8 +1,14 @@
-import { displayDialogue } from '../../utils';
+import { time } from '../../kplayCtx';
+import { displayDialogue, showCustomPrompt } from '../../utils';
 import { updateAchievements } from '../../utils/achievementsUpdate';
+
+let abort;
 
 export const interactionWithGameMachine12 = (player, k, map) => {
     player.onCollide('game_machine_12', () => {
+        time.paused = true;
+        player.state.isInDialog = true;
+        abort = new AbortController();
         showCustomPrompt(
             'Do you want to play "Pattern Memory Challenge"?',
             ['Yes', 'No'],
@@ -29,7 +35,10 @@ export const interactionWithGameMachine12 = (player, k, map) => {
                         text: ['Maybe next time!'],
                     });
                 }
-            }
+            },
+            player,
+            k,
+            abort
         );
     });
 };
@@ -167,38 +176,4 @@ function arraysEqual(a, b) {
         a.length === b.length &&
         a.every((val, index) => val === b[index])
     );
-}
-
-function showCustomPrompt(message, options, callback) {
-    const promptElement = document.getElementById('custom-prompt');
-    const messageElement = document.getElementById('prompt-message');
-    const optionsContainer = document.getElementById('options-container');
-
-    if (!promptElement || !messageElement || !optionsContainer) {
-        k.debug.error('Required DOM elements for custom prompt not found');
-        return;
-    }
-
-    messageElement.textContent = message;
-    optionsContainer.innerHTML = '';
-
-    options.forEach((option) => {
-        const button = document.createElement('button');
-        button.textContent = option;
-        button.classList.add('option-btn');
-        button.onclick = () => {
-            callback(option);
-            closeCustomPrompt();
-        };
-        optionsContainer.appendChild(button);
-    });
-
-    promptElement.style.display = 'flex';
-}
-
-function closeCustomPrompt() {
-    const promptElement = document.getElementById('custom-prompt');
-    if (promptElement) {
-        promptElement.style.display = 'none';
-    }
 }

@@ -1,6 +1,7 @@
 import { time } from '../../kplayCtx';
 import { characters } from '../../constants';
 import { changePlayerSprite } from '../../utils/changePlayer';
+import { closeCustomPrompt } from '../../utils';
 
 const slightPause = () => new Promise((res) => setTimeout(res, 500));
 let abort;
@@ -76,7 +77,7 @@ async function showCustomPrompt(message, options, callback, player, k) {
             // Add click event for mouse interactions
             button.onclick = function () {
                 callback(option);
-                closeCustomPrompt(player, k);
+                closeCustomPrompt(player, k, abort);
             };
 
             // Add keyboard event listener for accessibility
@@ -85,7 +86,7 @@ async function showCustomPrompt(message, options, callback, player, k) {
                     // Enter or Space key
                     e.preventDefault(); // Prevent the default behavior (e.g., form submission)
                     callback(option);
-                    closeCustomPrompt(player, k);
+                    closeCustomPrompt(player, k, abort);
                 }
             });
 
@@ -136,7 +137,7 @@ async function showCustomPrompt(message, options, callback, player, k) {
         closeButton.classList.add('option-btn');
         closeButton.textContent = 'Close';
         closeButton.onclick = () => {
-            closeCustomPrompt(player, k);
+            closeCustomPrompt(player, k, abort);
         };
         closeButton.style.width = '35%';
         prevButton.style.width = '20%';
@@ -162,18 +163,4 @@ async function showCustomPrompt(message, options, callback, player, k) {
     if (optionsContainer.children.length > 0) {
         optionsContainer.children[0].focus();
     }
-}
-
-// Function to close the custom prompt
-function closeCustomPrompt(player, k) {
-    // Hide the custom prompt
-    document.getElementById('custom-prompt').style.display = 'none';
-
-    const statsUI = document.getElementById('stats-container');
-    statsUI.style.display = 'flex';
-
-    time.paused = false;
-    abort.abort();
-    player.state.isInDialog = false;
-    k.canvas.focus();
 }

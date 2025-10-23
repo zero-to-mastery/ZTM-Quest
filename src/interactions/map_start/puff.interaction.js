@@ -1,9 +1,14 @@
 import { time } from '../../kplayCtx';
-import { displayDialogue } from '../../utils';
+import { displayDialogue, showCustomPrompt } from '../../utils';
 import { updateEnergyState } from '../../utils/energyUpdate';
+
+let abort;
 
 export const interactionWithPuff = (player, k, map) => {
     player.onCollide('puff', () => {
+        time.paused = true;
+        player.state.isInDialog = true;
+        abort = new AbortController();
         showCustomPrompt(
             'Would you like to sit and rest on the puff? (Time advances 15s)',
             ['Sit', 'Leave'],
@@ -30,46 +35,10 @@ export const interactionWithPuff = (player, k, map) => {
                         },
                     });
                 }
-            }
+            },
+            player,
+            k,
+            abort
         );
     });
 };
-
-function showCustomPrompt(message, options, callback) {
-    document.getElementById('prompt-message').textContent = message;
-
-    const optionsContainer = document.getElementById('options-container');
-    optionsContainer.innerHTML = '';
-
-    options.forEach((option) => {
-        const button = document.createElement('button');
-        button.textContent = option;
-        button.classList.add('option-btn');
-        button.setAttribute('tabindex', '0');
-
-        button.onclick = function () {
-            callback(option);
-            closeCustomPrompt();
-        };
-
-        button.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                callback(option);
-                closeCustomPrompt();
-            }
-        });
-
-        optionsContainer.appendChild(button);
-    });
-
-    document.getElementById('custom-prompt').style.display = 'flex';
-
-    if (optionsContainer.children.length > 0) {
-        optionsContainer.children[0].focus();
-    }
-}
-
-function closeCustomPrompt() {
-    document.getElementById('custom-prompt').style.display = 'none';
-}

@@ -1,9 +1,15 @@
-import { displayDialogue } from '../../utils';
+import { time } from '../../kplayCtx';
+import { displayDialogue, showCustomPrompt } from '../../utils';
 import { updateAchievements } from '../../utils/achievementsUpdate';
 import { addCoins } from '../../utils/coinsUpdate';
 
+let abort;
+
 export const interactionWithGameMachine1 = (player, k, map) => {
     player.onCollide('game_machine_1', () => {
+        time.paused = true;
+        player.state.isInDialog = true;
+        abort = new AbortController();
         showCustomPrompt(
             'Do you want to play the Number Guessing Game?',
             ['Yes', 'No'],
@@ -31,7 +37,10 @@ export const interactionWithGameMachine1 = (player, k, map) => {
                         onDisplayEnd: () => {},
                     });
                 }
-            }
+            },
+            player,
+            k,
+            abort
         );
     });
 };
@@ -167,29 +176,4 @@ function startNumberGuessingGame(k) {
     });
 
     k.go('numberGuessing');
-}
-function showCustomPrompt(message, options, callback) {
-    document.getElementById('prompt-message').textContent = message;
-    const optionsContainer = document.getElementById('options-container');
-    optionsContainer.innerHTML = '';
-
-    options.forEach((option) => {
-        const button = document.createElement('button');
-        button.textContent = option;
-        button.classList.add('option-btn');
-        button.onclick = function () {
-            callback(option);
-            closeCustomPrompt();
-        };
-        optionsContainer.appendChild(button);
-    });
-
-    document.getElementById('custom-prompt').style.display = 'flex';
-    if (optionsContainer.children.length > 0) {
-        optionsContainer.children[0].focus();
-    }
-}
-
-function closeCustomPrompt() {
-    document.getElementById('custom-prompt').style.display = 'none';
 }
