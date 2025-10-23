@@ -40,7 +40,7 @@ export async function displayDialogue({
     player,
     characterName,
     text,
-    onDisplayEnd = () => { },
+    onDisplayEnd = () => {},
     addFlickerEffect = false,
 }) {
     document.getElementById('custom-prompt').style.display = 'none';
@@ -72,7 +72,12 @@ export async function displayDialogue({
     for await (const t of text) {
         abort = new AbortController();
         await new Promise((res) => {
-            const dialoguePromise = processDialogue({ dialog, text: t, characterName, abort });
+            const dialoguePromise = processDialogue({
+                dialog,
+                text: t,
+                characterName,
+                abort,
+            });
 
             // Wait for dialogue to complete or user to click next
             dialoguePromise.then(() => {
@@ -132,7 +137,7 @@ export async function displayPermissionBox({
     k,
     player,
     text,
-    onDisplayEnd = () => { },
+    onDisplayEnd = () => {},
     purchaseCost,
 }) {
     time.paused = true;
@@ -297,32 +302,32 @@ export async function getContributors() {
 
 export const objectToBackpackInteraction =
     ({ tag, title }) =>
-        (player, k, map) => {
-            let text;
-            let pressE;
+    (player, k, map) => {
+        let text;
+        let pressE;
 
-            player.onCollide(tag, (obj) => {
-                if (!player.state.backpack) return;
-                text = obj.add([
-                    k.pos(obj.width / 2 - 2, -5),
-                    k.text('E', { size: 12 }),
-                ]);
+        player.onCollide(tag, (obj) => {
+            if (!player.state.backpack) return;
+            text = obj.add([
+                k.pos(obj.width / 2 - 2, -5),
+                k.text('E', { size: 12 }),
+            ]);
 
-                pressE = k.onKeyPress((key) => {
-                    if (key === 'e') {
-                        // move it to backpack
-                        Backpack.addItem({
-                            title: title || tag,
-                            assetUrl: obj.assetUrl,
-                        });
-                        obj.destroy();
-                    }
-                });
+            pressE = k.onKeyPress((key) => {
+                if (key === 'e') {
+                    // move it to backpack
+                    Backpack.addItem({
+                        title: title || tag,
+                        assetUrl: obj.assetUrl,
+                    });
+                    obj.destroy();
+                }
             });
+        });
 
-            player.onCollideEnd(tag, (obj) => {
-                if (!pressE) return;
-                pressE.cancel();
-                obj.remove(text);
-            });
-        };
+        player.onCollideEnd(tag, (obj) => {
+            if (!pressE) return;
+            pressE.cancel();
+            obj.remove(text);
+        });
+    };
