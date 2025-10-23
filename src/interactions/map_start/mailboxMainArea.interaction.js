@@ -1,13 +1,15 @@
+import { time } from '../../kplayCtx';
 import { displayDialogue } from '../../utils';
 import { fetchNews, formatNewsDate } from '../../utils/newsApi';
 
 // Cache for news to avoid fetching multiple times
 let newsCache = null;
+let abort;
 
 /**
  * Show custom prompt with clickable options
  */
-function showCustomPrompt(message, options, callback) {
+function showCustomPrompt(message, options, callback, player, k) {
     const energyUI = document.getElementById('energy-container');
     if (energyUI) {
         energyUI.style.display = 'none';
@@ -28,14 +30,14 @@ function showCustomPrompt(message, options, callback) {
 
         button.onclick = function () {
             callback(option.value);
-            closeCustomPrompt();
+            closeCustomPrompt(player, k);
         };
 
         button.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 callback(option.value);
-                closeCustomPrompt();
+                closeCustomPrompt(player, k);
             }
         });
 
@@ -49,12 +51,16 @@ function showCustomPrompt(message, options, callback) {
     }
 }
 
-function closeCustomPrompt() {
+function closeCustomPrompt(player, k) {
     document.getElementById('custom-prompt').style.display = 'none';
     const energyUI = document.getElementById('energy-container');
     if (energyUI) {
         energyUI.style.display = 'flex';
     }
+    time.paused = false;
+    abort.abort();
+    player.state.isInDialog = false;
+    k.canvas.focus();
 }
 
 /**
@@ -85,7 +91,7 @@ const showNewsDetail = async (player, k, newsItem, returnPage = 0) => {
                 await showNewsList(player, k, returnPage);
             }
         }, 50);
-    });
+    }, player, k);
 };
 
 /**
@@ -165,11 +171,14 @@ const showNewsList = async (player, k, page = 0) => {
                 await showNewsDetail(player, k, selectedNews, page);
             }
         }, 50);
-    });
+    }, player, k);
 };
 
 export const interactionWithMainboxMainArea = (player, k, map) => {
     player.onCollide('mailbox_mainArea', async () => {
+        time.paused = true;
+        player.state.isInDialog = true;
+        abort = new AbortController();
         await showNewsList(player, k);
     });
 };
