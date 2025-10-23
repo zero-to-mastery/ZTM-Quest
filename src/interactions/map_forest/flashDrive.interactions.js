@@ -25,6 +25,9 @@ export const interactionWithFlashDrive = (player, k, map) => {
                         'Find the Flash Drive',
                         'Found the Flash Drive'
                     );
+                    const flashDriveObj = map.get('flashDrive')[0];
+                    // Remove the flash drive from the map
+                    k.destroy(flashDriveObj);
                 }
             },
         });
