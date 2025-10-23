@@ -1,7 +1,9 @@
+import { time } from '../../kplayCtx';
 import { characters } from '../../constants';
 import { changePlayerSprite } from '../../utils/changePlayer';
 
 const slightPause = () => new Promise((res) => setTimeout(res, 500));
+let abort;
 
 export const interactionWithLocker = (player, k, map) => {
     player.onCollide('cabin_edge_room_1', () => {
@@ -9,6 +11,9 @@ export const interactionWithLocker = (player, k, map) => {
             (character) =>
                 character.name.charAt(0).toUpperCase() + character.name.slice(1)
         );
+        time.paused = true;
+        player.state.isInDialog = true;
+        abort = new AbortController();
         // Trigger the custom prompt when the player collides with the drinks machine
         showCustomPrompt(
             'What character would you like to play?', // Prompt message
@@ -27,12 +32,14 @@ export const interactionWithLocker = (player, k, map) => {
                     player
                 );
                 k.canvas.focus();
-            }
+            },
+            player,
+            k
         );
     });
 };
 
-async function showCustomPrompt(message, options, callback) {
+async function showCustomPrompt(message, options, callback, player, k) {
     // Set the prompt message
     document.getElementById('prompt-message').textContent = message;
 
@@ -64,7 +71,7 @@ async function showCustomPrompt(message, options, callback) {
             // Add click event for mouse interactions
             button.onclick = function () {
                 callback(option);
-                closeCustomPrompt();
+                closeCustomPrompt(player, k);
             };
 
             // Add keyboard event listener for accessibility
@@ -73,7 +80,7 @@ async function showCustomPrompt(message, options, callback) {
                     // Enter or Space key
                     e.preventDefault(); // Prevent the default behavior (e.g., form submission)
                     callback(option);
-                    closeCustomPrompt();
+                    closeCustomPrompt(player, k);
                 }
             });
 
@@ -130,7 +137,11 @@ async function showCustomPrompt(message, options, callback) {
 }
 
 // Function to close the custom prompt
-function closeCustomPrompt() {
+function closeCustomPrompt(player, k) {
     // Hide the custom prompt
     document.getElementById('custom-prompt').style.display = 'none';
+    time.paused = false;
+    abort.abort();
+    player.state.isInDialog = false;
+    k.canvas.focus();
 }
