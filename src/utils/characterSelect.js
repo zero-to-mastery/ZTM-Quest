@@ -3,42 +3,17 @@ import { getGameState, setGameState } from './gameState';
 import { changePlayerSprite } from '../utils/changePlayer';
 import { k } from '../kplayCtx';
 
-
 export async function showCharacterSelectModal(player) {
   const settingsModal = document.getElementById('settings-modal');
   if (settingsModal) settingsModal.style.display = 'flex';
 
-
   const modalContent = document.querySelector('#settings-modal .modal-content');
   const originalContent = modalContent.innerHTML;
 
-
   let characterHTML = `
-    <style>
-      .char-option {
-        text-align:center;
-        cursor:pointer;
-        font-size:1.2em;
-        font-weight:700;
-        padding:12px 32px;
-        margin:7px 18px 8px 18px;
-        border-radius:16px;
-        color:#fff;
-        background:none;
-        box-shadow:0 0 8px 2px #fff;
-        transition:box-shadow 0.12s, color 0.12s;
-        border:2px solid rgba(255,255,255,0.19);
-      }
-      .char-option:hover, .char-option:focus {
-        box-shadow:0 0 20px 7px #fff;
-        color:#fff;
-        outline:none;
-        border:2px solid #fff;
-      }
-    </style>
     <div>
       <h2 style="color:#fff;">Choose Your Character</h2>
-      <div style="display:flex;flex-wrap:wrap;gap:18px;justify-content:center;">
+      <div class="character-select-grid">
         ${CHARACTERS.map(c =>
           `<div class="char-option"
                 data-name="${c.name}"
@@ -50,7 +25,6 @@ export async function showCharacterSelectModal(player) {
     </div>
   `;
   modalContent.innerHTML = characterHTML;
-
 
   setTimeout(() => {
     document.querySelectorAll('.char-option').forEach(div => {
@@ -68,7 +42,6 @@ export async function showCharacterSelectModal(player) {
         }
         closeModal('settings-modal');
         
-        // Add delay to ensure gameState is written to localStorage
         setTimeout(() => {
           k.go('loadingScreen');
         }, 100);
@@ -85,7 +58,6 @@ export async function showCharacterSelectModal(player) {
       closeModal('settings-modal');
     };
   }, 0);
-
 
   function closeModal(modalId) {
     const modal = document.getElementById(modalId);

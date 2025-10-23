@@ -8,25 +8,12 @@ export function openSettingsModal() {
   const originalContent = modalContent.innerHTML;
 
   setTimeout(() => {
-    // View Controls button
     const showControlsBtn = document.getElementById('show-controls-btn');
     if (showControlsBtn) {
       showControlsBtn.onclick = () => {
-        modalContent.innerHTML = `
-          <div class="controls-message">
-            <h3>Controls</h3>
-            <ul>
-              <li>W/↑ - Move Up</li>
-              <li>A/← - Move Left</li>
-              <li>S/↓ - Move Down</li>
-              <li>D/→ - Move Right</li>
-              <li>ENTER - Interact</li>
-              <li>ESC - Pause Menu</li>
-              <li>M - Toggle Map</li>
-            </ul>
-            <button id="controls-close-btn">OK</button>
-          </div>
-        `;
+        const template = document.getElementById('controls-template');
+        modalContent.innerHTML = template.innerHTML;
+        
         document.getElementById('controls-close-btn').onclick = () => {
           modalContent.innerHTML = originalContent;
           wireSettingsButtons();
@@ -34,40 +21,31 @@ export function openSettingsModal() {
       };
     }
 
-    // Reset Game Progress button
     const resetSaveBtn = document.getElementById('reset-save-btn');
     if (resetSaveBtn) {
       resetSaveBtn.onclick = () => {
-        modalContent.innerHTML = `
-          <div>
-            <p>Are you sure you want to reset all game progress? This cannot be undone!</p>
-            <button id="reset-cancel-btn">Cancel</button>
-            <button id="reset-confirm-btn" class="danger">Reset</button>
-          </div>
-        `;
+        const template = document.getElementById('reset-confirm-template');
+        modalContent.innerHTML = template.innerHTML;
+        
         document.getElementById('reset-cancel-btn').onclick = () => {
           modalContent.innerHTML = originalContent;
           wireSettingsButtons();
         };
+        
         document.getElementById('reset-confirm-btn').onclick = () => {
-          // Save audio settings before clearing
           const audioMuted = localStorage.getItem('ztm-audio-muted');
           const musicVolume = localStorage.getItem('ztm-music-volume');
           
-          // Clear ALL localStorage
           localStorage.clear();
           
-          // Restore audio settings
           if (audioMuted) localStorage.setItem('ztm-audio-muted', audioMuted);
           if (musicVolume) localStorage.setItem('ztm-music-volume', musicVolume);
           
-          // Reload page
           window.location.reload();
         };
       };
     }
 
-    // Save & Close
     const saveBtn = document.getElementById('save-settings-btn');
     if (saveBtn) {
       saveBtn.onclick = () => closeModal('settings-modal');
@@ -87,7 +65,6 @@ export function openSettingsModal() {
     };
   }
 
-  // Rewire listeners after restoring
   function wireSettingsButtons() {
     openSettingsModal();
   }
