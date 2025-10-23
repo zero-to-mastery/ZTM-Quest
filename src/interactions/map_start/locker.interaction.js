@@ -95,11 +95,16 @@ async function showCustomPrompt(message, options, callback, player, k) {
         prevButton.classList.add('option-btn');
         prevButton.textContent = 'Previous';
         prevButton.disabled = currentPage === 1;
-        prevButton.onclick = () => {
+        prevButton.onclick = async () => {
             if (currentPage > 1) {
                 currentPage--;
-                renderOptions();
-                renderPagination();
+                await renderOptions();
+                await renderPagination();
+
+                // Set focus on the first button
+                if (optionsContainer.children.length > 0) {
+                    optionsContainer.children[0].focus();
+                }
             }
         };
 
@@ -108,11 +113,16 @@ async function showCustomPrompt(message, options, callback, player, k) {
         nextButton.classList.add('option-btn');
         nextButton.textContent = 'Next';
         nextButton.disabled = currentPage === totalPages;
-        nextButton.onclick = () => {
+        nextButton.onclick = async () => {
             if (currentPage < totalPages) {
                 currentPage++;
-                renderOptions();
-                renderPagination();
+                await renderOptions();
+                await renderPagination();
+
+                // Set focus on the first button
+                if (optionsContainer.children.length > 0) {
+                    optionsContainer.children[0].focus();
+                }
             }
         };
 
@@ -140,8 +150,8 @@ async function showCustomPrompt(message, options, callback, player, k) {
     optionsContainer.style.flexWrap = 'wrap';
 
     // Initial render of options and pagination
-    renderOptions();
-    renderPagination();
+    await renderOptions();
+    await renderPagination();
 
     // Set focus on the first button
     if (optionsContainer.children.length > 0) {
