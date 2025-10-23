@@ -115,8 +115,21 @@ async function showCustomPrompt(message, options, callback, player, k) {
                 renderPagination();
             }
         };
-        prevButton.style.width = '45%';
-        nextButton.style.width = '45%';
+
+        // Create Close button
+        const closeButton = document.createElement('button');
+        closeButton.classList.add('option-btn');
+        closeButton.textContent = 'Close';
+        closeButton.onclick = () => {
+            closeCustomPrompt(player, k);
+        };
+        closeButton.style.width = '35%';
+        prevButton.style.width = '20%';
+        nextButton.style.width = '20%';
+        closeButton.style.backgroundColor = 'crimson';
+        prevButton.style.backgroundColor = 'lightblue';
+        nextButton.style.backgroundColor = 'lightgreen';
+        optionsContainer.appendChild(closeButton);
         optionsContainer.appendChild(prevButton);
         optionsContainer.appendChild(nextButton);
     }
