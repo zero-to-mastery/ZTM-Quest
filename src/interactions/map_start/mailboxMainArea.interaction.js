@@ -10,10 +10,10 @@ let abort;
  * Show custom prompt with clickable options
  */
 function showCustomPrompt(message, options, callback, player, k) {
-    const energyUI = document.getElementById('energy-container');
-    if (energyUI) {
-        energyUI.style.display = 'none';
-    }
+    const statsUI = document.getElementById('stats-container');
+    const miniMapUI = document.getElementById('minimap');
+    statsUI.style.display = 'none';
+    miniMapUI.style.display = 'none';
 
     let promptMessage = document.getElementById('prompt-message');
     promptMessage.innerHTML = message;
@@ -53,10 +53,8 @@ function showCustomPrompt(message, options, callback, player, k) {
 
 function closeCustomPrompt(player, k) {
     document.getElementById('custom-prompt').style.display = 'none';
-    const energyUI = document.getElementById('energy-container');
-    if (energyUI) {
-        energyUI.style.display = 'flex';
-    }
+    const statsUI = document.getElementById('stats-container');
+    statsUI.style.display = 'flex';
     time.paused = false;
     abort.abort();
     player.state.isInDialog = false;

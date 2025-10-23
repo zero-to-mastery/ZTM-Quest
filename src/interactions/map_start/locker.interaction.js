@@ -40,6 +40,11 @@ export const interactionWithLocker = (player, k, map) => {
 };
 
 async function showCustomPrompt(message, options, callback, player, k) {
+    const statsUI = document.getElementById('stats-container');
+    const miniMapUI = document.getElementById('minimap');
+    statsUI.style.display = 'none';
+    miniMapUI.style.display = 'none';
+
     // Set the prompt message
     document.getElementById('prompt-message').textContent = message;
 
@@ -163,6 +168,10 @@ async function showCustomPrompt(message, options, callback, player, k) {
 function closeCustomPrompt(player, k) {
     // Hide the custom prompt
     document.getElementById('custom-prompt').style.display = 'none';
+
+    const statsUI = document.getElementById('stats-container');
+    statsUI.style.display = 'flex';
+
     time.paused = false;
     abort.abort();
     player.state.isInDialog = false;
