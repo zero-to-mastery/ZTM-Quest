@@ -1,4 +1,4 @@
-import gameObjects from '../gameObjects/map_campus_house_1';
+import { getGameObjects } from '../gameObjects/map_campus_house_1';
 import { initMap } from '../init/map.init';
 import interactions from '../interactions/map_campus_house_1';
 import sounds from '../sounds/map_campus_house_1';
@@ -19,5 +19,5 @@ export async function campusHouse1() {
         './maps/map_campus_house_1.json'
     );
 
-    return [map, spawnpoint, gameObjects, interactions, sounds];
+    return [map, spawnpoint, getGameObjects(), interactions, sounds];
 }
