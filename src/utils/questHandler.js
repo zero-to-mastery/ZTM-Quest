@@ -53,18 +53,22 @@ export const completeQuest = async (player, questName) => {
         // New object to contain quest properties
         const newObj = {};
         let hasFoundIncompleteObjective = false;
-        // If there is an objective that is not finished then show dialog to user
+        let questStatusText = '';
+        // If there is an objective that is not finished then show the status to user
         for (let objective in objectives) {
             if (!objectives[objective]) {
-                await displayDialogue({
-                    k,
-                    player,
-                    characterName: 'Quest System',
-                    text: [`You have not finished: "${objective}"`],
-                });
+                questStatusText += `<br />🚫 ${objective}`;
                 hasFoundIncompleteObjective = true;
+            } else {
+                questStatusText += `<br />✅ ${objective}`;
             }
         }
+        await displayDialogue({
+            k,
+            player,
+            characterName: 'Quest System',
+            text: [`"${questName}" Quest Status:${questStatusText}`],
+        });
 
         if (hasFoundIncompleteObjective) {
             return;
@@ -78,7 +82,7 @@ export const completeQuest = async (player, questName) => {
             k,
             player,
             characterName: 'Quest System',
-            text: [`🎉 Quest Completed! 🎉`, `"${questName}"`],
+            text: [`🎉 Quest Completed! 🎉<br />${questName}`],
         });
     }
 };
@@ -105,7 +109,7 @@ export const completeQuestObjective = async (player, questName, objective) => {
         k,
         player,
         characterName: 'Quest System',
-        text: [`✅ Objective Completed!`, `"${objective}"`],
+        text: [`"${questName}" Objective Completed!<br />✅ ${objective}`],
     });
     return true;
 };
@@ -132,7 +136,7 @@ export const recieveQuest = async (player, quest) => {
             k,
             player,
             characterName: 'Quest System',
-            text: [`🆕 New Quest Started!`, `"${Object.keys(quest)[0]}"`],
+            text: [`🆕 New Quest Started!<br />"${Object.keys(quest)[0]}"`],
         });
     }
 };
