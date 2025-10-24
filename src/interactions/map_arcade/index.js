@@ -16,6 +16,7 @@ import { interactionWithGameMachine9 } from './game_machine_9.interactions';
 import { interactionWithGameMachine5 } from './game_machine_5.interactions';
 import { interactionWithGameMachine7 } from './game_machine_7.interaction';
 import { interactionWithGameMachine13 } from './game_machine_13.interactions';
+//import { interactionWithGameMachine14 } from './game_machine_14.interactions';
 
 const interactions = [
     enterMapCityInteraction,
@@ -42,6 +43,7 @@ const interactions = [
     interactionWithGameMachineCrawl,
     interactionWithGameMachine5,
     interactionWithGameMachine13,
+    //interactionWithGameMachine14,
 ];
 
 export default interactions;
