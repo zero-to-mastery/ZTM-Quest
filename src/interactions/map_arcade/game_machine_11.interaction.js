@@ -1,5 +1,10 @@
 import { time } from '../../kplayCtx';
-import { displayDialogue, hideCanvasFrame, showCanvasFrame, showCustomPrompt } from '../../utils';
+import {
+    displayDialogue,
+    hideCanvasFrame,
+    showCanvasFrame,
+    showCustomPrompt,
+} from '../../utils';
 import { updateAchievements } from '../../utils/achievementsUpdate';
 
 let abort;

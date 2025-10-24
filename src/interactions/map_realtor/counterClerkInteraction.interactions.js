@@ -1,6 +1,10 @@
 import { time } from '../../kplayCtx';
 import { interactionHandler } from '../handler.interactions';
-import { displayDialogue, displayPermissionBox, showCustomPrompt } from '../../utils';
+import {
+    displayDialogue,
+    displayPermissionBox,
+    showCustomPrompt,
+} from '../../utils';
 import {
     completeQuest,
     completeQuestObjective,

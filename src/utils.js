@@ -332,7 +332,14 @@ export const objectToBackpackInteraction =
         });
     };
 
-export const showCustomPrompt = (message, options, callback, player, k, abort) => {
+export const showCustomPrompt = (
+    message,
+    options,
+    callback,
+    player,
+    k,
+    abort
+) => {
     /**
      * Show custom prompt with clickable options
      */
@@ -366,7 +373,7 @@ export const showCustomPrompt = (message, options, callback, player, k, abort) =
             if (typeof option === 'object') {
                 callback(option.value);
             } else {
-                callback(option)
+                callback(option);
             }
             closeCustomPrompt(player, k, abort);
         };
@@ -378,7 +385,7 @@ export const showCustomPrompt = (message, options, callback, player, k, abort) =
                 if (typeof option === 'object') {
                     callback(option.value);
                 } else {
-                    callback(option)
+                    callback(option);
                 }
                 closeCustomPrompt(player, k, abort);
             }
@@ -394,7 +401,7 @@ export const showCustomPrompt = (message, options, callback, player, k, abort) =
     if (optionsContainer.children.length > 0) {
         optionsContainer.children[0].focus();
     }
-}
+};
 
 // Function to close the custom prompt
 export const closeCustomPrompt = (player, k, abort) => {
@@ -408,4 +415,4 @@ export const closeCustomPrompt = (player, k, abort) => {
     abort.abort();
     player.state.isInDialog = false;
     k.canvas.focus();
-}
+};

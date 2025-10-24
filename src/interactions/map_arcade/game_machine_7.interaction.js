@@ -2,7 +2,7 @@ import { time } from '../../kplayCtx';
 import { displayDialogue, showCustomPrompt } from '../../utils';
 import { updateAchievements } from '../../utils/achievementsUpdate';
 
-let abort
+let abort;
 
 export const interactionWithGameMachine7 = (player, k, map) => {
     player.onCollide('game_machine_7', () => {

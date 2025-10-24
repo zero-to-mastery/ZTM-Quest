@@ -1,5 +1,9 @@
 import { time } from '../../kplayCtx';
-import { displayDialogue, displayPermissionBox, showCustomPrompt } from '../../utils';
+import {
+    displayDialogue,
+    displayPermissionBox,
+    showCustomPrompt,
+} from '../../utils';
 import { updateEnergyState } from '../../utils/energyUpdate';
 import { getRandomQuestion } from '../../utils/randomJSQuestion';
 
@@ -28,33 +32,40 @@ export const bedroomTableInteractions = async (player, k, map) => {
 
             player.state.isInDialog = true;
             abort = new AbortController();
-            showCustomPrompt(questionText, options, async (selectedOption) => {
-                let feedbackText = [];
+            showCustomPrompt(
+                questionText,
+                options,
+                async (selectedOption) => {
+                    let feedbackText = [];
 
-                if (selectedOption === quizQuestion.answer) {
-                    updateEnergyState(player.state, 10);
-                    feedbackText.push("Correct! You're on fire!");
-                } else {
-                    updateEnergyState(player.state, -10);
-                    feedbackText.push("Oops! That's not right.");
-                }
+                    if (selectedOption === quizQuestion.answer) {
+                        updateEnergyState(player.state, 10);
+                        feedbackText.push("Correct! You're on fire!");
+                    } else {
+                        updateEnergyState(player.state, -10);
+                        feedbackText.push("Oops! That's not right.");
+                    }
 
-                feedbackText.push(
-                    `Correct answer: ${quizQuestion.answer}. ${quizQuestion.explanation}`
-                );
-                feedbackText.push(
-                    'Thanks for playing! You can continue exploring.'
-                );
+                    feedbackText.push(
+                        `Correct answer: ${quizQuestion.answer}. ${quizQuestion.explanation}`
+                    );
+                    feedbackText.push(
+                        'Thanks for playing! You can continue exploring.'
+                    );
 
-                await displayDialogue({
-                    k,
-                    player,
-                    text: feedbackText,
-                    onDisplayEnd: () => {
-                        time.paused = false;
-                    },
-                });
-            }, player, k, abort);
+                    await displayDialogue({
+                        k,
+                        player,
+                        text: feedbackText,
+                        onDisplayEnd: () => {
+                            time.paused = false;
+                        },
+                    });
+                },
+                player,
+                k,
+                abort
+            );
         } else {
             await displayDialogue({
                 k,

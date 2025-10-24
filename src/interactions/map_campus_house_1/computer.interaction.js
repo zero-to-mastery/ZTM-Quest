@@ -54,39 +54,46 @@ export const computerInteractions = async (player, k, map) => {
             time.paused = true;
             player.state.isInDialog = true;
             abort = new AbortController();
-            showCustomPrompt(challengeText, options, async (selectedOption) => {
-                const response = [];
+            showCustomPrompt(
+                challengeText,
+                options,
+                async (selectedOption) => {
+                    const response = [];
 
-                if (selectedOption == 'C') {
-                    updateEnergyState(player.state, -10);
-                    player.state.completedMageChallenge = true;
-                    response.push("Correct!, you're a genius!");
-                    response.push('It was a tough one!, You look tired');
-                } else {
-                    updateEnergyState(player.state, -30);
-                    response.push('Incorrect! Try again next time!');
+                    if (selectedOption == 'C') {
+                        updateEnergyState(player.state, -10);
+                        player.state.completedMageChallenge = true;
+                        response.push("Correct!, you're a genius!");
+                        response.push('It was a tough one!, You look tired');
+                    } else {
+                        updateEnergyState(player.state, -30);
+                        response.push('Incorrect! Try again next time!');
+                        response.push(
+                            'Anyway it was a good effort, You look tired'
+                        );
+                    }
+
                     response.push(
-                        'Anyway it was a good effort, You look tired'
+                        'You should take a nap before you continue exploring the campus'
                     );
-                }
 
-                response.push(
-                    'You should take a nap before you continue exploring the campus'
-                );
-
-                await displayDialogue({
-                    k,
-                    player,
-                    text: response,
-                    onDisplayEnd: () => {
-                        // Only reset if player didn't complete the challenge successfully
-                        // Keep alreadyTalkedToMage true so they can return to Mage for reward
-                        if (!player.state.completedMageChallenge) {
-                            player.state.alreadyTalkedToMage = false;
-                        }
-                    },
-                });
-            }, player, k, abort);
+                    await displayDialogue({
+                        k,
+                        player,
+                        text: response,
+                        onDisplayEnd: () => {
+                            // Only reset if player didn't complete the challenge successfully
+                            // Keep alreadyTalkedToMage true so they can return to Mage for reward
+                            if (!player.state.completedMageChallenge) {
+                                player.state.alreadyTalkedToMage = false;
+                            }
+                        },
+                    });
+                },
+                player,
+                k,
+                abort
+            );
         }
     });
 

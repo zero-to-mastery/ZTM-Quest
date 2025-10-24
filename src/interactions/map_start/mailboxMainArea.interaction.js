@@ -28,13 +28,20 @@ const showNewsDetail = async (player, k, newsItem, returnPage = 0) => {
         },
     ];
 
-    showCustomPrompt(detailMessage, options, (selectedValue) => {
-        setTimeout(async () => {
-            if (selectedValue === 'back') {
-                await showNewsList(player, k, returnPage);
-            }
-        }, 50);
-    }, player, k, abort);
+    showCustomPrompt(
+        detailMessage,
+        options,
+        (selectedValue) => {
+            setTimeout(async () => {
+                if (selectedValue === 'back') {
+                    await showNewsList(player, k, returnPage);
+                }
+            }, 50);
+        },
+        player,
+        k,
+        abort
+    );
 };
 
 /**
@@ -98,23 +105,30 @@ const showNewsList = async (player, k, page = 0) => {
         text: '✕ Close',
     });
 
-    showCustomPrompt(message, options, (selectedValue) => {
-        // Use setTimeout to avoid closing before showing next prompt
-        setTimeout(async () => {
-            if (selectedValue === 'prev') {
-                await showNewsList(player, k, page - 1);
-            } else if (selectedValue === 'next') {
-                await showNewsList(player, k, page + 1);
-            } else if (selectedValue === 'close') {
-                // Just close, do nothing
-                return;
-            } else {
-                // It's a news index
-                const selectedNews = newsCache[selectedValue];
-                await showNewsDetail(player, k, selectedNews, page);
-            }
-        }, 50);
-    }, player, k, abort);
+    showCustomPrompt(
+        message,
+        options,
+        (selectedValue) => {
+            // Use setTimeout to avoid closing before showing next prompt
+            setTimeout(async () => {
+                if (selectedValue === 'prev') {
+                    await showNewsList(player, k, page - 1);
+                } else if (selectedValue === 'next') {
+                    await showNewsList(player, k, page + 1);
+                } else if (selectedValue === 'close') {
+                    // Just close, do nothing
+                    return;
+                } else {
+                    // It's a news index
+                    const selectedNews = newsCache[selectedValue];
+                    await showNewsDetail(player, k, selectedNews, page);
+                }
+            }, 50);
+        },
+        player,
+        k,
+        abort
+    );
 };
 
 export const interactionWithMainboxMainArea = (player, k, map) => {

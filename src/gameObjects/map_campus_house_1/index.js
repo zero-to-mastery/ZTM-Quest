@@ -16,10 +16,10 @@ export const getGameObjects = () => {
         // Add more game objects here
     ];
     const state = getGameState();
-    
+
     if (!state.player.backpack) {
         gameObjects.push(backpack);
     }
 
     return gameObjects;
-}
+};
