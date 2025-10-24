@@ -1,8 +1,14 @@
-import { displayDialogue } from '../../utils';
+import { time } from '../../kplayCtx';
+import { displayDialogue, showCustomPrompt } from '../../utils';
 import { updateEnergyState } from '../../utils/energyUpdate';
+
+let abort;
 
 export const interactionWithDog = (player, k, map) => {
     player.onCollide('dog', () => {
+        time.paused = true;
+        player.state.isInDialog = true;
+        abort = new AbortController();
         showCustomPrompt(
             'The dog is excited to play with you!',
             ['Play', 'Leave'],
@@ -23,46 +29,10 @@ export const interactionWithDog = (player, k, map) => {
                         },
                     });
                 }
-            }
+            },
+            player,
+            k,
+            abort
         );
     });
 };
-
-function showCustomPrompt(message, options, callback) {
-    document.getElementById('prompt-message').textContent = message;
-
-    const optionsContainer = document.getElementById('options-container');
-    optionsContainer.innerHTML = '';
-
-    options.forEach((option) => {
-        const button = document.createElement('button');
-        button.textContent = option;
-        button.classList.add('option-btn');
-        button.setAttribute('tabindex', '0');
-
-        button.onclick = function () {
-            callback(option);
-            closeCustomPrompt();
-        };
-
-        button.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                callback(option);
-                closeCustomPrompt();
-            }
-        });
-
-        optionsContainer.appendChild(button);
-    });
-
-    document.getElementById('custom-prompt').style.display = 'flex';
-
-    if (optionsContainer.children.length > 0) {
-        optionsContainer.children[0].focus();
-    }
-}
-
-function closeCustomPrompt() {
-    document.getElementById('custom-prompt').style.display = 'none';
-}

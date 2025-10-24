@@ -157,6 +157,11 @@ export class Backpack {
 
     static showButton() {
         backpackBtn.style.display = 'block';
+
+        const instance = Backpack.getInstance();
+        backpackBtn.addEventListener('click', () => {
+            instance.openBackpack();
+        });
     }
 
     static removeButton() {

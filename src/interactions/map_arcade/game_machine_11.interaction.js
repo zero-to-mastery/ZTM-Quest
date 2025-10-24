@@ -1,8 +1,14 @@
-import { displayDialogue, hideCanvasFrame, showCanvasFrame } from '../../utils';
+import { time } from '../../kplayCtx';
+import { displayDialogue, hideCanvasFrame, showCanvasFrame, showCustomPrompt } from '../../utils';
 import { updateAchievements } from '../../utils/achievementsUpdate';
+
+let abort;
 
 export const interactionWithGameMachine11 = (player, k, map) => {
     player.onCollide('game_machine_11', () => {
+        time.paused = true;
+        player.state.isInDialog = true;
+        abort = new AbortController();
         showCustomPrompt(
             'Do you want to play the Sinusoid Formula Game? Collect trophies and overtake formulas!',
             ['Yes', 'No'],
@@ -29,47 +35,13 @@ export const interactionWithGameMachine11 = (player, k, map) => {
                         text: ['Maybe next time!'],
                     });
                 }
-            }
+            },
+            player,
+            k,
+            abort
         );
     });
 };
-
-function showCustomPrompt(message, options, callback) {
-    document.getElementById('prompt-message').textContent = message;
-    const optionsContainer = document.getElementById('options-container');
-    optionsContainer.innerHTML = '';
-
-    options.forEach((option) => {
-        const button = document.createElement('button');
-        button.textContent = option;
-        button.classList.add('option-btn');
-        button.setAttribute('tabindex', '0');
-        button.onclick = function () {
-            callback(option);
-            closeCustomPrompt();
-        };
-
-        button.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                callback(option);
-                closeCustomPrompt();
-            }
-        });
-
-        optionsContainer.appendChild(button);
-    });
-
-    document.getElementById('custom-prompt').style.display = 'flex';
-
-    if (optionsContainer.children.length > 0) {
-        optionsContainer.children[0].focus();
-    }
-}
-
-function closeCustomPrompt() {
-    document.getElementById('custom-prompt').style.display = 'none';
-}
 
 function startChromeFormulaGame(k) {
     const roadHeight = k.height() / 3;

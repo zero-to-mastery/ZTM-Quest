@@ -331,3 +331,81 @@ export const objectToBackpackInteraction =
             obj.remove(text);
         });
     };
+
+export const showCustomPrompt = (message, options, callback, player, k, abort) => {
+    /**
+     * Show custom prompt with clickable options
+     */
+
+    const statsUI = document.getElementById('stats-container');
+    const miniMapUI = document.getElementById('minimap');
+    statsUI.style.display = 'none';
+    miniMapUI.style.display = 'none';
+
+    // Set the prompt message
+    let promptMessage = document.getElementById('prompt-message');
+    promptMessage.innerHTML = message;
+
+    // Clear any existing options in the container
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
+
+    // Create buttons for each option
+    options.forEach((option) => {
+        const button = document.createElement('button');
+        if (typeof option === 'object') {
+            button.innerHTML = option.text;
+        } else {
+            button.innerHTML = option;
+        }
+        button.classList.add('option-btn');
+        button.setAttribute('tabindex', '0'); // Make the button focusable
+
+        // Add click event for mouse interactions
+        button.onclick = function () {
+            if (typeof option === 'object') {
+                callback(option.value);
+            } else {
+                callback(option)
+            }
+            closeCustomPrompt(player, k, abort);
+        };
+
+        // Add keyboard event listener for accessibility
+        button.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault(); // Prevent the default behavior
+                if (typeof option === 'object') {
+                    callback(option.value);
+                } else {
+                    callback(option)
+                }
+                closeCustomPrompt(player, k, abort);
+            }
+        });
+
+        optionsContainer.appendChild(button);
+    });
+
+    // Display the custom prompt
+    document.getElementById('custom-prompt').style.display = 'flex';
+
+    // Set focus on the first button
+    if (optionsContainer.children.length > 0) {
+        optionsContainer.children[0].focus();
+    }
+}
+
+// Function to close the custom prompt
+export const closeCustomPrompt = (player, k, abort) => {
+    // Hide the custom prompt
+    document.getElementById('custom-prompt').style.display = 'none';
+
+    const statsUI = document.getElementById('stats-container');
+    statsUI.style.display = 'flex';
+
+    time.paused = false;
+    abort.abort();
+    player.state.isInDialog = false;
+    k.canvas.focus();
+}

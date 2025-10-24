@@ -1,4 +1,5 @@
-import { displayDialogue } from '../../utils';
+import { time } from '../../kplayCtx';
+import { displayDialogue, showCustomPrompt } from '../../utils';
 import { updateEnergyState } from '../../utils/energyUpdate';
 
 const challengeText = `What's the value of output?:
@@ -26,6 +27,8 @@ const options = [
     },
 ];
 
+let abort;
+
 export const computerInteractions = async (player, k, map) => {
     const [computer] = map.query({ include: 'computer' });
     player.onCollide('computer', async () => {
@@ -46,13 +49,11 @@ export const computerInteractions = async (player, k, map) => {
         }
 
         if (player.state.alreadyTalkedToMage) {
-            const energyUI = document.getElementById('energy-container');
-            if (energyUI) {
-                energyUI.style.display = 'none';
-            }
-
             computer.play('on');
 
+            time.paused = true;
+            player.state.isInDialog = true;
+            abort = new AbortController();
             showCustomPrompt(challengeText, options, async (selectedOption) => {
                 const response = [];
 
@@ -85,70 +86,13 @@ export const computerInteractions = async (player, k, map) => {
                         }
                     },
                 });
-            });
+            }, player, k, abort);
         }
     });
 
     player.onCollideEnd('computer', () => {
-        const energyUI = document.getElementById('energy-container');
-        if (energyUI) {
-            energyUI.style.display = 'flex';
-        }
+        const statsUI = document.getElementById('stats-container');
+        statsUI.style.display = 'flex';
         computer.play('off');
     });
 };
-
-function showCustomPrompt(message, options, callback) {
-    // Set the prompt message
-    const energyUI = document.getElementById('energy-container');
-    if (energyUI) {
-        energyUI.style.display = 'none';
-    }
-
-    let promotMessage = document.getElementById('prompt-message');
-    promotMessage.innerHTML = message;
-
-    // Clear any existing options in the container
-    const optionsContainer = document.getElementById('options-container');
-    optionsContainer.innerHTML = '';
-
-    // Create buttons for each option
-    options.forEach((option) => {
-        const button = document.createElement('button');
-        button.innerHTML = option.text;
-        button.classList.add('option-btn');
-        button.setAttribute('tabindex', '0'); // Make the button focusable
-
-        // Add click event for mouse interactions
-        button.onclick = function () {
-            callback(option.value);
-            closeCustomPrompt();
-        };
-
-        // Add keyboard event listener for accessibility
-        button.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                // Enter or Space key
-                e.preventDefault(); // Prevent the default behavior (e.g., form submission)
-                callback(option);
-                closeCustomPrompt();
-            }
-        });
-
-        optionsContainer.appendChild(button);
-    });
-
-    // Display the custom prompt
-    document.getElementById('custom-prompt').style.display = 'flex';
-
-    // Set focus on the first button
-    if (optionsContainer.children.length > 0) {
-        optionsContainer.children[0].focus();
-    }
-}
-
-// Function to close the custom prompt
-function closeCustomPrompt() {
-    // Hide the custom prompt
-    document.getElementById('custom-prompt').style.display = 'none';
-}

@@ -1,7 +1,10 @@
+import { time } from '../../kplayCtx';
 import { characters } from '../../constants';
 import { changePlayerSprite } from '../../utils/changePlayer';
+import { closeCustomPrompt } from '../../utils';
 
 const slightPause = () => new Promise((res) => setTimeout(res, 500));
+let abort;
 
 export const interactionWithLocker = (player, k, map) => {
     player.onCollide('cabin_edge_room_1', () => {
@@ -9,6 +12,9 @@ export const interactionWithLocker = (player, k, map) => {
             (character) =>
                 character.name.charAt(0).toUpperCase() + character.name.slice(1)
         );
+        time.paused = true;
+        player.state.isInDialog = true;
+        abort = new AbortController();
         // Trigger the custom prompt when the player collides with the drinks machine
         showCustomPrompt(
             'What character would you like to play?', // Prompt message
@@ -27,12 +33,19 @@ export const interactionWithLocker = (player, k, map) => {
                     player
                 );
                 k.canvas.focus();
-            }
+            },
+            player,
+            k
         );
     });
 };
 
-async function showCustomPrompt(message, options, callback) {
+async function showCustomPrompt(message, options, callback, player, k) {
+    const statsUI = document.getElementById('stats-container');
+    const miniMapUI = document.getElementById('minimap');
+    statsUI.style.display = 'none';
+    miniMapUI.style.display = 'none';
+
     // Set the prompt message
     document.getElementById('prompt-message').textContent = message;
 
@@ -64,7 +77,7 @@ async function showCustomPrompt(message, options, callback) {
             // Add click event for mouse interactions
             button.onclick = function () {
                 callback(option);
-                closeCustomPrompt();
+                closeCustomPrompt(player, k, abort);
             };
 
             // Add keyboard event listener for accessibility
@@ -73,7 +86,7 @@ async function showCustomPrompt(message, options, callback) {
                     // Enter or Space key
                     e.preventDefault(); // Prevent the default behavior (e.g., form submission)
                     callback(option);
-                    closeCustomPrompt();
+                    closeCustomPrompt(player, k, abort);
                 }
             });
 
@@ -88,11 +101,16 @@ async function showCustomPrompt(message, options, callback) {
         prevButton.classList.add('option-btn');
         prevButton.textContent = 'Previous';
         prevButton.disabled = currentPage === 1;
-        prevButton.onclick = () => {
+        prevButton.onclick = async () => {
             if (currentPage > 1) {
                 currentPage--;
-                renderOptions();
-                renderPagination();
+                await renderOptions();
+                await renderPagination();
+
+                // Set focus on the first button
+                if (optionsContainer.children.length > 0) {
+                    optionsContainer.children[0].focus();
+                }
             }
         };
 
@@ -101,15 +119,33 @@ async function showCustomPrompt(message, options, callback) {
         nextButton.classList.add('option-btn');
         nextButton.textContent = 'Next';
         nextButton.disabled = currentPage === totalPages;
-        nextButton.onclick = () => {
+        nextButton.onclick = async () => {
             if (currentPage < totalPages) {
                 currentPage++;
-                renderOptions();
-                renderPagination();
+                await renderOptions();
+                await renderPagination();
+
+                // Set focus on the first button
+                if (optionsContainer.children.length > 0) {
+                    optionsContainer.children[0].focus();
+                }
             }
         };
-        prevButton.style.width = '45%';
-        nextButton.style.width = '45%';
+
+        // Create Close button
+        const closeButton = document.createElement('button');
+        closeButton.classList.add('option-btn');
+        closeButton.textContent = 'Close';
+        closeButton.onclick = () => {
+            closeCustomPrompt(player, k, abort);
+        };
+        closeButton.style.width = '35%';
+        prevButton.style.width = '20%';
+        nextButton.style.width = '20%';
+        closeButton.style.backgroundColor = 'crimson';
+        prevButton.style.backgroundColor = 'lightblue';
+        nextButton.style.backgroundColor = 'lightgreen';
+        optionsContainer.appendChild(closeButton);
         optionsContainer.appendChild(prevButton);
         optionsContainer.appendChild(nextButton);
     }
@@ -120,17 +156,11 @@ async function showCustomPrompt(message, options, callback) {
     optionsContainer.style.flexWrap = 'wrap';
 
     // Initial render of options and pagination
-    renderOptions();
-    renderPagination();
+    await renderOptions();
+    await renderPagination();
 
     // Set focus on the first button
     if (optionsContainer.children.length > 0) {
         optionsContainer.children[0].focus();
     }
-}
-
-// Function to close the custom prompt
-function closeCustomPrompt() {
-    // Hide the custom prompt
-    document.getElementById('custom-prompt').style.display = 'none';
 }

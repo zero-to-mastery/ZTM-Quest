@@ -1,61 +1,10 @@
-import { displayDialogue } from '../../utils';
+import { time } from '../../kplayCtx';
+import { displayDialogue, showCustomPrompt } from '../../utils';
 import { fetchNews, formatNewsDate } from '../../utils/newsApi';
 
 // Cache for news to avoid fetching multiple times
 let newsCache = null;
-
-/**
- * Show custom prompt with clickable options
- */
-function showCustomPrompt(message, options, callback) {
-    const energyUI = document.getElementById('energy-container');
-    if (energyUI) {
-        energyUI.style.display = 'none';
-    }
-
-    let promptMessage = document.getElementById('prompt-message');
-    promptMessage.innerHTML = message;
-
-    const optionsContainer = document.getElementById('options-container');
-    optionsContainer.innerHTML = '';
-
-    // Create buttons for each option
-    options.forEach((option) => {
-        const button = document.createElement('button');
-        button.innerHTML = option.text;
-        button.classList.add('option-btn');
-        button.setAttribute('tabindex', '0');
-
-        button.onclick = function () {
-            callback(option.value);
-            closeCustomPrompt();
-        };
-
-        button.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                callback(option.value);
-                closeCustomPrompt();
-            }
-        });
-
-        optionsContainer.appendChild(button);
-    });
-
-    document.getElementById('custom-prompt').style.display = 'flex';
-
-    if (optionsContainer.children.length > 0) {
-        optionsContainer.children[0].focus();
-    }
-}
-
-function closeCustomPrompt() {
-    document.getElementById('custom-prompt').style.display = 'none';
-    const energyUI = document.getElementById('energy-container');
-    if (energyUI) {
-        energyUI.style.display = 'flex';
-    }
-}
+let abort;
 
 /**
  * Show detailed view of a specific news article with back button
@@ -85,7 +34,7 @@ const showNewsDetail = async (player, k, newsItem, returnPage = 0) => {
                 await showNewsList(player, k, returnPage);
             }
         }, 50);
-    });
+    }, player, k, abort);
 };
 
 /**
@@ -165,11 +114,14 @@ const showNewsList = async (player, k, page = 0) => {
                 await showNewsDetail(player, k, selectedNews, page);
             }
         }, 50);
-    });
+    }, player, k, abort);
 };
 
 export const interactionWithMainboxMainArea = (player, k, map) => {
     player.onCollide('mailbox_mainArea', async () => {
+        time.paused = true;
+        player.state.isInDialog = true;
+        abort = new AbortController();
         await showNewsList(player, k);
     });
 };
