@@ -8,6 +8,9 @@ import { addPlayerControls } from './../player.controls';
 import { resetPausingVariables } from '../utils/resetPausingVariables';
 import { Backpack } from '../backpack';
 
+// Define handler outside function so we can remove it
+let pauseHandler = null;
+
 export async function bootstrap(bootMapCb, mapArgs) {
     const gameState = getGameState();
     const player = makePlayer(gameState.player);
@@ -35,4 +38,29 @@ export async function bootstrap(bootMapCb, mapArgs) {
     addSceneSounds(sounds, k, map);
 
     Backpack.backpackInteractions();
+
+    // Remove old pause handler if exists
+    if (pauseHandler) {
+        document.removeEventListener('keydown', pauseHandler);
+    }
+
+    // Create new pause handler
+    pauseHandler = (e) => {
+        if (e.key === 'Escape') {
+            const pauseMenu = document.getElementById('pause-menu');
+            if (pauseMenu) {
+                if (
+                    pauseMenu.style.display === 'none' ||
+                    pauseMenu.style.display === ''
+                ) {
+                    pauseMenu.style.display = 'flex';
+                } else {
+                    pauseMenu.style.display = 'none';
+                }
+            }
+        }
+    };
+
+    // Add new pause handler
+    document.addEventListener('keydown', pauseHandler);
 }

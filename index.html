@@ -232,6 +232,367 @@
                 <div class="menu-bar"></div>
             </div>
 
+            <!-- Main Menu Overlay -->
+            <div id="main-menu" class="main-menu-overlay">
+                <div class="main-menu-container">
+                    <div class="main-menu-content">
+                        <!-- Logo/Title -->
+                        <div class="main-menu-title">
+                            <h1>ZTM QUEST</h1>
+                            <p class="main-menu-subtitle">Adventure Awaits</p>
+                        </div>
+
+                        <!-- Menu Buttons -->
+                        <div class="main-menu-buttons">
+                            <button
+                                id="start-new-game-btn"
+                                class="main-menu-btn primary"
+                            >
+                                <span>New Game</span>
+                            </button>
+
+                            <button
+                                id="continue-game-btn"
+                                class="main-menu-btn secondary"
+                                style="display: none"
+                            >
+                                <span>Continue</span>
+                            </button>
+
+                            <button
+                                id="main-menu-achievements-btn"
+                                class="main-menu-btn secondary"
+                            >
+                                <span>Achievements</span>
+                            </button>
+
+                            <button
+                                id="main-menu-stats-btn"
+                                class="main-menu-btn secondary"
+                            >
+                                <span>Stats</span>
+                            </button>
+
+                            <button
+                                id="main-menu-settings-btn"
+                                class="main-menu-btn secondary"
+                            >
+                                <span>Settings</span>
+                            </button>
+
+                            <button
+                                id="main-menu-credits-btn"
+                                class="main-menu-btn secondary"
+                            >
+                                <span>Credits</span>
+                            </button>
+                        </div>
+
+                        <!-- Version -->
+                        <div class="main-menu-footer">
+                            <p>Press ENTER to start</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- In-Game Pause Menu -->
+            <div
+                id="pause-menu"
+                class="pause-menu-overlay"
+                style="display: none"
+            >
+                <div class="pause-menu-container">
+                    <div class="pause-menu-content">
+                        <h2 class="pause-menu-title">PAUSED</h2>
+
+                        <div class="pause-menu-buttons">
+                            <button
+                                id="resume-game-btn"
+                                class="pause-menu-btn primary"
+                            >
+                                <span>Resume</span>
+                            </button>
+
+                            <div class="pause-menu-settings">
+                                <div class="setting-row">
+                                    <label>Music</label>
+                                    <button
+                                        id="toggle-sound-btn"
+                                        class="toggle-btn"
+                                    >
+                                        <span class="toggle-indicator"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <button
+                                id="pause-main-menu-btn"
+                                class="pause-menu-btn secondary"
+                            >
+                                <span>Main Menu</span>
+                            </button>
+                        </div>
+
+                        <div class="pause-menu-footer">
+                            <p>Press ESC to resume</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Modal -->
+            <div
+                id="settings-modal"
+                class="modal-overlay"
+                style="display: none"
+            >
+                <div class="modal-container settings-modal">
+                    <div class="modal-header">
+                        <h2>⚙️ Settings</h2>
+                        <button
+                            class="close-modal-btn"
+                            data-modal="settings-modal"
+                        >
+                            ×
+                        </button>
+                    </div>
+
+                    <div class="modal-content">
+                        <!-- Music Volume -->
+                        <div class="setting-group">
+                            <label for="music-volume">Music</label>
+                            <div class="volume-control">
+                                <input
+                                    type="range"
+                                    id="music-volume"
+                                    min="0"
+                                    max="100"
+                                    value="100"
+                                />
+                                <span id="music-volume-value">100%</span>
+                            </div>
+                        </div>
+
+                        <!-- Fullscreen Toggle -->
+                        <div class="setting-group">
+                            <label>Fullscreen</label>
+                            <button
+                                id="toggle-fullscreen-btn"
+                                class="toggle-btn-modal"
+                            >
+                                <span class="toggle-indicator-modal"></span>
+                            </button>
+                        </div>
+
+                        <!-- Controls Guide -->
+                        <div class="setting-group">
+                            <button
+                                id="show-controls-btn"
+                                class="settings-action-btn"
+                            >
+                                View Controls
+                            </button>
+                        </div>
+
+                        <!-- Reset Save Data -->
+                        <div class="setting-group">
+                            <button
+                                id="reset-save-btn"
+                                class="settings-action-btn danger"
+                            >
+                                Reset Game Progress
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button id="save-settings-btn" class="modal-save-btn">
+                            Save & Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements Modal -->
+            <div
+                id="achievements-modal"
+                class="modal-overlay"
+                style="display: none"
+            >
+                <div class="modal-container">
+                    <div class="modal-header">
+                        <h2>🏆 Achievements</h2>
+                        <button
+                            class="close-modal-btn"
+                            data-modal="achievements-modal"
+                        >
+                            ×
+                        </button>
+                    </div>
+
+                    <div
+                        class="modal-content achievements-grid"
+                        id="achievements-list"
+                    >
+                        <div class="no-achievements">
+                            <p>No achievements available yet!</p>
+                            <p class="subtext">
+                                Check back later for new achievements
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Modal -->
+            <div id="stats-modal" class="modal-overlay" style="display: none">
+                <div class="modal-container">
+                    <div class="modal-header">
+                        <h2>📊 Player Stats</h2>
+                        <button
+                            class="close-modal-btn"
+                            data-modal="stats-modal"
+                        >
+                            ×
+                        </button>
+                    </div>
+
+                    <div class="modal-content stats-content">
+                        <div class="stat-card">
+                            <div class="stat-icon">⏱️</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Time Played</div>
+                                <div class="stat-value" id="stat-time">
+                                    00:00
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">🪙</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Coins Collected</div>
+                                <div class="stat-value" id="stat-coins">0</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">⚡</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Current Energy</div>
+                                <div class="stat-value" id="stat-energy">
+                                    100
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">🎯</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Quests Completed</div>
+                                <div class="stat-value" id="stat-quests">0</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">🗺️</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Maps Explored</div>
+                                <div class="stat-value" id="stat-maps">1</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">🏆</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Achievements</div>
+                                <div class="stat-value" id="stat-achievements">
+                                    0/0
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Credits Modal -->
+            <div id="credits-modal" class="modal-overlay" style="display: none">
+                <div class="modal-container">
+                    <div class="modal-header">
+                        <h2>✨ Credits</h2>
+                        <button
+                            class="close-modal-btn"
+                            data-modal="credits-modal"
+                        >
+                            ×
+                        </button>
+                    </div>
+
+                    <div class="modal-content credits-content">
+                        <div class="credits-section">
+                            <h3>Zero To Mastery Community</h3>
+                            <p>
+                                A collaborative project by ZTM students and
+                                contributors
+                            </p>
+                        </div>
+
+                        <div class="credits-section">
+                            <h3>Game Development</h3>
+                            <p>Built with Kaplay (Kaboom.js)</p>
+                            <p>Pixel art graphics and sound design</p>
+                        </div>
+
+                        <div class="credits-section">
+                            <h3>Special Thanks</h3>
+                            <p>All open-source contributors</p>
+                            <p>Zero To Mastery Academy</p>
+                            <p>Hacktoberfest participants</p>
+                        </div>
+
+                        <div class="credits-section">
+                            <a
+                                href="https://github.com/zero-to-mastery/ZTM-Quest"
+                                target="_blank"
+                                class="credits-link"
+                            >
+                                View Full Credits on GitHub →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls Modal Content Template -->
+            <div id="controls-template" style="display: none">
+                <div class="controls-message">
+                    <h3>Controls</h3>
+                    <ul>
+                        <li>W/↑ - Move Up</li>
+                        <li>A/← - Move Left</li>
+                        <li>S/↓ - Move Down</li>
+                        <li>D/→ - Move Right</li>
+                        <li>ENTER - Interact</li>
+                        <li>ESC - Pause Menu</li>
+                        <li>M - Toggle Map</li>
+                    </ul>
+                    <button id="controls-close-btn">OK</button>
+                </div>
+            </div>
+
+            <!-- Reset Confirmation Template -->
+            <div id="reset-confirm-template" style="display: none">
+                <div>
+                    <p>
+                        Are you sure you want to reset all game progress? This
+                        cannot be undone!
+                    </p>
+                    <button id="reset-cancel-btn">Cancel</button>
+                    <button id="reset-confirm-btn" class="danger">Reset</button>
+                </div>
+            </div>
+
             <div id="header" class="top">ZTM Quest</div>
             <div id="left-panel" class="left">
                 <div>
