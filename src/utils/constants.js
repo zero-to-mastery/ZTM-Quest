@@ -9,8 +9,24 @@ export const CHARACTERS = [
     { name: 'jessica', key: 'characters', frames: [70, 74, 72, 78, 71, 76] },
     { name: 'jason', key: 'characters', frames: [80, 84, 82, 88, 81, 86] },
     { name: 'jacob', key: 'characters', frames: [90, 94, 92, 98, 91, 96] },
-    { name: 'roger', key: 'characters', frames: [150, 154, 152, 158, 151, 156] },
-    { name: 'jerry', key: 'characters', frames: [160, 164, 162, 168, 161, 166] },
-    { name: 'jordan', key: 'characters', frames: [170, 174, 172, 178, 171, 176] },
-    { name: 'jessie', key: 'characters', frames: [180, 184, 182, 188, 181, 186] },
+    {
+        name: 'roger',
+        key: 'characters',
+        frames: [150, 154, 152, 158, 151, 156],
+    },
+    {
+        name: 'jerry',
+        key: 'characters',
+        frames: [160, 164, 162, 168, 161, 166],
+    },
+    {
+        name: 'jordan',
+        key: 'characters',
+        frames: [170, 174, 172, 178, 171, 176],
+    },
+    {
+        name: 'jessie',
+        key: 'characters',
+        frames: [180, 184, 182, 188, 181, 186],
+    },
 ];

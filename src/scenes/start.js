@@ -27,7 +27,6 @@ export async function start() {
     // Get selected character BEFORE creating player
     const gs = getGameState();
     const charName = gs.player?.character?.name || 'junior';
-    
 
     // Create player with temp sprite
     const player = k.add([

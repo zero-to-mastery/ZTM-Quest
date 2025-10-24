@@ -49,7 +49,10 @@ export async function bootstrap(bootMapCb, mapArgs) {
         if (e.key === 'Escape') {
             const pauseMenu = document.getElementById('pause-menu');
             if (pauseMenu) {
-                if (pauseMenu.style.display === 'none' || pauseMenu.style.display === '') {
+                if (
+                    pauseMenu.style.display === 'none' ||
+                    pauseMenu.style.display === ''
+                ) {
                     pauseMenu.style.display = 'flex';
                 } else {
                     pauseMenu.style.display = 'none';
