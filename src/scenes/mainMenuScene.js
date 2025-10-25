@@ -8,6 +8,14 @@ export function mainMenuScene() {
     if (!mainMenuElement) {
         return;
     }
+    
+    if (localStorage.getItem('showCharacterSelect') === 'true') {
+        localStorage.removeItem('showCharacterSelect');
+        mainMenuElement.classList.add('hidden');
+        mainMenuElement.style.display = 'none';
+        showCharacterSelectModal();
+        return;
+    }
 
     const startNewGameBtn = document.getElementById('start-new-game-btn');
     const continueGameBtn = document.getElementById('continue-game-btn');
@@ -40,8 +48,24 @@ export function mainMenuScene() {
     replaceButton(startNewGameBtn, () => {
         if (isStarting) return;
         isStarting = true;
-        closeAllMenus();
-        showCharacterSelectModal();
+
+        // Save audio settings before clearing
+        const audioMuted = localStorage.getItem('ztm-audio-muted');
+        const musicVolume = localStorage.getItem('ztm-music-volume');
+
+        // Clear ALL localStorage completely
+        localStorage.clear();
+
+        // Restore only audio settings
+        if (audioMuted) localStorage.setItem('ztm-audio-muted', audioMuted);
+        if (musicVolume)
+            localStorage.setItem('ztm-music-volume', musicVolume);
+
+        // Set flag to show character select after reload
+        localStorage.setItem('showCharacterSelect', 'true');
+
+        // Hard refresh to clear everything including memory cache
+        window.location.reload();
     });
 
     if (hasSaveData && continueGameBtn) {
