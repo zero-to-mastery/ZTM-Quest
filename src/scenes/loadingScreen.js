@@ -177,7 +177,7 @@ export function loadingScreen(k) {
             }
 
             const walkCycle = Math.floor((time * 4) % 2);
-            const frameIndex = npc.character.frames[walkCycle === 0 ? 1 : 0];
+            const frameIndex = npc.character.frames[walkCycle === 0 ? 3 : 2];
 
             k.drawSprite({
                 sprite: 'characters',
