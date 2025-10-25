@@ -38,9 +38,5 @@ export async function start() {
     // Immediately apply the selected character
     changePlayerSprite(charName, 'idle-down', k, player);
 
-    k.onKeyPress('o', () => {
-        k.go('gameOver');
-    });
-
     return [map, spawnpoint, gameObjects, interactions, sounds];
 }

@@ -5,7 +5,7 @@ export const library = (k, map, spawnpoints) => {
     const librarySpawnY = 100;
 
     const libraryObj = k.make([
-        k.sprite('library', { frame: 0, anim: 'laying' }),
+        k.sprite('library', { frame: 0 }),
         k.area(),
         k.pos(map.pos.x + librarySpawnX, map.pos.y + librarySpawnY),
         k.scale(0.15),

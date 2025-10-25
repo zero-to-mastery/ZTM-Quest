@@ -31,6 +31,7 @@ import { setupPauseMenu } from './utils/pauseMenu';
 import { setupMenuModals } from './utils/menuModals';
 
 import { Backpack } from './backpack';
+import { playerScenes } from './constants';
 
 k.scene('loadingScreen', () => loadingScreen(k));
 k.scene('start', (enter_tag) => bootstrap(start, { enter_tag }));
@@ -131,7 +132,14 @@ if (creditsButton) {
         const leftPanel = document.getElementById('left-panel');
         leftPanel.classList.toggle('show-misc-menu');
 
-        k.go('gameOver');
+        const gameState = getGameState();
+        const playerScene = gameState.player.scene;
+        if (playerScenes.includes(playerScene)) {
+            k.go('gameOver');
+        } else if (playerScene === 'gameOver') {
+            k.go('start');
+        }
+        k.canvas.focus();
     });
 }
 

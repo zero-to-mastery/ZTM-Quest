@@ -1,6 +1,6 @@
 import { displayDialogue } from '../../utils';
 import {
-    recieveQuest,
+    receiveQuest,
     retrieveQuestObjectiveStatus,
 } from '../../utils/questHandler';
 import { map_start_quests } from '../quests/constants.quests';
@@ -31,7 +31,7 @@ export const enterMapCityLeftInteraction = (player, k, map) => {
         ) {
             k.go('city', 'spawn_office_left');
         } else {
-            await recieveQuest(player, map_start_quests['Start Interacting!']);
+            await receiveQuest(player, map_start_quests['Start Interacting!']);
             if (!hasTalkedToBruno) {
                 displayDialogue({
                     k,

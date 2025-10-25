@@ -110,3 +110,20 @@ export const conversationRico = [
         'So go in there, have fun — and make it epic!',
     ],
 ];
+
+export const playerScenes = [
+    'start',
+    'city',
+    'arcade',
+    'forest',
+    'forest_junction',
+    'campus_house_1',
+    'classroom',
+    'seaside',
+    'downtown',
+    'extended_campus',
+    'orange_house',
+    'red_house',
+    'realtor',
+    'company_interior',
+];
