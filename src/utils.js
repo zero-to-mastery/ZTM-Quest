@@ -394,6 +394,29 @@ export const showCustomPrompt = (
         optionsContainer.appendChild(button);
     });
 
+    // Add arrow key navigation
+    const buttons = optionsContainer.querySelectorAll('.option-btn');
+    let currentIndex = 0;
+
+    const keyHandler = (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            currentIndex = (currentIndex + 1) % buttons.length;
+            buttons[currentIndex].focus();
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            currentIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+            buttons[currentIndex].focus();
+        }
+    };
+
+    document.addEventListener('keydown', keyHandler);
+
+    // Clean up event listener when prompt closes
+    window.cleanupPromptKeyHandler = () => {
+        document.removeEventListener('keydown', keyHandler);
+    };
+
     // Display the custom prompt
     document.getElementById('custom-prompt').style.display = 'flex';
 
@@ -405,6 +428,12 @@ export const showCustomPrompt = (
 
 // Function to close the custom prompt
 export const closeCustomPrompt = (player, k, abort) => {
+    // Clean up keyboard event listener
+    if (window.cleanupPromptKeyHandler) {
+        window.cleanupPromptKeyHandler();
+        delete window.cleanupPromptKeyHandler;
+    }
+
     // Hide the custom prompt
     document.getElementById('custom-prompt').style.display = 'none';
 
@@ -413,6 +442,5 @@ export const closeCustomPrompt = (player, k, abort) => {
 
     time.paused = false;
     abort.abort();
-    player.state.isInDialog = false;
-    k.canvas.focus();
 };
+
