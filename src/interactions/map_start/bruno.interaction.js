@@ -5,7 +5,7 @@ import {
     completeQuestObjective,
     completeQuest,
     playerHasQuest,
-    recieveQuest,
+    receiveQuest,
 } from '../../utils/questHandler';
 import { map_start_quests } from '../quests/constants.quests';
 
@@ -18,7 +18,7 @@ export const interactionWithBruno = (player, k, map) => {
             text: conversationBruno,
             onDisplayEnd: async () => {
                 if (!playerHasQuest(player, 'Start Interacting!')) {
-                    await recieveQuest(
+                    await receiveQuest(
                         player,
                         map_start_quests['Start Interacting!']
                     );

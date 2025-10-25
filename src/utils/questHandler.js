@@ -127,7 +127,7 @@ export const retrieveQuestObjectiveStatus = (player, questName, objective) => {
     return player.state.quests[questName].objectives[objective];
 };
 
-export const recieveQuest = async (player, quest) => {
+export const receiveQuest = async (player, quest) => {
     if (!playerHasQuest(player, Object.keys(quest)[0])) {
         // Triggers set handler in Proxy state object
         player.state.quests = { ...player.state.quests, ...quest };
@@ -160,4 +160,4 @@ export const isObjectiveComplete = (player, questName, objective) => {
 };
 
 // If you want to add quests, you can recieve them through interactions.
-// Use recieveQuest to get the quest via the player's state object.
+// Use receiveQuest to get the quest via the player's state object.
