@@ -413,7 +413,6 @@ export const showCustomPrompt = (
     document.addEventListener('keydown', keyHandler);
 
     // Clean up event listener when prompt closes
-    const originalClose = closeCustomPrompt;
     window.cleanupPromptKeyHandler = () => {
         document.removeEventListener('keydown', keyHandler);
     };
