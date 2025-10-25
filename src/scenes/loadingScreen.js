@@ -21,8 +21,9 @@ export function loadingScreen(k) {
 
     const walkingNPCs = [];
     for (let i = 0; i < 3; i++) {
-        const randomChar =
-            characters[Math.floor(Math.random() * characters.length)];
+        const charIdx = Math.floor(Math.random() * characters.length);
+        const randomChar = characters[charIdx];
+        characters.splice(charIdx,1);   // This ensures characters are unique
         walkingNPCs.push({
             character: randomChar,
             startX: -100 - i * 150,
