@@ -14,7 +14,7 @@ export const restroomInteractions = (player, k, map) => {
     );
     player.onCollide('restroom_toilet', () => {
         const dialogue = ['You feel refreshed now.', 'Ready for the ride.'];
-        
+
         if (!hasTalkedToBruno) {
             dialogue.push('You should talk to Bruno first.');
         }
@@ -23,9 +23,13 @@ export const restroomInteractions = (player, k, map) => {
             player,
             text: [dialogue.join(' ')],
             onDisplayEnd: async () => {
-                await completeQuestObjective(player, questName, 'wasInRestroom');
+                await completeQuestObjective(
+                    player,
+                    questName,
+                    'wasInRestroom'
+                );
                 await completeQuest(player, questName);
-            }
+            },
         });
     });
 
