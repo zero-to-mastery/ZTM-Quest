@@ -60,7 +60,7 @@ Thank you for playing!
     ]);
 
     const crossButton = k.add([
-        k.rect(65, 35),
+        k.rect(120, 35),
         k.color(255, 0, 0),
         k.anchor('topright'),
         k.z(101),
@@ -69,7 +69,7 @@ Thank you for playing!
     ]);
 
     const exitText = k.add([
-        k.text('Exit', { size: 26 / camScale }),
+        k.text('Exit (O)', { size: 26 / camScale }),
         k.color(255, 255, 255),
         k.anchor('topright'),
         k.z(102),
@@ -159,7 +159,7 @@ Thank you for playing!
     });
 
     // key bindings, again for added functionality
-    k.onKeyPress('x', () => {
+    k.onKeyPress('o', () => {
         k.go('start');
     });
 });
