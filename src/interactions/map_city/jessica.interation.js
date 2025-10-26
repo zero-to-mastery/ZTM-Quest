@@ -3,7 +3,7 @@ import { displayDialogue } from '../../utils';
 import {
     completeQuestObjective,
     playerHasQuest,
-    recieveQuest,
+    receiveQuest,
     completeQuest,
     isObjectiveComplete,
 } from '../../utils/questHandler';
@@ -48,7 +48,7 @@ export const jessicaInteraction = async (player, k) => {
             text: [generateJessicaDialogue(player)],
             onDisplayEnd: async () => {
                 if (!playerHasQuest(player, 'Find the Flash Drive')) {
-                    await recieveQuest(
+                    await receiveQuest(
                         player,
                         jessicaQuests.findTheFlashDriveQuest
                     );
