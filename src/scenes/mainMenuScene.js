@@ -8,7 +8,7 @@ export function mainMenuScene() {
     if (!mainMenuElement) {
         return;
     }
-    
+
     if (localStorage.getItem('showCharacterSelect') === 'true') {
         localStorage.removeItem('showCharacterSelect');
         mainMenuElement.classList.add('hidden');
@@ -58,8 +58,7 @@ export function mainMenuScene() {
 
         // Restore only audio settings
         if (audioMuted) localStorage.setItem('ztm-audio-muted', audioMuted);
-        if (musicVolume)
-            localStorage.setItem('ztm-music-volume', musicVolume);
+        if (musicVolume) localStorage.setItem('ztm-music-volume', musicVolume);
 
         // Set flag to show character select after reload
         localStorage.setItem('showCharacterSelect', 'true');
