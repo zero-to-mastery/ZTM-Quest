@@ -443,4 +443,3 @@ export const closeCustomPrompt = (player, k, abort) => {
     time.paused = false;
     abort.abort();
 };
-
