@@ -8,7 +8,7 @@ import {
 import {
     completeQuest,
     completeQuestObjective,
-    recieveQuest,
+    receiveQuest,
 } from '../../utils/questHandler';
 import { takeAwayCoins } from '../../utils/coinsUpdate';
 import { map_realtor } from '../quests/constants.quests';
@@ -26,7 +26,7 @@ export const counterClerkInteraction = (player, k) => {
                 'Would you like to purchase a house?',
             ],
         });
-        await recieveQuest(player, map_realtor['Buy a house!']);
+        await receiveQuest(player, map_realtor['Buy a house!']);
         await completeQuestObjective(
             player,
             'Buy a house!',

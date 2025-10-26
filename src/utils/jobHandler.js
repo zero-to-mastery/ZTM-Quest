@@ -1,5 +1,5 @@
 // jobHandler.js
-import { playerHasQuest, recieveQuest, completeQuest } from './questHandler.js';
+import { playerHasQuest, receiveQuest, completeQuest } from './questHandler.js';
 
 export const JOB_QUEST_NAME = 'company_job';
 
@@ -18,7 +18,7 @@ export const playerHasJob = (player) => {
  */
 export const startJobQuest = async (player) => {
     if (!playerHasQuest(player, JOB_QUEST_NAME)) {
-        await recieveQuest(player, {
+        await receiveQuest(player, {
             [JOB_QUEST_NAME]: {
                 done: false,
                 objectives: {},

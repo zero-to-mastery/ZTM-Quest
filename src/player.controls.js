@@ -1,8 +1,9 @@
-import { scaleFactor } from './constants';
+import { playerScenes, scaleFactor } from './constants';
 import { animations, stopCharacterAnims } from './utils/animation';
 import { getCamScale } from './utils';
 import { k } from './kplayCtx';
 import { drawMinimap, toggleMinimap } from './utils/miniMap';
+import { getGameState } from './utils/gameState';
 
 // Manage multiple pressed buttons
 const pressed = new Set();
@@ -183,6 +184,15 @@ export const addPlayerControls = (player) => {
     // Set up the button press event to toggle the minimap
     k.onButtonPress('map', () => {
         toggleMinimap(k);
+    });
+
+    // Set up the button press event to toggle credits screen
+    k.onButtonPress('credits', () => {
+        const gameState = getGameState();
+        const playerScene = gameState.player.scene;
+        if (playerScenes.includes(playerScene)) {
+            k.go('gameOver');
+        }
     });
 
     // Only stop animations if no buttons are pressed
