@@ -14,10 +14,10 @@ export const backpackInteractions = (player, k, map) => {
         const dialog = [];
 
         if (wantBackpack) {
-            Backpack.initState();
             k.destroy(backpack);
             // show backpack on side right panel
-            Backpack.showButton();
+            Backpack.initState();
+            Backpack.init();
 
             dialog.push('Aye, a trusty pack for a worthy traveler.');
         } else {

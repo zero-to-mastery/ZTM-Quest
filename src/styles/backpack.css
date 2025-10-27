@@ -47,8 +47,6 @@
 
 .backpack-frame .backpack-container {
     padding: 0 16px 16px 16px;
-    max-height: 300px;
-    overflow: auto;
 }
 
 .backpack-frame .backpack-graphic {
@@ -90,6 +88,11 @@
     cursor: pointer;
     transition: all 0.2s;
     position: relative;
+}
+
+.backpack-frame .inventory-slot.selected,
+.backpack-frame .inventory-slot.selected:hover {
+    background: #48d387;
 }
 
 .backpack-frame .inventory-slot:hover {
@@ -202,26 +205,63 @@
     cursor: pointer;
 }
 
-@media (max-width: 600px) {
-    .backpack-frame .inventory-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 8px;
+/* Adding responsive CSS media queries for mobile devices */
+@media (max-width: 768px) {
+    #backpack-content .backpack-frame {
+        width: 90vw;
+        max-width: 400px;
     }
 
-    .backpack-frame .title-bar h1 {
-        font-size: 16px;
-        letter-spacing: 2px;
+    .backpack-frame .inventory-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    #backpack-content .backpack-frame {
+        width: 70vw;
+        border: 6px solid #2a1a42;
+    }
+
+    .backpack-frame .title-bar {
+        font-size: 14px;
+        padding: 8px 10px;
+        letter-spacing: 0.5px;
     }
 
     .backpack-frame .backpack-container {
-        max-height: 180px;
+        padding: 12px;
     }
 
-    .backpack-frame .inventory-slot {
-        font-size: 24px;
+    .backpack-frame .inventory-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 5px;
+        margin-bottom: 12px;
     }
 
-    .backpack-frame .footer button {
-        font-size: 10px;
+    .backpack-frame .backpack-flap {
+        height: 10px;
+        margin-bottom: 8px;
+    }
+}
+
+/* Adding landscape mobile optimization */
+@media (max-height: 800px) {
+    #backpack-content .backpack-frame {
+        width: 85vw;
+        max-width: 600px;
+        margin: 10px auto;
+    }
+
+    .backpack-frame .backpack-flap {
+        height: 12px;
+        margin-bottom: 6px;
+    }
+
+    .backpack-frame .inventory-grid {
+        grid-template-columns: repeat(10, 1fr);
+        gap: 6px;
+        margin-bottom: 8px;
     }
 }
