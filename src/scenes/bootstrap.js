@@ -7,6 +7,7 @@ import { getGameState } from '../utils/gameState';
 import { addPlayerControls } from './../player.controls';
 import { resetPausingVariables } from '../utils/resetPausingVariables';
 import { Backpack } from '../backpack';
+import { changePlayerSprite } from '../utils/changePlayer';
 
 // Define handler outside function so we can remove it
 let pauseHandler = null;
@@ -14,6 +15,10 @@ let pauseHandler = null;
 export async function bootstrap(bootMapCb, mapArgs) {
     const gameState = getGameState();
     const player = makePlayer(gameState.player);
+
+    // Apply the saved character sprite
+    const charName = gameState.player?.character?.name || 'junior';
+    changePlayerSprite(charName, 'idle-down', k, player);
 
     const [map, spawnpoint, gameObjects, interactions, sounds] =
         await bootMapCb();
