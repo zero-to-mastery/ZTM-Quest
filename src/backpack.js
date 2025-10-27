@@ -1,18 +1,34 @@
-import { getGameState, setGameState } from './utils/gameState';
+import { getGameState, saveGameState, setGameState } from './utils/gameState';
 import { k } from './kplayCtx';
-
+import { updateEnergyUI } from './utils/energyUpdate';
 const backpackBtn = document.getElementById('backpack-btn');
 
 let isOpened = false;
+let selectedItem = null;
+
+function consumeInteraction(energyQty) {
+    const gameState = getGameState();
+    gameState.player.energy += energyQty;
+    setGameState(gameState);
+    updateEnergyUI(gameState.player.energy);
+}
+
+const itemsMap = {
+    banana: () => consumeInteraction(10),
+};
 
 export class Backpack {
-    constructor(state, maxSlots = 20) {
+    constructor(maxSlots = 20) {
         this.maxSlots = maxSlots;
-        this.inventory = state;
+    }
+
+    get inventory() {
+        const gameState = getGameState();
+        return gameState.player.backpack.items;
     }
 
     getInventorySlotHtml(item) {
-        return `<div class="inventory-slot">
+        return `<div class="inventory-slot ${selectedItem === item.itemName ? 'selected' : ''}" data-id="${item.itemName}">
             <img src="${item.assetUrl}" with="100%" alt="" />
             <span class="quantity-badge">${item.qty || 1}</span>
             <div class="tooltip">${item.itemName} ×${item.qty || 1}</div>
@@ -54,10 +70,56 @@ export class Backpack {
                 );
             }
         }
+        this.saveInventoryState(this.inventory);
+    }
+
+    saveInventoryState() {
         const newState = getGameState();
         newState.player.backpack.items = this.inventory;
         setGameState(newState);
     }
+
+    selectItem(slotEl) {
+        const itemId = slotEl.getAttribute('data-id');
+        selectedItem = itemId;
+        // deselect others
+        const slots = document.querySelectorAll(
+            '#backpack-content .inventory-slot:not(.empty)'
+        );
+        slots.forEach((item) => {
+            item.classList.remove('selected');
+        });
+        //higlight selected item
+        slotEl.classList.add('selected');
+    }
+
+    decreaseItemQty(itemId) {
+        const ind = this.inventory.findIndex(
+            (item) => item.itemName === itemId
+        );
+
+        if (ind != -1) {
+            if (this.inventory[ind].qty >= 2) {
+                --this.inventory[ind].qty;
+            } else {
+                //remove item
+                this.inventory.splice(ind, 1);
+                selectedItem = null;
+            }
+            this.saveInventoryState();
+            this.render();
+        }
+    }
+
+    useItem() {
+        if (!selectedItem) return;
+        const action = itemsMap[selectedItem];
+        action?.();
+        // Decrease the qty
+        this.decreaseItemQty(selectedItem);
+    }
+
+    dropItem() {}
 
     render() {
         const backpack = document.getElementById('backpack-content');
@@ -79,10 +141,7 @@ export class Backpack {
     static getInstance() {
         const gameState = getGameState();
         if (gameState.player.backpack) {
-            return new Backpack(
-                gameState.player.backpack.items,
-                gameState.player.backpack.maxSlots
-            );
+            return new Backpack(gameState.player.backpack.maxSlots);
         }
         return false;
     }
@@ -99,34 +158,35 @@ export class Backpack {
             items: [],
             maxSlots: 20,
         };
+        saveGameState(gameState);
     }
 
-    handleCloseBackpack() {
-        if (!k.isFocused()) {
-            k.pressButton('backpack');
-            k.canvas.focus();
+    handleDocumentKeypress(e) {
+        if (e.key == 'i') {
+            //workaround for press backpack key if canvas lose the focus
+            if (!k.isFocused()) {
+                k.canvas.focus();
+                k.pressButton('backpack');
+            }
+        } else if (e.key == 'r') {
+            this.useItem();
         }
     }
 
     openBackpack() {
         this.render();
-        document.addEventListener('keypress', this.handleCloseBackpack);
-        const inventoryCloseBtn = document.getElementById(
-            'inventory-close-btn'
+        document.addEventListener(
+            'keypress',
+            this.handleDocumentKeypress.bind(this)
         );
-        inventoryCloseBtn.addEventListener('click', this.handleCloseBackpack);
         isOpened = true;
     }
 
     hideBackpack() {
         this.hide();
-        document.removeEventListener('keypress', this.handleCloseBackpack);
-        const inventoryCloseBtn = document.getElementById(
-            'inventory-close-btn'
-        );
-        inventoryCloseBtn.removeEventListener(
-            'click',
-            this.handleCloseBackpack
+        document.removeEventListener(
+            'keypress',
+            this.handleDocumentKeypress.bind(this)
         );
         isOpened = false;
     }
@@ -134,11 +194,36 @@ export class Backpack {
     static init() {
         const instance = Backpack.getInstance();
         if (instance) {
-            backpackBtn.style.display = 'block';
+            Backpack.showButton();
 
             backpackBtn.addEventListener('click', () => {
                 instance.openBackpack();
             });
+
+            const inventoryCloseBtn = document.getElementById(
+                'inventory-close-btn'
+            );
+            const useItem = document.getElementById('item-use-btn');
+            const dropItem = document.getElementById('item-drop-btn');
+            inventoryCloseBtn.addEventListener(
+                'click',
+                instance.hideBackpack.bind(instance)
+            );
+            useItem.addEventListener('click', instance.useItem.bind(instance));
+            dropItem.addEventListener(
+                'click',
+                instance.dropItem.bind(instance)
+            );
+
+            document
+                .getElementById('backpack-content')
+                .addEventListener('click', (e) => {
+                    const slot = e.target.closest(
+                        '.inventory-slot:not(.empty)'
+                    );
+                    if (!slot) return;
+                    instance.selectItem(slot);
+                });
         }
     }
 
@@ -157,11 +242,6 @@ export class Backpack {
 
     static showButton() {
         backpackBtn.style.display = 'block';
-
-        const instance = Backpack.getInstance();
-        backpackBtn.addEventListener('click', () => {
-            instance.openBackpack();
-        });
     }
 
     static removeButton() {
