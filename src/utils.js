@@ -440,6 +440,17 @@ export const closeCustomPrompt = (player, k, abort) => {
     const statsUI = document.getElementById('stats-container');
     statsUI.style.display = 'flex';
 
+    player.vel = k.vec2(0, 0);
+    
+    player.state.isInDialog = false;
     time.paused = false;
+    
+    k.canvas.focus();
+    
+    ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd'].forEach(key => {
+        const event = new KeyboardEvent('keyup', { key: key });
+        k.canvas.dispatchEvent(event);
+    });
     abort.abort();
 };
+
