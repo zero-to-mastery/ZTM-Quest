@@ -10,10 +10,10 @@ export const triggerPlayerFishingAnimations = (
     // Get the selected character from game state
     const gameState = getGameState();
     const charName = gameState.player?.character?.name || 'junior';
-    
+
     // Update the player's sprite to use the selected character
     changePlayerFishingSprite(charName, startAnimation, k, player);
-    
+
     // Apply the flip if needed
     if (flipX) {
         player.flipX = flipX;

@@ -40,10 +40,18 @@ export const clearSavedGame = () => {
 
 const syncStateProps = (stateToCheck, defaultState) => {
     for (const prop in defaultState) {
-        if (typeof defaultState[prop] === 'object' && defaultState[prop] !== null) {
+        if (
+            typeof defaultState[prop] === 'object' &&
+            defaultState[prop] !== null
+        ) {
             // If property doesn't exist in stateToCheck, initialize it
-            if (typeof stateToCheck[prop] !== 'object' || stateToCheck[prop] === null) {
-                stateToCheck[prop] = Array.isArray(defaultState[prop]) ? [] : {};
+            if (
+                typeof stateToCheck[prop] !== 'object' ||
+                stateToCheck[prop] === null
+            ) {
+                stateToCheck[prop] = Array.isArray(defaultState[prop])
+                    ? []
+                    : {};
             }
             syncStateProps(stateToCheck[prop], defaultState[prop]);
             continue;
