@@ -6,11 +6,15 @@ import { makeFishingRod } from '../../../factories/fishingRod.factory';
 import { k } from '../../../kplayCtx';
 import { addPlayerControls } from '../player.controls';
 import { getGameState } from '../../../utils/gameState';
+import { changePlayerFishingSprite } from '../../../utils/changePlayer';
 
 export async function bootstrap(bootMapCb, mapArgs) {
     const gameState = getGameState();
     const player = makePlayer(gameState.player);
-    player.use(k.sprite('player_fishing', { anim: 'idle-down' }));
+
+    // Apply the saved character fishing sprite
+    const charName = gameState.player?.character?.name || 'junior';
+    changePlayerFishingSprite(charName, 'idle-down', k, player);
     player.use(k.scale(1));
     const hook = makeHook(k);
     const fishingRod = makeFishingRod();
