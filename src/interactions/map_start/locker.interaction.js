@@ -1,166 +1,98 @@
 import { time } from '../../kplayCtx';
 import { characters } from '../../constants';
 import { changePlayerSprite } from '../../utils/changePlayer';
-import { closeCustomPrompt } from '../../utils';
+import { showCustomPrompt } from '../../utils';
 
-const slightPause = () => new Promise((res) => setTimeout(res, 500));
 let abort;
 
-export const interactionWithLocker = (player, k, map) => {
-    player.onCollide('cabin_edge_room_1', () => {
-        const characterOptions = characters.map(
-            (character) =>
-                character.name.charAt(0).toUpperCase() + character.name.slice(1)
-        );
-        time.paused = true;
-        player.state.isInDialog = true;
-        abort = new AbortController();
-        // Trigger the custom prompt when the player collides with the drinks machine
-        showCustomPrompt(
-            'What character would you like to play?', // Prompt message
-            characterOptions, // Dynamic options based on characters
-            (selectedOption) => {
-                // Find the selected character from the array
-                const selectedCharacter = characters.find(
-                    (character) =>
-                        character.name.toLowerCase() ===
-                        selectedOption.toLowerCase()
-                );
+/**
+ * Show paginated character list (5 per page)
+ */
+const showCharacterList = async (player, k, page = 0) => {
+    const characterOptions = characters.map(
+        (character) =>
+            character.name.charAt(0).toUpperCase() + character.name.slice(1)
+    );
+
+    const itemsPerPage = 5;
+    const totalPages = Math.ceil(characterOptions.length / itemsPerPage);
+    const startIndex = page * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, characterOptions.length);
+    const currentCharacters = characterOptions.slice(startIndex, endIndex);
+
+    const message = `<strong>Character Selection (Page ${page + 1}/${totalPages})</strong>`;
+
+    // Create options for characters on this page
+    const options = currentCharacters.map((characterName, index) => {
+        const actualIndex = startIndex + index;
+        return {
+            value: actualIndex,
+            text: characterName,
+        };
+    });
+
+    // Add navigation buttons
+    if (page > 0) {
+        options.push({
+            value: 'prev',
+            text: '← Previous',
+        });
+    }
+
+    if (page < totalPages - 1) {
+        options.push({
+            value: 'next',
+            text: 'Next →',
+        });
+    }
+
+    options.push({
+        value: 'close',
+        text: '✕ Close',
+    });
+
+    showCustomPrompt(
+        message,
+        options,
+        async (selectedValue) => {
+            if (selectedValue === 'prev' || selectedValue === 'next') {
+                // Reopen immediately for navigation
+                setTimeout(async () => {
+                    player.state.isInDialog = true;
+                    time.paused = true;
+
+                    if (selectedValue === 'prev') {
+                        await showCharacterList(player, k, page - 1);
+                    } else if (selectedValue === 'next') {
+                        await showCharacterList(player, k, page + 1);
+                    }
+                }, 50);
+            } else if (typeof selectedValue === 'number') {
+                const selectedCharacter = characters[selectedValue];
                 changePlayerSprite(
                     selectedCharacter.name,
                     player.curAnim(),
                     k,
                     player
                 );
-                k.canvas.focus();
-            },
-            player,
-            k
-        );
-    });
+            }
+        },
+        player,
+        k,
+        abort
+    );
 };
 
-async function showCustomPrompt(message, options, callback, player, k) {
-    const statsUI = document.getElementById('stats-container');
-    const miniMapUI = document.getElementById('minimap');
-    statsUI.style.display = 'none';
-    miniMapUI.style.display = 'none';
+export const interactionWithLocker = (player, k, map) => {
+    player.onCollide('cabin_edge_room_1', async () => {
+        player.vel = k.vec2(0, 0);
 
-    // Set the prompt message
-    document.getElementById('prompt-message').textContent = message;
+        time.paused = true;
+        player.state.isInDialog = true;
+        abort = new AbortController();
 
-    // Clear any existing options in the container
-    const optionsContainer = document.getElementById('options-container');
-    optionsContainer.innerHTML = '';
+        await new Promise(resolve => setTimeout(resolve, 300));
 
-    const itemsPerPage = 5; // Number of options per page
-    let currentPage = 1;
-    const totalPages = Math.ceil(options.length / itemsPerPage);
-
-    async function renderOptions() {
-        await slightPause();
-        // Calculate the start and end indices for the current page
-        const start = (currentPage - 1) * itemsPerPage;
-        const end = start + itemsPerPage;
-        const currentOptions = options.slice(start, end);
-
-        // Clear existing options
-        optionsContainer.innerHTML = '';
-
-        // Create buttons for each option
-        currentOptions.forEach((option) => {
-            const button = document.createElement('button');
-            button.textContent = option;
-            button.classList.add('option-btn');
-            button.setAttribute('tabindex', '0'); // Make the button focusable
-
-            // Add click event for mouse interactions
-            button.onclick = function () {
-                callback(option);
-                closeCustomPrompt(player, k, abort);
-            };
-
-            // Add keyboard event listener for accessibility
-            button.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    // Enter or Space key
-                    e.preventDefault(); // Prevent the default behavior (e.g., form submission)
-                    callback(option);
-                    closeCustomPrompt(player, k, abort);
-                }
-            });
-
-            optionsContainer.appendChild(button);
-        });
-    }
-
-    async function renderPagination() {
-        await slightPause();
-        // Create Previous button
-        const prevButton = document.createElement('button');
-        prevButton.classList.add('option-btn');
-        prevButton.textContent = 'Previous';
-        prevButton.disabled = currentPage === 1;
-        prevButton.onclick = async () => {
-            if (currentPage > 1) {
-                currentPage--;
-                await renderOptions();
-                await renderPagination();
-
-                // Set focus on the first button
-                if (optionsContainer.children.length > 0) {
-                    optionsContainer.children[0].focus();
-                }
-            }
-        };
-
-        // Create Next button
-        const nextButton = document.createElement('button');
-        nextButton.classList.add('option-btn');
-        nextButton.textContent = 'Next';
-        nextButton.disabled = currentPage === totalPages;
-        nextButton.onclick = async () => {
-            if (currentPage < totalPages) {
-                currentPage++;
-                await renderOptions();
-                await renderPagination();
-
-                // Set focus on the first button
-                if (optionsContainer.children.length > 0) {
-                    optionsContainer.children[0].focus();
-                }
-            }
-        };
-
-        // Create Close button
-        const closeButton = document.createElement('button');
-        closeButton.classList.add('option-btn');
-        closeButton.textContent = 'Close';
-        closeButton.onclick = () => {
-            closeCustomPrompt(player, k, abort);
-        };
-        closeButton.style.width = '35%';
-        prevButton.style.width = '20%';
-        nextButton.style.width = '20%';
-        closeButton.style.backgroundColor = 'crimson';
-        prevButton.style.backgroundColor = 'lightblue';
-        nextButton.style.backgroundColor = 'lightgreen';
-        optionsContainer.appendChild(closeButton);
-        optionsContainer.appendChild(prevButton);
-        optionsContainer.appendChild(nextButton);
-    }
-
-    // Display the custom prompt
-    document.getElementById('custom-prompt').style.display = 'flex';
-    optionsContainer.style.display = 'flex';
-    optionsContainer.style.flexWrap = 'wrap';
-
-    // Initial render of options and pagination
-    await renderOptions();
-    await renderPagination();
-
-    // Set focus on the first button
-    if (optionsContainer.children.length > 0) {
-        optionsContainer.children[0].focus();
-    }
-}
+        await showCharacterList(player, k);
+    });
+};
