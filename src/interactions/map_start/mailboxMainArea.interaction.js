@@ -31,12 +31,15 @@ const showNewsDetail = async (player, k, newsItem, returnPage = 0) => {
     showCustomPrompt(
         detailMessage,
         options,
-        (selectedValue) => {
-            setTimeout(async () => {
-                if (selectedValue === 'back') {
+        async (selectedValue) => {
+            if (selectedValue === 'back') {
+                // Reopen immediately for navigation
+                setTimeout(async () => {
+                    player.state.isInDialog = true;
+                    time.paused = true;
                     await showNewsList(player, k, returnPage);
-                }
-            }, 50);
+                }, 50);
+            }
         },
         player,
         k,
@@ -108,22 +111,25 @@ const showNewsList = async (player, k, page = 0) => {
     showCustomPrompt(
         message,
         options,
-        (selectedValue) => {
-            // Use setTimeout to avoid closing before showing next prompt
-            setTimeout(async () => {
-                if (selectedValue === 'prev') {
-                    await showNewsList(player, k, page - 1);
-                } else if (selectedValue === 'next') {
-                    await showNewsList(player, k, page + 1);
-                } else if (selectedValue === 'close') {
-                    // Just close, do nothing
-                    return;
-                } else {
-                    // It's a news index
-                    const selectedNews = newsCache[selectedValue];
-                    await showNewsDetail(player, k, selectedNews, page);
-                }
-            }, 50);
+        async (selectedValue) => {
+            if (selectedValue === 'prev' || selectedValue === 'next' || typeof selectedValue === 'number') {
+                // Reopen immediately for navigation
+                setTimeout(async () => {
+                    player.state.isInDialog = true;
+                    time.paused = true;
+                    
+                    if (selectedValue === 'prev') {
+                        await showNewsList(player, k, page - 1);
+                    } else if (selectedValue === 'next') {
+                        await showNewsList(player, k, page + 1);
+                    } else {
+                        // It's a news index
+                        const selectedNews = newsCache[selectedValue];
+                        await showNewsDetail(player, k, selectedNews, page);
+                    }
+                }, 50);
+            }
+            // 'close' does nothing - closeCustomPrompt handles unlock
         },
         player,
         k,
@@ -133,9 +139,15 @@ const showNewsList = async (player, k, page = 0) => {
 
 export const interactionWithMainboxMainArea = (player, k, map) => {
     player.onCollide('mailbox_mainArea', async () => {
+        player.vel = k.vec2(0, 0);
+        
         time.paused = true;
         player.state.isInDialog = true;
         abort = new AbortController();
+        
+        await new Promise(resolve => setTimeout(resolve, 300));
+        
         await showNewsList(player, k);
     });
 };
+
