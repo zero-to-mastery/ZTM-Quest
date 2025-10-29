@@ -112,12 +112,16 @@ const showNewsList = async (player, k, page = 0) => {
         message,
         options,
         async (selectedValue) => {
-            if (selectedValue === 'prev' || selectedValue === 'next' || typeof selectedValue === 'number') {
+            if (
+                selectedValue === 'prev' ||
+                selectedValue === 'next' ||
+                typeof selectedValue === 'number'
+            ) {
                 // Reopen immediately for navigation
                 setTimeout(async () => {
                     player.state.isInDialog = true;
                     time.paused = true;
-                    
+
                     if (selectedValue === 'prev') {
                         await showNewsList(player, k, page - 1);
                     } else if (selectedValue === 'next') {
@@ -140,14 +144,13 @@ const showNewsList = async (player, k, page = 0) => {
 export const interactionWithMainboxMainArea = (player, k, map) => {
     player.onCollide('mailbox_mainArea', async () => {
         player.vel = k.vec2(0, 0);
-        
+
         time.paused = true;
         player.state.isInDialog = true;
         abort = new AbortController();
-        
-        await new Promise(resolve => setTimeout(resolve, 300));
-        
+
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
         await showNewsList(player, k);
     });
 };
-
