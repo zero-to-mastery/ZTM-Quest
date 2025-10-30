@@ -183,7 +183,7 @@ export class Backpack {
         } else if (e.key == 'r') {
             this.useItem();
         } else if (e.key == 'x') {
-            this.dropItem()
+            this.dropItem();
         }
     }
 
