@@ -18,6 +18,7 @@ import { enterMapExtendedCampusTop } from './enterMapExtendCampusTop.interaction
 import { interactionWithBin } from './bin.interaction';
 import { jessicaInteraction } from './jessica.interation';
 import { interactionWithSoccerBall } from './soccerBall.interaction';
+import { interactionWithMailbox } from './mailbox.interaction';
 
 const interactions = [
     enterMapArcadeInteraction,
@@ -40,6 +41,7 @@ const interactions = [
     interactionWithBin,
     jessicaInteraction,
     interactionWithSoccerBall,
+    interactionWithMailbox,
 ];
 
 export default interactions;
