@@ -17,7 +17,10 @@ const showCharacterList = async (player, k, page = 0) => {
     const itemsPerPage = 5;
     const totalPages = Math.ceil(characterOptions.length / itemsPerPage);
     const startIndex = page * itemsPerPage;
-    const endIndex = Math.min(startIndex + itemsPerPage, characterOptions.length);
+    const endIndex = Math.min(
+        startIndex + itemsPerPage,
+        characterOptions.length
+    );
     const currentCharacters = characterOptions.slice(startIndex, endIndex);
 
     const message = `<strong>Character Selection (Page ${page + 1}/${totalPages})</strong>`;
@@ -91,7 +94,7 @@ export const interactionWithLocker = (player, k, map) => {
         player.state.isInDialog = true;
         abort = new AbortController();
 
-        await new Promise(resolve => setTimeout(resolve, 300));
+        await new Promise((resolve) => setTimeout(resolve, 300));
 
         await showCharacterList(player, k);
     });
