@@ -50,7 +50,7 @@ export const interactionWithDiningTable = (player, k, map) => {
                         energy: 40,
                     },
                     'Nothing, thanks': {
-                        text: ['Maybe next time when you\'re hungry!'],
+                        text: ["Maybe next time when you're hungry!"],
                         cost: 0,
                         energy: 0,
                     },
@@ -64,7 +64,11 @@ export const interactionWithDiningTable = (player, k, map) => {
                     text: selectedFood.text,
                     onDisplayEnd: () => {
                         if (selectedFood.cost > 0) {
-                            purchaseItem(k, selectedFood.cost, selectedFood.energy);
+                            purchaseItem(
+                                k,
+                                selectedFood.cost,
+                                selectedFood.energy
+                            );
                         }
                     },
                 });
