@@ -119,7 +119,19 @@ export class Backpack {
         this.decreaseItemQty(selectedItem);
     }
 
-    dropItem() {}
+    dropItem() {
+        if (!selectedItem) return;
+        const ind = this.inventory.findIndex(
+            (item) => item.itemName === selectedItem
+        );
+
+        if (ind != -1) {
+            this.inventory.splice(ind, 1);
+            selectedItem = null;
+            this.saveInventoryState();
+            this.render();
+        }
+    }
 
     render() {
         const backpack = document.getElementById('backpack-content');
@@ -170,6 +182,8 @@ export class Backpack {
             }
         } else if (e.key == 'r') {
             this.useItem();
+        } else if (e.key == 'x') {
+            this.dropItem()
         }
     }
 
