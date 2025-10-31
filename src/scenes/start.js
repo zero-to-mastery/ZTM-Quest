@@ -30,8 +30,8 @@ export async function start() {
 
     // Create player with temp sprite
     const player = k.add([
-        k.sprite('characters', { frame: 0 }),
-        k.pos(spawnpoint.pos),
+        k.sprite('player', { frame: 0 }),
+        k.pos(spawnpoint.player),
         k.area(),
     ]);
 
