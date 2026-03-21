@@ -10,6 +10,7 @@ import './styles/global.css';
 import { city } from './scenes/city';
 import { arcade } from './scenes/arcade';
 import { forest } from './scenes/forest';
+import { graveyard } from './scenes/graveyard';
 import { forestJunction } from './scenes/forest_junction';
 import { campusHouse1 } from './scenes/campus_house_1';
 import { bootstrap } from './scenes/bootstrap';
@@ -38,6 +39,7 @@ k.scene('start', (enter_tag) => bootstrap(start, { enter_tag }));
 k.scene('city', (enter_tag) => bootstrap(city, { enter_tag }));
 k.scene('arcade', (enter_tag) => bootstrap(arcade, { enter_tag }));
 k.scene('forest', (enter_tag) => bootstrap(forest, { enter_tag }));
+k.scene('graveyard', (enter_tag) => bootstrap(graveyard, { enter_tag }));
 k.scene('forest_junction', (enter_tag) =>
     bootstrap(forestJunction, { enter_tag })
 );

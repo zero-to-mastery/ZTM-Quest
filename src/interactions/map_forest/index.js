@@ -1,4 +1,5 @@
 import { enterMapForestJunctionInteraction } from './enterMapForestJunction.interactions';
+import { enterMapGraveyardInteraction } from './enterMapGraveyard.interactions';
 import { interactionWithTree } from './tree.interactions';
 import { interactionWithSwampyLog } from './swampyLog.interactions';
 import { interactionWithShrub } from './shrub.interactions';
@@ -10,8 +11,11 @@ import { interactionWithFirepit } from './firepit.interactions';
 import { interactionWithPond } from './pond.interactions';
 import { interactionWithFlashDrive } from './flashDrive.interactions';
 
+
+
 const interactions = [
     enterMapForestJunctionInteraction,
+    enterMapGraveyardInteraction,
     interactionWithTree,
     interactionWithSwampyLog,
     interactionWithShrub,
